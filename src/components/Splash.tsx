@@ -1,5 +1,5 @@
 import { SplashScript } from "./SplashScript";
-import { LOGO_VIEWBOX, MARK_PIECES, WORD_DESIGN, WORD_LETTERS } from "./splash-logo";
+import { LOGO_VIEWBOX, MARK_PIECES, WORD_DESIGN, WORD_LETTERS } from "./brand-logo";
 
 /** The logo assembles on white, after the Skyrise reference: pieces fly in, the mark settles, the name follows. */
 export function Splash() {

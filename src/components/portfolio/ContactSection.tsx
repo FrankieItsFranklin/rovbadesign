@@ -1,4 +1,5 @@
 import { imageCredits } from "@/data/projects";
+import { FooterWordmark } from "./FooterWordmark";
 import type { Lang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 
@@ -21,9 +22,9 @@ export function ContactSection({ lang }: { lang: Lang }) {
           </a>
         </div>
       </div>
-      <p aria-hidden="true" className="mt-24 text-[26.5vw] leading-[0.78] font-bold tracking-[-0.055em] md:mt-36 md:text-[27.6vw]">
-        ROVBA
-      </p>
+      <div className="mt-24 md:mt-36">
+        <FooterWordmark />
+      </div>
       <div className="label mt-10 grid gap-4 text-paper/60 md:grid-cols-12 md:gap-8">
         <p className="md:col-span-3">{d.signature}</p>
         <p className="normal-case tracking-normal md:col-span-9">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LangSwitch } from "@/components/LangSwitch";
+import { Logo } from "@/components/Logo";
 import { type Lang, localePath } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 
@@ -14,8 +15,8 @@ export function PortfolioHeader({ lang, alternate }: { lang: Lang; alternate: st
   ];
   return (
     <header className="intro-fade pointer-events-none absolute inset-x-0 top-0 z-10 grid grid-cols-[1fr_auto] items-start gap-6 px-[var(--gutter)] pt-5 md:grid-cols-[1fr_auto_1fr] md:pt-6">
-      <Link href={home} className="label pointer-events-auto text-[13px] font-bold tracking-[0.08em] whitespace-nowrap">
-        ROVBA Design
+      <Link href={home} aria-label="ROVBA Design" className="logo-link pointer-events-auto">
+        <Logo className="h-[26px] w-auto md:h-[30px]" />
       </Link>
       <nav aria-label={d.nav.main} className="pointer-events-auto flex items-start gap-5 md:gap-8">
         <ul className="label flex gap-4 md:gap-8">

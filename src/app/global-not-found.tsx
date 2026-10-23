@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { dictionaries } from "@/i18n/dictionaries";
 import "./[lang]/globals.css";
 
@@ -16,8 +17,8 @@ export default function GlobalNotFound() {
     <html lang="en" className={`${grotesk.variable} ${newsreader.variable}`}>
       <body>
         <main className="flex min-h-svh flex-col justify-between px-[var(--gutter)] py-6">
-          <Link href="/" className="label text-[13px] font-bold tracking-[0.08em]">
-            ROVBA Design
+          <Link href="/" aria-label="ROVBA Design" className="logo-link self-start">
+            <Logo className="h-[26px] w-auto md:h-[30px]" />
           </Link>
           <div>
             <h1 className="text-[clamp(48px,9vw,140px)] leading-[0.88] font-bold tracking-[-0.045em]">{en.notFound.title}</h1>

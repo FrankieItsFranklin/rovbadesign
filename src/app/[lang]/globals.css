@@ -478,6 +478,35 @@
   }
 }
 
+/* ——— logo ——— */
+
+.logo-link {
+  display: inline-block;
+  line-height: 0;
+  transition: opacity 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .logo-link:hover {
+    opacity: 0.7;
+  }
+}
+
+/* The footer name: letters wait below the clipping edge and rise one after another. */
+.footer-word {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.footer-word path {
+  transform-box: fill-box;
+  transition: transform 1100ms var(--ease-out);
+  transition-delay: calc(var(--i) * 80ms);
+}
+.footer-word[data-state="waiting"] path {
+  transform: translateY(104%);
+}
+
 #contact :focus-visible {
   outline-color: var(--color-paper);
 }

@@ -1,4 +1,4 @@
-// Paths of the horizontal ROVBA Design logo (design/logo/02-horizontal.svg), split for the entrance.
+// Paths of the horizontal ROVBA Design logo (design/logo/02-horizontal.svg), shared by the header, the footer and the splash.
 // Mark: the three pieces of the sign. Letters: R, O, V, B, A of the wordmark; DESIGN below them.
 export const LOGO_VIEWBOX = "-4 -4 701.31 162";
 export const MARK_PIECES = [
