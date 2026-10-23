@@ -21,7 +21,12 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --gutter: clamp(16px, 2.2vw, 32px);
+  /* How long the opening splash holds the page; the line's own entrance waits for it. */
+  --splash: 0ms;
   color-scheme: light;
+}
+:root:not([data-splash="skip"]) {
+  --splash: 1150ms;
 }
 
 @layer base {
@@ -302,17 +307,17 @@
 /* Entrance: the rope draws itself, the prints are hung one after another. */
 .is-intro .rope-cord {
   stroke-dasharray: 1;
-  animation: rope-draw 900ms var(--ease-in-out) both;
+  animation: rope-draw 900ms var(--splash) var(--ease-in-out) both;
 }
 .is-intro .rope-fiber {
-  animation: fade-in 500ms 650ms ease both;
+  animation: fade-in 500ms calc(var(--splash) + 650ms) ease both;
 }
 .is-intro .card-drop {
   animation: card-hang 900ms var(--ease-out) both;
-  animation-delay: calc(320ms + var(--i, 7) * 55ms);
+  animation-delay: calc(var(--splash) + 320ms + var(--i, 7) * 55ms);
 }
 :root:not([data-intro="done"]) .intro-fade {
-  animation: fade-in 600ms 900ms ease both;
+  animation: fade-in 600ms calc(var(--splash) * 0.6 + 900ms) ease both;
 }
 
 @keyframes rope-draw {
@@ -339,7 +344,7 @@
 
 .case-reveal {
   animation: rise 700ms var(--ease-out) both;
-  animation-delay: calc(var(--d, 0) * 70ms + 120ms);
+  animation-delay: calc(var(--splash) + var(--d, 0) * 70ms + 120ms);
 }
 @keyframes rise {
   from {
@@ -355,7 +360,110 @@
   box-shadow: 0 0.5px 1px rgba(40, 30, 20, 0.08);
 }
 
+/* ——— opening splash ——— */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--color-ink);
+  pointer-events: none;
+  animation: splash-out 320ms 1150ms var(--ease-out) forwards;
+}
+:root[data-splash="skip"] .splash {
+  display: none;
+}
+.splash-logo {
+  width: min(520px, 76vw);
+  overflow: visible;
+  animation: splash-settle 300ms 1150ms ease both;
+}
+.splash-logo path {
+  fill: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+/* The assembled mark first sits in the middle of the logo's width, larger, then moves aside for the name. */
+.splash-mark {
+  transform-box: view-box;
+  transform-origin: 89px 77px;
+  animation: splash-mark 300ms 500ms var(--ease-in-out) both;
+}
+/* A thick round stroke makes each piece a soft blob in flight; it thins to nothing as the piece lands. */
+.splash-piece {
+  stroke: currentColor;
+  stroke-linejoin: round;
+  animation: splash-piece 560ms var(--ease-out) both;
+}
+.splash-piece-1 {
+  --from: translate(300px, -230px) rotate(150deg) scale(0.55);
+}
+.splash-piece-2 {
+  --from: translate(-60px, 260px) rotate(-100deg) scale(0.6);
+  animation-delay: 50ms;
+}
+.splash-piece-3 {
+  --from: translate(-300px, -90px) rotate(-160deg) scale(0.55);
+  animation-delay: 100ms;
+}
+.splash-letter {
+  animation: splash-letter 360ms var(--ease-out) both;
+  animation-delay: calc(700ms + var(--i) * 45ms);
+}
+.splash-design {
+  animation: fade-in 300ms 900ms ease both;
+}
+
+@keyframes splash-piece {
+  from {
+    transform: var(--from);
+    stroke-width: 90px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    stroke-width: 14px;
+  }
+  to {
+    transform: none;
+    stroke-width: 0;
+  }
+}
+@keyframes splash-mark {
+  from {
+    transform: translateX(259px) scale(1.35);
+  }
+}
+@keyframes splash-letter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@keyframes splash-settle {
+  to {
+    transform: scale(0.97);
+  }
+}
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --splash: 0ms !important;
+  }
+  .splash {
+    display: none;
+  }
   .is-intro .rope-cord,
   .is-intro .card-drop {
     animation: fade-in 400ms ease both;

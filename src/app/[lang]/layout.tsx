@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
+import { Splash } from "@/components/Splash";
 import { LANGS, isLang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import "./globals.css";
@@ -35,14 +36,18 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   return (
-    <html lang={lang} className={`${grotesk.variable} ${newsreader.variable}`}>
+    // The splash script sets data-splash on <html> before React hydrates.
+    <html lang={lang} className={`${grotesk.variable} ${newsreader.variable}`} suppressHydrationWarning>
       <head>
         {/* Without JS the line stays a plain scrolling row, so it must not wait for the engine. */}
         <noscript>
           <style>{".line:not(.is-ready) .card, .line:not(.is-ready) .rope { opacity: 1 }"}</style>
         </noscript>
       </head>
-      <body>{children}</body>
+      <body>
+        <Splash />
+        {children}
+      </body>
     </html>
   );
 }

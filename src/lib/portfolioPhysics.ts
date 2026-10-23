@@ -2,10 +2,12 @@ import { clamp } from "./wrap";
 
 /** Release inertia: velocity decays exponentially, so the line glides and settles without a hard stop. */
 export const INERTIA_TIME_MS = 220;
+/** A finger throw glides longer, closer to how a phone scrolls natively. */
+export const TOUCH_INERTIA_TIME_MS = 380;
 export const MIN_VELOCITY = 0.012; // px per ms
 
-export function decay(velocity: number, dt: number) {
-  return velocity * Math.exp(-dt / INERTIA_TIME_MS);
+export function decay(velocity: number, dt: number, timeMs = INERTIA_TIME_MS) {
+  return velocity * Math.exp(-dt / timeMs);
 }
 
 /** The last ~100 ms of movement give the release velocity; a finger that rested before lifting throws nothing. */

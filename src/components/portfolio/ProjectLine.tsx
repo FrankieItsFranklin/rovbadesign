@@ -15,6 +15,10 @@ import { Rope } from "./Rope";
 // The entrance plays once per visit, not on every return from a case study.
 let introPlayed = false;
 const INTRO_MS = 1500;
+const ROLL_IN_MS = 1700;
+
+/** The opening splash's length, read from the CSS that runs it (0 when skipped or with reduced motion). */
+const splashDelay = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--splash")) || 0;
 
 function buildLayout(g: LineGeometry, projects: Project[]) {
   const sizes = projects.map((p) => cardSize(g, p.cardScale, p.cardAspectRatio));
@@ -81,9 +85,11 @@ export function ProjectLine({ projects, lang }: { projects: Project[]; lang: Lan
     if (stage.classList.contains("is-ready")) return;
     const id = requestAnimationFrame(() => {
       if (!introPlayed) {
+        const delay = splashDelay();
         engine.visibleOrder().forEach((el, i) => el.style.setProperty("--i", String(i)));
         stage.classList.add("is-intro");
-        window.setTimeout(() => stage.classList.remove("is-intro"), INTRO_MS);
+        window.setTimeout(() => stage.classList.remove("is-intro"), delay + INTRO_MS);
+        if (geometry.compact) engine.rollIn(geometry.width * 0.9, delay + 250, ROLL_IN_MS);
         introPlayed = true;
       }
       stage.classList.add("is-ready");

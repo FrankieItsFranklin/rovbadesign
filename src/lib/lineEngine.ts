@@ -1,7 +1,9 @@
 import { parabolaSlope, ropePath, ropeY, type LineGeometry } from "./rope";
 import {
   MAX_EXTRA_SAG,
+  INERTIA_TIME_MS,
   MIN_VELOCITY,
+  TOUCH_INERTIA_TIME_MS,
   clampUnit,
   decay,
   motionFor,
@@ -39,8 +41,8 @@ type ItemState = LineItem & {
 const DRAG_THRESHOLD = 6;
 /** A finger's direction is decided sooner, before the browser commits to scrolling the page. */
 const TOUCH_DECIDE = 4;
-/** Flicks with a finger are short; a slightly longer glide makes them feel like a throw. */
-const TOUCH_INERTIA_BOOST = 1.35;
+/** Flicks with a finger are short; a little extra speed makes them feel like a throw. */
+const TOUCH_INERTIA_BOOST = 1.15;
 
 // Survives client-side navigation, so coming back from a case study keeps the line where it was.
 let savedOffset = 0;
@@ -61,6 +63,7 @@ export class LineEngine {
   private offset = savedOffset;
   private lastOffset = savedOffset;
   private velocity = 0;
+  private inertiaTime = INERTIA_TIME_MS;
   private flow = 0;
   private sag = 0;
   private sagSpeed = 0;
@@ -151,6 +154,16 @@ export class LineEngine {
     this.wake();
   }
 
+  /** The line arrives from the right and glides to rest, so a phone shows the inertia before anyone touches it. */
+  rollIn(distance: number, delay: number, duration: number) {
+    if (this.reduced) return;
+    this.velocity = 0;
+    this.tween = { from: this.offset + distance, to: this.offset, start: performance.now() + delay, duration };
+    this.offset += distance;
+    this.lastOffset = this.offset;
+    this.wake();
+  }
+
   private bringIntoView(el: HTMLElement) {
     const item = this.items.find((i) => i.el === el);
     if (!item) return;
@@ -173,12 +186,12 @@ export class LineEngine {
     if (!g) return;
 
     if (this.tween) {
-      const t = this.tween.duration ? Math.min(1, (now - this.tween.start) / this.tween.duration) : 1;
+      const t = this.tween.duration ? Math.min(1, Math.max(0, (now - this.tween.start) / this.tween.duration)) : 1;
       this.offset = this.tween.from + (this.tween.to - this.tween.from) * easeOutQuint(t);
       if (t >= 1) this.tween = null;
     } else if (!this.dragging && this.velocity !== 0) {
       this.offset += this.velocity * dt;
-      this.velocity = decay(this.velocity, dt);
+      this.velocity = decay(this.velocity, dt, this.inertiaTime);
       if (Math.abs(this.velocity) < MIN_VELOCITY) this.velocity = 0;
     }
 
@@ -262,8 +275,9 @@ export class LineEngine {
     this.wake();
   }
 
-  private endDrag(t: number, glide: boolean, boost: number) {
+  private endDrag(t: number, glide: boolean, boost: number, inertiaTime: number) {
     this.dragging = false;
+    this.inertiaTime = inertiaTime;
     this.stage.classList.remove("is-dragging");
     this.velocity = this.reduced || !glide ? 0 : releaseVelocity(this.samples, t) * boost;
     this.suppressClickUntil = performance.now() + 400;
@@ -293,7 +307,7 @@ export class LineEngine {
       const p = this.pointer;
       if (!p || e.pointerId !== p.id) return;
       this.pointer = null;
-      if (this.dragging) this.endDrag(e.timeStamp, e.type !== "pointercancel", 1);
+      if (this.dragging) this.endDrag(e.timeStamp, e.type !== "pointercancel", 1, INERTIA_TIME_MS);
     };
     this.on("pointerup", release);
     this.on("pointercancel", release);
@@ -349,7 +363,7 @@ export class LineEngine {
       const tt = this.touch;
       if (!tt || ![...e.changedTouches].some((c) => c.identifier === tt.id)) return;
       this.touch = null;
-      if (tt.mode === "drag") this.endDrag(e.timeStamp, e.type === "touchend", TOUCH_INERTIA_BOOST);
+      if (tt.mode === "drag") this.endDrag(e.timeStamp, e.type === "touchend", TOUCH_INERTIA_BOOST, TOUCH_INERTIA_TIME_MS);
     };
     this.on("touchend", touchEnd);
     this.on("touchcancel", touchEnd);
