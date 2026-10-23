@@ -35,14 +35,30 @@ export function springStep(
 }
 
 /** A print swings like a pendulum hung from its pin: dragging right makes the bottom trail left. */
-export const MAX_SWING_DEG = 2.4;
-export const SWING_GAIN = 2.2; // degrees per px/ms
+export type MotionProfile = {
+  swingGain: number; // degrees per px/ms
+  maxSwing: number;
+  /** Pendulum damping: lower keeps a print swinging a little after the line stops. */
+  damping: number;
+  /** Idle sway in degrees, so the line never looks frozen. */
+  wind: number;
+  /** How far the screenshot lags inside its frame while the line moves, px. */
+  parallax: number;
+};
+
+// Phones have no hover, so the movement itself carries the life: stronger swing, longer settle.
+export const motionFor = (compact: boolean): MotionProfile =>
+  compact
+    ? { swingGain: 3.4, maxSwing: 4.2, damping: 7.5, wind: 0.55, parallax: 10 }
+    : { swingGain: 2.2, maxSwing: 2.4, damping: 11, wind: 0.3, parallax: 7 };
 export const MAX_TANGENT_DEG = 3.5;
 export const TANGENT_SHARE = 0.42;
 export const MAX_EXTRA_SAG = 10;
 
-export const swingTarget = (velocity: number) => clamp(-MAX_SWING_DEG, MAX_SWING_DEG, velocity * SWING_GAIN);
+export const swingTarget = (velocity: number, m: MotionProfile) => clamp(-m.maxSwing, m.maxSwing, velocity * m.swingGain);
 export const tangentDeg = (slope: number) =>
   clamp(-MAX_TANGENT_DEG, MAX_TANGENT_DEG, (Math.atan(slope) * 180 * TANGENT_SHARE) / Math.PI);
+
+export const clampUnit = (v: number) => clamp(-1, 1, v);
 
 export const easeOutQuint = (t: number) => 1 - (1 - t) ** 5;

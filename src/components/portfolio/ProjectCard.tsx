@@ -38,18 +38,20 @@ export function ProjectCard({ project, size, lang, copy, first, cardRef, onOpen 
         <span className="card-lift">
           <Clothespin className="card-pin" />
           <span className="card-print">
-            <Image
-              src={project.cover}
-              alt={dictionaries[lang].card.alt(project.title)}
-              fill
-              sizes="(max-width: 640px) 56vw, (max-width: 1024px) 30vw, 340px"
-              quality={80}
-              // Every print can swing into view at any moment, so none waits for lazy loading.
-              loading="eager"
-              fetchPriority={first ? "high" : "auto"}
-              draggable={false}
-              style={{ objectPosition: project.coverPosition }}
-            />
+            <span className="card-shot">
+              <Image
+                src={project.cover}
+                alt={dictionaries[lang].card.alt(project.title)}
+                fill
+                sizes="(max-width: 640px) 56vw, (max-width: 1024px) 30vw, 340px"
+                quality={80}
+                // Every print can swing into view at any moment, so none waits for lazy loading.
+                loading="eager"
+                fetchPriority={first ? "high" : "auto"}
+                draggable={false}
+                style={{ objectPosition: project.coverPosition }}
+              />
+            </span>
             <span className="card-shade" />
             <span className="card-caption">
               <span className="card-title">{project.title}</span>

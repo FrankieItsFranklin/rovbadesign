@@ -178,6 +178,12 @@
     0 12px 26px -10px rgba(40, 30, 20, 0.22);
   isolation: isolate;
 }
+.card-shot {
+  position: absolute;
+  inset: 0 -12px;
+  display: block;
+  will-change: transform;
+}
 .card-print img {
   object-fit: cover;
   pointer-events: none;
@@ -233,7 +239,13 @@
   .line:not(.is-dragging) .card:hover .card-lift {
     transform: translateY(-6px);
   }
-  .line:not(.is-dragging) .card:hover .card-print img {
+  .line:not(.is-dragging) .card:hover .card-shot {
+  position: absolute;
+  inset: 0 -12px;
+  display: block;
+  will-change: transform;
+}
+.card-print img {
     transform: scale(1.04);
   }
   .line:not(.is-dragging) .card:hover :is(.card-shade, .card-caption) {
@@ -253,6 +265,11 @@
 @media (hover: none) {
   .card-label {
     display: block;
+  }
+  /* The print under the finger lifts a little, as if it had been picked up. */
+  .card:active .card-lift {
+    transform: translateY(-5px) scale(0.985);
+    transition-duration: 180ms;
   }
 }
 

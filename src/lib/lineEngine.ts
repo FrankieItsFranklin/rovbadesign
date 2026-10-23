@@ -2,12 +2,15 @@ import { parabolaSlope, ropePath, ropeY, type LineGeometry } from "./rope";
 import {
   MAX_EXTRA_SAG,
   MIN_VELOCITY,
+  clampUnit,
   decay,
+  motionFor,
   easeOutQuint,
   releaseVelocity,
   springStep,
   swingTarget,
   tangentDeg,
+  type MotionProfile,
   type Sample,
 } from "./portfolioPhysics";
 import { wrap } from "./wrap";
@@ -21,7 +24,16 @@ export type LineItem = {
   drop: number;
 };
 
-type ItemState = LineItem & { x: number; angle: number; spin: number; stiffness: number };
+type ItemState = LineItem & {
+  /** Screenshot layer inside the print, shifted for the parallax. */
+  shot: HTMLElement | null;
+  shift: number;
+  phase: number;
+  x: number;
+  angle: number;
+  spin: number;
+  stiffness: number;
+};
 
 /** Distance a pointer travels before a press becomes a drag (and the click is cancelled). */
 const DRAG_THRESHOLD = 6;
@@ -38,6 +50,9 @@ export class LineEngine {
   private ropes: SVGPathElement[];
   private reduced: boolean;
   private g!: LineGeometry;
+  private m!: MotionProfile;
+  /** The idle sway only runs while the line is on screen and the tab is open. */
+  private visible = true;
   private items: ItemState[] = [];
   private pins = new Float64Array(0);
   private total = 1;
@@ -68,17 +83,31 @@ export class LineEngine {
     this.ropes = ropes;
     this.reduced = reduced;
     this.listen();
+    const io = new IntersectionObserver(([entry]) => this.setVisible(entry.isIntersecting && !document.hidden));
+    io.observe(stage);
+    const onVisibility = () => this.setVisible(!document.hidden);
+    document.addEventListener("visibilitychange", onVisibility);
+    this.disposers.push(() => io.disconnect(), () => document.removeEventListener("visibilitychange", onVisibility));
+  }
+
+  private setVisible(visible: boolean) {
+    this.visible = visible;
+    if (visible) this.wake();
   }
 
   setLayout(g: LineGeometry, items: LineItem[], loopLength: number) {
     const fresh = !this.g;
     this.g = g;
+    this.m = motionFor(g.compact);
     this.total = loopLength;
     const widest = Math.max(...items.map((i) => i.w));
     this.lo = -(widest + g.gap);
     this.pins = new Float64Array(items.length);
     this.items = items.map((item, i) => ({
       ...item,
+      shot: item.el.querySelector<HTMLElement>(".card-shot"),
+      shift: 0,
+      phase: i * 1.7,
       x: 0,
       angle: this.items[i]?.angle ?? item.rotation,
       spin: 0,
@@ -158,8 +187,12 @@ export class LineEngine {
     this.flow += (instant - this.flow) * Math.min(1, dt / 60);
     if (Math.abs(this.flow) < 0.0005) this.flow = 0;
 
-    // The rope gives a little under fast movement and springs back.
-    const sagTarget = this.reduced ? g.sag : g.sag + Math.min(MAX_EXTRA_SAG, Math.abs(this.flow) * 5);
+    const m = this.m;
+    const windy = !this.reduced && this.visible;
+    const time = now / 1000;
+    // The rope gives a little under fast movement and springs back; the wind breathes it a little.
+    const breath = windy ? Math.sin(time * 0.7) * m.wind * 2 : 0;
+    const sagTarget = this.reduced ? g.sag : g.sag + breath + Math.min(MAX_EXTRA_SAG, Math.abs(this.flow) * 5);
     [this.sag, this.sagSpeed] = this.reduced ? [sagTarget, 0] : springStep(this.sag, this.sagSpeed, sagTarget, dt, 90, 12);
 
     const items = this.items;
@@ -169,21 +202,27 @@ export class LineEngine {
       this.pins[i] = it.x + it.w / 2;
     }
 
-    let restless = this.dragging || this.tween !== null || this.velocity !== 0 || this.flow !== 0 || Math.abs(this.sag - sagTarget) > 0.05;
-    const swing = this.reduced ? 0 : swingTarget(this.flow);
+    let restless = windy || this.dragging || this.tween !== null || this.velocity !== 0 || this.flow !== 0 || Math.abs(this.sag - sagTarget) > 0.05;
+    const swing = this.reduced ? 0 : swingTarget(this.flow, m);
+    const shift = this.reduced ? 0 : -clampUnit(this.flow / 1.2) * m.parallax;
 
     for (let i = 0; i < items.length; i++) {
       const it = items[i];
       const cx = this.pins[i];
       const y = ropeY(g, this.sag, cx, this.pins, items.length) + g.hang + it.drop;
       const rest = it.rotation + tangentDeg(parabolaSlope(g, this.sag, cx));
-      const target = it.el === this.hovered ? rest * 0.3 : rest + swing;
+      const wind = windy ? Math.sin(time * (0.9 + (i % 3) * 0.17) + it.phase) * m.wind : 0;
+      const target = it.el === this.hovered ? rest * 0.3 : rest + swing + wind;
       if (this.reduced) {
         it.angle = target;
         it.spin = 0;
       } else {
-        [it.angle, it.spin] = springStep(it.angle, it.spin, target, dt, it.stiffness, 11);
+        [it.angle, it.spin] = springStep(it.angle, it.spin, target, dt, it.stiffness, m.damping);
         if (Math.abs(it.spin) > 0.01 || Math.abs(it.angle - target) > 0.01) restless = true;
+      }
+      if (it.shot && Math.abs(shift - it.shift) > 0.05) {
+        it.shift = shift;
+        it.shot.style.transform = `translate3d(${shift.toFixed(2)}px, 0, 0)`;
       }
       it.el.style.transform = `translate3d(${it.x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${it.angle.toFixed(3)}deg)`;
     }
