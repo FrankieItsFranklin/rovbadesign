@@ -1,0 +1,8 @@
+node_modules
+.next
+.vercel
+.env*
+.taste-skill
+next-env.d.ts
+*.tsbuildinfo
+.DS_Store

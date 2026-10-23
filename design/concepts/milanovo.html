@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Milanovo — Ristorante, Pizzeria, Caffè</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..700&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --green:#1d3428; --green-2:#26443a; --cream:#efe7d4; --paper:#f6f1e4; --wine:#7a2331; --ink:#1a1a16; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--paper); color:var(--ink); font:17px/1.55 "Libre Franklin", sans-serif; }
+  .serif { font-family:"Bodoni Moda", serif; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:28px 56px; background:var(--green); color:var(--cream); font-size:14px; }
+  nav .links { display:flex; gap:36px; }
+  nav .mark { font:600 22px "Bodoni Moda", serif; letter-spacing:.18em; }
+  nav .book { background:var(--cream); color:var(--green); padding:12px 22px; border-radius:999px; font-weight:600; }
+  .hero { display:grid; grid-template-columns:1.05fr 1fr; min-height:calc(100vh - 82px); background:var(--green); color:var(--cream); }
+  .hero .copy { padding:80px 56px 64px; display:flex; flex-direction:column; justify-content:space-between; }
+  .hero h1 { font-family:"Bodoni Moda", serif; font-weight:500; font-size:clamp(64px, 9.4vw, 150px); line-height:.9; letter-spacing:-.02em; }
+  .hero h1 em { display:block; font-weight:400; }
+  .hero p { max-width:30ch; font-size:19px; color:#d9d0bb; }
+  .hero .meta { display:flex; gap:48px; font-size:15px; color:#cfc6b0; }
+  .hero .meta b { display:block; color:var(--cream); font-weight:600; }
+  .hero figure { position:relative; overflow:hidden; }
+  .hero figure img { width:100%; height:100%; object-fit:cover; display:block; }
+  .menu { padding:120px 56px; display:grid; grid-template-columns:1fr 2fr; gap:80px; }
+  .menu h2 { font:500 64px/.95 "Bodoni Moda", serif; letter-spacing:-.02em; color:var(--green); }
+  .menu .note { margin-top:20px; max-width:26ch; color:#4b4a40; }
+  .dishes { display:grid; grid-template-columns:1fr 1fr; gap:42px 64px; }
+  .dish h3 { font:600 24px "Bodoni Moda", serif; display:flex; justify-content:space-between; color:var(--green); }
+  .dish h3 span { font:500 18px "Libre Franklin", sans-serif; color:var(--wine); }
+  .dish p { color:#4b4a40; font-size:16px; margin-top:6px; }
+  .caffe { display:grid; grid-template-columns:1fr 1fr; background:var(--cream); }
+  .caffe img { width:100%; height:720px; object-fit:cover; display:block; }
+  .caffe .t { padding:96px 72px; display:flex; flex-direction:column; justify-content:center; gap:28px; }
+  .caffe h2 { font:italic 400 72px/.95 "Bodoni Moda", serif; color:var(--wine); }
+  .caffe p { font-size:19px; max-width:34ch; }
+  .hours { display:grid; grid-template-columns:repeat(3, 1fr); gap:40px; padding:96px 56px 72px; background:var(--wine); color:var(--cream); }
+  .hours h4 { font:500 30px "Bodoni Moda", serif; margin-bottom:10px; }
+  .foot { padding:40px 56px 120px; background:var(--wine); color:#e7c9c0; font-size:14px; display:flex; justify-content:space-between; }
+  .foot .big { font:500 15vw/.8 "Bodoni Moda", serif; letter-spacing:-.03em; color:var(--cream); }
+  @media (max-width:760px) {
+    nav { padding:20px; } nav .links { display:none; }
+    .hero { grid-template-columns:1fr; } .hero .copy { padding:40px 20px; gap:36px; } .hero figure { height:440px; }
+    .hero .meta { gap:24px; }
+    .menu { grid-template-columns:1fr; padding:72px 20px; gap:40px; } .menu h2 { font-size:48px; } .dishes { grid-template-columns:1fr; gap:28px; }
+    .caffe { grid-template-columns:1fr; } .caffe img { height:420px; } .caffe .t { padding:56px 20px; } .caffe h2 { font-size:52px; }
+    .hours { grid-template-columns:1fr; padding:64px 20px; } .foot { padding:24px 20px 72px; flex-direction:column; gap:24px; }
+  }
+</style>
+</head>
+<body>
+<nav><span class="mark">MILANOVO</span><span class="links"><span>Menu</span><span>Caffè</span><span>Wino</span><span>Kontakt</span></span><span class="book">Zarezerwuj stolik</span></nav>
+<section class="hero">
+  <div class="copy">
+    <h1>Milanovo <em>dal 1987</em></h1>
+    <div style="display:grid; gap:36px">
+      <p>Pizza z pieca opalanego dębem, makaron robiony rano i espresso, które pije się przy barze.</p>
+      <div class="meta"><span><b>ul. Mokotowska 41</b>Warszawa, Śródmieście</span><span><b>12:00 – 23:00</b>codziennie</span></div>
+    </div>
+  </div>
+  <figure><img src="assets/wood-fired-pizza-oven-at-baronessa-italian.jpg" alt=""></figure>
+</section>
+<section class="menu">
+  <div><h2>Dziś z pieca</h2><p class="note">Ciasto dojrzewa 48 godzin. Piec ma 450 stopni, pizza spędza w nim półtorej minuty.</p></div>
+  <div class="dishes">
+    <div class="dish"><h3>Margherita <span>38 zł</span></h3><p>San Marzano, fior di latte, bazylia, oliwa z Ligurii.</p></div>
+    <div class="dish"><h3>Diavola <span>46 zł</span></h3><p>Salame piccante, mozzarella, miód z chili.</p></div>
+    <div class="dish"><h3>Quattro formaggi <span>48 zł</span></h3><p>Gorgonzola, taleggio, parmigiano, mozzarella.</p></div>
+    <div class="dish"><h3>Tagliatelle al ragù <span>52 zł</span></h3><p>Ragù bolognese gotowane sześć godzin.</p></div>
+    <div class="dish"><h3>Vitello tonnato <span>44 zł</span></h3><p>Cielęcina, sos z tuńczyka, kapary.</p></div>
+    <div class="dish"><h3>Tiramisù <span>26 zł</span></h3><p>Według przepisu nonny Giulii.</p></div>
+  </div>
+</section>
+<section class="caffe">
+  <img src="assets/espresso-coffee.jpg" alt="">
+  <div class="t"><h2>Caffè al banco</h2><p>Rano bar działa jak w Mediolanie: espresso na stojąco, cornetto prosto z pieca, gazeta na ladzie.</p><p style="font-size:16px">Espresso 9 zł · Cappuccino 14 zł · Cornetto 9 zł</p></div>
+</section>
+<section class="hours">
+  <div><h4>Rezerwacje</h4>+48 22 000 00 00<br>stolik@milanovo.pl</div>
+  <div><h4>Godziny</h4>Pon – Pt 8:00 – 23:00<br>Sob – Nd 10:00 – 23:00</div>
+  <div><h4>Adres</h4>ul. Mokotowska 41<br>00-551 Warszawa</div>
+</section>
+<footer class="foot"><span class="big">Milanovo</span><span>Koncept ROVBA Design</span></footer>
+</body>
+</html>

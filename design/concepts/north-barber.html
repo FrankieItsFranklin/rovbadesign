@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>North Barber — Praga, Warszawa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --black:#121212; --coal:#1c1c1b; --bone:#ecebe6; --red:#d0202e; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--black); color:var(--bone); font:17px/1.5 "Archivo", sans-serif; }
+  .display { font-family:"Anton", sans-serif; text-transform:uppercase; line-height:.86; }
+  nav { position:absolute; inset:0 0 auto; display:flex; justify-content:space-between; padding:28px 48px; font-weight:500; z-index:2; }
+  nav .links { display:flex; gap:32px; }
+  nav .book { background:var(--red); padding:12px 24px; font-weight:700; }
+  .hero { position:relative; height:100vh; min-height:760px; overflow:hidden; }
+  .hero img { width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.15) brightness(.55); }
+  .hero h1 { position:absolute; left:40px; right:40px; bottom:150px; font-size:clamp(120px, 24vw, 380px); letter-spacing:-.01em; }
+  .hero h1 span { color:var(--red); }
+  .hero .row { position:absolute; left:48px; right:48px; bottom:48px; display:flex; justify-content:space-between; font-size:18px; }
+  .prices { display:grid; grid-template-columns:1fr 1.4fr; gap:80px; padding:128px 48px; }
+  .prices h2 { font-size:120px; }
+  .prices h2 span { color:var(--red); }
+  .list { display:grid; gap:0; }
+  .item { display:grid; grid-template-columns:1fr auto; padding:26px 0; border-top:2px solid #2c2c2b; }
+  .item b { font:400 40px "Anton", sans-serif; text-transform:uppercase; }
+  .item i { font-style:normal; color:#a7a59e; grid-column:1; }
+  .item em { font:400 40px "Anton", sans-serif; font-style:normal; color:var(--red); grid-row:1; grid-column:2; }
+  .chair { display:grid; grid-template-columns:1.3fr 1fr; background:var(--bone); color:var(--black); }
+  .chair img { width:100%; height:760px; object-fit:cover; display:block; filter:grayscale(.2) contrast(1.05); }
+  .chair .t { padding:96px 64px; display:flex; flex-direction:column; justify-content:space-between; }
+  .chair h2 { font-size:110px; }
+  .chair p { font-size:20px; max-width:30ch; }
+  .book-band { background:var(--red); padding:96px 48px; display:flex; justify-content:space-between; align-items:end; }
+  .book-band h2 { font-size:170px; }
+  .book-band p { font-size:20px; max-width:24ch; text-align:right; }
+  footer { padding:40px 48px 80px; display:flex; justify-content:space-between; color:#a7a59e; }
+  @media (max-width:760px) {
+    nav { padding:20px; } nav .links { display:none; }
+    .hero { min-height:0; height:100svh; } .hero h1 { left:16px; bottom:120px; font-size:31vw; } .hero .row { left:20px; right:20px; bottom:28px; flex-direction:column; gap:6px; font-size:16px; }
+    .prices { grid-template-columns:1fr; padding:72px 20px; gap:32px; } .prices h2 { font-size:76px; } .item b, .item em { font-size:30px; }
+    .chair { grid-template-columns:1fr; } .chair img { height:420px; } .chair .t { padding:56px 20px; gap:28px; } .chair h2 { font-size:72px; }
+    .book-band { flex-direction:column; align-items:start; gap:24px; padding:64px 20px; } .book-band h2 { font-size:88px; } .book-band p { text-align:left; }
+    footer { padding:28px 20px 60px; flex-direction:column; gap:12px; }
+  }
+</style>
+</head>
+<body>
+<nav><span class="display" style="font-size:26px">North</span><span class="links"><span>Cennik</span><span>Barberzy</span><span>Kontakt</span></span><span class="book">Umów wizytę</span></nav>
+<section class="hero">
+  <img src="assets/dscf1083-vintage-red-barber-chairs-in-a.jpg" alt="">
+  <h1 class="display">North<span>.</span></h1>
+  <div class="row"><span>ul. Ząbkowska 12, Praga</span><span>Wt – Sob 10:00 – 20:00</span><span>Bez rezerwacji od 10:00 do 12:00</span></div>
+</section>
+<section class="prices">
+  <h2 class="display">Cennik<span>.</span></h2>
+  <div class="list">
+    <div class="item"><b>Strzyżenie</b><em>90 zł</em><i>Konsultacja, mycie, stylizacja. 45 minut.</i></div>
+    <div class="item"><b>Broda</b><em>60 zł</em><i>Trymer, brzytwa, gorący ręcznik.</i></div>
+    <div class="item"><b>Strzyżenie + broda</b><em>140 zł</em><i>Pełna wizyta. 75 minut.</i></div>
+    <div class="item"><b>Golenie brzytwą</b><em>80 zł</em><i>Klasyczne, z kompresem.</i></div>
+  </div>
+</section>
+<section class="chair">
+  <img src="assets/dscf1083-vintage-red-barber-chairs-in-a.jpg" alt="">
+  <div class="t"><h2 class="display">Trzy fotele</h2><p>Trzech barberów, trzy fotele, żadnej kolejki na telefonie. Przychodzisz o swojej godzinie i siadasz.</p></div>
+</section>
+<section class="book-band"><h2 class="display">Wtorek?</h2><p>Najbliższy wolny termin pokazujemy na stronie, a nie w wiadomości na Instagramie.</p></section>
+<footer><span>North Barber · Praga, Warszawa</span><span>Koncept ROVBA Design</span></footer>
+</body>
+</html>
