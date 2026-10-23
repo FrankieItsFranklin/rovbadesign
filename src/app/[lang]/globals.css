@@ -26,7 +26,7 @@
   color-scheme: light;
 }
 :root:not([data-splash="skip"]) {
-  --splash: 1150ms;
+  --splash: 2050ms;
 }
 
 @layer base {
@@ -371,7 +371,7 @@
   background: #fff;
   color: var(--color-ink);
   pointer-events: none;
-  animation: splash-out 320ms 1150ms var(--ease-out) forwards;
+  animation: splash-out 450ms 2050ms var(--ease-out) forwards;
 }
 :root[data-splash="skip"] .splash {
   display: none;
@@ -379,7 +379,7 @@
 .splash-logo {
   width: min(520px, 76vw);
   overflow: visible;
-  animation: splash-settle 300ms 1150ms ease both;
+  animation: splash-settle 450ms 2050ms ease both;
 }
 .splash-logo path {
   fill: currentColor;
@@ -390,31 +390,31 @@
 .splash-mark {
   transform-box: view-box;
   transform-origin: 89px 77px;
-  animation: splash-mark 300ms 500ms var(--ease-in-out) both;
+  animation: splash-mark 450ms 850ms var(--ease-in-out) both;
 }
 /* A thick round stroke makes each piece a soft blob in flight; it thins to nothing as the piece lands. */
 .splash-piece {
   stroke: currentColor;
   stroke-linejoin: round;
-  animation: splash-piece 560ms var(--ease-out) both;
+  animation: splash-piece 900ms var(--ease-out) both;
 }
 .splash-piece-1 {
   --from: translate(300px, -230px) rotate(150deg) scale(0.55);
 }
 .splash-piece-2 {
   --from: translate(-60px, 260px) rotate(-100deg) scale(0.6);
-  animation-delay: 50ms;
+  animation-delay: 80ms;
 }
 .splash-piece-3 {
   --from: translate(-300px, -90px) rotate(-160deg) scale(0.55);
-  animation-delay: 100ms;
+  animation-delay: 160ms;
 }
 .splash-letter {
-  animation: splash-letter 360ms var(--ease-out) both;
-  animation-delay: calc(700ms + var(--i) * 45ms);
+  animation: splash-letter 500ms var(--ease-out) both;
+  animation-delay: calc(1050ms + var(--i) * 70ms);
 }
 .splash-design {
-  animation: fade-in 300ms 900ms ease both;
+  animation: fade-in 450ms 1350ms ease both;
 }
 
 @keyframes splash-piece {
