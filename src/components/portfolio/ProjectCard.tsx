@@ -11,12 +11,13 @@ type Props = {
   size: { w: number; h: number } | null;
   lang: Lang;
   copy: boolean;
-  eager: boolean;
+  /** First prints on screen: fetched before everything else. */
+  first: boolean;
   cardRef?: Ref<HTMLAnchorElement>;
   onOpen: (e: MouseEvent<HTMLAnchorElement>, project: Project) => void;
 };
 
-export function ProjectCard({ project, size, lang, copy, eager, cardRef, onOpen }: Props) {
+export function ProjectCard({ project, size, lang, copy, first, cardRef, onOpen }: Props) {
   const style = size ? ({ width: size.w, "--print-h": `${size.h}px` } as CSSProperties) : undefined;
   return (
     <Link
@@ -43,8 +44,9 @@ export function ProjectCard({ project, size, lang, copy, eager, cardRef, onOpen 
               fill
               sizes="(max-width: 640px) 56vw, (max-width: 1024px) 30vw, 340px"
               quality={80}
-              loading={eager ? "eager" : "lazy"}
-              fetchPriority={eager ? "high" : undefined}
+              // Every print can swing into view at any moment, so none waits for lazy loading.
+              loading="eager"
+              fetchPriority={first ? "high" : "auto"}
               draggable={false}
               style={{ objectPosition: project.coverPosition }}
             />

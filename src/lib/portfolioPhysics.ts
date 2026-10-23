@@ -8,14 +8,14 @@ export function decay(velocity: number, dt: number) {
   return velocity * Math.exp(-dt / INERTIA_TIME_MS);
 }
 
-/** Pointer samples over the last ~90 ms give a release velocity that ignores the final jitter. */
+/** The last ~100 ms of movement give the release velocity; a finger that rested before lifting throws nothing. */
 export type Sample = { x: number; t: number };
 
 export function releaseVelocity(samples: Sample[], now: number) {
-  const recent = samples.filter((s) => now - s.t < 90);
-  if (recent.length < 2) return 0;
+  const last = samples[samples.length - 1];
+  if (!last || now - last.t > 80) return 0;
+  const recent = samples.filter((s) => last.t - s.t <= 100);
   const first = recent[0];
-  const last = recent[recent.length - 1];
   const dt = last.t - first.t;
   return dt > 0 ? clamp(-3, 3, (last.x - first.x) / dt) : 0;
 }

@@ -25,6 +25,10 @@ type ItemState = LineItem & { x: number; angle: number; spin: number; stiffness:
 
 /** Distance a pointer travels before a press becomes a drag (and the click is cancelled). */
 const DRAG_THRESHOLD = 6;
+/** A finger's direction is decided sooner, before the browser commits to scrolling the page. */
+const TOUCH_DECIDE = 4;
+/** Flicks with a finger are short; a slightly longer glide makes them feel like a throw. */
+const TOUCH_INERTIA_BOOST = 1.35;
 
 // Survives client-side navigation, so coming back from a case study keeps the line where it was.
 let savedOffset = 0;
@@ -47,10 +51,12 @@ export class LineEngine {
   private sagSpeed = 0;
   private tween: { from: number; to: number; start: number; duration: number } | null = null;
 
-  private pointer: { id: number; startX: number; startY: number; lastX: number; touch: boolean } | null = null;
+  private pointer: { id: number; startX: number; startY: number; lastX: number } | null = null;
+  private touch: { id: number; startX: number; startY: number; lastX: number; mode: "pending" | "drag" | "scroll" } | null = null;
   private dragging = false;
   private samples: Sample[] = [];
-  private suppressClick = false;
+  /** Clicks right after a drag are the end of that drag, not a request to open a project. */
+  private suppressClickUntil = 0;
   private hovered: HTMLElement | null = null;
 
   private raf = 0;
@@ -195,52 +201,60 @@ export class LineEngine {
     this.disposers.push(() => this.stage.removeEventListener(type, fn as EventListener, opts));
   }
 
+  /** Grabbing a moving line stops it, like catching a swinging rope. */
+  private catchLine(x: number, t: number) {
+    this.samples = [{ x, t }];
+    this.velocity = 0;
+    this.tween = null;
+  }
+
+  private startDrag() {
+    this.dragging = true;
+    this.tween = null;
+    this.hovered = null;
+    this.stage.classList.add("is-dragging");
+  }
+
+  private dragTo(x: number, t: number, from: { lastX: number }) {
+    this.offset += x - from.lastX;
+    from.lastX = x;
+    this.samples.push({ x, t });
+    if (this.samples.length > 12) this.samples.shift();
+    this.wake();
+  }
+
+  private endDrag(t: number, glide: boolean, boost: number) {
+    this.dragging = false;
+    this.stage.classList.remove("is-dragging");
+    this.velocity = this.reduced || !glide ? 0 : releaseVelocity(this.samples, t) * boost;
+    this.suppressClickUntil = performance.now() + 400;
+    this.wake();
+  }
+
   private listen() {
     this.on("pointerdown", (e) => {
-      if (this.pointer || (e.pointerType === "mouse" && e.button !== 0)) return;
-      this.pointer = { id: e.pointerId, startX: e.clientX, startY: e.clientY, lastX: e.clientX, touch: e.pointerType !== "mouse" };
-      this.samples = [{ x: e.clientX, t: e.timeStamp }];
-      // Grabbing a moving line stops it, like catching a swinging rope.
-      this.velocity = 0;
-      this.tween = null;
+      // Fingers go through the touch handlers below, which can stop the page from scrolling.
+      if (e.pointerType === "touch" || this.pointer || (e.pointerType === "mouse" && e.button !== 0)) return;
+      this.pointer = { id: e.pointerId, startX: e.clientX, startY: e.clientY, lastX: e.clientX };
+      this.catchLine(e.clientX, e.timeStamp);
     });
 
     this.on("pointermove", (e) => {
       const p = this.pointer;
       if (!p || e.pointerId !== p.id) return;
-      const dx = e.clientX - p.startX;
-      const dy = e.clientY - p.startY;
       if (!this.dragging) {
-        if (p.touch && Math.abs(dy) > DRAG_THRESHOLD && Math.abs(dy) > Math.abs(dx)) {
-          this.pointer = null; // the page is being scrolled
-          return;
-        }
-        if (Math.abs(dx) < DRAG_THRESHOLD) return;
-        this.dragging = true;
-        this.tween = null;
-        this.hovered = null;
+        if (Math.abs(e.clientX - p.startX) < DRAG_THRESHOLD) return;
         this.stage.setPointerCapture(e.pointerId);
-        this.stage.classList.add("is-dragging");
+        this.startDrag();
       }
-      this.offset += e.clientX - p.lastX;
-      p.lastX = e.clientX;
-      this.samples.push({ x: e.clientX, t: e.timeStamp });
-      if (this.samples.length > 12) this.samples.shift();
-      this.wake();
+      this.dragTo(e.clientX, e.timeStamp, p);
     });
 
     const release = (e: PointerEvent) => {
       const p = this.pointer;
       if (!p || e.pointerId !== p.id) return;
       this.pointer = null;
-      if (!this.dragging) return;
-      this.dragging = false;
-      this.stage.classList.remove("is-dragging");
-      this.velocity = this.reduced || e.type === "pointercancel" ? 0 : releaseVelocity(this.samples, e.timeStamp);
-      this.suppressClick = true;
-      // The click (if any) is dispatched right after pointerup; after that, clicks are real again.
-      window.setTimeout(() => (this.suppressClick = false), 0);
-      this.wake();
+      if (this.dragging) this.endDrag(e.timeStamp, e.type !== "pointercancel", 1);
     };
     this.on("pointerup", release);
     this.on("pointercancel", release);
@@ -249,13 +263,57 @@ export class LineEngine {
     this.on(
       "click",
       (e) => {
-        if (!this.suppressClick) return;
+        if (performance.now() > this.suppressClickUntil) return;
         e.preventDefault();
         e.stopPropagation();
-        this.suppressClick = false;
       },
       { capture: true },
     );
+
+    // Touch: decide the direction on the first few pixels. Horizontal moves the line and
+    // blocks the page from scrolling (pointer events cannot do that); vertical is left to the page.
+    this.on(
+      "touchstart",
+      (e) => {
+        if (this.touch || e.touches.length !== 1) return;
+        const t = e.changedTouches[0];
+        this.touch = { id: t.identifier, startX: t.clientX, startY: t.clientY, lastX: t.clientX, mode: "pending" };
+        this.catchLine(t.clientX, e.timeStamp);
+      },
+      { passive: true },
+    );
+
+    this.on(
+      "touchmove",
+      (e) => {
+        const tt = this.touch;
+        const t = tt && [...e.changedTouches].find((c) => c.identifier === tt.id);
+        if (!tt || !t || tt.mode === "scroll") return;
+        if (tt.mode === "pending") {
+          const dx = Math.abs(t.clientX - tt.startX);
+          const dy = Math.abs(t.clientY - tt.startY);
+          if (Math.max(dx, dy) < TOUCH_DECIDE) return;
+          if (dy > dx) {
+            tt.mode = "scroll";
+            return;
+          }
+          tt.mode = "drag";
+          this.startDrag();
+        }
+        if (e.cancelable) e.preventDefault();
+        this.dragTo(t.clientX, e.timeStamp, tt);
+      },
+      { passive: false },
+    );
+
+    const touchEnd = (e: TouchEvent) => {
+      const tt = this.touch;
+      if (!tt || ![...e.changedTouches].some((c) => c.identifier === tt.id)) return;
+      this.touch = null;
+      if (tt.mode === "drag") this.endDrag(e.timeStamp, e.type === "touchend", TOUCH_INERTIA_BOOST);
+    };
+    this.on("touchend", touchEnd);
+    this.on("touchcancel", touchEnd);
 
     // Trackpads swipe horizontally; vertical wheel is left to the page.
     this.on(

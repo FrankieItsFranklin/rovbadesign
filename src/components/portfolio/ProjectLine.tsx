@@ -114,7 +114,7 @@ export function ProjectLine({ projects, lang }: { projects: Project[]; lang: Lan
               size={e.size}
               lang={lang}
               copy={e.copy}
-              eager={!e.copy && (i < 4 || i === projects.length - 1)}
+              first={!e.copy && (i < 4 || i === projects.length - 1)}
               cardRef={(el) => {
                 cardEls.current[i] = el;
               }}
