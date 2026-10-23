@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import Link from "next/link";
-import { Logo } from "@/components/Logo";
+import { LogoMark } from "@/components/LogoMark";
 import { dictionaries } from "@/i18n/dictionaries";
 import "./[lang]/globals.css";
 
@@ -18,7 +18,7 @@ export default function GlobalNotFound() {
       <body>
         <main className="flex min-h-svh flex-col justify-between px-[var(--gutter)] py-6">
           <Link href="/" aria-label="ROVBA Design" className="logo-link self-start">
-            <Logo className="h-[26px] w-auto md:h-[30px]" />
+            <LogoMark className="h-[30px] w-auto md:h-[34px]" />
           </Link>
           <div>
             <h1 className="text-[clamp(48px,9vw,140px)] leading-[0.88] font-bold tracking-[-0.045em]">{en.notFound.title}</h1>

@@ -487,34 +487,26 @@
 .logo-link svg {
   overflow: visible;
 }
-.logo-piece,
-.logo-letter {
+.logo-piece {
   transform-box: fill-box;
-  transform-origin: center;
   transition: transform 520ms var(--ease-out);
 }
-/* Hover echoes the splash: the mark's three pieces drift apart as if about to come loose,
-   the letters run a small wave; leaving puts everything back. (1px ≈ 5 logo units at 30px tall.) */
+/* Hover: the pieces slide straight out from the sign's centre, one after another, like an
+   assembly drawing, then return. Translation only, so the sign never reads as a spinning wheel. */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .logo-link:is(:hover, :focus-visible) .logo-piece {
-    transition-duration: 380ms;
+    transition-duration: 420ms;
   }
   .logo-link:is(:hover, :focus-visible) .logo-piece-1 {
-    transform: translate(13px, -11px) rotate(9deg);
+    transform: translate(11px, -5px);
   }
   .logo-link:is(:hover, :focus-visible) .logo-piece-2 {
-    transform: translate(4px, 13px) rotate(-5deg);
+    transform: translate(2px, 12px);
+    transition-delay: 50ms;
   }
   .logo-link:is(:hover, :focus-visible) .logo-piece-3 {
-    transform: translate(-14px, -5px) rotate(-9deg);
-  }
-  .logo-link:is(:hover, :focus-visible) .logo-letter {
-    animation: logo-wave 560ms var(--ease-out) calc(60ms + var(--i) * 45ms);
-  }
-}
-@keyframes logo-wave {
-  35% {
-    transform: translateY(-16px);
+    transform: translate(-11px, 4px);
+    transition-delay: 100ms;
   }
 }
 
