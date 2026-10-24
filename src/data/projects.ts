@@ -203,7 +203,7 @@ export const projects: Project[] = [
   },
   {
     id: "tilia",
-    demoUrl: "/demo/tilia/",
+    demoUrl: "/demo/tilia",
     niche: "dental",
     slug: "tilia",
     title: "Tilia",
