@@ -49,7 +49,7 @@ export const polishProjects: Record<string, PolishCopy> = {
     details: [
       "Anton do wszystkiego, co krzyczy, prosty grotesk do wszystkiego, co informuje.",
       "Czerń, kość i jedna czerwona kropka, która staje się znakiem.",
-      "Archiwalne zdjęcia starych foteli fryzjerskich, odbarwione do poziomu typografii.",
+      "Tablica terminów pokazuje najbliższy wolny fotel, więc nagłówek „Wtorek?” sam sobie odpowiada.",
     ],
   },
   lident: {
@@ -76,7 +76,7 @@ export const polishProjects: Record<string, PolishCopy> = {
     details: [
       "Bodoni Moda w nazwie i daniach, Libre Franklin w cenach i godzinach.",
       "Butelkowa zieleń, kremowy karton i jedna głęboka czerwień wina.",
-      "Każde danie z ceną i jedną linijką o składnikach, bez PDF do pobrania.",
+      "Karta idzie za zegarem: rano bar espresso, w południe obiad, wieczorem pełna kolacja.",
     ],
   },
   luka: {
@@ -102,7 +102,7 @@ export const polishProjects: Record<string, PolishCopy> = {
     details: [
       "Italiana w dużych rozmiarach, Manrope we wszystkim, co klientka musi przeczytać.",
       "Archiwalne zdjęcie lustra w salonie z 1953 roku buduje nastrój, dopóki studio nie ma własnej sesji.",
-      "Asymetryczne połowy, zdjęcie zawsze wyższe od tekstu obok.",
+      "Wybierz usługi i zobacz, jak wizyta układa się na jednej linii dnia: jedna klientka naraz.",
     ],
   },
   adp: {

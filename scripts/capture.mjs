@@ -7,6 +7,7 @@ import path from "node:path";
 const OUT = path.resolve("public/work");
 
 // cover: размер окна, кадр которого становится принтом на верёвке
+// desktop/mobile: позиции кадров — доля высоты окна или CSS-селектор секции
 const SOURCES = [
   { id: "finir", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, 1.2, 2.6], mobile: [0, 1.3, 3] },
   { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
@@ -15,9 +16,9 @@ const SOURCES = [
   { id: "sobaniec", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "adp", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "lident", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "milanovo", url: "concept:milanovo", cover: [1280, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
-  { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
-  { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
+  { id: "milanovo", url: "concept:milanovo", cover: [1280, 1600], desktop: [0, "#dzien", "#cantina"], mobile: [0, "#dzien", "#forno"] },
+  { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, "#cennik", "#termin"], mobile: [0, "#termin", "#barberzy"] },
+  { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
 ];
 
 const only = process.argv.slice(2);
@@ -41,7 +42,8 @@ async function shoot(browser, src, kind, [w, h], scale, positions) {
   await settle(page);
   const files = [];
   for (const [i, pos] of positions.entries()) {
-    await page.evaluate((y) => scrollTo(0, y), Math.round(pos * h));
+    if (typeof pos === "string") await page.evaluate((sel) => scrollTo(0, document.querySelector(sel).getBoundingClientRect().top + scrollY), pos);
+    else await page.evaluate((y) => scrollTo(0, y), Math.round(pos * h));
     await page.waitForTimeout(500);
     const file = `${src.id}/${kind}-${i + 1}.jpg`;
     await page.screenshot({ path: path.join(OUT, file), type: "jpeg", quality: 84 });

@@ -119,7 +119,7 @@ export const projects: Project[] = [
     details: [
       { label: "Typography", text: "Anton for everything that shouts, a plain grotesk for everything that informs." },
       { label: "Palette", text: "Black, bone and one red full stop that becomes the mark." },
-      { label: "Imagery", text: "Archive photographs of old barber chairs, desaturated until they match the type." },
+      { label: "Interaction", text: "A slot board shows the nearest free chair, so the headline \"Tuesday?\" answers itself." },
     ],
     ...shots("north-barber"),
     coverPosition: "50% 0%",
@@ -178,7 +178,7 @@ export const projects: Project[] = [
     details: [
       { label: "Typography", text: "Bodoni Moda for the name and the dishes, Libre Franklin for prices and hours." },
       { label: "Palette", text: "Bottle green, cream card stock and one deep wine red." },
-      { label: "Menu", text: "Every dish with its price and one line of what is in it, no PDF download." },
+      { label: "Interaction", text: "The menu follows the clock: espresso bar in the morning, lunch at noon, the full card in the evening." },
     ],
     ...shots("milanovo"),
     coverPosition: "50% 0%",
@@ -236,7 +236,7 @@ export const projects: Project[] = [
     details: [
       { label: "Typography", text: "Italiana at display sizes, Manrope for everything a client needs to read." },
       { label: "Imagery", text: "A 1953 archive photograph of a salon mirror sets the mood until the studio is shot." },
-      { label: "Layout", text: "Asymmetric halves, the photograph always taller than the text beside it." },
+      { label: "Interaction", text: "Pick the services and watch the visit settle on a single line of the day, one client at a time." },
     ],
     ...shots("atelier-17"),
     coverPosition: "50% 0%",
