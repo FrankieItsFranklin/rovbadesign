@@ -11,6 +11,7 @@ const OUT = path.resolve("public/work");
 const SOURCES = [
   { id: "finir", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, "#uslugi", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
   { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "tilia", url: "http://localhost:4324/", cover: [1280, 1600], desktop: [0, 1.2, 2.6], mobile: [0, 1.3, 3] },
   { id: "piernicova", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "luka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "sobaniec", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },

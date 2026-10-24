@@ -79,6 +79,20 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Karta idzie za zegarem: rano bar espresso, w południe obiad, wieczorem pełna kolacja.",
     ],
   },
+  tilia: {
+    category: "Gabinet stomatologiczny",
+    city: "Warszawa",
+    description:
+      "Mały gabinet na Żoliborzu, który chce być spokojny, a nie kliniczny. Strona czyta się jak drukowana ulotka dla pacjenta: cichy szeryf, szerokie marginesy i każdy krok pierwszej wizyty wyjaśniony, zanim ktokolwiek musi zadzwonić.",
+    challenge: "Większość stron dentystów w mieście zaczyna się od zdjęcia uśmiechu ze stocku i przycisku rezerwacji. Osiedlowy gabinet musi najpierw zdobyć zaufanie.",
+    approach:
+      "Zaczęliśmy od rozmowy, a nie od zabiegu: trzy proste kroki, prawdziwe godziny otwarcia i cennik, który da się przeczytać na telefonie.",
+    details: [
+      "Lekki, redakcyjny szeryf w nagłówkach, duży i lekko pochylony w jedynym zdaniu, które naprawdę się liczy.",
+      "Kolor kości, głęboka zieleń sosny dla akcji i nic więcej.",
+      "Formularz rezerwacji, który mówi wprost, co się stanie po wysłaniu.",
+    ],
+  },
   luka: {
     category: "Biuro rachunkowe",
     city: "Kraków",
