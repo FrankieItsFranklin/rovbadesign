@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/work/[slug
   return {
     title: project.title,
     description: project.description,
-    alternates: { languages: { en: `/work/${slug}`, pl: `/pl/work/${slug}` } },
+    alternates: { canonical: localePath(lang as Lang, `/work/${slug}`), languages: { en: `/work/${slug}`, pl: `/pl/work/${slug}` } },
   };
 }
 
@@ -56,6 +56,13 @@ export default async function CaseStudy({ params }: PageProps<"/[lang]/work/[slu
               <a href={project.liveUrl} className="label link-quiet mt-8 inline-block" target="_blank" rel="noreferrer">
                 {d.visit}
               </a>
+            ) : project.demoUrl ? (
+              <>
+                <a href={project.demoUrl} className="label mt-8 inline-flex min-h-11 items-center rounded-full border border-ink px-5 transition-colors hover:bg-ink hover:text-paper" target="_blank" rel="noreferrer">
+                  {d.demo}
+                </a>
+                <p className="mt-4 max-w-[28ch] text-[14px] text-muted">{project.status === "Concept" ? d.conceptNote : d.fictionalNote}</p>
+              </>
             ) : (
               <p className="mt-8 max-w-[28ch] text-[14px] text-muted">
                 {project.status === "Concept" ? d.conceptNote : d.prototypeNote}

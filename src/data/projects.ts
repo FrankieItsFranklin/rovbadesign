@@ -3,6 +3,7 @@
 
 export type CardAspect = "4/5" | "1/1" | "3/4";
 export type ProjectStatus = "Live" | "Prototype" | "Concept";
+export type Niche = "restaurants" | "dental" | "beauty" | "services";
 
 export type Project = {
   id: string;
@@ -23,6 +24,9 @@ export type Project = {
   desktopImages: string[];
   mobileImages: string[];
   liveUrl?: string;
+  /** A public copy of the prototype or concept, hosted by the portfolio under /demo. */
+  demoUrl?: string;
+  niche: Niche;
   /** Field colour behind the phone screens on the case study. */
   accent: string;
   accentInk: string;
@@ -43,6 +47,7 @@ const shots = (id: string) => ({
 export const projects: Project[] = [
   {
     id: "finir",
+    niche: "dental",
     slug: "finir",
     title: "Finir",
     client: "Finir Gabinet Stomatologiczny",
@@ -73,6 +78,7 @@ export const projects: Project[] = [
   },
   {
     id: "halong",
+    niche: "restaurants",
     slug: "ha-long-curry",
     title: "Ha Long Curry",
     client: "Ha Long Curry",
@@ -104,6 +110,8 @@ export const projects: Project[] = [
   },
   {
     id: "north-barber",
+    demoUrl: "/demo/concepts/north-barber.html",
+    niche: "beauty",
     slug: "north-barber",
     title: "North Barber",
     client: "North Barber",
@@ -133,6 +141,7 @@ export const projects: Project[] = [
   },
   {
     id: "lident",
+    niche: "dental",
     slug: "lident",
     title: "Lident",
     client: "Gabinet Stomatologiczny Lident",
@@ -163,6 +172,8 @@ export const projects: Project[] = [
   },
   {
     id: "milanovo",
+    demoUrl: "/demo/concepts/milanovo.html",
+    niche: "restaurants",
     slug: "milanovo",
     title: "Milanovo",
     client: "Milanovo",
@@ -192,6 +203,8 @@ export const projects: Project[] = [
   },
   {
     id: "tilia",
+    demoUrl: "/demo/tilia/",
+    niche: "dental",
     slug: "tilia",
     title: "Tilia",
     client: "Tilia Gabinet Stomatologiczny",
@@ -222,6 +235,7 @@ export const projects: Project[] = [
   },
   {
     id: "luka",
+    niche: "services",
     slug: "luka",
     title: "Luka",
     client: "Luka Biuro Rachunkowe",
@@ -251,6 +265,8 @@ export const projects: Project[] = [
   },
   {
     id: "atelier-17",
+    demoUrl: "/demo/concepts/atelier-17.html",
+    niche: "beauty",
     slug: "atelier-17",
     title: "Atelier 17",
     client: "Atelier 17",
@@ -280,6 +296,7 @@ export const projects: Project[] = [
   },
   {
     id: "adp",
+    niche: "dental",
     slug: "adp-clinic",
     title: "ADP Clinic",
     client: "ADP Clinic",
@@ -309,6 +326,7 @@ export const projects: Project[] = [
   },
   {
     id: "piernicova",
+    niche: "restaurants",
     slug: "piernicova",
     title: "Piernicova",
     client: "Restauracja Piernicova",
@@ -338,6 +356,7 @@ export const projects: Project[] = [
   },
   {
     id: "sobaniec",
+    niche: "dental",
     slug: "sobaniec",
     title: "Stomatologia Sobaniec",
     client: "Stomatologia Dr Stefan Sobaniec",

@@ -3,6 +3,7 @@ import { LangSwitch } from "@/components/LangSwitch";
 import { LogoMark } from "@/components/LogoMark";
 import { type Lang, localePath } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
+import { pagePath } from "@/i18n/routes";
 
 export function PortfolioHeader({ lang, alternate }: { lang: Lang; alternate: string }) {
   const d = dictionaries[lang];
@@ -10,7 +11,9 @@ export function PortfolioHeader({ lang, alternate }: { lang: Lang; alternate: st
   const nav = [
     // On phones the line is the first screen, so "Work" is dropped to keep the bar on one row.
     { href: `${home}#work`, label: d.nav.work, wide: true },
-    { href: `${home}#studio`, label: d.nav.studio },
+    { href: `${home}#studio`, label: d.nav.studio, wide: true },
+    { href: `${home}#offer`, label: d.nav.offer },
+    { href: pagePath(lang, "journal"), label: d.nav.journal, wide: true },
     { href: `${home}#contact`, label: d.nav.contact },
   ];
   return (

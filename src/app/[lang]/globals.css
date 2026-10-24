@@ -371,7 +371,10 @@
   background: var(--color-paper);
   color: var(--color-ink);
   pointer-events: none;
-  animation: splash-out 450ms 2050ms var(--ease-out) forwards;
+  /* The paper clears while the mark flies to the header; the mark itself goes last. */
+  animation:
+    splash-clear 420ms 2120ms var(--ease-out) forwards,
+    splash-out 1ms 3150ms forwards;
 }
 :root[data-splash="skip"] .splash {
   display: none;
@@ -379,7 +382,10 @@
 .splash-logo {
   width: min(520px, 76vw);
   overflow: visible;
-  animation: splash-settle 450ms 2050ms ease both;
+  transform-origin: var(--fly-ox, 50%) var(--fly-oy, 50%);
+  animation:
+    splash-fly 680ms 2050ms var(--ease-in-out) forwards,
+    splash-fade 220ms 2930ms ease forwards;
 }
 .splash-logo path {
   fill: currentColor;
@@ -410,11 +416,15 @@
   animation-delay: 160ms;
 }
 .splash-letter {
-  animation: splash-letter 500ms var(--ease-out) both;
-  animation-delay: calc(1050ms + var(--i) * 70ms);
+  animation:
+    splash-letter 500ms var(--ease-out) both,
+    splash-fade 240ms 2050ms ease forwards;
+  animation-delay: calc(1050ms + var(--i) * 70ms), 2050ms;
 }
 .splash-design {
-  animation: fade-in 450ms 1350ms ease both;
+  animation:
+    fade-in 450ms 1350ms ease both,
+    splash-fade 240ms 2050ms ease forwards;
 }
 
 @keyframes splash-piece {
@@ -445,9 +455,23 @@
     transform: translateY(18px);
   }
 }
-@keyframes splash-settle {
+/* The header logo waits under the flying mark and takes over the moment it lands. */
+:root[data-fly] .logo-link {
+  animation: fade-in 1ms 2730ms both;
+}
+@keyframes splash-fly {
   to {
-    transform: scale(0.97);
+    transform: translate(var(--fly-x, 0), var(--fly-y, 0)) scale(var(--fly-s, 0.97));
+  }
+}
+@keyframes splash-fade {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes splash-clear {
+  to {
+    background-color: transparent;
   }
 }
 @keyframes splash-out {
@@ -528,4 +552,11 @@
 
 #contact :focus-visible {
   outline-color: var(--color-paper);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

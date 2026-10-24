@@ -48,3 +48,18 @@ npm run dev          # http://localhost:3801
 - `hello@rovba.design` в `src/components/portfolio/ContactSection.tsx` — адрес-заглушка.
 - Статусы проектов: живой только Ha Long Curry; Finir, Lident, Luka, Piernicova, ADP, Sobaniec, Dental 3D — прототипы; Milanovo, North Barber, Atelier 17 — концепты студии (имена, цены, команда в них придуманы). Перед показом прототипов с названиями реальных клиник/ресторанов — согласовать с ними.
 - Год 2026 у всех проектов и тексты кейсов — проверить.
+
+
+## Заявки, аналитика, данные студии
+
+- **Форма заявки** → `src/app/api/contact/route.ts`, письмо через Resend. В Vercel → Settings → Environment Variables:
+  `RESEND_API_KEY`, `CONTACT_TO` (куда слать, можно несколько через запятую), `CONTACT_FROM`
+  (после подтверждения домена в Resend, напр. `ROVBA Design <formularz@rovbadesign.pl>`; до этого не задавать —
+  письма уходят с `onboarding@resend.dev` только на адрес владельца аккаунта Resend). Без ключа форма показывает e-mail.
+- **Аналитика**: Vercel Web Analytics (`<Analytics />` в layout). Включить в дашборде проекта → Analytics → Enable.
+- **Данные студии** (владелец, NIP, телефон/WhatsApp, календарь, фото и био для «О студии»): `src/data/studio.ts`.
+  Пустые поля на сайте не показываются. Цены пакетов: `PRICES` в `src/components/portfolio/OfferSection.tsx`.
+- **Живые демо** вымышленных проектов: `npm run demos` собирает Tilia и концепты в `public/demo/` (noindex).
+  Прототипы реальных фирм туда не попадают: в них настоящие контакты клиентов.
+- **Страницы**: `/for|/pl/dla/<ниша>` (`src/data/niches.ts`), `/journal|/pl/dziennik` (`src/data/journal.ts`),
+  `/about|/pl/o-studiu`, `/privacy|/pl/polityka-prywatnosci`. Публичные польские адреса задаются в `src/i18n/routes.ts`.
