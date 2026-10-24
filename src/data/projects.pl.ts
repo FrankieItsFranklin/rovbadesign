@@ -131,19 +131,6 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Pędzelkowa nazwa nad solidnym, książkowym szeryfem.",
     ],
   },
-  "dental-3d": {
-    category: "Moduł interaktywny",
-    city: "Warszawa",
-    description:
-      "Projekt z laboratorium: interaktywny ząb i implant, które klinika może wstawić na własną stronę. Obróć go, przełącz na RTG, rozłóż implant i przeczytaj, do czego służy każda część.",
-    challenge: "Pacjenci kiwają głową na konsultacji implantologicznej, nie wyobrażając sobie ani jednej części.",
-    approach: "Proceduralna geometria 3D bez ciężkich modeli, cztery tryby widoku i proste opisy przy każdej części.",
-    details: [
-      "React Three Fiber z geometrią budowaną w kodzie, dzięki czemu moduł ładuje się szybko.",
-      "Widok powierzchni, anatomii, RTG i rozłożony — tego samego zęba.",
-      "Zbudowany jako moduł do stron klinik premium, nie jako osobna aplikacja.",
-    ],
-  },
   sobaniec: {
     category: "Rodzinny gabinet stomatologiczny",
     city: "Białystok",
@@ -173,8 +160,6 @@ export const polishTerms: Record<string, string> = {
   "Pricing Calculator": "Kalkulator cen",
   Booking: "Rezerwacje",
   Motion: "Animacja",
-  "Creative Development": "Creative development",
-  "3D": "3D",
   Typography: "Typografia",
   Palette: "Paleta",
   Interaction: "Interakcja",
@@ -186,7 +171,4 @@ export const polishTerms: Record<string, string> = {
   Tone: "Ton",
   Layout: "Układ",
   Structure: "Struktura",
-  Technology: "Technologia",
-  Modes: "Tryby",
-  Use: "Zastosowanie",
 };

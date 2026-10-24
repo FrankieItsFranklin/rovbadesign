@@ -15,7 +15,6 @@ const SOURCES = [
   { id: "sobaniec", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "adp", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "lident", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "dental-3d", url: "http://localhost:3701/", cover: [1200, 1600], desktop: [0, 1, 2], mobile: [0, 1, 2] },
   { id: "milanovo", url: "concept:milanovo", cover: [1280, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
   { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, 1, 2], mobile: [0, 1.1, 2.2] },
