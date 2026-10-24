@@ -15,14 +15,14 @@ export const polishProjects: Record<string, PolishCopy> = {
     category: "Gabinet stomatologiczny",
     city: "Warszawa",
     description:
-      "Mały gabinet na Żoliborzu, który chciał być spokojny, a nie kliniczny. Strona czyta się jak drukowana ulotka dla pacjenta: cichy szeryf, szerokie marginesy i każdy krok pierwszej wizyty wyjaśniony, zanim ktokolwiek musi zadzwonić.",
-    challenge: "Większość stron dentystów w mieście zaczyna się od zdjęcia uśmiechu ze stocku i przycisku rezerwacji. Finir musiał najpierw zdobyć zaufanie.",
+      "Mały gabinet na Żoliborzu, wydrukowany jak polskie ulotki farmaceutyczne z lat 60. i 70. Każdy zabieg to osobna ulotka w jednej płaskiej farbie, z lekarzem, ceną i prostym następnym krokiem.",
+    challenge: "Strony dentystów w Warszawie wyglądają jak ten sam biały gabinet z uśmiechem ze stocku. Finir potrzebował głosu, którego nie skopiuje sąsiad.",
     approach:
-      "Zaczęliśmy od rozmowy, a nie od zabiegu: trzy proste kroki, prawdziwe godziny otwarcia i cennik, który da się przeczytać na telefonie.",
+      "Sięgnęliśmy po język ulotek, które polskie zakłady farmaceutyczne rozsyłały do rejonowych przychodni: płaskie plamy koloru, wysokie wąskie nazwy dzielone na sylaby i jeden czarny pas.",
     details: [
-      "Lekki, redakcyjny szeryf w nagłówkach, duży i lekko pochylony w jedynym zdaniu, które naprawdę się liczy.",
-      "Kolor kości, głęboka zieleń sosny dla akcji i nic więcej.",
-      "Formularz rezerwacji, który mówi wprost, co się stanie po wysłaniu.",
+      "Wersaliki League Gothic dzielone na sylaby, jak na ulotce z lat 70., i prosty grotesk do wszystkiego, co pacjent czyta.",
+      "Szary papier offsetowy i siedem płaskich farb, po jednej na zabieg, nadrukowanych na siebie jak w druku dwukolorowym.",
+      "Osiem ulotek rozkłada się ze stosu, a najbliższe wolne terminy z pierwszego ekranu otwierają już wypełniony formularz zapisu.",
     ],
   },
   halong: {

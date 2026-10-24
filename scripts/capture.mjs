@@ -9,7 +9,7 @@ const OUT = path.resolve("public/work");
 // cover: размер окна, кадр которого становится принтом на верёвке
 // desktop/mobile: позиции кадров — доля высоты окна или CSS-селектор секции
 const SOURCES = [
-  { id: "finir", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, 1.2, 2.6], mobile: [0, 1.3, 3] },
+  { id: "finir", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, "#uslugi", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
   { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "piernicova", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "luka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
