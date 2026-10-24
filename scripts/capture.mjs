@@ -15,7 +15,7 @@ const SOURCES = [
   { id: "luka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "sobaniec", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "adp", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "lident", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "lident", url: "http://localhost:4000/static/lident/?notes=off", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "milanovo", url: "concept:milanovo", cover: [1280, 1600], desktop: [0, "#dzien", "#cantina"], mobile: [0, "#dzien", "#forno"] },
   { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, "#cennik", "#termin"], mobile: [0, "#termin", "#barberzy"] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
