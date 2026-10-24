@@ -69,11 +69,11 @@ export async function POST(req: Request) {
     }),
   });
   if (!res.ok) {
-    // Resend explains refusals (unverified sender, test-mode recipient, bad key); keep the reason in the logs
-    // and pass its short name on, so a failed send can be diagnosed without the dashboard.
+    // Resend explains refusals (unverified sender, test-mode recipient, bad key). The full message can contain
+    // the account's own e-mail, so it stays in the server logs; the visitor only gets the short error name.
     const reason = (await res.json().catch(() => null)) as { name?: string; message?: string } | null;
     console.error("Resend refused the message", res.status, reason);
-    return NextResponse.json({ ok: false, error: "send_failed", reason: reason?.name ?? res.status, detail: reason?.message }, { status: 502 });
+    return NextResponse.json({ ok: false, error: "send_failed", reason: reason?.name ?? res.status }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
 }
