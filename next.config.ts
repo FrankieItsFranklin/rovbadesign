@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/en", destination: "/", permanent: true },
+      // Renamed demo projects keep their old case-study addresses working.
+      ...[["luka", "rubryka"], ["adp-clinic", "kotwica"], ["milanovo", "ventotto"]].flatMap(([from, to]) => [
+        { source: `/work/${from}`, destination: `/work/${to}`, permanent: true },
+        { source: `/pl/work/${from}`, destination: `/pl/work/${to}`, permanent: true },
+      ]),
       // Generated Open Graph images keep their internal /en/… address.
       { source: "/en/:path((?!.*opengraph-image).*)", destination: "/:path", permanent: true },
       // Internal Polish paths that have a Polish public name.

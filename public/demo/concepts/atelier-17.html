@@ -8,12 +8,12 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js")</script>
 <style>
   :root {
     --white:#f4f2ef; --stone:#dcd7cf; --stone-2:#e9e5df; --ink:#151515; --ink-2:#3f3d3a; --mute:#6e6a64; --clay:#a35d43; --clay-deep:#8a4a33; --night:#151515; --night-ink:#c9c4bc;
-    --display:"Italiana", Didot, serif; --text:"Manrope", system-ui, sans-serif;
+    --display:"Instrument Serif", Georgia, serif; --text:"Manrope", system-ui, sans-serif;
     --ease-out:cubic-bezier(.22,1,.36,1); --gutter:48px;
   }
   * { box-sizing:border-box; margin:0; }
@@ -58,7 +58,8 @@
   @keyframes door { from { opacity:0; letter-spacing:.2em; } to { opacity:1; letter-spacing:-.01em; } }
   .hero p { max-width:34ch; font-size:20px; }
   .hero .acts { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
-  .hero figure { height:calc(100svh - 130px); min-height:620px; overflow:hidden; }
+  .hero figure { height:calc(100svh - 130px); min-height:620px; overflow:hidden; margin-left:-12%; -webkit-mask-image:linear-gradient(to right, transparent 0, rgba(0,0,0,.55) 18%, #000 42%); mask-image:linear-gradient(to right, transparent 0, rgba(0,0,0,.55) 18%, #000 42%); }
+  .hero .l { position:relative; z-index:2; }
   .hero img { width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); animation:settle 2400ms var(--ease-out) both; }
   @keyframes settle { from { transform:scale(1.07); } to { transform:none; } }
 
@@ -73,17 +74,14 @@
   .services-head { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-bottom:64px; }
   .services-head p { max-width:38ch; color:var(--ink-2); }
   .groups { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:56px; }
+  .group figure { aspect-ratio:4/3; overflow:hidden; margin-bottom:22px; background:var(--stone); }
+  .group figure img { width:100%; height:100%; object-fit:cover; transition:transform 900ms var(--ease-out); }
+  .group:hover figure img { transform:scale(1.04); }
   .group h3 { font:400 40px/1 var(--display); padding-bottom:18px; border-bottom:1px solid var(--ink); margin-bottom:6px; }
   .svc { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2px 16px; padding:16px 0; border-bottom:1px solid #cdc7be; }
   .svc b { font-weight:600; }
   .svc em { font-style:normal; color:var(--clay-deep); font-weight:600; font-variant-numeric:tabular-nums; }
   .svc span { grid-column:1 / -1; font-size:15px; color:var(--mute); }
-  .objects { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:80px; }
-  .objects figure { background:#fff; aspect-ratio:4/3; overflow:hidden; display:grid; place-items:center; }
-  .objects img { width:100%; height:100%; object-fit:contain; padding:8%; transition:transform 900ms var(--ease-out); }
-  .objects figure:last-child img { object-fit:cover; padding:0; }
-  .objects figure:hover img { transform:scale(1.04); }
-  .objects figcaption { font-size:14px; color:var(--mute); margin-top:10px; }
 
   .plan { background:var(--night); color:var(--white); padding:136px var(--gutter); }
   .plan-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:end; margin-bottom:56px; }
@@ -151,12 +149,11 @@
   @media (max-width:760px) {
     :root { --gutter:20px; }
     nav.top { padding:18px 20px; } nav.top .links, nav.top > .btn { display:none; } .menu-btn { display:block; }
-    .hero { grid-template-columns:1fr; min-height:0; } .hero .l { padding:16px 0 40px; gap:28px; } .hero figure { height:480px; min-height:0; }
+    .hero { grid-template-columns:1fr; min-height:0; } .hero .l { padding:16px 0 40px; gap:28px; } .hero figure { height:480px; min-height:0; margin:-40px -20px 0; -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 34%); mask-image:linear-gradient(to bottom, transparent 0, #000 34%); }
     .hero .num { font-size:200px; }
     .one { grid-template-columns:1fr; padding:80px 20px; gap:40px; } .one .cols { grid-template-columns:1fr; gap:24px; }
     .services { padding:80px 20px; } .services-head { flex-direction:column; align-items:start; margin-bottom:40px; } .groups { grid-template-columns:1fr; gap:44px; }
-    .objects { grid-template-columns:1fr 1fr; margin-top:56px; } .objects figure:last-child { display:none; }
-    .plan { padding:80px 20px; } .plan-head { grid-template-columns:1fr; gap:16px; margin-bottom:40px; } .plan-head p { justify-self:start; }
+      .plan { padding:80px 20px; } .plan-head { grid-template-columns:1fr; gap:16px; margin-bottom:40px; } .plan-head p { justify-self:start; }
     .chip { flex:1 1 calc(50% - 10px); } .chip span { min-height:68px; padding:10px 14px; }
     .ticks span:nth-child(even) { visibility:hidden; }
     .team { grid-template-columns:1fr; } .team figure { min-height:0; height:420px; } .team .t { padding:64px 20px; }
@@ -211,29 +208,28 @@
   </div>
   <div class="groups">
     <div class="group" data-r>
+      <figure><img src="assets/service-cut.jpg" width="1920" height="1280" loading="lazy" alt="Nożyczki przy pasmie jasnych włosów, cięcie z bliska"></figure>
       <h3>Cięcie</h3>
       <div class="svc"><b>Cięcie i modelowanie</b><em>180 zł</em><span>Konsultacja kształtu, mycie, cięcie. Około 75 minut.</span></div>
       <div class="svc"><b>Cięcie krótkich włosów</b><em>150 zł</em><span>Pixie, bob, linia karku. Około 60 minut.</span></div>
       <div class="svc"><b>Grzywka</b><em>40 zł</em><span>Między wizytami, bez mycia. 15 minut.</span></div>
     </div>
     <div class="group" data-r>
+      <figure><img src="assets/service-color.jpg" width="1920" height="1280" loading="lazy" alt="Pędzel do farbowania z kosmykiem rudych włosów na marmurze"></figure>
       <h3>Kolor</h3>
       <div class="svc"><b>Koloryzacja globalna</b><em>320 zł</em><span>Jeden kolor od nasady. Test pasma przy pierwszej wizycie.</span></div>
       <div class="svc"><b>Balayage</b><em>520 zł</em><span>Malowane pasma, tonowanie, pielęgnacja. Około 3 godzin.</span></div>
       <div class="svc"><b>Tonowanie</b><em>160 zł</em><span>Odświeżenie odcienia, połysk. 45 minut.</span></div>
     </div>
     <div class="group" data-r>
+      <figure><img src="assets/service-care.jpg" width="1920" height="1280" loading="lazy" alt="Ręcznik, szczotka, kosmetyki do włosów i świece"></figure>
       <h3>Pielęgnacja</h3>
       <div class="svc"><b>Rytuał</b><em>220 zł</em><span>Diagnoza skóry głowy, kuracja i masaż. Godzina dla włosów.</span></div>
       <div class="svc"><b>Upięcie</b><em>260 zł</em><span>Na ślub lub wieczór, z próbą tydzień wcześniej.</span></div>
       <div class="svc"><b>Modelowanie</b><em>110 zł</em><span>Mycie i suszenie na szczotce. 40 minut.</span></div>
     </div>
   </div>
-  <div class="objects">
-    <figure data-r><img src="assets/lacquer-sprayer-hairdressing-circa-1950.jpg" width="2667" height="3000" loading="lazy" alt="Chromowany rozpylacz do lakieru z gumową gruszką, około 1950"></figure>
-    <figure data-r><img src="assets/neck-clippers-hairdressing-circa-1950.jpg" width="3000" height="2000" loading="lazy" alt="Ręczna maszynka do karku, około 1950"></figure>
-    <figure data-r><img src="assets/scissors-comb.jpg" width="960" height="894" loading="lazy" alt="Nożyczki fryzjerskie i grzebień z bliska"></figure>
-  </div>
+
 </section>
 
 <section class="plan" id="wizyta" data-reveal>
@@ -304,7 +300,7 @@
 <footer>
   <div class="big it" aria-hidden="true">17</div>
   <div class="row"><span>Atelier 17 · studio fryzur · ul. Dobra 17, Powiśle</span><span>Koncept ROVBA Design · salon, zespół i grafik są fikcyjne</span></div>
-  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Hairdresser_1953_(JOKAUAS2_2203-10).tif">fryzjerka przy lustrze, 1953</a> U. A. Saarinen, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Harry_Fell,_hairdresser,_Melbourne,_28_October_1952_-_Flickr_-_State_Library_of_NSW.jpg">Harry Fell, 1952</a> State Library of New South Wales, bez znanych ograniczeń; <a href="https://www.rawpixel.com/image/8736354/beauty-shop-1943-oak-ridge">salon w Oak Ridge, 1943</a> US DOE, CC0; <a href="https://collections.museumsvictoria.com.au/items/706714">rozpylacz do lakieru</a> i <a href="https://collections.museumsvictoria.com.au/items/1242165">maszynka do karku</a> Museums Victoria, CC BY 4.0; <a href="https://stocksnap.io/photo/scissors-comb-A5M4RVGZKE">nożyczki i grzebień</a> Candace McDaniel, CC0; <a href="https://commons.wikimedia.org/wiki/File:Warszawa_Powi%C5%9Ble_train_station.07.jpg">stacja Powiśle</a> Nenea hartia, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=42157137">bulwary</a> Dariusz Kowalczyk, CC BY-SA 4.0. Zdjęcia nie przedstawiają salonu Atelier 17.</p>
+  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Hairdresser_1953_(JOKAUAS2_2203-10).tif">fryzjerka przy lustrze, 1953</a> U. A. Saarinen, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Harry_Fell,_hairdresser,_Melbourne,_28_October_1952_-_Flickr_-_State_Library_of_NSW.jpg">Harry Fell, 1952</a> State Library of New South Wales, bez znanych ograniczeń; <a href="https://www.rawpixel.com/image/8736354/beauty-shop-1943-oak-ridge">salon w Oak Ridge, 1943</a> US DOE, CC0; <a href="https://commons.wikimedia.org/wiki/File:Cutting_hair_-_haircuts.jpg">cięcie</a>, <a href="https://commons.wikimedia.org/wiki/File:Tinting_Brush_for_Dying_Hair.jpg">pędzel do koloru</a> i <a href="https://commons.wikimedia.org/wiki/File:Pamper_Day_-_Haircare_Products_-_50888163522.jpg">pielęgnacja</a> geehairimages, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Warszawa_Powi%C5%9Ble_train_station.07.jpg">stacja Powiśle</a> Nenea hartia, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=42157137">bulwary</a> Dariusz Kowalczyk, CC BY-SA 4.0. Zdjęcia nie przedstawiają salonu Atelier 17.</p>
 </footer>
 
 <script src="assets/concept.js"></script>

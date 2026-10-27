@@ -56,14 +56,14 @@ export const polishProjects: Record<string, PolishCopy> = {
     category: "Gabinet stomatologiczny",
     city: "Warszawa",
     description:
-      "Prototyp dla gabinetu na Mokotowie, zrobiony, żeby zacząć rozmowę z klientem. Pierwszy ekran to narysowany uśmiech: dotknij zęba, który niepokoi, a formularz rezerwacji już wie, gdzie boli.",
+      "Prototyp dla gabinetu na Mokotowie, zrobiony na rozmowę z klientem. Strona jest kartoteką pacjentów: każda sekcja to kolorowa przekładka z indeksem, a pierwszy ekran to karta wizyty. Dotknij zęba, który niepokoi, a formularz już wie, gdzie boli.",
     challenge: "Pacjenci rzadko znają nazwę swojego problemu. Wiedzą za to, który to ząb.",
     approach:
       "Interaktywny schemat zębów zamienia objaw w wypełnioną prośbę o wizytę, a cennik odpowiada na pytania przed telefonem.",
     details: [
       "Ząb, objaw, rezerwacja: trzy dotknięcia od pierwszego ekranu do wypełnionego formularza.",
-      "Każdy rysunek powstał w kodzie, w porcelanowych i szałwiowych kolorach gabinetu.",
-      "Cennik z wyszukiwarką i bez gwiazdek, tak jak obiecuje nagłówek.",
+      "Karty katalogowe z czerwoną linią nagłówka i niebieskimi liniami; to, co gabinet musi jeszcze dostarczyć, jest wpisane na maszynie jak puste pole formularza.",
+      "Wybrany ząb jest zakreskowany czerwonym ołówkiem, tak jak dentysta zaznacza ząb do leczenia na karcie.",
     ],
   },
   ventotto: {
@@ -93,17 +93,17 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Formularz rezerwacji, który mówi wprost, co się stanie po wysłaniu.",
     ],
   },
-  luka: {
+  rubryka: {
     category: "Biuro rachunkowe",
     city: "Kraków",
     description:
-      "Biuro rachunkowe z Krakowa, działające od 1993 roku, które chciało, żeby nowi klienci znali cenę przed pierwszym spotkaniem. Strona zbudowana jest wokół kalkulatora, który zamienia liczbę dokumentów w miesięczny abonament.",
+      "Demonstracyjne biuro rachunkowe z Krakowa, nazwane od rubryki w księdze. Nowi klienci mają znać cenę przed pierwszym spotkaniem, więc strona jest zbudowana wokół kalkulatora, który zamienia liczbę dokumentów w miesięczny abonament.",
     challenge: "Biura rachunkowe chowają ceny za formularzem kontaktowym. Małe firmy wychodzą, zanim zapytają.",
     approach: "Jasna obietnica w nagłówku i działający kalkulator abonamentu tuż pod nim.",
     details: [
       "Przesuń liczbę dokumentów i pracowników, przeczytaj dokładną cenę miesięczną.",
       "Precyzyjny grotesk z cyframi tabelarycznymi, żeby każda cena trzymała linię.",
-      "Prosty polski, bez podatkowego żargonu na pierwszym ekranie.",
+      "Znak to kartka księgi z rubrykami i jedną wypełnioną komórką: każda złotówka ma już swoje miejsce.",
     ],
   },
   "atelier-17": {
@@ -119,11 +119,11 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Wybierz usługi i zobacz, jak wizyta układa się na jednej linii dnia: jedna klientka naraz.",
     ],
   },
-  adp: {
+  kotwica: {
     category: "Klinika implantologii",
     city: "Lublin",
     description:
-      "Wielostronicowa strona kliniki implantologii w Lublinie, działającej od 1993 roku. Wyróżnikiem jest implant, który rozkłada się przy przewijaniu: korona, łącznik, tytanowy wszczep, każdy z ceną.",
+      "Wielostronicowa demonstracyjna strona kliniki implantologii w Lublinie. Kotwica, bo tym właśnie jest implant. Wyróżnikiem jest implant, który rozkłada się przy przewijaniu: korona, łącznik, dziąsło i kość, każdy z ceną.",
     challenge: "Leczenie implantologiczne jest drogie i trudne do wyobrażenia. Pacjent musi zobaczyć, za co płaci.",
     approach: "Rozkładany przy przewijaniu implant, pełny cennik i kalkulator kosztów na ciemnym, klinicznym granacie.",
     details: [
