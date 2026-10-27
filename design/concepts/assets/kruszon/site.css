@@ -60,6 +60,12 @@ p { max-width:68ch; }
 .flight { position:relative; height:clamp(260px, 42vh, 460px); overflow:hidden; }
 .flight .lbl { position:absolute; right:var(--m); bottom:18px; z-index:3; font-size:clamp(28px, 2.6vw, 40px); }
 
+/* rozsypane drobiny (site.js): tylko w pudełkach bez tekstu, pod napisami */
+.scatter { position:absolute; inset:0; pointer-events:none; z-index:1; }
+.scatter .bit { position:absolute; height:auto; filter:drop-shadow(0 8px 8px rgb(52 28 23 / .2)); will-change:transform; }
+.scatter .dust { position:absolute; width:0; height:0; will-change:transform; }
+.scatter .dust i { position:absolute; border-radius:50%; background:#fff; box-shadow:0 0 2px rgb(255 255 255 / .95), 0 0.5px 1.5px rgb(120 80 55 / .45); }
+
 /* ---------- nagłówek ---------- */
 .bar { position:sticky; top:0; z-index:30; background:var(--card); box-shadow:0 1px 0 var(--bg-2); }
 .bar .row1 { display:flex; align-items:center; gap:24px; padding:10px var(--m) 6px; font-size:14px; max-width:1440px; margin-inline:auto; }
@@ -169,6 +175,8 @@ footer .credits a { color:inherit; }
   .prod .add { width:44px; height:44px; }
   footer .cols { grid-template-columns:1fr 1fr; }
   .flyer.side { display:none; }
+  .scatter .bit:nth-child(n+7) { display:none; }
+  .phead .scatter { display:none; }
   .phead .crumbs { display:none; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=3">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=4">
 <style>
   .hero { position:relative; min-height:calc(100svh - 104px); display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; }
   .hero .pattern { position:absolute; right:-4vw; top:6%; width:min(50vw, 740px); z-index:0; }
@@ -20,7 +20,7 @@
   .hero .lead { margin-top:22px; max-width:42ch; font-size:18px; }
   .hero .ctas { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
   .hero .stage { position:relative; z-index:1; height:100%; min-height:560px; }
-  .hero .main { position:absolute; width:min(44vw, 680px); right:4%; top:16%; transform:rotate(-14deg); }
+  .hero .main { position:absolute; z-index:2; width:min(44vw, 680px); right:4%; top:16%; transform:rotate(-14deg); }
   .js .hero .main { animation:drop 1300ms 150ms var(--ease-out) both; }
   @keyframes drop { from { transform:translate(80px, -60px) rotate(8deg) scale(.88); opacity:0; } to { transform:rotate(-14deg); opacity:1; } }
 
@@ -135,19 +135,15 @@
     <p class="lead">Rodzinna cukiernia w Łodzi. Pieczemy na maśle i jajkach od wiejskich kur, codziennie od piątej rano, w trzech cukierniach naraz.</p>
     <div class="ctas"><a class="btn" href="kruszon-katalog.html">Zobacz witrynę</a><a class="btn dark" href="kruszon-tort.html">Zaprojektuj tort</a></div>
   </div>
-  <div class="stage" aria-hidden="true" data-fly-box>
-    <div class="crumbs" data-crumbs="12"></div>
+  <div class="stage" aria-hidden="true" data-fly-box data-scatter="czek:4 krusz:6 cukier:3" data-scatter-x="5-95">
     <img class="main cut" src="assets/kruszon/gen/drozdzowka.webp" width="901" height="776" alt="" fetchpriority="high">
     <img class="flyer cut" style="--w:clamp(70px,7vw,120px)" data-fly="20 10 6 60 -30 20" src="assets/kruszon/gen/mieta-wanilia.webp" width="901" height="839" alt="">
     <img class="flyer cut" style="--w:clamp(80px,8vw,140px)" data-fly="88 95 92 40 18 -12" src="assets/kruszon/gen/owoce.webp" width="901" height="800" alt="">
   </div>
 </section>
 
-<div class="flight" aria-hidden="true">
-  
-  <div class="crumbs" data-crumbs="10"></div>
+<div class="flight" aria-hidden="true" data-scatter="czek:4 krusz:5 cukier:2">
   <img class="flyer cut" style="--w:clamp(140px,16vw,260px)" data-fly="-20 30 120 60 -40 30" src="assets/kruszon/gen/paczek.webp" width="901" height="741" alt="">
-  <img class="flyer cut" style="--w:clamp(120px,13vw,210px)" data-fly="-40 70 140 20 20 -30" src="assets/kruszon/gen/kruszonka.webp" width="901" height="754" alt="">
   <img class="flyer cut" style="--w:clamp(110px,11vw,180px)" data-fly="130 40 -30 50 30 -40" src="assets/kruszon/gen/makaroniki.webp" width="901" height="786" alt="">
 </div>
 
@@ -174,7 +170,7 @@
   </div>
 </section>
 
-<section class="values" aria-labelledby="val-h" data-reveal>
+<section class="values" aria-labelledby="val-h" data-reveal data-scatter="czek:3 krusz:4 cukier:2" data-scatter-x="0-15,85-100">
   <img class="flyer side cut" style="--w:clamp(120px,13vw,220px)" data-fly="9 -15 11 115 -30 25" src="assets/kruszon/gen/tort-czekoladowy.webp" width="901" height="897" alt="" aria-hidden="true">
   <img class="flyer side cut" style="--w:clamp(110px,12vw,200px)" data-fly="91 115 89 -15 20 -25" src="assets/kruszon/gen/makaroniki.webp" width="901" height="786" alt="" aria-hidden="true">
   <div class="lane over">
@@ -209,12 +205,8 @@
   <ul class="products" data-products data-limit="4" data-r></ul>
 </section>
 
-<div class="flight" aria-hidden="true">
-  
-  <div class="crumbs" data-crumbs="10"></div>
+<div class="flight" aria-hidden="true" data-scatter="czek:4 krusz:5 cukier:2">
   <img class="flyer cut" style="--w:clamp(150px,17vw,280px)" data-fly="120 30 -20 55 40 -30" src="assets/kruszon/gen/sernik.webp" width="901" height="807" alt="">
-  <img class="flyer cut" style="--w:clamp(110px,11vw,190px)" data-fly="-30 60 130 25 -20 40" src="assets/kruszon/gen/czekolada.webp" width="901" height="897" alt="">
-  <img class="flyer cut" style="--w:clamp(90px,9vw,150px)" data-fly="140 75 -40 40 -30 20" src="assets/kruszon/gen/cukier.webp" width="901" height="888" alt="">
 </div>
 
 <section class="teaser" aria-labelledby="teaser-h" data-reveal>
@@ -273,7 +265,7 @@
   </div>
 </footer>
 <script src="assets/concept.js"></script>
-<script src="assets/kruszon/site.js?v=3"></script>
+<script src="assets/kruszon/site.js?v=4"></script>
 
 </body>
 </html>

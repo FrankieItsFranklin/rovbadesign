@@ -37,11 +37,53 @@
     var x = (v[0] + (v[2] - v[0]) * p) / 100 * r.width - w / 2, y = (v[1] + (v[3] - v[1]) * p) / 100 * r.height - h / 2;
     f.el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (v[4] + (v[5] - v[4]) * p).toFixed(1) + "deg)";
   }
+
+  // ---------- rozsypane drobiny: kawałki czekolady, kruszonki i pył cukru pudru ----------
+  // data-scatter="czek:6 krusz:8 cukier:3" na pudełku bez tekstu; data-scatter-x="0-20,80-100" zawęża pas w poziomie.
+  // Każdy kawałek ma własną głębokość: dalsze są mniejsze, rozmyte i przesuwają się wolniej przy przewijaniu.
+  var BITS = { czek: 9, krusz: 12 }, bits = [];
+  document.querySelectorAll("[data-scatter]").forEach(function (box, bi) {
+    var seed = bi * 97 + 13, R = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    var bands = (box.dataset.scatterX || "0-100").split(",").map(function (b) { return b.split("-").map(Number); });
+    var px = function () { var b = bands[Math.floor(R() * bands.length)]; return b[0] + R() * (b[1] - b[0]); };
+    var layer = document.createElement("div"); layer.className = "scatter"; layer.setAttribute("aria-hidden", "true"); box.appendChild(layer);
+    box.dataset.scatter.split(/\s+/).forEach(function (spec) {
+      var kv = spec.split(":"), kind = kv[0], n = +kv[1];
+      if (kind === "cukier") {
+        // obłoki pyłu: setki drobnych kropek skupionych wokół kilku punktów, gęściej w środku
+        for (var c = 0; c < n; c++) {
+          var cx = px(), cy = 15 + R() * 70, cloud = document.createElement("div"); cloud.className = "dust";
+          var depth = 0.3 + R() * 0.7; cloud.style.left = cx + "%"; cloud.style.top = cy + "%"; var html = "";
+          for (var d = 0; d < 70; d++) { var a = R() * Math.PI * 2, r = Math.pow(R(), 1.7) * 90, sz = 1 + R() * 2.6; html += '<i style="left:' + (Math.cos(a) * r).toFixed(1) + "px;top:" + (Math.sin(a) * r * 0.7).toFixed(1) + "px;width:" + sz.toFixed(1) + "px;height:" + sz.toFixed(1) + "px;opacity:" + (0.35 + R() * 0.6).toFixed(2) + '"></i>'; }
+          cloud.innerHTML = html; layer.appendChild(cloud); bits.push({ el: cloud, box: box, depth: depth, rot: 0, spin: 0 });
+        }
+        return;
+      }
+      for (var k = 0; k < n; k++) {
+        var depth2 = 0.2 + R() * 0.8, im = new Image(); im.src = "assets/kruszon/gen/bits/" + kind + "-" + (1 + Math.floor(R() * BITS[kind])) + ".webp"; im.alt = ""; im.className = "bit";
+        var w = (kind === "czek" ? 26 : 18) + depth2 * (kind === "czek" ? 58 : 40);
+        im.style.width = w.toFixed(0) + "px"; im.style.left = px() + "%"; im.style.top = 8 + R() * 84 + "%";
+        if (depth2 < 0.4) im.style.filter = "blur(" + ((0.4 - depth2) * 6).toFixed(1) + "px)";
+        im.style.zIndex = depth2 > 0.7 ? 2 : 0;
+        var rot = R() * 360; im.style.transform = "rotate(" + rot.toFixed(0) + "deg)";
+        layer.appendChild(im); bits.push({ el: im, box: box, depth: depth2, rot: rot, spin: (R() - 0.5) * 60 });
+      }
+    });
+  });
+  function placeBits() {
+    var vh = innerHeight;
+    bits.forEach(function (b) {
+      var r = b.box.getBoundingClientRect(); if (r.bottom < -300 || r.top > vh + 300) return;
+      var off = (r.top + r.height / 2 - vh / 2) * b.depth * 0.22, p = (vh - r.top) / (vh + r.height);
+      b.el.style.transform = "translate3d(0," + off.toFixed(1) + "px,0) rotate(" + (b.rot + b.spin * p).toFixed(1) + "deg)";
+    });
+  }
   var ticking = false;
   function frame() {
     ticking = false;
     var vh = innerHeight;
     document.documentElement.style.setProperty("--sy", (scrollY * 0.25).toFixed(1));
+    placeBits();
     flyers.forEach(function (f) {
       var r = f.sec.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200) return;

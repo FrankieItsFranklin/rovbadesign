@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=3">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=4">
 <style>
   .phead .side { position:absolute; right:var(--m); top:50%; translate:0 -50%; width:min(30vw, 420px); }
   .phead .lead, .phead h1, .phead .script { max-width:60%; }
@@ -54,8 +54,7 @@
 </header>
 <div class="sheet" data-sheet role="dialog" aria-label="Menu"><button type="button" class="close" aria-label="Zamknij menu">×</button><a href="kruszon.html">Start</a><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></div>
 <main>
-<section class="phead wrap" aria-labelledby="h1">
-  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+<section class="phead wrap" aria-labelledby="h1" data-scatter="krusz:4 czek:2 cukier:2" data-scatter-x="70-100">
   <p class="crumb-nav over"><a href="kruszon.html">Start</a> / Witryna</p>
   <p class="script over">słodkie odkrycia</p>
   <h1 id="h1" class="display over">Dziś w witrynie</h1>
@@ -73,9 +72,7 @@
   <ul class="products" data-products data-full data-r></ul>
 </section>
 
-<div class="flight" aria-hidden="true">
-  
-  <div class="crumbs" data-crumbs="10"></div>
+<div class="flight" aria-hidden="true" data-scatter="czek:4 krusz:5 cukier:2">
   <img class="flyer cut" style="--w:clamp(140px,15vw,240px)" data-fly="-25 40 125 55 -30 30" src="assets/kruszon/gen/kremowka.webp" width="901" height="823" alt="">
   <img class="flyer cut" style="--w:clamp(100px,10vw,170px)" data-fly="130 70 -30 30 30 -20" src="assets/kruszon/gen/owoce.webp" width="901" height="800" alt="">
 </div>
@@ -119,7 +116,7 @@
   </div>
 </footer>
 <script src="assets/concept.js"></script>
-<script src="assets/kruszon/site.js?v=3"></script>
+<script src="assets/kruszon/site.js?v=4"></script>
 
 </body>
 </html>
