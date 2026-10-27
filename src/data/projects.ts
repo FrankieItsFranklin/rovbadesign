@@ -483,6 +483,37 @@ export const projects: Project[] = [
     cardAspectRatio: "16/10",
     featured: false,
   },
+  {
+    id: "kruszon",
+    demoUrl: "/demo/concepts/kruszon.html",
+    niche: "restaurants",
+    slug: "kruszon",
+    title: "Kruszon",
+    client: "Kruszon Cukiernia Rodzinna",
+    category: "Pastry Shop",
+    city: "Łódź",
+    year: 2026,
+    status: "Concept",
+    services: ["Art Direction", "Web Design", "Interactive Element", "Booking"],
+    description:
+      "A studio concept for a family pastry shop in Łódź, named after the butter crumble it puts on everything. Cakes and doughnuts float across a cream page in a shower of crumbs, with tall yellow numbers and handwritten notes on top.",
+    challenge: "A small chain of three shops that has to feel like a grandmother's kitchen and still take orders like a shop.",
+    approach: "A catalogue with a basket for same-day pick-up, and a cake builder that draws your cake from above as you choose size, cream, fruit and the words on top.",
+    details: [
+      { label: "Interaction", text: "The cake builder draws the cake from above and prices it by weight; the basket reserves pastries for pick-up in one of three shops." },
+      { label: "Imagery", text: "Pastries photographed on white and cut out of their backgrounds, so they float over the page like on a tray." },
+      { label: "Typography", text: "Bebas Neue capitals at poster size with Caveat handwriting written across them." },
+    ],
+    ...shots("kruszon"),
+    coverPosition: "50% 0%",
+    accent: "#5b3a29",
+    accentInk: "#ffd60a",
+    cardRotation: -1.1,
+    cardDrop: 2,
+    cardScale: 1.04,
+    cardAspectRatio: "16/10",
+    featured: true,
+  },
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);

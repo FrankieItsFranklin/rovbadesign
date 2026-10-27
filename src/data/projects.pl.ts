@@ -197,6 +197,19 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Mączna biel, brąz skórki i ciemne żyto na nocną zmianę.",
     ],
   },
+  kruszon: {
+    category: "Cukiernia",
+    city: "Łódź",
+    description:
+      "Koncept studia dla rodzinnej cukierni w Łodzi, nazwanej od maślanej kruszonki, którą sypie na wszystko. Ciasta i pączki fruwają po kremowej stronie w deszczu okruszków, pod wysokimi żółtymi liczbami i odręcznymi dopiskami.",
+    challenge: "Trzy cukiernie, które mają pachnieć kuchnią babci, a przy tym przyjmować zamówienia jak sklep.",
+    approach: "Witryna z koszykiem do odbioru tego samego dnia i kreator tortu, który rysuje tort z góry, gdy wybierasz wielkość, krem, owoce i napis.",
+    details: [
+      "Kreator rysuje tort z góry i liczy cenę od wagi; koszyk odkłada ciastka do odbioru w jednej z trzech cukierni.",
+      "Ciastka sfotografowane na białym tle i wycięte, więc unoszą się nad stroną jak na tacy.",
+      "Wersaliki Bebas Neue w rozmiarze plakatu i odręczny Caveat wpisany w poprzek.",
+    ],
+  },
 };
 
 /** Service names and detail labels shared by many projects. */

@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kruszon — cukiernia rodzinna w Łodzi, od 1991</title>
+<meta name="description" content="Rodzinna cukiernia w Łodzi: torty, ciastka i pączki z masłem, codziennie od piątej rano. Trzy cukiernie, torty na zamówienie w trzy dni.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+  :root {
+    --cream:#f7f0e3; --cream-2:#efe3cd; --white:#fffdf9; --yellow:#ffd60a; --yellow-2:#f5c400; --brown:#5b3a29; --brown-2:#7a5440; --ink:#3a2418;
+    --display:"Bebas Neue", "Oswald", Impact, sans-serif; --script:"Caveat", "Segoe Script", cursive; --text:"Rubik", system-ui, sans-serif;
+    --ease-out:cubic-bezier(.22,1,.36,1); --m:clamp(16px, 4vw, 64px); --r:22px;
+  }
+  * { box-sizing:border-box; margin:0; }
+  html, body { overflow-x:clip; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--cream); color:var(--ink); font:400 17px/1.55 var(--text); -webkit-font-smoothing:antialiased; }
+  ::selection { background:var(--yellow); color:var(--ink); }
+  img { display:block; max-width:100%; height:auto; }
+  a { color:inherit; }
+  button { font:inherit; color:inherit; }
+  :focus-visible { outline:3px solid var(--brown); outline-offset:3px; }
+  .display { font-family:var(--display); font-weight:400; text-transform:uppercase; line-height:.9; letter-spacing:.005em; }
+  .script { font-family:var(--script); font-weight:500; line-height:1; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 28px; border-radius:999px; background:var(--yellow); color:var(--ink); font:600 15px var(--text); letter-spacing:.06em; text-transform:uppercase; text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, transform 160ms var(--ease-out), box-shadow 200ms; }
+  .btn:hover { background:var(--yellow-2); }
+  .btn:active { transform:scale(.96); }
+  .btn.brown { background:var(--brown); color:var(--cream); }
+  .btn.brown:hover { background:var(--ink); }
+  .wrap { max-width:1440px; margin-inline:auto; padding-inline:var(--m); }
+  .cut { filter:drop-shadow(0 22px 22px rgb(91 58 41 / .22)); }
+  .js [data-reveal] [data-r] { opacity:0; transform:translateY(28px); transition:opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
+  .js [data-reveal].is-in [data-r] { opacity:1; transform:none; }
+  .js [data-reveal] [data-r="fly"] { transform:translate(60px, 40px) rotate(14deg) scale(.9); }
+  .js [data-reveal].is-in [data-r="fly"] { transform:rotate(var(--rot, -12deg)); }
+
+  /* okruszki: rysowane, rozsypane po sekcjach, przesuwają się z przewijaniem */
+  .crumbs { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+  .crumbs svg { position:absolute; width:var(--s, 18px); height:var(--s, 18px); fill:var(--c, #b5835a); transform:translateY(calc(var(--k, 1) * var(--sy, 0) * -1px)) rotate(var(--rot, 0deg)); }
+
+  /* ---------- nagłówek ---------- */
+  .bar { position:sticky; top:0; z-index:30; background:var(--white); box-shadow:0 1px 0 var(--cream-2); }
+  .bar .row1 { display:flex; align-items:center; gap:24px; padding:10px var(--m) 6px; font-size:14px; max-width:1440px; margin-inline:auto; }
+  .bar .row2 { display:flex; align-items:center; gap:28px; padding:6px var(--m) 12px; max-width:1440px; margin-inline:auto; }
+  .logo { display:flex; flex-direction:column; align-items:center; text-decoration:none; line-height:1; margin-right:12px; }
+  .logo b { font:400 34px/1 var(--display); letter-spacing:.06em; color:var(--brown); }
+  .logo span { font:500 17px/1 var(--script); color:var(--brown-2); margin-top:-2px; }
+  .bar nav { display:flex; gap:26px; font:500 14px var(--text); text-transform:uppercase; letter-spacing:.05em; }
+  .bar nav a { text-decoration:none; padding:8px 0; color:var(--brown); }
+  .bar nav a:hover { text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px; text-decoration-color:var(--yellow); }
+  .bar .sp { flex:1; }
+  .bar .tel { font-weight:600; text-decoration:none; color:var(--brown); }
+  .bar .pill { background:var(--cream-2); border-radius:999px; padding:9px 16px; font:600 13px var(--text); text-transform:uppercase; letter-spacing:.05em; text-decoration:none; color:var(--brown); }
+  .cart-btn { position:relative; width:46px; height:46px; border-radius:50%; background:var(--yellow); border:0; cursor:pointer; display:grid; place-items:center; transition:transform 160ms var(--ease-out); }
+  .cart-btn:active { transform:scale(.92); }
+  .cart-btn svg { width:22px; height:22px; }
+  .cart-btn b { position:absolute; top:-4px; right:-4px; min-width:20px; height:20px; border-radius:10px; background:var(--brown); color:var(--cream); font:600 12px/20px var(--text); text-align:center; padding:0 5px; }
+  .cart-btn.pop { animation:pop 420ms var(--ease-out); }
+  @keyframes pop { 40% { transform:scale(1.18); } }
+
+  /* ---------- hero ---------- */
+  .hero { position:relative; min-height:calc(100svh - 104px); display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; }
+  .hero .pattern { position:absolute; right:-4vw; top:6%; width:min(52vw, 760px); opacity:.9; z-index:0; }
+  .hero .txt { position:relative; z-index:2; padding:0 0 0 var(--m); max-width:680px; }
+  .hero .script { font-size:clamp(44px, 4.4vw, 70px); color:#cfa87a; }
+  .hero h1 { font-size:clamp(56px, 6vw, 104px); color:var(--brown); margin-top:6px; }
+  .hero .lead { margin-top:22px; max-width:42ch; font-size:18px; }
+  .hero .ctas { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .hero .free { margin-top:20px; font-size:15px; display:flex; gap:10px; align-items:center; }
+  .hero .free i { width:10px; height:10px; border-radius:50%; background:var(--yellow-2); }
+  .hero .stage { position:relative; z-index:1; height:100%; min-height:560px; }
+  .hero .main { position:absolute; width:min(46vw, 700px); right:4%; top:14%; --rot:-14deg; transform:rotate(-14deg); }
+  .js .hero .main { animation:drop 1300ms 150ms var(--ease-out) both; }
+  @keyframes drop { from { transform:translate(80px, -60px) rotate(8deg) scale(.88); opacity:0; } to { transform:rotate(-14deg); opacity:1; } }
+  .hero .berry { position:absolute; width:clamp(70px, 7vw, 120px); }
+  .hero .b1 { right:52%; top:18%; transform:rotate(-24deg); }
+  .hero .b2 { right:6%; bottom:10%; transform:rotate(18deg); width:clamp(90px, 9vw, 150px); }
+  .js .hero .berry { animation:float 7s ease-in-out infinite; }
+  .hero .b2 { animation-delay:-3s !important; }
+  @keyframes float { 50% { translate:0 -14px; } }
+
+  /* ---------- wielka liczba ---------- */
+  .count { position:relative; background:var(--white); padding:clamp(100px, 12vw, 170px) 0; overflow:hidden; }
+  .count .wrap { position:relative; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; z-index:1; }
+  .count .num { position:relative; }
+  .count .num .display { font-size:clamp(150px, 19vw, 320px); color:var(--yellow); line-height:.8; }
+  .count .num .script { position:absolute; right:4%; top:-.2em; font-size:clamp(46px, 4.4vw, 76px); color:var(--brown); transform:rotate(-4deg); }
+  .count .num img { position:absolute; left:-6%; bottom:-58%; width:min(30vw, 420px); --rot:-8deg; }
+  .count h2 { font:400 clamp(30px, 2.6vw, 42px)/1 var(--display); color:var(--brown); text-transform:uppercase; }
+  .count p { margin-top:18px; max-width:46ch; }
+
+  /* ---------- kategorie ---------- */
+  .cats { padding-block:clamp(110px, 12vw, 170px) 40px; position:relative; }
+  .cats .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; }
+  .cat { position:relative; background:var(--white); border-radius:var(--r); padding:150px 26px 28px; text-align:center; margin-top:90px; transition:transform 400ms var(--ease-out); }
+  .cat:hover { transform:translateY(-8px); }
+  .cat img { position:absolute; left:50%; top:-90px; width:82%; translate:-50% 0; transition:transform 600ms var(--ease-out); }
+  .cat:hover img { transform:rotate(-6deg) scale(1.05); }
+  .cat h3 { font:400 46px/1 var(--display); color:var(--brown); text-transform:uppercase; }
+  .cat .script { font-size:28px; color:var(--brown-2); margin-top:-4px; }
+  .cat p { margin-top:14px; font-size:15px; }
+  .cat .btn { margin-top:20px; min-height:46px; padding:0 22px; }
+
+  /* ---------- wartości ---------- */
+  .values { position:relative; padding:clamp(120px, 13vw, 190px) 0 60px; text-align:center; overflow:hidden; }
+  .values .big { font-size:clamp(90px, 12.5vw, 220px); color:var(--yellow); position:relative; z-index:1; }
+  .values .script { font-size:clamp(44px, 4.6vw, 80px); color:var(--brown); position:relative; z-index:2; margin-top:-.35em; }
+  .values .f { position:absolute; z-index:2; }
+  .values .f1 { width:min(20vw, 300px); left:4%; top:12%; --rot:-18deg; }
+  .values .f2 { width:min(15vw, 220px); right:6%; top:24%; --rot:14deg; }
+  .values .f3 { width:min(12vw, 170px); right:24%; bottom:2%; --rot:-6deg; }
+  .story { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px, 6vw, 96px); align-items:center; padding:clamp(70px, 8vw, 120px) 0; }
+  .story.rev .t { order:2; }
+  .story h3 { font:400 clamp(30px, 2.6vw, 42px)/1 var(--display); text-transform:uppercase; color:var(--brown); }
+  .story .t p { margin-top:16px; max-width:52ch; }
+  .story .pics { position:relative; }
+  .story .pics .a { border-radius:var(--r); width:88%; margin-left:auto; aspect-ratio:4/3; object-fit:cover; }
+  .story .pics .b { position:absolute; left:0; bottom:-12%; width:40%; aspect-ratio:1; object-fit:cover; border-radius:var(--r); border:8px solid var(--cream); }
+
+  /* ---------- 1991 ---------- */
+  .year { position:relative; background:var(--white); padding:clamp(110px, 12vw, 170px) 0; overflow:hidden; }
+  .year .wrap { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; position:relative; z-index:1; }
+  .year .num { position:relative; }
+  .year .num .display { font-size:clamp(170px, 22vw, 360px); color:var(--yellow); line-height:.8; }
+  .year .num .script { position:absolute; left:12%; top:30%; font-size:clamp(40px, 4vw, 68px); color:var(--brown); line-height:.95; transform:rotate(-6deg); }
+  .year .facts { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:28px; }
+  .year .facts div { background:var(--cream); border-radius:16px; padding:18px; }
+  .year .facts b { display:block; font:400 40px/1 var(--display); color:var(--brown); }
+  .year .facts span { font-size:14px; }
+
+  /* ---------- nowości: karty z koszykiem ---------- */
+  .news { padding-block:clamp(110px, 12vw, 170px); position:relative; }
+  .news .head { display:flex; justify-content:space-between; align-items:end; gap:24px; flex-wrap:wrap; }
+  .news .script { font-size:clamp(40px, 4vw, 64px); color:#cfa87a; }
+  .news h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--brown); margin-top:-6px; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; }
+  .filters button { border:0; background:var(--white); border-radius:999px; padding:10px 18px; font:600 13px var(--text); text-transform:uppercase; letter-spacing:.05em; cursor:pointer; color:var(--brown); transition:background-color 160ms; }
+  .filters button[aria-pressed="true"] { background:var(--brown); color:var(--cream); }
+  .products { margin-top:40px; display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; list-style:none; padding:0; }
+  .prod { background:var(--white); border-radius:var(--r); padding:18px 18px 20px; position:relative; display:flex; flex-direction:column; transition:transform 350ms var(--ease-out), opacity 250ms; }
+  .prod:hover { transform:translateY(-6px); }
+  .prod[hidden] { display:none; }
+  .prod .badge { position:absolute; top:16px; left:16px; background:var(--brown); color:var(--cream); font:600 12px var(--text); letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px; z-index:1; }
+  .prod .ph { height:200px; display:grid; place-items:center; margin:10px 0 8px; }
+  .prod .ph img { max-height:180px; width:auto; max-width:92%; transition:transform 500ms var(--ease-out); }
+  .prod:hover .ph img { transform:rotate(-5deg) scale(1.06); }
+  .prod .k { font-size:13px; color:var(--brown-2); }
+  .prod h3 { font:400 30px/1 var(--display); text-transform:uppercase; color:var(--brown); margin-top:4px; }
+  .prod .w { font-size:14px; margin-top:6px; color:var(--brown-2); }
+  .prod .bot { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:14px; }
+  .prod .pr { font:400 34px/1 var(--display); color:var(--ink); }
+  .prod .add { width:48px; height:48px; border-radius:50%; background:var(--yellow); border:0; cursor:pointer; display:grid; place-items:center; transition:transform 160ms var(--ease-out), background-color 160ms; }
+  .prod .add:hover { background:var(--yellow-2); }
+  .prod .add:active { transform:scale(.9); }
+  .prod .add svg { width:22px; height:22px; }
+  .prod .add.ok { background:var(--brown); color:var(--cream); }
+
+  /* koszyk */
+  .drawer { position:fixed; inset:0 0 0 auto; width:min(420px, 100vw); background:var(--white); z-index:50; transform:translateX(100%); visibility:hidden; transition:transform 380ms var(--ease-out), visibility 0s 380ms; display:flex; flex-direction:column; box-shadow:-30px 0 60px -30px rgb(58 36 24 / .4); }
+  .drawer[data-open] { transform:none; visibility:visible; transition:transform 380ms var(--ease-out); }
+  .scrim { position:fixed; inset:0; background:rgb(58 36 24 / .35); z-index:40; opacity:0; visibility:hidden; transition:opacity 300ms, visibility 0s 300ms; }
+  .scrim[data-open] { opacity:1; visibility:visible; transition:opacity 300ms; }
+  .drawer .dh { display:flex; justify-content:space-between; align-items:center; padding:22px 24px; }
+  .drawer .dh h2 { font:400 40px/1 var(--display); color:var(--brown); }
+  .drawer .x { width:44px; height:44px; border-radius:50%; border:0; background:var(--cream); cursor:pointer; font-size:22px; }
+  .drawer ul { list-style:none; padding:0 24px; flex:1; overflow:auto; display:grid; gap:12px; align-content:start; }
+  .drawer li { display:grid; grid-template-columns:64px 1fr auto; gap:14px; align-items:center; background:var(--cream); border-radius:16px; padding:10px 12px; }
+  .drawer li img { width:64px; height:52px; object-fit:contain; }
+  .drawer li b { font-weight:600; display:block; }
+  .drawer li small { color:var(--brown-2); }
+  .qty { display:flex; align-items:center; gap:6px; }
+  .qty button { width:34px; height:34px; border-radius:50%; border:0; background:var(--white); cursor:pointer; font-size:18px; }
+  .drawer .empty { padding:24px; color:var(--brown-2); }
+  .drawer .df { padding:20px 24px 26px; display:grid; gap:12px; border-top:1px solid var(--cream-2); }
+  .drawer .tot { display:flex; justify-content:space-between; font:400 34px/1 var(--display); color:var(--brown); }
+  .drawer select { min-height:48px; border-radius:12px; border:0; background:var(--cream); padding:0 14px; font:400 16px var(--text); color:var(--ink); }
+  .drawer .msg { font-weight:500; min-height:1.4em; }
+
+  /* ---------- tort na zamówienie ---------- */
+  .order { position:relative; background:var(--white); padding:clamp(110px, 12vw, 170px) 0; overflow:hidden; }
+  .order .top { text-align:center; position:relative; z-index:1; }
+  .order .big { font-size:clamp(80px, 10.5vw, 190px); color:var(--yellow); }
+  .order .top p { font:600 clamp(18px, 1.6vw, 24px)/1.3 var(--text); text-transform:uppercase; color:var(--brown); letter-spacing:.03em; margin-top:16px; }
+  .builder { position:relative; z-index:1; margin-top:clamp(60px, 7vw, 100px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px, 5vw, 80px); align-items:start; }
+  .cake-view { position:sticky; top:130px; background:var(--cream); border-radius:28px; padding:28px; display:grid; gap:16px; }
+  .cake-view svg { width:100%; height:auto; }
+  .cake-view .sum { display:flex; justify-content:space-between; align-items:end; gap:16px; }
+  .cake-view .sum b { font:400 64px/1 var(--display); color:var(--brown); }
+  .cake-view .sum span { font-size:15px; text-align:right; }
+  .opts { display:grid; gap:30px; }
+  .opts fieldset { border:0; padding:0; }
+  .opts legend { font:400 30px/1 var(--display); text-transform:uppercase; color:var(--brown); margin-bottom:12px; }
+  .opts legend small { font:500 22px var(--script); text-transform:none; color:var(--brown-2); margin-left:8px; }
+  .choice { display:flex; flex-wrap:wrap; gap:10px; }
+  .choice label { position:relative; cursor:pointer; }
+  .choice input { position:absolute; opacity:0; inset:0; cursor:pointer; }
+  .choice span { display:flex; align-items:center; gap:10px; min-height:48px; padding:0 18px; border-radius:999px; background:var(--cream); font-weight:500; transition:background-color 160ms, color 160ms, transform 160ms var(--ease-out); }
+  .choice span i { width:16px; height:16px; border-radius:50%; background:var(--c); box-shadow:inset 0 0 0 1px rgb(0 0 0 / .12); }
+  .choice input:checked + span { background:var(--brown); color:var(--cream); }
+  .choice input:focus-visible + span { outline:3px solid var(--brown); outline-offset:3px; }
+  .choice label:active span { transform:scale(.96); }
+  .field { display:grid; gap:8px; }
+  .field input, .field select { min-height:52px; border-radius:14px; border:0; background:var(--cream); padding:0 16px; font:400 17px var(--text); color:var(--ink); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .opts .done { font-weight:600; min-height:1.5em; color:var(--brown); }
+
+  /* ---------- cukiernie ---------- */
+  .shops { padding-block:clamp(110px, 12vw, 170px); }
+  .shops .script { font-size:clamp(40px, 4vw, 64px); color:#cfa87a; }
+  .shops h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--brown); margin-top:-6px; }
+  .shops .list { margin-top:44px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:22px; }
+  .shops .photo { border-radius:var(--r); overflow:hidden; grid-row:span 1; }
+  .shops .photo img { width:100%; height:100%; object-fit:cover; }
+  .shop { background:var(--white); border-radius:var(--r); padding:26px; display:flex; flex-direction:column; gap:10px; }
+  .shop h3 { font:400 34px/1 var(--display); text-transform:uppercase; color:var(--brown); }
+  .shop .open { display:inline-flex; align-items:center; gap:8px; font-weight:500; font-size:15px; }
+  .shop .open i { width:9px; height:9px; border-radius:50%; background:#9aa08c; }
+  .shop .open[data-on] i { background:#5aa55a; box-shadow:0 0 0 4px rgb(90 165 90 / .2); }
+  .shop p { font-size:15px; }
+
+  footer { background:var(--brown); color:var(--cream); padding:70px var(--m) 40px; position:relative; overflow:hidden; }
+  footer .wrap { padding:0; }
+  footer .big { font:400 clamp(110px, 20vw, 340px)/.8 var(--display); color:var(--yellow); letter-spacing:.02em; }
+  footer .script { font-size:clamp(34px, 3vw, 52px); color:var(--cream); margin-top:-.3em; margin-left:4px; }
+  footer .cols { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; margin-top:44px; font-size:15px; }
+  footer .cols b { display:block; font:400 24px var(--display); letter-spacing:.04em; color:var(--yellow); margin-bottom:8px; }
+  footer .cols a { display:block; text-decoration:none; padding:2px 0; }
+  footer .cols a:hover { text-decoration:underline; }
+  footer .credits { margin-top:40px; font-size:13px; opacity:.75; max-width:75ch; }
+
+  @media (max-width: 960px) {
+    .bar .row1 .hide, .bar nav { display:none; }
+    .bar .row2 { display:none; }
+    .bar .row1 { padding:10px 16px; }
+    .hero { grid-template-columns:1fr; min-height:0; padding:32px 0 0; }
+    .hero .txt { padding:0 16px; }
+    .hero .stage { min-height:96vw; }
+    .hero .main { width:92vw; right:2%; top:8%; }
+    .hero .pattern { width:110vw; top:auto; bottom:0; right:-30vw; }
+    .count .wrap, .year .wrap, .story, .builder { grid-template-columns:minmax(0, 1fr); }
+    .count .num img { width:46vw; left:auto; right:-2%; bottom:-24%; }
+    .count .t { margin-top:60px; }
+    .cats .grid { grid-template-columns:1fr 1fr; gap:14px; }
+    .cat { padding:100px 14px 20px; margin-top:70px; }
+    .cat img { top:-64px; }
+    .cat h3 { font-size:34px; }
+    .cat p { display:none; }
+    .values .f1 { width:30vw; top:4%; left:-4%; } .values .f2 { width:24vw; top:auto; bottom:6%; right:-2%; } .values .f3 { display:none; }
+    .story.rev .t { order:0; }
+    .story .pics { margin-top:10px; }
+    .year .facts { grid-template-columns:1fr 1fr 1fr; gap:8px; }
+    .year .facts b { font-size:30px; }
+    .products { grid-template-columns:1fr 1fr; gap:12px; }
+    .prod { padding:14px 12px 14px; }
+    .prod .ph { height:130px; } .prod .ph img { max-height:120px; }
+    .prod h3 { font-size:24px; } .prod .pr { font-size:28px; }
+    .prod .add { width:44px; height:44px; }
+    .cake-view { position:relative; top:0; }
+    .two { grid-template-columns:1fr; }
+    .shops .list { grid-template-columns:1fr; }
+    .shops .photo { height:60vw; }
+    footer .cols { grid-template-columns:1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .hero .main, .js .hero .berry { animation:none; }
+    .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
+    .js [data-reveal] [data-r="fly"] { transform:rotate(var(--rot, -12deg)); }
+    .crumbs svg { transform:rotate(var(--rot, 0deg)); }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cr1" viewBox="0 0 20 20"><path d="M3 9 7 3l7 1 4 6-3 7-8 1-4-4Z"/></symbol>
+  <symbol id="cr2" viewBox="0 0 20 20"><path d="M2 12 5 5l8-2 5 5-1 7-9 2Z"/></symbol>
+  <symbol id="cr3" viewBox="0 0 20 20"><path d="M5 4h7l5 7-4 6H6L2 11Z"/></symbol>
+  <symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.5 8H6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="row1">
+    <a class="logo" href="#" aria-label="Kruszon, strona główna"><b>Kruszon</b><span>cukiernia od 1991</span></a>
+    <span class="hide">Łódź · trzy cukiernie</span>
+    <a class="tel hide" href="tel:+48420000000">42 000 00 00</a>
+    <span class="sp"></span>
+    <a class="pill hide" href="#cukiernie">Cukiernie</a>
+    <a class="pill hide" href="#tort">Tort na zamówienie</a>
+    <button class="cart-btn" type="button" aria-label="Koszyk" data-cart-open><svg aria-hidden="true"><use href="#cart"/></svg><b data-count>0</b></button>
+  </div>
+  <div class="row2">
+    <nav aria-label="Kategorie"><a href="#nowosci" data-jump="torty">Torty</a><a href="#nowosci" data-jump="ciastka">Ciastka</a><a href="#nowosci" data-jump="paczki">Pączki i drożdżowe</a><a href="#tort">Na zamówienie</a><a href="#cukiernie">Gdzie nas znaleźć</a></nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="h1">
+  <svg class="pattern" viewBox="0 0 600 600" aria-hidden="true" fill="#fffdf9">
+    <path d="M0 0h150a150 150 0 0 1-150 150Z"/><path d="M150 0h150v150a150 150 0 0 1-150-150Z"/><circle cx="375" cy="75" r="75"/><path d="M450 0h150v150A150 150 0 0 0 450 0Z"/>
+    <path d="M0 150a150 150 0 0 1 150 150H0Z"/><path d="M150 150h150a150 150 0 0 1-150 150Z"/><path d="M300 150h150v150a150 150 0 0 1-150-150Z"/><circle cx="525" cy="225" r="75"/>
+    <circle cx="75" cy="375" r="75"/><path d="M150 300h150a150 150 0 0 0-150 150Z"/><path d="M300 450V300h150a150 150 0 0 1-150 150Z"/><path d="M450 300a150 150 0 0 1 150 150H450Z"/>
+    <path d="M0 450a150 150 0 0 1 150 150H0Z"/><circle cx="225" cy="525" r="75"/><path d="M300 450h150v150a150 150 0 0 1-150-150Z"/><path d="M450 600a150 150 0 0 1 150-150v150Z"/>
+  </svg>
+  <div class="crumbs" data-crumbs="14"></div>
+  <div class="txt">
+    <p class="script">Dla Ciebie</p>
+    <h1 id="h1" class="display">Dobre ciasta i torty<br>prosto z Piotrkowskiej</h1>
+    <p class="lead">Rodzinna cukiernia w Łodzi. Pieczemy na maśle i jajkach od wiejskich kur, codziennie od piątej rano, w trzech cukierniach na raz.</p>
+    <div class="ctas"><a class="btn" href="#nowosci">Zobacz ciastka</a><a class="btn brown" href="#tort">Tort na zamówienie</a></div>
+    <p class="free"><i aria-hidden="true"></i><span data-hero-status>Codziennie od 7:00, w niedzielę od 9:00</span></p>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <img class="main cut" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" alt="" fetchpriority="high">
+    <img class="berry b1 cut" src="assets/kruszon/cut/truskawka.webp" width="809" height="567" alt="">
+    <img class="berry b2 cut" src="assets/kruszon/cut/wisnie.webp" width="600" height="803" alt="">
+  </div>
+</section>
+
+<section class="count" aria-labelledby="count-h" data-reveal>
+  <div class="crumbs" data-crumbs="10"></div>
+  <div class="wrap">
+    <div class="num" data-r>
+      <p class="script">ciastek dziennie</p>
+      <p class="display" aria-hidden="true" data-countup="2400">2 400</p>
+      <img class="cut" data-r="fly" src="assets/kruszon/cut/francuskie.webp" width="983" height="679" loading="lazy" alt="Kawałek ciasta francuskiego z migdałowym nadzieniem">
+    </div>
+    <div class="t" data-r>
+      <h2 id="count-h">Codziennie pieczemy około 2 400 ciastek, pączków i kawałków ciasta</h2>
+      <p>Wszystko powstaje w jednej pracowni na Bałutach i o 6:30 jedzie do trzech cukierni. Czego nie sprzedamy do wieczora, oddajemy do jadłodzielni przy Zgierskiej.</p>
+      <p>Zamówione przez stronę ciastka odbierasz w wybranej cukierni, bez kolejki.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cats wrap" aria-label="Kategorie" data-reveal>
+  <div class="grid">
+    <article class="cat" data-r><img class="cut" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" loading="lazy" alt="Puszysty sernik"><h3>Torty</h3><p class="script">święto na co dzień</p><p>Sernik, tort bezowy, szwarcwald i kawowy na kawałki albo w całości.</p><a class="btn" href="#nowosci" data-jump="torty">Zamów</a></article>
+    <article class="cat" data-r><img class="cut" src="assets/kruszon/cut/kruche.webp" width="747" height="531" loading="lazy" alt="Kruche ciastko z dżemem truskawkowym"><h3>Ciastka</h3><p class="script">chrupiące i miękkie</p><p>Kruche z dżemem, makaroniki, babeczki i ciastka na wagę do kawy.</p><a class="btn" href="#nowosci" data-jump="ciastka">Zamów</a></article>
+    <article class="cat" data-r><img class="cut" src="assets/kruszon/cut/paczek.webp" width="919" height="818" loading="lazy" alt="Pączek z cukrem pudrem"><h3>Pączki</h3><p class="script">z różą, jak trzeba</p><p>Pączki z różą i budyniem, drożdżówki z kruszonką, chałka w piątek.</p><a class="btn" href="#nowosci" data-jump="paczki">Zamów</a></article>
+    <article class="cat" data-r><img class="cut" src="assets/kruszon/cut/babka.webp" width="730" height="404" loading="lazy" alt="Babka marmurkowa"><h3>Na zamówienie</h3><p class="script">święto nie czeka</p><p>Tort na urodziny, chrzest albo komunię. Złożysz go niżej w minutę.</p><a class="btn" href="#tort">Złóż tort</a></article>
+  </div>
+</section>
+
+<section class="values" aria-labelledby="val-h" data-reveal>
+  <div class="crumbs" data-crumbs="12"></div>
+  <img class="f f1 cut" data-r="fly" src="assets/kruszon/cut/babeczka.webp" width="616" height="603" loading="lazy" alt="">
+  <img class="f f2 cut" data-r="fly" src="assets/kruszon/cut/makaroniki.webp" width="812" height="497" loading="lazy" alt="">
+  <img class="f f3 cut" data-r="fly" src="assets/kruszon/cut/truskawki.webp" width="883" height="529" loading="lazy" alt="">
+  <h2 id="val-h" class="display big" data-r>Masło, cukier<br>i czas</h2>
+  <p class="script" data-r>to cały nasz przepis</p>
+</section>
+
+<div class="wrap">
+  <section class="story" aria-labelledby="s1" data-reveal>
+    <div class="t" data-r>
+      <h3 id="s1">Prawdziwe masło, nie margaryna</h3>
+      <p>Kruszonkę, od której mamy nazwę, robimy z masła, mąki i cukru w proporcji jeden do jednego do jednego. Jak u babci Ireny, która zaczęła piec w 1991 roku w kuchni na Bałutach.</p>
+      <p>Jajka bierzemy od jednego gospodarstwa pod Zgierzem, twaróg na sernik od mleczarni w Łowiczu.</p>
+    </div>
+    <div class="pics" data-r><img class="a" src="assets/kruszon/sernik-pastel-de-queso-gastronomia-polaca-gniezno.jpg" width="1200" height="800" loading="lazy" alt="Cukierniczka przygotowuje sernik w pracowni"><img class="b" src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki z lukrem na tacy"></div>
+  </section>
+  <section class="story rev" aria-labelledby="s2" data-reveal>
+    <div class="t" data-r>
+      <h3 id="s2">Pączki smażymy rano, nie wieczorem</h3>
+      <p>Pierwsza partia wychodzi z tłuszczu o 5:40, druga o 11:00. Nadziewamy je ręcznie, różą z płatków, którą gotujemy latem na cały rok.</p>
+      <p>W tłusty czwartek smażymy od północy i robimy ich dwadzieścia tysięcy. Zamów wcześniej.</p>
+    </div>
+    <div class="pics" data-r><img class="a" src="assets/kruszon/smazenie-paczkow.jpg" width="1200" height="1206" loading="lazy" alt="Smażenie pączków w dużym garnku, fotografia archiwalna"><img class="b" src="assets/kruszon/cut/paczek-przekroj.webp" width="889" height="519" loading="lazy" alt="Przekrojony pączek z konfiturą" style="object-fit:contain;background:var(--white);padding:10px"></div>
+  </section>
+</div>
+
+<section class="year" aria-labelledby="year-h" data-reveal>
+  <div class="crumbs" data-crumbs="10"></div>
+  <div class="wrap">
+    <div class="num" data-r>
+      <p class="display" aria-hidden="true">1991</p>
+      <p class="script">od tego roku<br>pieczemy w Łodzi</p>
+    </div>
+    <div class="t" data-r>
+      <h2 id="year-h" class="display" style="font-size:clamp(40px,3.6vw,60px);color:var(--brown)">Trzy pokolenia, jedna kruszonka</h2>
+      <p style="margin-top:16px;max-width:52ch">Babcia Irena piekła dla sąsiadów z kamienicy. Jej syn otworzył pierwszą cukiernię na Piotrkowskiej w 1998 roku, a wnuczka Ola prowadzi dziś pracownię i wymyśla nowe ciastka na każdy sezon.</p>
+      <div class="facts"><div><b>3</b><span>cukiernie w Łodzi</span></div><div><b>34</b><span>osoby w zespole</span></div><div><b>58</b><span>rodzajów ciastek w roku</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="news wrap" id="nowosci" aria-labelledby="news-h" data-reveal>
+  <div class="head">
+    <div data-r><p class="script">słodkie odkrycia</p><h2 id="news-h" class="display">Dziś w witrynie</h2></div>
+    <div class="filters" role="group" aria-label="Filtr" data-filters data-r>
+      <button type="button" aria-pressed="true" data-f="all">Wszystko</button><button type="button" aria-pressed="false" data-f="torty">Torty</button><button type="button" aria-pressed="false" data-f="ciastka">Ciastka</button><button type="button" aria-pressed="false" data-f="paczki">Pączki</button>
+    </div>
+  </div>
+  <ul class="products" data-products data-r></ul>
+</section>
+
+<section class="order" id="tort" aria-labelledby="tort-h" data-reveal>
+  <div class="crumbs" data-crumbs="12"></div>
+  <div class="wrap">
+    <div class="top">
+      <h2 id="tort-h" class="display big" data-r>Nie ma Twojego tortu?</h2>
+      <p data-r>Złóż go sam. Upieczemy na wybrany dzień, za trzy dni albo później.</p>
+    </div>
+    <div class="builder">
+      <div class="cake-view" data-r>
+        <svg viewBox="0 0 400 400" role="img" aria-label="Podgląd tortu z góry" data-cake>
+          <circle cx="200" cy="208" r="176" fill="#e9dcc4"/>
+          <circle cx="200" cy="200" data-cr="r" r="160" fill="#fff4e2" data-cream/>
+          <circle cx="200" cy="200" data-cr="r2" r="160" fill="none" stroke="rgba(0,0,0,.05)" stroke-width="10"/>
+          <g data-fruit></g>
+          <text x="200" y="194" text-anchor="middle" font-family="Caveat, cursive" font-size="40" fill="#5b3a29" data-text>Sto lat!</text>
+          <text x="200" y="236" text-anchor="middle" font-family="Caveat, cursive" font-size="24" fill="#7a5440" data-sub>dla Basi</text>
+        </svg>
+        <div class="sum"><b data-price>0 zł</b><span data-meta>1,5 kg · 10 osób</span></div>
+      </div>
+      <form class="opts" data-builder data-r>
+        <fieldset><legend>Wielkość <small>ile osób przy stole</small></legend><div class="choice">
+          <label><input type="radio" name="size" value="6" data-kg="0.9"><span>6 osób</span></label>
+          <label><input type="radio" name="size" value="10" data-kg="1.5" checked><span>10 osób</span></label>
+          <label><input type="radio" name="size" value="16" data-kg="2.4"><span>16 osób</span></label>
+          <label><input type="radio" name="size" value="24" data-kg="3.6"><span>24 osoby</span></label>
+        </div></fieldset>
+        <fieldset><legend>Biszkopt</legend><div class="choice">
+          <label><input type="radio" name="base" value="waniliowy" data-p="0" checked><span><i style="--c:#f3d9a0"></i>Waniliowy</span></label>
+          <label><input type="radio" name="base" value="czekoladowy" data-p="10"><span><i style="--c:#6b3e2a"></i>Czekoladowy</span></label>
+          <label><input type="radio" name="base" value="orzechowy" data-p="15"><span><i style="--c:#b07a4d"></i>Orzechowy</span></label>
+        </div></fieldset>
+        <fieldset><legend>Krem</legend><div class="choice">
+          <label><input type="radio" name="cream" value="śmietankowy" data-c="#fff4e2" data-p="0" checked><span><i style="--c:#fff4e2"></i>Śmietankowy</span></label>
+          <label><input type="radio" name="cream" value="mascarpone" data-c="#fbe9d0" data-p="12"><span><i style="--c:#fbe9d0"></i>Mascarpone</span></label>
+          <label><input type="radio" name="cream" value="czekoladowy" data-c="#8a5a3c" data-p="12"><span><i style="--c:#8a5a3c"></i>Czekoladowy</span></label>
+          <label><input type="radio" name="cream" value="malinowy" data-c="#f2b8c0" data-p="14"><span><i style="--c:#f2b8c0"></i>Malinowy</span></label>
+        </div></fieldset>
+        <fieldset><legend>Na wierzchu</legend><div class="choice">
+          <label><input type="radio" name="fruit" value="truskawki" data-c="#d8283a" data-p="25" checked><span><i style="--c:#d8283a"></i>Truskawki</span></label>
+          <label><input type="radio" name="fruit" value="wiśnie" data-c="#7a0f22" data-p="25"><span><i style="--c:#7a0f22"></i>Wiśnie</span></label>
+          <label><input type="radio" name="fruit" value="borówki" data-c="#3d4a8a" data-p="30"><span><i style="--c:#3d4a8a"></i>Borówki</span></label>
+          <label><input type="radio" name="fruit" value="kruszonka" data-c="#c9935f" data-p="0"><span><i style="--c:#c9935f"></i>Kruszonka</span></label>
+        </div></fieldset>
+        <div class="two">
+          <label class="field">Napis na torcie <input name="text" maxlength="18" value="Sto lat!" data-in="text"></label>
+          <label class="field">Mniejszy napis <input name="sub" maxlength="22" value="dla Basi" data-in="sub"></label>
+        </div>
+        <div class="two">
+          <label class="field">Na kiedy <input type="date" name="date" required data-date></label>
+          <label class="field">Odbiór <select name="shop"><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew</option></select></label>
+        </div>
+        <label class="field">Telefon, oddzwonimy z potwierdzeniem <input type="tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="500 000 000" required></label>
+        <button class="btn brown" type="submit">Zamów ten tort</button>
+        <p class="done" role="status" data-done></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="shops wrap" id="cukiernie" aria-labelledby="shops-h" data-reveal>
+  <p class="script" data-r>przyjdź po ciastko</p>
+  <h2 id="shops-h" class="display" data-r>Trzy cukiernie w Łodzi</h2>
+  <div class="list">
+    <figure class="photo" data-r><img src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki z lukrem na tacy"></figure>
+    <article class="shop" data-r><h3>Piotrkowska 112</h3><p class="open" data-shop="7-20,7-20,7-20,7-20,7-20,8-20,9-16"><i></i><span>—</span></p><p>Centrum, przy pasażu. Kawiarnia na dwanaście stolików, kawa z ekspresu kolbowego.</p><p>Pn–pt 7–20 · sob 8–20 · nd 9–16</p></article>
+    <article class="shop" data-r><h3>Zgierska 41</h3><p class="open" data-shop="6-19,6-19,6-19,6-19,6-19,7-15,closed"><i></i><span>—</span></p><p>Bałuty, przy pracowni. Najwcześniej otwarta: ciepłe pączki od szóstej.</p><p>Pn–pt 6–19 · sob 7–15 · nd zamknięte</p></article>
+    <article class="shop" data-r><h3>Piłsudskiego 95</h3><p class="open" data-shop="8-19,8-19,8-19,8-19,8-19,8-17,10-15"><i></i><span>—</span></p><p>Widzew, obok przystanku tramwajowego. Odbiór tortów na zamówienie z parkingiem.</p><p>Pn–pt 8–19 · sob 8–17 · nd 10–15</p></article>
+  </div>
+</section>
+</main>
+
+<div class="scrim" data-scrim></div>
+<aside class="drawer" aria-label="Koszyk" data-drawer aria-hidden="true">
+  <div class="dh"><h2>Koszyk</h2><button type="button" class="x" aria-label="Zamknij koszyk" data-cart-close>×</button></div>
+  <ul data-lines></ul>
+  <p class="empty" data-empty>Koszyk jest pusty. Dodaj ciastko żółtym przyciskiem.</p>
+  <div class="df">
+    <div class="tot"><span>Razem</span><span data-total>0 zł</span></div>
+    <label class="field">Odbiór dziś <select data-pick><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew</option></select></label>
+    <button class="btn" type="button" data-checkout>Zarezerwuj do odbioru</button>
+    <p class="msg" role="status" data-msg></p>
+  </div>
+</aside>
+
+<footer>
+  <div class="wrap">
+    <div class="big" aria-hidden="true">Kruszon</div>
+    <p class="script">cukiernia rodzinna od 1991</p>
+    <div class="cols">
+      <div><b>Cukiernie</b>Piotrkowska 112<br>Zgierska 41, Bałuty<br>Piłsudskiego 95, Widzew</div>
+      <div><b>Kontakt</b><a href="tel:+48420000000">42 000 00 00</a><a href="mailto:zamowienia@kruszon.example">zamowienia@kruszon.example</a></div>
+      <div><b>Słodycze</b><a href="#nowosci">Dziś w witrynie</a><a href="#tort">Tort na zamówienie</a><a href="#cukiernie">Godziny otwarcia</a></div>
+      <div><b>Strona</b>ROVBA Design</div>
+    </div>
+    <p class="credits">Zdjęcia (wycięte z tła na potrzeby strony): <a href="https://commons.wikimedia.org/wiki/File:Danish_(1).jpg">drożdżówka</a> i <a href="https://commons.wikimedia.org/wiki/File:Cupcake_(1).jpg">babeczka</a> Renee Comet, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Part_de_galette_des_rois_2013.jpg">ciasto francuskie</a> Lionel Allorge, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Souffl%C3%A9-style_cheesecake_001.jpg">sernik</a> Ocdp, CC0; <a href="https://commons.wikimedia.org/wiki/File:2023_Sernik_z_rodzynkami.jpg">sernik z rodzynkami</a> Jacek Halicki, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Marmorkuchen-Minigugelhupf_angeschnitten_2022.jpg">babka</a> VSchagow, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Jelly_Doughnut_Retouched.jpg">pączek w przekroju</a> Kevin Payravi, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Fat-Doughnut-Brooklyn-Strawberry-Filled.jpg">pączek</a> Evan-Amos, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_tart,_2015-06-06.jpg">kruche</a> Crisco 1492, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:VanillaMacaron.jpg">makaroniki</a> Michelle Naherny, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg">wiśnie</a> Benjamint444, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg">truskawka</a> Joselodos, CC0; <a href="https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa).jpg">truskawki</a> Ivar Leidus, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
+  </div>
+</footer>
+
+<script src="assets/concept.js"></script>
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // ---------- okruszki ----------
+  var COLS = ["#b5835a", "#d1a77a", "#8c5b3a", "#e2c39a"];
+  document.querySelectorAll("[data-crumbs]").forEach(function (box, bi) {
+    var n = +box.dataset.crumbs, html = "";
+    for (var i = 0; i < n; i++) {
+      var s = (i * 37 + bi * 11) % 100, x = (i * 53 + bi * 29) % 100, y = (i * 71 + bi * 17) % 100;
+      html += '<svg style="left:' + x + '%;top:' + y + '%;--s:' + (8 + (s % 22)) + 'px;--c:' + COLS[i % 4] + ';--rot:' + (s * 3.6) + 'deg;--k:' + (0.2 + (s % 7) / 10) + '"><use href="#cr' + (1 + (i % 3)) + '"/></svg>';
+    }
+    box.innerHTML = html;
+  });
+  if (!reduce) {
+    var t = false;
+    addEventListener("scroll", function () { if (t) return; t = true; requestAnimationFrame(function () { t = false; document.documentElement.style.setProperty("--sy", (scrollY * 0.25).toFixed(1)); }); }, { passive: true });
+  }
+
+  // ---------- liczba rośnie ----------
+  var cu = document.querySelector("[data-countup]");
+  if (cu && !reduce && "IntersectionObserver" in window) {
+    var target = +cu.dataset.countup;
+    new IntersectionObserver(function (en, o) {
+      if (!en[0].isIntersecting) return; o.disconnect();
+      var t0 = performance.now();
+      (function step(now) { var p = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - p, 3); cu.textContent = Math.round(target * e).toLocaleString("pl-PL"); if (p < 1) requestAnimationFrame(step); })(t0);
+    }, { threshold: .4 }).observe(cu);
+  }
+
+  // ---------- witryna i koszyk ----------
+  var P = [
+    { id: "sernik", k: "torty", n: "Sernik z rodzynkami", w: "kawałek 0,15 kg", p: 9, img: "sernik.webp", badge: "Hit" },
+    { id: "japonski", k: "torty", n: "Sernik puszysty", w: "cały, 0,8 kg", p: 58, img: "sernik-japonski.webp" },
+    { id: "francuskie", k: "torty", n: "Pithivier migdałowy", w: "kawałek 0,14 kg", p: 11, img: "francuskie.webp", badge: "Nowość" },
+    { id: "babka", k: "torty", n: "Babka marmurkowa", w: "cała, 0,45 kg", p: 24, img: "babka.webp" },
+    { id: "kruche", k: "ciastka", n: "Kruche z truskawką", w: "1 szt., 0,07 kg", p: 6, img: "kruche.webp" },
+    { id: "makaroniki", k: "ciastka", n: "Makaroniki waniliowe", w: "3 szt.", p: 15, img: "makaroniki.webp", badge: "Nowość" },
+    { id: "babeczka", k: "ciastka", n: "Babeczka czekoladowa", w: "1 szt., 0,09 kg", p: 8, img: "babeczka.webp" },
+    { id: "paczek", k: "paczki", n: "Pączek z różą", w: "1 szt., 0,09 kg", p: 4.5, img: "paczek.webp", badge: "Hit" },
+    { id: "przekroj", k: "paczki", n: "Pączek z konfiturą", w: "1 szt., 0,09 kg", p: 5, img: "paczek-przekroj.webp" },
+    { id: "drozdzowka", k: "paczki", n: "Drożdżówka z kruszonką", w: "1 szt., 0,12 kg", p: 6.5, img: "drozdzowka.webp" },
+    { id: "truskawki", k: "ciastka", n: "Tartaletka z truskawką", w: "1 szt.", p: 12, img: "truskawki.webp" },
+    { id: "wisnie", k: "paczki", n: "Drożdżowe z wiśnią", w: "1 szt., 0,12 kg", p: 7, img: "wisnie.webp" },
+  ];
+  var zl = function (v) { return (Math.round(v * 100) / 100).toLocaleString("pl-PL", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 }) + " zł"; };
+  var list = document.querySelector("[data-products]"), cart = {};
+  P.forEach(function (x) {
+    var li = document.createElement("li"); li.className = "prod"; li.dataset.k = x.k;
+    li.innerHTML = (x.badge ? '<span class="badge">' + x.badge + "</span>" : "") +
+      '<div class="ph"><img class="cut" src="assets/kruszon/cut/' + x.img + '" alt="' + x.n + '" loading="lazy"></div>' +
+      '<p class="k">' + { torty: "Ciasta i torty", ciastka: "Ciastka", paczki: "Pączki i drożdżowe" }[x.k] + "</p><h3>" + x.n + '</h3><p class="w">' + x.w + "</p>" +
+      '<div class="bot"><span class="pr">' + zl(x.p) + '</span><button type="button" class="add" aria-label="Dodaj do koszyka: ' + x.n + '"><svg aria-hidden="true"><use href="#cart"/></svg></button></div>';
+    li.querySelector(".add").addEventListener("click", function (e) { add(x.id, 1); var b = e.currentTarget; b.classList.add("ok"); setTimeout(function () { b.classList.remove("ok"); }, 900); });
+    list.appendChild(li);
+  });
+  var fbtn = document.querySelectorAll("[data-filters] button");
+  function filter(f) { fbtn.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.f === f)); }); list.querySelectorAll(".prod").forEach(function (li) { li.hidden = f !== "all" && li.dataset.k !== f; }); }
+  fbtn.forEach(function (b) { b.addEventListener("click", function () { filter(b.dataset.f); }); });
+  document.querySelectorAll("[data-jump]").forEach(function (a) { a.addEventListener("click", function () { if (a.dataset.jump) filter(a.dataset.jump); }); });
+
+  var lines = document.querySelector("[data-lines]"), totalEl = document.querySelector("[data-total]"), count = document.querySelector("[data-count]"), cbtn = document.querySelector("[data-cart-open]");
+  function add(id, d) { cart[id] = Math.max(0, (cart[id] || 0) + d); if (!cart[id]) delete cart[id]; render(); if (d > 0) { cbtn.classList.remove("pop"); void cbtn.offsetWidth; cbtn.classList.add("pop"); } }
+  function render() {
+    var tot = 0, n = 0; lines.innerHTML = "";
+    Object.keys(cart).forEach(function (id) {
+      var x = P.find(function (p) { return p.id === id; }), q = cart[id]; tot += q * x.p; n += q;
+      var li = document.createElement("li");
+      li.innerHTML = '<img src="assets/kruszon/cut/' + x.img + '" alt=""><div><b>' + x.n + "</b><small>" + zl(x.p) + ' / szt.</small></div><div class="qty"><button type="button" aria-label="Mniej">−</button><span>' + q + '</span><button type="button" aria-label="Więcej">+</button></div>';
+      var bs = li.querySelectorAll("button"); bs[0].addEventListener("click", function () { add(id, -1); }); bs[1].addEventListener("click", function () { add(id, 1); });
+      lines.appendChild(li);
+    });
+    totalEl.textContent = zl(tot); count.textContent = n; document.querySelector("[data-empty]").hidden = n > 0; document.querySelector("[data-msg]").textContent = "";
+  }
+  var drawer = document.querySelector("[data-drawer]"), scrim = document.querySelector("[data-scrim]");
+  function open(o) { drawer.toggleAttribute("data-open", o); scrim.toggleAttribute("data-open", o); drawer.setAttribute("aria-hidden", String(!o)); if (o) drawer.querySelector(".x").focus(); }
+  cbtn.addEventListener("click", function () { open(true); });
+  document.querySelector("[data-cart-close]").addEventListener("click", function () { open(false); cbtn.focus(); });
+  scrim.addEventListener("click", function () { open(false); });
+  addEventListener("keydown", function (e) { if (e.key === "Escape" && drawer.hasAttribute("data-open")) { open(false); cbtn.focus(); } });
+  document.querySelector("[data-checkout]").addEventListener("click", function () {
+    var m = document.querySelector("[data-msg]");
+    if (!Object.keys(cart).length) { m.textContent = "Najpierw dodaj coś do koszyka."; return; }
+    m.textContent = "Odłożone na dziś: " + document.querySelector("[data-pick]").value + ". Podaj przy ladzie numer K-" + (100 + Math.floor(Math.random() * 900)) + ".";
+  });
+  render();
+
+  // ---------- tort na zamówienie ----------
+  var form = document.querySelector("[data-builder]"), fruitG = document.querySelector("[data-fruit]"), NS = "http://www.w3.org/2000/svg";
+  var PER_KG = 95;
+  function val(n) { return form.querySelector('input[name="' + n + '"]:checked'); }
+  function draw() {
+    var size = val("size"), base = val("base"), cream = val("cream"), fruit = val("fruit");
+    var kg = +size.dataset.kg, ppl = +size.value;
+    var r = 120 + Math.min(1, (kg - 0.9) / 2.7) * 56;
+    form.ownerDocument.querySelectorAll("[data-cr]").forEach(function (c) { c.setAttribute("r", r); });
+    document.querySelector("[data-cream]").setAttribute("fill", cream.dataset.c);
+    var dark = cream.value === "czekoladowy";
+    document.querySelector("[data-text]").setAttribute("fill", dark ? "#fff4e2" : "#5b3a29");
+    document.querySelector("[data-sub]").setAttribute("fill", dark ? "#f3d9a0" : "#7a5440");
+    fruitG.innerHTML = "";
+    var n = Math.round(10 + (r - 120) / 4), rr = r - 22;
+    for (var i = 0; i < n; i++) {
+      var a = i / n * Math.PI * 2, x = 200 + Math.cos(a) * rr, y = 200 + Math.sin(a) * rr;
+      if (fruit.value === "kruszonka") { var u = document.createElementNS(NS, "use"); u.setAttribute("href", "#cr" + (1 + i % 3)); u.setAttribute("x", x - 9); u.setAttribute("y", y - 9); u.setAttribute("width", 18); u.setAttribute("height", 18); u.setAttribute("fill", i % 2 ? "#c9935f" : "#a8723f"); fruitG.appendChild(u); continue; }
+      var c = document.createElementNS(NS, fruit.value === "truskawki" ? "ellipse" : "circle");
+      c.setAttribute("cx", x); c.setAttribute("cy", y);
+      if (fruit.value === "truskawki") { c.setAttribute("rx", 9); c.setAttribute("ry", 12); c.setAttribute("transform", "rotate(" + (a * 57.3 + 90) + " " + x + " " + y + ")"); }
+      else c.setAttribute("r", fruit.value === "borówki" ? 7 : 9);
+      c.setAttribute("fill", fruit.dataset.c); fruitG.appendChild(c);
+      if (fruit.value === "wiśnie") { var st = document.createElementNS(NS, "path"); st.setAttribute("d", "M" + x + " " + (y - 8) + " q 4 -10 10 -12"); st.setAttribute("stroke", "#4c6b2a"); st.setAttribute("stroke-width", 2); st.setAttribute("fill", "none"); fruitG.appendChild(st); }
+    }
+    var price = Math.round(kg * PER_KG + (+base.dataset.p) + (+cream.dataset.p) + (+fruit.dataset.p));
+    document.querySelector("[data-price]").textContent = price + " zł";
+    var os = ppl % 10 >= 2 && ppl % 10 <= 4 && (ppl % 100 < 12 || ppl % 100 > 14) ? " osoby" : " osób";
+    document.querySelector("[data-meta]").textContent = kg.toLocaleString("pl-PL") + " kg · " + ppl + os + " · biszkopt " + base.value;
+    return price;
+  }
+  form.addEventListener("change", draw);
+  form.querySelectorAll("[data-in]").forEach(function (inp) { inp.addEventListener("input", function () { document.querySelector("[data-" + inp.dataset.in + "]").textContent = inp.value; }); });
+  var dEl = form.querySelector("[data-date]"), min = new Date(); min.setDate(min.getDate() + 3);
+  var iso = function (d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  dEl.min = iso(min); dEl.value = iso(min);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); var price = draw();
+    var d = new Date(dEl.value + "T12:00:00");
+    document.querySelector("[data-done]").textContent = "Przyjęte: tort na " + d.toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long" }) + ", " + price + " zł, odbiór " + form.shop.value + ". Oddzwonimy dziś z potwierdzeniem.";
+  });
+  draw();
+
+  // ---------- czy cukiernia jest otwarta ----------
+  var now = new Date(), wd = (now.getDay() + 6) % 7, h = now.getHours() + now.getMinutes() / 60;
+  document.querySelectorAll("[data-shop]").forEach(function (el) {
+    var d = el.dataset.shop.split(",")[wd], s = el.querySelector("span");
+    if (d === "closed") { s.textContent = "Dziś zamknięte"; return; }
+    var a = d.split("-").map(Number);
+    if (h >= a[0] && h < a[1]) { el.setAttribute("data-on", ""); s.textContent = "Otwarte do " + a[1] + ":00"; }
+    else s.textContent = h < a[0] ? "Dziś otwieramy o " + a[0] + ":00" : "Już zamknięte, jutro od rana";
+  });
+})();
+</script>
+</body>
+</html>

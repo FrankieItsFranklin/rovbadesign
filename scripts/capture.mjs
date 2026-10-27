@@ -22,6 +22,7 @@ const SOURCES = [
   { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#cennik", "#przywieszka"], mobile: [0, "#przywieszka", "#cennik"] },
   { id: "ostrozka", url: "concept:ostrozka", cover: [1280, 1600], desktop: [0, "#bukiet", "#cennik"], mobile: [0, "#bukiet", "#cennik"] },
   { id: "bochen", url: "concept:bochen", cover: [1280, 1600], desktop: [0, "#z-pieca", "#chleby"], mobile: [0, "#z-pieca", "#chleby"] },
+  { id: "kruszon", url: "concept:kruszon", cover: [1280, 1600], desktop: [0, "#nowosci", "#tort"], mobile: [0, "#nowosci", "#tort"] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
 ];
 
