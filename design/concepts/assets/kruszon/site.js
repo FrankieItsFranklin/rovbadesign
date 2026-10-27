@@ -30,21 +30,29 @@
   // ---------- przeloty: data-fly="x0 y0 x1 y1 r0 r1" w % sekcji, środek obrazka jedzie po prostej ----------
   var flyers = [].slice.call(document.querySelectorAll("[data-fly]")).map(function (el) {
     var v = el.dataset.fly.split(/\s+/).map(Number);
-    return { el: el, sec: el.closest("[data-fly-box], section, .flight") || el.parentElement, v: v };
+    return { el: el, sec: el.closest("[data-fly-box], section, .flight") || el.parentElement, v: v, w: 0, h: 0 };
   });
-  function place(f, p) {
-    var r = f.sec.getBoundingClientRect(), v = f.v, w = f.el.offsetWidth, h = f.el.offsetHeight;
-    var x = (v[0] + (v[2] - v[0]) * p) / 100 * r.width - w / 2, y = (v[1] + (v[3] - v[1]) * p) / 100 * r.height - h / 2;
-    var rot = v[4] + (v[5] - v[4]) * p;
-    if (f.cx === undefined || reduce) { f.cx = x; f.cy = y; f.cr = rot; } else { f.cx += (x - f.cx) * 0.1; f.cy += (y - f.cy) * 0.1; f.cr += (rot - f.cr) * 0.1; }
-    f.el.style.transform = "translate(" + f.cx.toFixed(1) + "px," + f.cy.toFixed(1) + "px) rotate(" + f.cr.toFixed(1) + "deg)";
-  }
+  function measure() { flyers.forEach(function (f) { f.w = f.el.offsetWidth; f.h = f.el.offsetHeight; }); }
+  measure();
+  flyers.forEach(function (f) { if (f.el.complete === false) f.el.addEventListener("load", function () { measure(); wake(); }, { once: true }); });
 
   // ---------- rozsypane drobiny: kawałki czekolady, kruszonki i pył cukru pudru ----------
   // data-scatter="czek:6 krusz:8 cukier:3" na pudełku bez tekstu; data-scatter-x="0-20,80-100" zawęża pas w poziomie.
   // Rozkład równomierny: pudełko dzielone na siatkę komórek, każdy kawałek trafia do innej komórki z losowym przesunięciem.
-  // Ruch: paralaksa zależna od głębokości, obrót przy przewijaniu i powolne unoszenie się; wszystko wygładzane (inercja).
-  var BITS = { czek: 9, krusz: 12 }, bits = [];
+  // Ruch: paralaksa i obrót przy przewijaniu liczy JS (tylko gdy coś się rusza), unoszenie się robi CSS na karcie graficznej.
+  var BITS = { czek: 9, krusz: 12 }, bits = [], boxes = [];
+  function dustImage(R) {
+    // 80 drobin pudru rysujemy raz do bitmapy zamiast 80 elementów z cieniami
+    var W = 240, H = 180, k = 2, c = document.createElement("canvas"); c.width = W * k; c.height = H * k;
+    var x = c.getContext("2d"); x.scale(k, k);
+    for (var d = 0; d < 80; d++) {
+      var a = R() * Math.PI * 2, r = Math.pow(R(), 1.6) * 110, sz = 1 + R() * 2.8, px = W / 2 + Math.cos(a) * r, py = H / 2 + Math.sin(a) * r * 0.75;
+      x.globalAlpha = 0.35 + R() * 0.6;
+      x.fillStyle = "rgba(120,80,55,.45)"; x.beginPath(); x.arc(px, py + 0.5, sz / 2 + 0.4, 0, 7); x.fill();
+      x.fillStyle = "#fff"; x.beginPath(); x.arc(px, py, sz / 2, 0, 7); x.fill();
+    }
+    var im = new Image(); im.alt = ""; im.className = "dust"; im.width = W; im.height = H; im.src = c.toDataURL("image/png"); return im;
+  }
   document.querySelectorAll("[data-scatter]").forEach(function (box, bi) {
     var seed = bi * 97 + 13, R = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
     var bands = (box.dataset.scatterX || "0-100").split(",").map(function (b) { return b.split("-").map(Number); });
@@ -57,55 +65,55 @@
     for (var c2 = cells.length - 1; c2 > 0; c2--) { var r2 = Math.floor(R() * (c2 + 1)), t2 = cells[c2]; cells[c2] = cells[r2]; cells[r2] = t2; }
     var ci = 0, cell = function () { var c3 = cells[ci++ % cells.length]; return { x: toX(((c3 % cols) + 0.15 + R() * 0.7) / cols), y: 6 + ((Math.floor(c3 / cols) + 0.15 + R() * 0.7) / rows) * 88 }; };
     var layer = document.createElement("div"); layer.className = "scatter"; layer.setAttribute("aria-hidden", "true"); box.appendChild(layer);
+    var bx = { box: box, r: null }; boxes.push(bx);
     specs.forEach(function (sp) {
       for (var k = 0; k < sp.n; k++) {
-        var pos = cell(), depth = 0.2 + R() * 0.8, el;
-        if (sp.kind === "cukier") {
-          el = document.createElement("div"); el.className = "dust"; var html = "";
-          for (var d = 0; d < 80; d++) { var a = R() * Math.PI * 2, r = Math.pow(R(), 1.6) * 110, sz = 1 + R() * 2.8; html += '<i style="left:' + (Math.cos(a) * r).toFixed(1) + "px;top:" + (Math.sin(a) * r * 0.75).toFixed(1) + "px;width:" + sz.toFixed(1) + "px;height:" + sz.toFixed(1) + "px;opacity:" + (0.35 + R() * 0.6).toFixed(2) + '"></i>'; }
-          el.innerHTML = html;
-        } else {
+        var pos = cell(), depth = 0.2 + R() * 0.8, el, wrap = document.createElement("span");
+        wrap.className = "bitw";
+        if (sp.kind === "cukier") el = dustImage(R);
+        else {
           el = new Image(); el.alt = ""; el.className = "bit"; el.src = "assets/kruszon/gen/bits/" + sp.kind + "-" + (1 + Math.floor(R() * BITS[sp.kind])) + ".webp";
           el.style.width = ((sp.kind === "czek" ? 24 : 16) + depth * (sp.kind === "czek" ? 62 : 44)).toFixed(0) + "px";
-          if (depth < 0.4) el.style.filter = "blur(" + ((0.4 - depth) * 6).toFixed(1) + "px) drop-shadow(0 6px 6px rgb(52 28 23 / .15))";
-          el.style.zIndex = depth > 0.7 ? 2 : 0;
+          if (depth < 0.4) el.style.opacity = (0.55 + depth).toFixed(2);
         }
-        el.style.left = pos.x.toFixed(1) + "%"; el.style.top = pos.y.toFixed(1) + "%";
-        layer.appendChild(el);
-        bits.push({ el: el, box: box, depth: depth, rot: R() * 360, spin: (R() - 0.5) * 160, ph: R() * 6.28, sp: 0.4 + R() * 0.6, amp: 6 + depth * 14, cy: 0, cr: null });
+        // unoszenie: jeden z czterech gotowych torów, własne tempo i faza
+        el.style.animation = "bob" + (1 + Math.floor(R() * 4)) + " " + (4 + R() * 5).toFixed(1) + "s ease-in-out " + (-R() * 9).toFixed(1) + "s infinite alternate";
+        wrap.style.left = pos.x.toFixed(1) + "%"; wrap.style.top = pos.y.toFixed(1) + "%";
+        wrap.appendChild(el); layer.appendChild(wrap);
+        bits.push({ el: wrap, bx: bx, depth: depth, rot: R() * 360, spin: (R() - 0.5) * 160, cy: 0, cr: null });
       }
     });
   });
-  // jedna pętla animacji: cel liczony z przewijania i czasu, pozycja dojeżdża do celu z wygładzeniem
-  var running = false;
-  function loop(now) {
-    var vh = innerHeight, t = now / 1000, any = false;
+
+  // jedna pętla: najpierw wszystkie odczyty pozycji, potem zapisy; działa tylko przy przewijaniu i dojeżdżaniu
+  var raf = 0;
+  function wake() { if (!raf) raf = requestAnimationFrame(loop); }
+  function loop() {
+    raf = 0;
+    var vh = innerHeight, energy = 0;
+    boxes.forEach(function (b) { b.r = b.box.getBoundingClientRect(); });
+    flyers.forEach(function (f) { f.r = f.sec.getBoundingClientRect(); });
     bits.forEach(function (b) {
-      var r = b.box.getBoundingClientRect(); if (r.bottom < -300 || r.top > vh + 300) return; any = true;
+      var r = b.bx.r; if (r.bottom < -300 || r.top > vh + 300) return;
       var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-      var ty = (r.top + r.height / 2 - vh / 2) * b.depth * -0.55 + (reduce ? 0 : Math.sin(t * b.sp + b.ph) * b.amp);
-      var tr = b.rot + b.spin * p + (reduce ? 0 : Math.sin(t * b.sp * 0.7 + b.ph) * 8);
-      if (b.cr === null) { b.cy = ty; b.cr = tr; } else { b.cy += (ty - b.cy) * 0.09; b.cr += (tr - b.cr) * 0.09; }
+      var ty = (r.top + r.height / 2 - vh / 2) * b.depth * -0.55, tr = b.rot + b.spin * p;
+      if (b.cr === null || reduce) { b.cy = ty; b.cr = tr; } else { b.cy += (ty - b.cy) * 0.09; b.cr += (tr - b.cr) * 0.09; }
+      energy += Math.abs(ty - b.cy) + Math.abs(tr - b.cr);
       b.el.style.transform = "translate3d(0," + b.cy.toFixed(1) + "px,0) rotate(" + b.cr.toFixed(1) + "deg)";
     });
-    requestAnimationFrame(loop);
-  }
-  function placeBits() {}
-  if (bits.length) requestAnimationFrame(loop);
-  var ticking = false;
-  function frame() {
-    ticking = false;
-    var vh = innerHeight;
-    document.documentElement.style.setProperty("--sy", (scrollY * 0.25).toFixed(1));
-    placeBits();
     flyers.forEach(function (f) {
-      var r = f.sec.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > vh + 200) return;
-      place(f, Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height))));
+      var r = f.r; if (r.bottom < -200 || r.top > vh + 200) return;
+      var pr = reduce ? 0.5 : Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height))), v = f.v;
+      var x = (v[0] + (v[2] - v[0]) * pr) / 100 * r.width - f.w / 2, y = (v[1] + (v[3] - v[1]) * pr) / 100 * r.height - f.h / 2, rot = v[4] + (v[5] - v[4]) * pr;
+      if (f.cx === undefined || reduce) { f.cx = x; f.cy = y; f.cr = rot; } else { f.cx += (x - f.cx) * 0.1; f.cy += (y - f.cy) * 0.1; f.cr += (rot - f.cr) * 0.1; }
+      energy += Math.abs(x - f.cx) + Math.abs(y - f.cy);
+      f.el.style.transform = "translate3d(" + f.cx.toFixed(1) + "px," + f.cy.toFixed(1) + "px,0) rotate(" + f.cr.toFixed(1) + "deg)";
     });
+    if (energy > 0.3) wake();
   }
-  if (reduce) flyers.forEach(function (f) { place(f, 0.5); });
-  else { (function tick() { frame(); requestAnimationFrame(tick); })(); }
+  addEventListener("scroll", wake, { passive: true });
+  addEventListener("resize", function () { measure(); wake(); });
+  wake();
 
   // ---------- liczby rosną ----------
   document.querySelectorAll("[data-countup]").forEach(function (cu) {

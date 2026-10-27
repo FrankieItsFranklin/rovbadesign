@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=8">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=9">
 <style>
   .phead .side { position:absolute; right:var(--m); top:52%; translate:0 -50%; width:min(28vw, 400px); }
   .phead .lead, .phead h1, .phead .script { max-width:60%; }
@@ -25,7 +25,7 @@
   .gen h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:6px; }
   .gen p { margin-top:10px; font-size:15px; }
 
-  .day { padding:clamp(100px, 11vw, 160px) 0; position:relative; }
+  .day { padding-block:clamp(100px, 11vw, 160px); position:relative; }
   .day .script { font-size:clamp(42px, 4vw, 66px); }
   .day h2 { font-size:clamp(56px, 6vw, 110px); color:var(--head); }
   .clock { list-style:none; padding:0; margin-top:56px; display:grid; gap:14px; }
@@ -104,9 +104,9 @@
   <p class="script over" data-r>dzień w pracowni na Bałutach</p>
   <h2 id="day-h" class="display over" data-r>Od piątej do północy</h2>
   <ol class="clock" data-clock>
-    <li data-h="4" data-r><span class="h">4:00</span><div><h3>Ciasto drożdżowe</h3><p>Pierwsza zmiana zaczyna od drożdżówek. Ciasto rośnie godzinę w cieple pieca.</p></div><img src="assets/kruszon/sernik-pastel-de-queso-gastronomia-polaca-gniezno.jpg" width="1200" height="800" loading="lazy" alt="Cukierniczka przy stole w pracowni"></li>
+    <li data-h="4" data-r><span class="h">4:00</span><div><h3>Ciasto drożdżowe</h3><p>Pierwsza zmiana zaczyna od drożdżówek. Ciasto rośnie godzinę w cieple pieca.</p></div><img src="assets/kruszon/kr-drozdzowe.jpg" width="1300" height="705" loading="lazy" alt="Cukierniczka układa wyrośnięte bułki drożdżowe na blasze"></li>
     <li data-h="5" data-r><span class="h">5:40</span><div><h3>Pierwsze pączki</h3><p>Smażymy na smalcu po dwie minuty z każdej strony, nadziewamy ręcznie różą.</p></div><img src="assets/kruszon/smazenie-paczkow.jpg" width="1200" height="1206" loading="lazy" alt="Smażenie pączków, fotografia archiwalna"></li>
-    <li data-h="6" data-r><span class="h">6:30</span><div><h3>Samochód do cukierni</h3><p>Trzy kursy: Bałuty, centrum, Widzew. Ciastka jadą w drewnianych skrzynkach.</p></div><img src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki na tacy"></li>
+    <li data-h="6" data-r><span class="h">6:30</span><div><h3>Samochód do cukierni</h3><p>Trzy kursy: Bałuty, centrum, Widzew. Ciastka jadą w drewnianych skrzynkach.</p></div><img src="assets/kruszon/kr-wypieki.jpg" width="1300" height="975" loading="lazy" alt="Rogaliki i drożdżówki z czekoladą na desce"></li>
     <li data-h="11" data-r><span class="h">11:00</span><div><h3>Druga partia</h3><p>Drugi raz pączki i serniki na popołudnie. Do 12:00 przyjmujemy zamówienia na ten sam dzień.</p></div><img class="cutimg" src="assets/kruszon/gen/sernik.webp" width="901" height="807" loading="lazy" alt="Sernik z rodzynkami"></li>
     <li data-h="15" data-r><span class="h">15:00</span><div><h3>Torty na jutro</h3><p>Biszkopty pieczemy dzień wcześniej, żeby odpoczęły. Krem i owoce dopiero rano.</p></div><img class="cutimg" src="assets/kruszon/gen/tort-truskawkowy.webp" width="901" height="891" loading="lazy" alt="Puszysty sernik"></li>
     <li data-h="20" data-r><span class="h">20:00</span><div><h3>Kruszonka na jutro</h3><p>Ostatnia rzecz przed zamknięciem: dwadzieścia kilo kruszonki do lodówki, na rano.</p></div><img class="cutimg" src="assets/kruszon/gen/drozdzowka.webp" width="901" height="776" loading="lazy" alt="Drożdżówka z kruszonką"></li>
@@ -155,11 +155,11 @@
       <div><b>Słodycze</b><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a></div>
       <div><b>Strona</b>ROVBA Design</div>
     </div>
-    <p class="credits">Zdjęcia wyrobów: wizualizacje przygotowane dla projektu. Zdjęcia z pracowni: <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
+    <p class="credits">Zdjęcia wyrobów: wizualizacje przygotowane dla projektu. Zdjęcia z pracowni z <a href="https://unsplash.com">Unsplash</a>: <a href="https://unsplash.com/photos/hands-holding-a-pile-of-dirt-uOKmuYb9H_Q">ciasto</a> Ian Talmacs, <a href="https://unsplash.com/photos/white-ceramic-bowl-with-white-liquid-tT5ACBfqo0s">masło</a> Jess Bailey, <a href="https://unsplash.com/photos/person-baked-bread-L6Ag-rKpGnw">drożdżówki</a> Hathaipat K., <a href="https://unsplash.com/photos/pastries-and-baking-tools-for-breakfast-Ns2aJ5OXKds">wypieki</a> tabitha turner; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna, przez Wikimedia Commons.</p>
   </div>
 </footer>
 <script src="assets/concept.js"></script>
-<script src="assets/kruszon/site.js?v=6"></script>
+<script src="assets/kruszon/site.js?v=7"></script>
 <script>
 (function () {
   // podświetl etap dnia, który trwa teraz

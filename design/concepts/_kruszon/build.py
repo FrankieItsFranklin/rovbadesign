@@ -28,7 +28,7 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){{var m=location.search.match(/[?&]pal=(\\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")}})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=8">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=9">
 """
 
 SPRITES = """<svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -72,7 +72,7 @@ DRAWER = """<div class="scrim" data-scrim></div>
 </aside>
 """
 
-CREDITS = """Zdjęcia wyrobów: wizualizacje przygotowane dla projektu. Zdjęcia z pracowni: <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons."""
+CREDITS = """Zdjęcia wyrobów: wizualizacje przygotowane dla projektu. Zdjęcia z pracowni z <a href="https://unsplash.com">Unsplash</a>: <a href="https://unsplash.com/photos/hands-holding-a-pile-of-dirt-uOKmuYb9H_Q">ciasto</a> Ian Talmacs, <a href="https://unsplash.com/photos/white-ceramic-bowl-with-white-liquid-tT5ACBfqo0s">masło</a> Jess Bailey, <a href="https://unsplash.com/photos/person-baked-bread-L6Ag-rKpGnw">drożdżówki</a> Hathaipat K., <a href="https://unsplash.com/photos/pastries-and-baking-tools-for-breakfast-Ns2aJ5OXKds">wypieki</a> tabitha turner; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna, przez Wikimedia Commons."""
 
 FOOTER = f"""<footer>
   <div class="wrap">
@@ -99,6 +99,6 @@ for fname, key, title, desc in PAGES:
     if m: script, src = m.group(0), src[:m.start()]
     html = (HEAD.format(pal=DEFAULT_PAL, title=title, desc=desc) + style + "</head>\n<body>\n" + SPRITES + header(key) +
             "<main>\n" + src.strip() + "\n</main>\n" + DRAWER + FOOTER +
-            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=6"></script>\n' + script + "\n</body>\n</html>\n")
+            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=7"></script>\n' + script + "\n</body>\n</html>\n")
     (OUT / fname).write_text(html, encoding="utf-8")
     print("ok", fname)

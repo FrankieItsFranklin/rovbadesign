@@ -65,10 +65,14 @@ p { max-width:68ch; }
 /* rozsypane drobiny (site.js): tylko w pudełkach bez tekstu, pod napisami */
 .scatter { position:absolute; inset:0; pointer-events:none; z-index:1; }
 /* wyroby zawsze na pierwszym planie, drobiny pod nimi */
-.scatter .bit, .scatter .dust { z-index:0 !important; }
-.scatter .bit { position:absolute; height:auto; filter:drop-shadow(0 8px 8px rgb(52 28 23 / .2)); will-change:transform; }
-.scatter .dust { position:absolute; width:0; height:0; will-change:transform; }
-.scatter .dust i { position:absolute; border-radius:50%; background:#fff; box-shadow:0 0 2px rgb(255 255 255 / .95), 0 0.5px 1.5px rgb(120 80 55 / .45); }
+.scatter .bitw { position:absolute; z-index:0; will-change:transform; }
+.scatter .bit, .scatter .dust { display:block; will-change:transform; }
+@keyframes bob1 { from { transform:translateY(-8px) rotate(-6deg); } to { transform:translateY(8px) rotate(6deg); } }
+@keyframes bob2 { from { transform:translateY(-14px) rotate(4deg); } to { transform:translateY(12px) rotate(-8deg); } }
+@keyframes bob3 { from { transform:translate(-6px, -10px) rotate(-3deg); } to { transform:translate(6px, 10px) rotate(5deg); } }
+@keyframes bob4 { from { transform:translateY(-18px) rotate(8deg); } to { transform:translateY(16px) rotate(-4deg); } }
+.scatter .bit { height:auto; filter:drop-shadow(0 8px 8px rgb(52 28 23 / .2)); }
+.scatter .dust { width:240px; height:180px; max-width:none; margin:-90px 0 0 -120px; }
 
 /* ---------- nagłówek ---------- */
 .bar { position:sticky; top:0; z-index:30; background:var(--card); box-shadow:0 1px 0 var(--bg-2); }
@@ -179,11 +183,12 @@ footer .credits a { color:inherit; }
   .prod .add { width:44px; height:44px; }
   footer .cols { grid-template-columns:1fr 1fr; }
   .flyer.side { display:none; }
-  .scatter .bit:nth-child(n+7) { display:none; }
+  .scatter .bitw:nth-child(n+7) { display:none; }
   .phead .scatter { display:none; }
   .phead .crumbs { display:none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
   .crumbs svg { transform:rotate(var(--rot, 0deg)); }
+  .scatter .bit, .scatter .dust { animation:none !important; }
 }
