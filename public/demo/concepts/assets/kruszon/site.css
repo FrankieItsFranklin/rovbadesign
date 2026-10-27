@@ -58,12 +58,14 @@ p { max-width:68ch; }
 .crumbs svg { position:absolute; width:var(--s, 18px); height:var(--s, 18px); fill:var(--c); transform:translateY(calc(var(--k, 1) * var(--sy, 0) * -1px)) rotate(var(--rot, 0deg)); }
 
 /* latające wyroby: tor liczony w JS z postępu sekcji, ruch tylko w pasach bez tekstu */
-.flyer { position:absolute; left:0; top:0; z-index:1; pointer-events:none; will-change:transform; width:var(--w, 160px); }
+.flyer { position:absolute; left:0; top:0; z-index:3; pointer-events:none; will-change:transform; width:var(--w, 160px); }
 .flight { position:relative; height:clamp(260px, 42vh, 460px); overflow:hidden; }
 .flight .lbl { position:absolute; right:var(--m); bottom:18px; z-index:3; font-size:clamp(28px, 2.6vw, 40px); }
 
 /* rozsypane drobiny (site.js): tylko w pudełkach bez tekstu, pod napisami */
 .scatter { position:absolute; inset:0; pointer-events:none; z-index:1; }
+/* wyroby zawsze na pierwszym planie, drobiny pod nimi */
+.scatter .bit, .scatter .dust { z-index:0 !important; }
 .scatter .bit { position:absolute; height:auto; filter:drop-shadow(0 8px 8px rgb(52 28 23 / .2)); will-change:transform; }
 .scatter .dust { position:absolute; width:0; height:0; will-change:transform; }
 .scatter .dust i { position:absolute; border-radius:50%; background:#fff; box-shadow:0 0 2px rgb(255 255 255 / .95), 0 0.5px 1.5px rgb(120 80 55 / .45); }
