@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/en", destination: "/", permanent: true },
       // Renamed demo projects keep their old case-study addresses working.
-      ...[["luka", "rubryka"], ["adp-clinic", "kotwica"], ["milanovo", "ventotto"], ["finir", "szkliwo"], ["lident", "fiszka"], ["piernicova", "korzenna"], ["sobaniec", "przystan"]].flatMap(([from, to]) => [
+      ...[["luka", "rubryka"], ["adp-clinic", "kotwica"], ["milanovo", "ventotto"], ["finir", "szkliwo"], ["lident", "fiszka"], ["piernicova", "korzenna"], ["sobaniec", "przystan"], ["bochen", "kruszon"]].flatMap(([from, to]) => [
         { source: `/work/${from}`, destination: `/work/${to}`, permanent: true },
         { source: `/pl/work/${from}`, destination: `/pl/work/${to}`, permanent: true },
       ]),

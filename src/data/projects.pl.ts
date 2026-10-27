@@ -184,19 +184,6 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Trzy kamienne szarości i jedna szałwiowa zieleń, żeby cały kolor niosły kwiaty.",
     ],
   },
-  bochen: {
-    category: "Piekarnia na zakwasie",
-    city: "Wrocław",
-    description:
-      "Koncept studia dla piekarni na zakwasie na Nadodrzu, w której piec otwiera się co półtorej godziny. Jeden kształt prowadzi całą stronę: owalny bochenek z jednym nacięciem.",
-    challenge: "Ludzie przychodzą po ciepły chleb i nigdy nie wiedzą, kiedy on jest.",
-    approach: "Dzisiejsze blachy są na stronie jako rząd bochenków, które wypełniają się skórką, kiedy każda wychodzi z pieca.",
-    details: [
-      "Tablica pieca czyta zegar: co się teraz piecze, co ostatnio wyszło i ile zostało do następnej blachy.",
-      "Owalny bochenek z jednym nacięciem to znak, przycisk, maska każdego zdjęcia i punktor w karcie.",
-      "Mączna biel, brąz skórki i ciemne żyto na nocną zmianę.",
-    ],
-  },
   kruszon: {
     category: "Cukiernia",
     city: "Łódź",
