@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,39763,t=>{t.q("/demo/przystan/_next/static/media/fotel-z-gory.1b8w3k0x3xt5b.jpg")}]);

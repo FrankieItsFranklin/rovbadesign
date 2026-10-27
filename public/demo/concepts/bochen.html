@@ -12,7 +12,7 @@
 <script>document.documentElement.classList.add("js")</script>
 <style>
   :root {
-    --bg:#fbf8f2; --surface:#f1ebe0; --ink:#2a211a; --muted:#6e6258; --crust:#c98a4b; --crust-2:#a86b33; --crumb:#efd9b4; --deep:#3a2a1e;
+    --bg:#efefec; --surface:#e7e5df; --ink:#1d1a17; --muted:#4d4741; --crust:#3b2a20; --crust-2:#5a4030; --crumb:#e9dcc4; --deep:#2a1f18; --fire:#f0c24b;
     --f:"Chillax", "Avenir Next", system-ui, sans-serif;
     --step-small:clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem); --step-body:clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
     --step-lead:clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem); --step-head:clamp(2rem, 1.3rem + 3.2vw, 4rem);
@@ -28,9 +28,11 @@
   :focus-visible { outline:3px solid var(--crust-2); outline-offset:3px; }
   h1, h2, h3 { font-weight:600; letter-spacing:-.03em; line-height:1; }
   .soft { color:var(--muted); }
+  .lead-ink { color:var(--ink); }
+  p { max-width:65ch; }
   /* Przycisk ma kształt bochenka: owal. */
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:0 30px; border-radius:50%/50%; background:var(--crust); color:var(--ink); font:500 17px var(--f); text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, transform 160ms var(--ease-out); }
-  .btn:hover { background:#d79a5b; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:0 30px; border-radius:50%/50%; background:var(--fire); color:var(--ink); font:500 17px var(--f); text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, transform 160ms var(--ease-out); }
+  .btn:hover { background:#f5cf6a; }
   .btn:active { transform:scale(.96); }
   .btn.ink { background:var(--ink); color:var(--bg); }
   .btn.ink:hover { background:#000; }
@@ -46,9 +48,9 @@
   .hero { position:relative; height:100svh; min-height:740px; overflow:hidden; }
   .top { position:absolute; inset:0 0 auto; z-index:3; display:flex; justify-content:space-between; align-items:center; padding:22px var(--m); }
   .top .mark { font-weight:600; font-size:32px; letter-spacing:-.04em; text-decoration:none; }
-  .top nav { display:flex; gap:28px; font-size:16px; }
-  .top nav a { text-decoration:none; padding:6px 0; background:linear-gradient(currentColor,currentColor) left bottom / 0 1.5px no-repeat; transition:background-size 240ms var(--ease-out); }
-  .top nav a:hover { background-size:100% 1.5px; }
+  .top nav { display:flex; gap:28px; font-size:16px; color:var(--bg); }
+  .top nav a { padding:6px 0; text-decoration:underline; text-decoration-color:transparent; text-underline-offset:6px; text-decoration-thickness:1.5px; transition:text-decoration-color 200ms ease; }
+  .top nav a:hover { text-decoration-color:currentColor; }
   .top .short { display:none; }
   .loaf { position:absolute; width:170vh; height:110vh; left:calc(50% + 4vw); top:-2vh; z-index:0; }
   .loaf svg { width:100%; height:100%; overflow:visible; }
@@ -60,11 +62,12 @@
   .hero h1 { font-size:clamp(64px, 6.6vw, 112px); }
   .hero .copy > p { margin-top:26px; font-size:19px; max-width:38ch; }
   .hero .copy .btn { margin-top:34px; align-self:flex-start; }
-  .now { position:absolute; z-index:2; left:calc(50% + 14vw); top:50%; transform:translateY(-50%); width:min(360px, 28vw); color:var(--ink); }
+  .now { position:absolute; z-index:2; left:calc(50% + 12vw); top:66%; transform:translateY(-50%); width:min(400px, 30vw); color:var(--bg); }
   .now .k { font-size:15px; display:flex; align-items:center; gap:10px; }
-  .now .k i { width:10px; height:10px; border-radius:50%; background:var(--ink); }
-  .now[data-hot] .k i { background:#fff6e3; box-shadow:0 0 0 0 rgb(255 246 227 / .7); animation:hot 1.8s infinite; }
+  .now .k i { width:10px; height:10px; border-radius:50%; background:var(--crumb); }
+  .now[data-hot] .k i { background:var(--fire); box-shadow:0 0 0 0 rgb(255 246 227 / .7); animation:hot 1.8s infinite; }
   @keyframes hot { 70% { box-shadow:0 0 0 10px rgb(255 246 227 / 0); } 100% { box-shadow:0 0 0 0 rgb(255 246 227 / 0); } }
+  .now .k { display:inline-flex; vertical-align:middle; margin-right:12px; }
   .now .what { font-weight:600; font-size:clamp(30px, 2.6vw, 44px); line-height:1.05; letter-spacing:-.03em; margin-top:10px; }
   .now .when { margin-top:10px; font-size:17px; }
 
@@ -77,14 +80,15 @@
   .batch .t { font-weight:600; font-size:28px; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
   .batch .shape { width:100%; aspect-ratio:5/3; border-radius:50%; background:var(--crumb); position:relative; overflow:hidden; }
   .batch .shape::after { content:""; position:absolute; left:22%; top:46%; width:56%; height:2px; background:var(--bg); transform:rotate(-14deg); border-radius:2px; opacity:.8; }
-  .batch .shape b { position:absolute; inset:0; width:var(--p, 0%); background:var(--crust); transition:width 900ms var(--ease-out); }
+  .batch .shape b { position:absolute; inset:0; width:var(--p, 0%); background:var(--crust-2); transition:width 900ms var(--ease-out); }
   .batch .n { font-weight:500; line-height:1.25; }
   .batch .pr { margin-top:auto; font-size:15px; color:var(--muted); }
   .batch[data-state="out"] { background:#efe4d2; }
   .batch[data-state="out"] .shape b { width:100%; }
   .batch[data-state="baking"] { background:var(--ink); color:var(--bg); transform:translateY(-8px); }
+  .batch[data-state="baking"] .shape b { background:var(--fire); }
   .batch[data-state="baking"] .pr { color:#cdbfae; }
-  .batch .tag { position:absolute; top:12px; right:12px; font-size:13px; padding:2px 10px; border-radius:50%/50%; background:var(--crust); color:var(--ink); }
+  .batch .tag { position:absolute; top:12px; right:12px; font-size:13px; padding:2px 10px; border-radius:50%/50%; background:var(--fire); color:var(--ink); }
   .hold { margin-top:40px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
   .hold select, .hold input { min-height:54px; padding:0 18px; border:0; background:var(--surface); font:400 17px var(--f); color:var(--ink); border-radius:999px; }
   .hold .done { flex-basis:100%; font-weight:500; min-height:1.5em; }
@@ -94,11 +98,12 @@
   .menu .cat:first-of-type { margin-top:0; }
   .menu .cat h2 { font-size:clamp(32px, 3.4vw, 50px); }
   .menu .items { display:grid; grid-template-columns:1fr 1fr; column-gap:64px; row-gap:36px; list-style:none; padding:0; }
-  .menu li { display:grid; grid-template-columns:64px 1fr; gap:20px; align-items:start; }
-  .menu li img { width:64px; height:44px; object-fit:cover; border-radius:50%; }
+  .menu li { display:grid; grid-template-columns:128px 1fr; gap:24px; align-items:center; }
+  .menu li img { width:128px; height:84px; object-fit:cover; border-radius:50%; transition:transform 500ms var(--ease-out); }
+  .menu li:hover img { transform:rotate(-6deg) scale(1.06); }
   .menu li .row { display:flex; justify-content:space-between; gap:16px; font-weight:600; font-size:18px; }
-  .menu li p { margin-top:4px; font-size:15px; color:var(--muted); max-width:38ch; }
-  .menu li .note { color:var(--crust-2); font-size:14px; margin-top:4px; }
+  .menu li p { margin-top:4px; font-size:16px; color:var(--ink); max-width:38ch; }
+  .menu li .note { color:var(--muted); font-size:14px; margin-top:4px; }
 
   /* ---------- akordeon: noc w piekarni ---------- */
   .night .intro { align-items:start; }
@@ -107,9 +112,9 @@
   .acc { margin-top:64px; display:flex; height:520px; }
   .stage { position:relative; flex:1 1 0; min-width:0; overflow:hidden; background:var(--c); color:var(--tc, var(--bg)); transition:flex-grow 450ms var(--ease-out); border:0; text-align:left; font:inherit; cursor:pointer; padding:0; }
   .stage[aria-expanded="true"] { flex-grow:6; cursor:default; }
-  .stage .v { position:absolute; left:20px; bottom:20px; font-weight:600; font-size:20px; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; transition:opacity 200ms; }
+  .stage .v { position:absolute; z-index:2; left:20px; bottom:20px; font-weight:600; font-size:20px; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; transition:opacity 200ms; }
   .stage[aria-expanded="true"] .v { opacity:0; }
-  .stage .o { position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; opacity:0; transition:opacity 300ms 150ms; pointer-events:none; }
+  .stage .o { position:absolute; z-index:1; inset:0; display:grid; grid-template-columns:1fr 1fr; opacity:0; transition:opacity 300ms 150ms; pointer-events:none; }
   .stage[aria-expanded="true"] .o { opacity:1; }
   .stage .o .tx { padding:32px; display:flex; flex-direction:column; justify-content:space-between; }
   .stage .o .h { font-weight:600; letter-spacing:-.03em; line-height:1; font-size:40px; }
@@ -117,32 +122,59 @@
   .stage .o img { width:100%; height:100%; object-fit:cover; }
 
   /* ---------- o nas: panel ---------- */
-  .panel { margin:0 20px; background:var(--deep); color:var(--crumb); min-height:110svh; position:relative; overflow:hidden; padding:56px; }
-  .panel h2 { font-size:clamp(40px, 4.4vw, 64px); max-width:12ch; color:var(--bg); }
-  .panel figure { position:absolute; left:56px; bottom:-8vw; width:38vw; }
+  .panel { margin:0 20px; background:var(--deep); color:var(--crumb); min-height:86svh; position:relative; overflow:hidden; padding:56px; }
+  .panel h2 { font-size:clamp(40px, 4.4vw, 64px); max-width:20ch; color:var(--bg); }
+  .panel figure { position:absolute; left:56px; bottom:-6vw; width:44vw; }
   .panel figure img { width:100%; aspect-ratio:5/4; object-fit:cover; border-radius:50%; }
   .panel .blocks { position:absolute; left:63%; top:56px; width:300px; display:grid; gap:64px; }
   .panel .blocks h3 { font-size:22px; color:var(--bg); letter-spacing:-.02em; }
-  .panel .blocks p { margin-top:12px; font-size:15px; }
+  .panel .blocks p { margin-top:12px; font-size:16px; }
 
   /* ---------- dojazd ---------- */
   .where .grid { align-items:end; }
-  .where figure { grid-column:1 / 8; overflow:hidden; }
-  .where figure img { width:100%; aspect-ratio:2.1/1; object-fit:cover; }
+
   .where .facts { grid-column:9 / 13; display:grid; gap:22px; }
   .where .facts b { display:block; font-weight:600; }
   .where h2 { font-size:var(--step-head); grid-column:1 / -1; margin-bottom:48px; }
-  .where .order { grid-column:1 / -1; margin-top:96px; background:var(--crust); padding:44px 48px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; border-radius:999px; }
+  .where .order { grid-column:1 / -1; margin-top:96px; background:var(--fire); padding:44px 48px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; border-radius:999px; }
   .where .order p { font-size:var(--step-lead); font-weight:500; max-width:32ch; }
+
+  /* ---------- witryna: owal bochenka otwiera się w pełny kadr (przewijanie) ---------- */
+  .vitrine { height:230vh; position:relative; }
+  .vitrine .stick { position:sticky; top:0; height:100svh; overflow:hidden; display:grid; place-items:center; }
+  .vitrine .pic { position:absolute; inset:0; clip-path:ellipse(var(--rx, 22%) var(--ry, 19%) at 50% 50%); }
+  .vitrine .pic img { width:100%; height:100%; object-fit:cover; transform:scale(calc(1.25 - var(--p, 0) * .25)); }
+  .vitrine .l { position:absolute; left:0; right:0; text-align:center; font-weight:600; letter-spacing:-.03em; font-size:clamp(40px, 5vw, 84px); line-height:1; z-index:2; }
+  .vitrine .l1 { top:calc(50% - 30vh + var(--p, 0) * (34vh - 50%)); }
+  .vitrine .l2 { top:calc(50% + 21vh + var(--p, 0) * (50% - 21vh - 13vh)); }
+  .vitrine .cap { position:absolute; left:var(--m); bottom:24px; z-index:2; background:var(--bg); padding:10px 16px; font-size:15px; opacity:var(--p, 0); }
+
+  /* ---------- skąd mąka ---------- */
+  .field { position:relative; min-height:92svh; display:grid; align-items:end; overflow:hidden; color:var(--bg); }
+  .field > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .field .row { position:relative; display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); gap:24px; padding:var(--m); align-items:end; }
+  .field .t { grid-column:1 / 7; background:var(--deep); padding:36px; }
+  .field h2 { font-size:clamp(36px, 4vw, 60px); color:var(--bg); }
+  .field .t p { margin-top:16px; color:var(--crumb); }
+  .field figure { grid-column:9 / 13; margin:0; }
+  .field figure img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:50%; }
+  .field figcaption { margin:8px auto 0; width:max-content; max-width:100%; font-size:14px; background:var(--deep); color:var(--crumb); padding:4px 12px; }
+
+  /* ---------- fala na górze panelu i dwie kamienice ---------- */
+  .panel { -webkit-mask:radial-gradient(28px at 50% 0, #0000 98%, #000) 0 0 / 56px 100% repeat-x, linear-gradient(#000, #000) 0 28px / 100% 100% no-repeat; }
+  .where .pair { grid-column:1 / 8; display:grid; grid-template-columns:3fr 2fr; gap:12px; }
+  .where .pair figure { margin:0; overflow:hidden; }
+  .where .pair img { width:100%; height:100%; object-fit:cover; }
 
   footer { background:var(--ink); color:var(--bg); padding:64px var(--m) 40px; margin-top:120px; }
   footer .big { font-weight:600; font-size:clamp(90px, 20vw, 360px); letter-spacing:-.05em; line-height:.8; }
   footer .row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; margin-top:32px; font-size:15px; }
-  footer .credits { margin-top:24px; font-size:13px; opacity:.75; max-width:120ch; }
+  footer .credits { margin-top:24px; font-size:13px; opacity:.75; max-width:75ch; }
 
   @media (max-width: 900px) {
     :root { --m:16px; }
     .top nav a:not(.short) { display:none; } .top .short { display:inline; }
+    .top nav { color:var(--ink); }
     .loaf { width:130vw; height:84vw; left:50%; top:56svh; transform:translateX(-50%); }
     .js .loaf { animation:none; }
     .hero .copy { justify-content:flex-start; padding:15svh 16px 0; max-width:none; }
@@ -151,14 +183,14 @@
     .hero .copy .btn { margin-top:22px; }
     .now { left:50%; top:auto; bottom:6svh; transform:translateX(-50%); width:70vw; text-align:center; }
     .now .k { justify-content:center; }
-    .now .what { font-size:24px; }
+    .now .what { font-size:24px; } .now { color:var(--bg); }
     .now .when { font-size:15px; }
-    .track { grid-template-columns:repeat(7, 60vw); overflow-x:auto; scroll-snap-type:x mandatory; margin-inline:-16px; padding:12px 16px; }
-    .batch { scroll-snap-align:start; }
+    .track { grid-template-columns:1fr 1fr; }
+    .batch { min-height:0; }
     .hold > * { width:100%; }
     .menu .items { grid-template-columns:1fr; }
-    .menu li { grid-template-columns:52px 1fr; }
-    .menu li img { width:52px; height:36px; }
+    .menu li { grid-template-columns:88px 1fr; gap:16px; }
+    .menu li img { width:88px; height:58px; }
     .menu .cat h2 { font-size:8.5vw; }
     .grid > * { grid-column:1 / -1 !important; }
     .grid { grid-template-columns:minmax(0, 1fr); }
@@ -180,10 +212,17 @@
     .panel figure img { aspect-ratio:5/4; }
     .panel { padding-bottom:0; }
     .where .facts { margin-top:32px; }
+    .vitrine { height:180vh; }
+    .vitrine .l { font-size:9vw; }
+    .field .t { grid-column:1 / -1; padding:24px; }
+    .field figure { grid-column:1 / -1; width:60%; justify-self:end; }
+    .field .row { grid-template-columns:minmax(0, 1fr); }
+    .where .pair { grid-template-columns:1fr; }
     .where .order { border-radius:28px; padding:28px 24px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .js .loaf, .js .loaf .ear, .now[data-hot] .k i { animation:none; stroke-dashoffset:0; }
+    .vitrine { height:auto; } .vitrine .stick { position:relative; } .vitrine .pic { clip-path:none; } .vitrine .cap { opacity:1; }
     .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
   }
 </style>
@@ -198,8 +237,8 @@
 <section class="hero" aria-labelledby="h1">
   <div class="loaf" aria-hidden="true">
     <svg viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet">
-      <ellipse cx="500" cy="320" rx="500" ry="320" fill="#c98a4b"/>
-      <path class="ear" d="M150 380 C 330 250, 600 200, 860 250" fill="none" stroke="#efd9b4" stroke-width="34" stroke-linecap="round"/>
+      <ellipse cx="500" cy="320" rx="500" ry="320" fill="#3b2a20"/>
+      <path class="ear" d="M150 380 C 330 250, 600 200, 860 250" fill="none" stroke="#e9dcc4" stroke-width="34" stroke-linecap="round"/>
     </svg>
   </div>
   <div class="copy">
@@ -208,16 +247,26 @@
     <a class="btn ink" href="#z-pieca">Co jest teraz w piecu</a>
   </div>
   <div class="now" data-now>
-    <p class="k"><i aria-hidden="true"></i><span data-now-k>Teraz w piecu</span></p>
-    <p class="what" data-now-what>Żytni na zakwasie</p>
+    <p class="what"><span class="k"><i aria-hidden="true"></i></span><span data-now-what>W piecu: żytni na zakwasie</span></p>
+    <p class="when" data-now-k hidden></p>
     <p class="when" data-now-when>Wyjdzie o 7:00</p>
+  </div>
+</section>
+
+
+<section class="vitrine" aria-labelledby="vit-h" data-vitrine>
+  <div class="stick">
+    <div class="pic"><img src="assets/schmidt-bakery-2.jpg" width="1200" height="793" loading="lazy" alt="Witryna piekarni pełna bochenków żytnich i pszennych"></div>
+    <p class="l l1" id="vit-h">Chleb, który pachnie</p>
+    <p class="l l2">aż na ulicę.</p>
+    <p class="cap">Witryna o siódmej rano, zanim otworzymy drzwi.</p>
   </div>
 </section>
 
 <section class="oven pad wrap" id="z-pieca" aria-labelledby="oven-h" data-reveal>
   <div class="head">
     <h2 id="oven-h" data-r>Dzisiejsze blachy</h2>
-    <p class="soft" data-r>Każdy chleb ma swoją godzinę. Bochenek wypełnia się skórką, kiedy blacha wychodzi z pieca. Rozkład liczy się według godziny na Twoim telefonie.</p>
+    <p class="lead-ink" data-r>Każdy chleb ma swoją godzinę. Bochenek wypełnia się skórką, kiedy blacha wychodzi z pieca. Rozkład liczy się według godziny na Twoim telefonie.</p>
   </div>
   <div class="track" data-track data-r>
     <article class="batch" data-at="7:00"><p class="t">7:00</p><div class="shape"><b></b></div><p class="n">Żytni na zakwasie</p><p class="pr">14 zł · 800 g</p></article>
@@ -239,7 +288,7 @@
 </section>
 
 <section class="menu pad wrap" id="chleby" aria-label="Karta" data-reveal>
-  <div class="cat" data-r><h2>Chleby</h2><span class="soft">6 rodzajów</span></div>
+  <div class="cat" data-r><h2>Chleby</h2><span class="lead-ink">6 rodzajów</span></div>
   <ul class="items" data-r>
     <li><img src="assets/roggenbrot-laib-loaf-rye-bread.jpg" width="1200" height="900" loading="lazy" alt="Bochenek żytni z nacięciami"><div><div class="row"><span>Żytni na zakwasie</span><span>14 zł</span></div><p>Mąka żytnia typ 2000, woda, sól i zakwas, który dokarmiamy od 2016 roku. Trzyma się tydzień.</p></div></li>
     <li><img src="assets/sourdough-bread-loaf.jpg" width="1200" height="900" loading="lazy" alt="Okrągły bochenek pszenny na zakwasie"><div><div class="row"><span>Pszenno-żytni</span><span>16 zł</span></div><p>Chrupiąca skórka, wilgotny środek. Do kanapek i do zupy.</p></div></li>
@@ -248,7 +297,7 @@
     <li><img src="assets/bread-in-the-oven-5959009561.jpg" width="1920" height="1440" loading="lazy" alt="Bochenki w piecu"><div><div class="row"><span>Bagietka</span><span>7 zł</span></div><p>Pieczona po południu, żeby była świeża na kolację.</p></div></li>
     <li><img src="assets/putting-bread-in-the-oven-5958998763.jpg" width="1920" height="1440" loading="lazy" alt="Wkładanie chleba do pieca"><div><div class="row"><span>Chałka</span><span>15 zł</span></div><p>Na maśle, z makiem. W piątek i sobotę dwie blachy.</p><p class="note">Zawiera jajka i mleko</p></div></li>
   </ul>
-  <div class="cat" data-r><h2>Słodkie</h2><span class="soft">4 rodzaje</span></div>
+  <div class="cat" data-r><h2>Słodkie</h2><span class="lead-ink">4 rodzaje</span></div>
   <ul class="items" data-r>
     <li><img src="assets/drozdzowka-z-wisniami.jpg" width="1920" height="1079" loading="lazy" alt="Drożdżówka z wiśniami i kruszonką"><div><div class="row"><span>Drożdżówka z wiśnią</span><span>8 zł</span></div><p>Wiśnie z własnych słoików, kruszonka na maśle.</p></div></li>
     <li><img src="assets/drozdzowka-z-wisniami.jpg" width="1920" height="1079" loading="lazy" alt="" style="object-position:20% 50%"><div><div class="row"><span>Drożdżówka z kruszonką</span><span>7 zł</span></div><p>Taka jak u babci: dużo kruszonki, mało ciasta.</p></div></li>
@@ -257,17 +306,29 @@
   </ul>
 </section>
 
+
+<section class="field" aria-labelledby="field-h" data-reveal>
+  <img src="assets/rye-field-lutkowka.jpg" width="1200" height="900" loading="lazy" alt="Pole żyta latem pod błękitnym niebem">
+  <div class="row">
+    <div class="t" data-r>
+      <h2 id="field-h">Żyto spod Trzebnicy</h2>
+      <p>Mąkę bierzemy z jednego młyna, czterdzieści kilometrów od piekarni. Żytnia typ 2000, mielona na kamieniach, przyjeżdża co wtorek w workach po 25 kilo.</p>
+    </div>
+    <figure data-r><img src="assets/a-farmer-observes-a-field-of-rye.jpg" width="1200" height="1192" loading="lazy" alt="Rolnik ogląda kłosy żyta, fotografia archiwalna z 1961 roku"><figcaption>Żniwa, 1961. Fotografia archiwalna</figcaption></figure>
+  </div>
+</section>
+
 <section class="night pad wrap" aria-labelledby="night-h" data-reveal>
   <div class="grid intro">
     <h2 id="night-h" data-r>Noc w piekarni</h2>
-    <p class="soft" data-r>Chleb, który kupujesz o siódmej, zaczyna się poprzedniego wieczoru. Pięć etapów, od zakwasu do pieca.</p>
+    <p class="lead-ink" data-r>Chleb, który kupujesz o siódmej, zaczyna się poprzedniego wieczoru. Pięć etapów, od zakwasu do pieca.</p>
   </div>
   <div class="acc" data-acc data-r>
-    <button type="button" class="stage" style="--c:#3a2a1e" aria-expanded="true"><span class="v">20:00 · Zakwas</span><span class="o"><span class="tx"><span class="h">20:00 · Zakwas</span><span class="p">Dokarmiamy zakwas mąką i wodą. Przez noc rośnie w drewnianej dzieży i robi się kwaśny.</span></span><img src="assets/slices-of-sourdough-bread.jpg" width="1200" height="1200" loading="lazy" alt="Kromki chleba na zakwasie z dużymi oczkami"></span></button>
-    <button type="button" class="stage" style="--c:#6b4a2f" aria-expanded="false"><span class="v">3:30 · Mieszenie</span><span class="o"><span class="tx"><span class="h">3:30 · Mieszenie</span><span class="p">Zakwas, mąka, woda i sól. Ciasto żytnie mieszamy łyżką, pszenne wyrabiamy rękami.</span></span><img src="assets/baker-woman-s-hands-kneading-bread-dough.jpg" width="1920" height="1282" loading="lazy" alt="Dłonie wyrabiające ciasto chlebowe"></span></button>
-    <button type="button" class="stage" style="--c:#a86b33" aria-expanded="false"><span class="v">4:30 · Garowanie</span><span class="o"><span class="tx"><span class="h">4:30 · Garowanie</span><span class="p">Bochenki odpoczywają w koszykach z lnem. Godzina, czasem dwie, zależnie od pogody.</span></span><img src="assets/sourdough-bread-loaf.jpg" width="1200" height="900" loading="lazy" alt="Bochenek na zakwasie po upieczeniu"></span></button>
-    <button type="button" class="stage" style="--c:#c98a4b;--tc:#2a211a" aria-expanded="false"><span class="v">6:00 · Nacięcie</span><span class="o"><span class="tx"><span class="h">6:00 · Nacięcie</span><span class="p">Jedno nacięcie żyletką, pod kątem. Z niego wyrasta „ucho”, jak na naszym znaku.</span></span><img src="assets/roggenbrot-laib-loaf-rye-bread.jpg" width="1200" height="900" loading="lazy" alt="Nacięty bochenek żytni"></span></button>
-    <button type="button" class="stage" style="--c:#efd9b4;--tc:#2a211a" aria-expanded="false"><span class="v">6:15 · Piec</span><span class="o"><span class="tx"><span class="h">6:15 · Piec</span><span class="p">Pierwsza blacha wchodzi do pieca na 45 minut. O siódmej otwieramy drzwi.</span></span><img src="assets/putting-bread-in-the-oven-5958998763.jpg" width="1920" height="1440" loading="lazy" alt="Piekarz wkłada chleb do pieca"></span></button>
+    <button type="button" class="stage" style="--c:#2a1f18" aria-expanded="true"><span class="v">20:00 · Zakwas</span><span class="o"><span class="tx"><span class="h">20:00 · Zakwas</span><span class="p">Dokarmiamy zakwas mąką i wodą. Przez noc rośnie w drewnianej dzieży i robi się kwaśny.</span></span><img src="assets/slices-of-sourdough-bread.jpg" width="1200" height="1200" loading="lazy" alt="Kromki chleba na zakwasie z dużymi oczkami"></span></button>
+    <button type="button" class="stage" style="--c:#4a3628" aria-expanded="false"><span class="v">3:30 · Mieszenie</span><span class="o"><span class="tx"><span class="h">3:30 · Mieszenie</span><span class="p">Zakwas, mąka, woda i sól. Ciasto żytnie mieszamy łyżką, pszenne wyrabiamy rękami.</span></span><img src="assets/baker-woman-s-hands-kneading-bread-dough.jpg" width="1920" height="1282" loading="lazy" alt="Dłonie wyrabiające ciasto chlebowe"></span></button>
+    <button type="button" class="stage" style="--c:#6e5442" aria-expanded="false"><span class="v">4:30 · Garowanie</span><span class="o"><span class="tx"><span class="h">4:30 · Garowanie</span><span class="p">Bochenki odpoczywają w koszykach z lnem. Godzina, czasem dwie, zależnie od pogody.</span></span><img src="assets/sourdough-bread-loaf.jpg" width="1200" height="900" loading="lazy" alt="Bochenek na zakwasie po upieczeniu"></span></button>
+    <button type="button" class="stage" style="--c:#b09a83;--tc:#1d1a17" aria-expanded="false"><span class="v">6:00 · Nacięcie</span><span class="o"><span class="tx"><span class="h">6:00 · Nacięcie</span><span class="p">Jedno nacięcie żyletką, pod kątem. Z niego wyrasta „ucho”, jak na naszym znaku.</span></span><img src="assets/roggenbrot-laib-loaf-rye-bread.jpg" width="1200" height="900" loading="lazy" alt="Nacięty bochenek żytni"></span></button>
+    <button type="button" class="stage" style="--c:#e9dcc4;--tc:#1d1a17" aria-expanded="false"><span class="v">6:15 · Piec</span><span class="o"><span class="tx"><span class="h">6:15 · Piec</span><span class="p">Pierwsza blacha wchodzi do pieca na 45 minut. O siódmej otwieramy drzwi.</span></span><img src="assets/putting-bread-in-the-oven-5958998763.jpg" width="1920" height="1440" loading="lazy" alt="Piekarz wkłada chleb do pieca"></span></button>
   </div>
 </section>
 
@@ -284,7 +345,10 @@
 <section class="where pad wrap" id="dojazd" aria-labelledby="where-h" data-reveal>
   <div class="grid">
     <h2 id="where-h" data-r>Jedności Narodowej 77</h2>
-    <figure data-r><img src="assets/wroclaw-dworzec-nadodrze.jpg" width="1920" height="908" loading="lazy" alt="Ceglany dworzec Wrocław Nadodrze z napisem na dachu"></figure>
+    <div class="pair" data-r>
+      <figure><img src="assets/wroclaw-dworzec-nadodrze.jpg" width="1920" height="908" loading="lazy" alt="Ceglany dworzec Wrocław Nadodrze z napisem na dachu"></figure>
+      <figure><img src="assets/wroc-aw-jagiellonczyka-1-fotopolska-eu-267708.jpg" width="1200" height="981" loading="lazy" alt="Ceglana kamienica na rogu ulicy Jagiellończyka na Nadodrzu"></figure>
+    </div>
     <div class="facts" data-r>
       <p><b>Gdzie</b>Nadodrze, pięć minut pieszo od dworca Wrocław Nadodrze.</p>
       <p><b>Godziny</b>Pn–pt 6:45–19:00, sobota 7:00–14:00, niedziela zamknięte</p>
@@ -302,7 +366,7 @@
 <footer>
   <div class="big" aria-hidden="true">Bochen</div>
   <div class="row"><span>Bochen · piekarnia na zakwasie · ul. Jedności Narodowej 77, 50-260 Wrocław</span><span>Strona: ROVBA Design</span></div>
-  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Roggenbrot-Laib_Loaf-rye-bread.JPG">chleb żytni</a> Dirk Schneider, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Sourdough_Bread_Loaf.jpg">bochenek na zakwasie</a> Agelaia, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:A_loaf_of_wheat_and_rye_bread.jpg">pszenno-żytni</a> Tarasna0922, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Slices_of_sourdough_bread.jpg">kromki</a> Angel Ganev, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Bread_in_the_oven_(5959009561).jpg">chleb w piecu</a> i <a href="https://commons.wikimedia.org/wiki/File:Putting_bread_in_the_oven_(5958998763).jpg">wkładanie do pieca</a> Jeremy Keith, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Baker_woman%27s_hands_kneading_bread_dough.jpg">wyrabianie ciasta</a> Shixart1985, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Dro%C5%BCd%C5%BC%C3%B3wka_z_wi%C5%9Bniami.jpg">drożdżówka</a> Adam Sulich, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Wroclaw_dworzec_Nadodrze.jpg">dworzec Nadodrze</a>, domena publiczna. Przez Wikimedia Commons.</p>
+  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Roggenbrot-Laib_Loaf-rye-bread.JPG">chleb żytni</a> Dirk Schneider, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Sourdough_Bread_Loaf.jpg">bochenek na zakwasie</a> Agelaia, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:A_loaf_of_wheat_and_rye_bread.jpg">pszenno-żytni</a> Tarasna0922, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Slices_of_sourdough_bread.jpg">kromki</a> Angel Ganev, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Bread_in_the_oven_(5959009561).jpg">chleb w piecu</a> i <a href="https://commons.wikimedia.org/wiki/File:Putting_bread_in_the_oven_(5958998763).jpg">wkładanie do pieca</a> Jeremy Keith, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Baker_woman%27s_hands_kneading_bread_dough.jpg">wyrabianie ciasta</a> Shixart1985, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Dro%C5%BCd%C5%BC%C3%B3wka_z_wi%C5%9Bniami.jpg">drożdżówka</a> Adam Sulich, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Wroclaw_dworzec_Nadodrze.jpg">dworzec Nadodrze</a>, domena publiczna. <a href="https://commons.wikimedia.org/wiki/File:Schmidt,_bakery_2.jpg">witryna</a> К.Артём.1, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Rye_field_Lutk%C3%B3wka.jpg">pole żyta</a> Radosław Botev, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:A_farmer_observes_a_field_of_rye_1961_(JOKAKAL3B-11736).tif">żniwa 1961</a>, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Wroc%C5%82aw,_Jagiello%C5%84czyka_1_-_fotopolska.eu_(267708).jpg">Jagiellończyka 1</a> vorwerk, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
 </footer>
 
 <script src="assets/concept.js"></script>
@@ -326,12 +390,12 @@
     if (state === "out") { var tag = document.createElement("span"); tag.className = "tag"; tag.textContent = "jest"; b.appendChild(tag); }
     if (state === "baking") { var tag2 = document.createElement("span"); tag2.className = "tag"; tag2.textContent = "w piecu"; b.appendChild(tag2); }
   });
-  var nowEl = document.querySelector("[data-now]"), k = nowEl.querySelector("[data-now-k]"), w = nowEl.querySelector("[data-now-what]"), wh = nowEl.querySelector("[data-now-when]");
+  var nowEl = document.querySelector("[data-now]"), k = { set textContent(v) {} }, w = nowEl.querySelector("[data-now-what]"), wh = nowEl.querySelector("[data-now-when]");
   var name = function (b) { return b.querySelector(".n").textContent; };
-  if (!open) { k.textContent = "Dziś piec odpoczywa"; w.textContent = "Wracamy w poniedziałek"; wh.textContent = "Pierwsza blacha o 7:00"; }
-  else if (current) { nowEl.dataset.hot = ""; k.textContent = "Teraz w piecu"; w.textContent = name(current); wh.textContent = "Wyjdzie za " + (at(current) - mins) + " min, o " + current.dataset.at; }
-  else if (next) { k.textContent = last ? "Ostatnio z pieca: " + name(last) : "Piec się nagrzewa"; w.textContent = "Następny: " + name(next); wh.textContent = "O " + next.dataset.at + ", za " + (at(next) - mins >= 60 ? Math.floor((at(next) - mins) / 60) + " h " : "") + ((at(next) - mins) % 60) + " min"; }
-  else { k.textContent = "Ostatnia blacha już wyszła"; w.textContent = last ? name(last) : "Do jutra"; wh.textContent = "Jutro od 7:00"; }
+  if (!open) { k.textContent = "Dziś piec odpoczywa"; w.textContent = "Dziś piec odpoczywa"; wh.textContent = "Pierwsza blacha o 7:00"; }
+  else if (current) { nowEl.dataset.hot = ""; k.textContent = "Teraz w piecu"; w.textContent = "W piecu: " + name(current).toLowerCase(); wh.textContent = "Wyjdzie za " + (at(current) - mins) + " min, o " + current.dataset.at; }
+  else if (next) { if (last) wh.dataset.last = name(last); w.textContent = "Następna blacha: " + name(next).toLowerCase(); wh.textContent = (last ? "Ostatnio: " + name(last).toLowerCase() + ". " : "") + "O " + next.dataset.at + ", za " + (at(next) - mins >= 60 ? Math.floor((at(next) - mins) / 60) + " h " : "") + ((at(next) - mins) % 60) + " min"; }
+  else { k.textContent = "Ostatnia blacha już wyszła"; w.textContent = "Ostatnia blacha już wyszła"; wh.textContent = "Jutro od 7:00"; }
 
   // Odłóż: tylko z blach, które jeszcze nie są wyprzedane, czyli z tych, co już wyszły lub zaraz wyjdą.
   var sel = document.querySelector("[data-hold-what]");
@@ -344,6 +408,23 @@
 
   var stages = document.querySelectorAll("[data-acc] .stage");
   stages.forEach(function (s) { s.addEventListener("click", function () { stages.forEach(function (x) { x.setAttribute("aria-expanded", String(x === s)); }); }); });
+
+  // Witryna: owal rośnie od rozmiaru bochenka do pełnego kadru, a dwa wersy rozjeżdżają się na boki.
+  var vit = document.querySelector("[data-vitrine]");
+  if (vit && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var ticking = false;
+    var upd = function () {
+      ticking = false;
+      var r = vit.getBoundingClientRect(), total = r.height - innerHeight;
+      var p = Math.min(1, Math.max(0, -r.top / total));
+      var e = 1 - Math.pow(1 - p, 3);
+      vit.style.setProperty("--p", e.toFixed(3));
+      vit.style.setProperty("--rx", (22 + e * 56).toFixed(1) + "%");
+      vit.style.setProperty("--ry", (19 + e * 15).toFixed(1) + "%");
+    };
+    addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
 })();
 </script>
 </body>

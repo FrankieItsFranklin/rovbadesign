@@ -42,17 +42,21 @@
   .top { position:absolute; inset:0 0 auto; z-index:3; display:flex; justify-content:space-between; align-items:center; padding:22px var(--m); font-size:15px; }
   .top .mark { font:800 22px var(--display); text-transform:uppercase; text-decoration:none; letter-spacing:.02em; }
   .top nav { display:flex; gap:28px; }
-  .top nav a { text-decoration:none; background:linear-gradient(currentColor,currentColor) left bottom / 0 1.5px no-repeat; transition:background-size 240ms var(--ease-out); padding:6px 0; }
-  .top nav a:hover { background-size:100% 1.5px; }
+  .top nav a { text-decoration:underline; text-decoration-color:transparent; text-underline-offset:6px; text-decoration-thickness:1.5px; transition:text-decoration-color 200ms ease; padding:6px 0; }
+  .top nav a:hover { text-decoration-color:currentColor; }
   .top .short { display:none; }
   .hero { position:relative; min-height:100svh; display:grid; grid-template-rows:1fr auto auto 1fr auto; padding:0 var(--m) 44px; }
   .sentence { grid-row:2; font-size:clamp(96px, 12.4vw, 230px); line-height:.9; }
   .sentence .ln { display:flex; align-items:baseline; gap:.22em; white-space:nowrap; }
   .sentence .ln + .ln { margin-top:.06em; }
   .strip { flex:1; align-self:center; height:.72em; min-width:1.6em; border-radius:var(--r); overflow:hidden; position:relative; transform:translateY(-.02em); }
-  .strip img { width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+  
   .js .strip { clip-path:inset(0 100% 0 0 round var(--r)); animation:shutter 1100ms 250ms var(--ease-out) forwards; }
   .js .strip img { transform:scale(1.12); animation:settle 1500ms 250ms var(--ease-out) forwards; }
+  /* Koło kręci się powoli w szczelinie zdania: kwadrat szerszy od paska, obracany wokół piasty. */
+  .strip .spin { position:absolute; left:-6%; width:112%; aspect-ratio:1; top:50%; translate:0 -50%; animation:spin 40s linear infinite; }
+  .strip .spin img { width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+  @keyframes spin { to { rotate:360deg; } }
   @keyframes shutter { to { clip-path:inset(0 0 0 0 round var(--r)); } }
   @keyframes settle { to { transform:none; } }
   .sentence .w { display:inline-block; }
@@ -67,6 +71,7 @@
   @keyframes pulse { 70% { box-shadow:0 0 0 9px rgb(111 143 18 / 0); } 100% { box-shadow:0 0 0 0 rgb(111 143 18 / 0); } }
 
   section { padding-block:clamp(110px, 14vw, 180px); }
+  section.window { padding-block:0; }
 
   /* ---------- cennik: statement + tabela po prawej ---------- */
   .list h2 { font-size:clamp(40px, 4.5vw, 68px); line-height:.98; }
@@ -94,14 +99,14 @@
   .chip:active { transform:scale(.97); }
   .chip[aria-pressed="true"] { background:var(--ink); color:var(--bg); }
   .tag-wrap { grid-column:7 / 12; position:relative; padding-top:46px; }
-  .tag { position:relative; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:70px 32px 32px; box-shadow:0 1px 0 rgb(0 0 0 / .06), 0 30px 40px -30px rgb(40 30 10 / .55); transform:rotate(-2.2deg); transform-origin:50% 0; transition:transform 600ms var(--ease-out); }
+  .tag { position:relative; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:70px 32px 32px; transform:rotate(-2.2deg); transform-origin:50% 0; transition:transform 600ms var(--ease-out); }
   .tag.bump { animation:swing 900ms var(--ease-out); }
   @keyframes swing { 0% { transform:rotate(-2.2deg); } 30% { transform:rotate(1.8deg); } 60% { transform:rotate(-3deg); } 100% { transform:rotate(-2.2deg); } }
   .tag::before { content:""; position:absolute; top:22px; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:50%; background:var(--surface); box-shadow:inset 0 0 0 4px #c5b28b; }
   .tag::after { content:""; position:absolute; top:-46px; left:50%; width:2px; height:80px; margin-left:-1px; background:linear-gradient(#8a7a55, #6b5c3a); transform:rotate(8deg); transform-origin:bottom; }
-  .tag .no { display:flex; justify-content:space-between; font:800 18px var(--display); text-transform:uppercase; letter-spacing:.06em; border-bottom:2px solid currentColor; padding-bottom:10px; }
+  .tag .no { display:flex; justify-content:space-between; font:800 18px var(--display); text-transform:uppercase; letter-spacing:.06em; padding-bottom:6px; }
   .tag dl { margin-top:18px; display:grid; gap:14px; }
-  .tag dl div { display:grid; grid-template-columns:7.5em 1fr; gap:12px; border-bottom:1px dashed rgb(59 47 23 / .35); padding-bottom:12px; }
+  .tag dl div { display:grid; grid-template-columns:7.5em 1fr; gap:12px; background:#cfbb93; padding:10px 12px; }
   .tag dt { font-size:14px; }
   .tag dd { font:800 26px/1.05 var(--display); text-transform:uppercase; }
   .tag dd.list-dd { font:600 16px/1.4 var(--text); text-transform:none; }
@@ -150,7 +155,7 @@
   /* ---------- kontakt ---------- */
   .contact { padding-top:160px; padding-bottom:120px; }
   .contact .grid { align-items:start; }
-  .contact .s { grid-column:1 / 6; font-size:clamp(26px, 3vw, 44px); line-height:1.1; }
+  .contact .s { grid-column:1 / 6; font-size:clamp(22px, 2.3vw, 34px); line-height:1.2; }
   .contact figure { grid-column:8 / 10; }
   .contact figure img { width:160px; height:160px; object-fit:cover; }
   .contact .links { grid-column:10 / 13; }
@@ -159,10 +164,48 @@
   .contact .links a + a { margin-top:8px; }
   .contact .links p { margin-top:16px; font-size:14px; }
 
+  /* ---------- okno warsztatu: szczelina z hero otwiera się na pełną szerokość ---------- */
+  .window { padding:0 var(--m); }
+  .window figure { position:relative; overflow:hidden; border-radius:var(--r); height:clamp(380px, 72vh, 760px); }
+  .window img { width:100%; height:100%; object-fit:cover; transform:scale(1.08); transition:transform 1600ms var(--ease-out); }
+  .window.is-in img { transform:none; }
+  .window .facts { position:absolute; left:24px; right:24px; bottom:24px; display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; }
+  .window .facts p { background:var(--bg); padding:16px 18px; font-size:16px; line-height:1.35; }
+  .window .facts b { display:block; font:800 clamp(30px, 3vw, 46px)/1 var(--display); text-transform:uppercase; margin-bottom:6px; }
+
+  /* ---------- rowery, które tu stały: katalog jak kartoteka okazów ---------- */
+  .shelf .grid { align-items:center; }
+  .shelf h2 { font-size:var(--step-head); grid-column:1 / -1; margin-bottom:56px; }
+  .wheel { grid-column:1 / 4; list-style:none; padding:0; display:grid; gap:4px; }
+  .wheel button { all:unset; cursor:pointer; display:block; padding:8px 0; font:800 clamp(22px, 2vw, 30px)/1 var(--display); text-transform:uppercase; color:var(--muted); opacity:.55; transition:opacity 220ms, color 220ms, transform 300ms var(--ease-out); transform-origin:left center; }
+  .wheel button:hover { opacity:.9; }
+  .wheel button[aria-selected="true"] { color:var(--ink); opacity:1; transform:translateX(10px) scale(1.12); }
+  .wheel button:focus-visible { outline:3px solid var(--ink); outline-offset:4px; }
+  .specimen { grid-column:4 / 10; background:var(--surface); border-radius:var(--r); aspect-ratio:5/4; display:grid; place-items:center; overflow:hidden; position:relative; }
+  .specimen img { width:100%; height:100%; object-fit:cover; transition:opacity 300ms ease, transform 600ms var(--ease-out); }
+  .specimen.swap img { opacity:0; transform:scale(1.03); }
+  .specimen .yr { position:absolute; left:18px; top:14px; background:var(--bg); padding:4px 12px; border-radius:999px; font-size:14px; font-weight:600; }
+  .note { grid-column:10 / 13; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:28px 22px 24px; transform:rotate(1.6deg); }
+  .note .n { font:800 16px var(--display); text-transform:uppercase; letter-spacing:.06em; }
+  .note h3 { font:800 30px/1 var(--display); text-transform:uppercase; }
+  .note dl { margin-top:16px; display:grid; gap:10px; font-size:15px; }
+  .note dt { font-size:13px; opacity:.8; }
+  .note dd { font-weight:600; }
+  .note .p { margin-top:6px; font:800 36px/1 var(--display); }
+  .shelf .hint { grid-column:4 / 10; margin-top:14px; font-size:14px; }
+
+  /* ---------- zużyte części przy schodach ---------- */
+  .stairs { position:relative; }
+  .worn { position:absolute; left:var(--m); bottom:0; width:min(36%, 520px); display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .worn figure { margin:0; }
+  .worn img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--r); }
+  .worn figcaption { margin-top:8px; font-size:14px; color:var(--muted); }
+  .list .spec { display:block; font-size:13px; color:var(--muted); margin-top:2px; letter-spacing:.02em; }
+
   footer { background:var(--ink); color:var(--bg); padding:56px var(--m) 40px; }
   footer .big { font:800 clamp(80px, 19vw, 340px)/.8 var(--display); text-transform:uppercase; letter-spacing:-.01em; }
   footer .row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; margin-top:32px; font-size:15px; }
-  footer .credits { margin-top:24px; font-size:13px; opacity:.8; max-width:120ch; }
+  footer .credits { margin-top:24px; font-size:13px; opacity:.8; max-width:75ch; }
   footer .credits a { color:inherit; }
 
   @media (max-width: 900px) {
@@ -187,24 +230,34 @@
     .stairs li > div { grid-column:1 / -1; padding-left:calc(var(--i) * 6vw); }
     .stairs h3 { font-size:8.4vw; }
     .stairs p { font-size:16px; }
-    .offer .s { font-size:11vw; }
-    .offer .price { display:block; width:max-content; margin:.08em 0; }
+    .offer .s { font-size:12vw; }
+    .offer .price { display:inline-block; }
     .offer .foot .ctas { justify-self:stretch; text-align:left; margin-top:28px; }
     .offer .foot .btn { width:100%; }
     .about .text { font-size:22px; line-height:1.25; }
     .about .text img { width:110px; height:110px; }
     .about .facts { order:2; grid-template-columns:repeat(3, 1fr); font-size:13px; margin-top:32px; }
+
+    .window .facts { grid-template-columns:1fr 1fr; left:12px; right:12px; bottom:12px; gap:8px; }
+    .window .facts p { padding:12px; font-size:14px; }
+    .window figure { height:120vw; }
+    .wheel { display:flex; flex-wrap:wrap; gap:4px 16px; }
+    .wheel li { flex:none; scroll-snap-align:start; }
+    .wheel button[aria-selected="true"] { transform:none; }
+    .specimen { margin-top:20px; }
+    .note { margin-top:24px; transform:none; }
+    .worn { position:static; width:100%; margin-top:48px; }
     .street .pics { grid-template-columns:1fr; }
     .street img { height:62vw; }
     .contact { padding-top:110px; padding-bottom:80px; }
-    .contact .s { font-size:7.4vw; }
+    .contact .s { font-size:22px; }
     .contact .row-m { display:grid; grid-template-columns:96px minmax(0, 1fr); gap:16px; margin-top:32px; }
     .contact .links a { overflow-wrap:anywhere; }
     .contact figure img { width:96px; height:96px; }
   }
   @media (min-width: 901px) { .contact .row-m { display:contents; } }
   @media (prefers-reduced-motion: reduce) {
-    .js .strip, .js .strip img, .js .sentence .w, .tag.bump, .hero .now i { animation:none !important; clip-path:none !important; transform:none !important; opacity:1 !important; }
+    .js .strip, .js .strip img, .strip .spin, .js .sentence .w, .tag.bump, .hero .now i { animation:none !important; clip-path:none !important; transform:none !important; opacity:1 !important; }
     .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
   }
 </style>
@@ -216,6 +269,7 @@
   <nav aria-label="Strona">
     <a href="#cennik">Cennik</a>
     <a href="#przywieszka">Przywieszka</a>
+    <a href="#rowery">Modele</a>
     <a href="#dojazd">Dojazd</a>
     <a class="short" href="#przywieszka">Wycena</a>
   </nav>
@@ -224,7 +278,7 @@
 <main>
 <section class="hero" aria-labelledby="h1" style="padding-top:0">
   <h1 id="h1" class="display sentence">
-    <span class="ln"><span class="w">Oddaj rano,</span><span class="strip"><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" alt="Szprychy przedniego koła roweru z bliska" fetchpriority="high"></span></span>
+    <span class="ln"><span class="w">Oddaj rano,</span><span class="strip"><span class="spin"><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" alt="Szprychy przedniego koła roweru z bliska" fetchpriority="high"></span></span></span>
     <span class="ln"><span class="w">odbierz po 17.</span></span>
   </h1>
   <a class="btn act" href="#przywieszka">Wypisz przywieszkę</a>
@@ -234,6 +288,19 @@
   </div>
 </section>
 
+
+<section class="window" aria-label="Warsztat" data-reveal>
+  <figure>
+    <img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" loading="lazy" alt="Rowery zawieszone na ścianie warsztatu, stojak naprawczy na środku">
+    <div class="facts">
+      <p><b data-q>6</b>rowerów dziś na stojakach</p>
+      <p><b data-free>3</b>wolne miejsca na jutro rano</p>
+      <p><b>1 dzień</b>zwykła naprawa, przegląd dwa</p>
+      <p><b>0 zł</b>pompowanie kół przy ladzie</p>
+    </div>
+  </figure>
+</section>
+
 <section class="list wrap" id="cennik" aria-labelledby="cennik-h" data-reveal>
   <h2 id="cennik-h" class="display" data-r>Cennik, który wisi<span>nad stołem.</span></h2>
   <div class="grid body">
@@ -241,14 +308,14 @@
     <p class="name soft" data-r>Usługi</p>
     <table data-r>
       <tbody>
-        <tr><td>Przegląd</td><td>Pełny, z myciem napędu</td><td>180 zł</td></tr>
+        <tr><td>Przegląd</td><td>Pełny, z myciem napędu<span class="spec">śruby dokręcane kluczem 5 Nm</span></td><td>180 zł</td></tr>
         <tr><td>Przegląd</td><td>Podstawowy: hamulce, przerzutki, koła</td><td>110 zł</td></tr>
         <tr class="gap"><td>Hamulce</td><td>Regulacja, jedna oś</td><td>35 zł</td></tr>
-        <tr><td>Hamulce</td><td>Odpowietrzenie hydrauliki</td><td>90 zł</td></tr>
-        <tr><td>Przerzutki</td><td>Regulacja przód i tył</td><td>60 zł</td></tr>
-        <tr><td>Napęd</td><td>Wymiana łańcucha</td><td>40 zł + łańcuch</td></tr>
-        <tr class="gap"><td>Koło</td><td>Centrowanie</td><td>50 zł</td></tr>
-        <tr><td>Koło</td><td>Wymiana dętki</td><td>30 zł + dętka</td></tr>
+        <tr><td>Hamulce</td><td>Odpowietrzenie hydrauliki<span class="spec">olej mineralny lub DOT</span></td><td>90 zł</td></tr>
+        <tr><td>Przerzutki</td><td>Regulacja przód i tył<span class="spec">1×, 2×, 3× · 7–12 rz.</span></td><td>60 zł</td></tr>
+        <tr><td>Napęd</td><td>Wymiana łańcucha<span class="spec">zużycie powyżej 0,75%</span></td><td>40 zł + łańcuch</td></tr>
+        <tr class="gap"><td>Koło</td><td>Centrowanie<span class="spec">bicie do 0,3 mm</span></td><td>50 zł</td></tr>
+        <tr><td>Koło</td><td>Wymiana dętki<span class="spec">28″ · 700×35C · 26″ · 20″</span></td><td>30 zł + dętka</td></tr>
         <tr><td>Koło</td><td>Wymiana szprychy</td><td>25 zł za sztukę</td></tr>
         <tr class="gap"><td>Inne</td><td>Montaż bagażnika lub błotników</td><td>45 zł</td></tr>
         <tr><td>Inne</td><td>Przechowanie roweru zimą, miesiąc</td><td>60 zł</td></tr>
@@ -275,7 +342,7 @@
       <form class="tag" data-tag aria-label="Przywieszka naprawy">
         <p class="no"><span>Szprycha</span><span data-no>Nr 0000</span></p>
         <dl>
-          <div><dt>Do zrobienia</dt><dd class="list-dd" data-jobs>Zaznacz usługę obok</dd></div>
+          <div><dt>Do zrobienia</dt><dd class="list-dd" data-jobs>wybierz usługę</dd></div>
           <div class="sum"><dt>Razem</dt><dd data-sum>0 zł</dd></div>
           <div><dt>Odbiór</dt><dd data-ready>—</dd></div>
         </dl>
@@ -287,6 +354,25 @@
   </div>
 </section>
 
+
+<section class="shelf wrap pad-s" id="rowery" aria-labelledby="shelf-h" data-reveal>
+  <div class="grid">
+    <h2 id="shelf-h" class="display" data-r>Co najczęściej stoi na stojaku</h2>
+    <ul class="wheel" role="tablist" aria-label="Rowery" data-r data-wheel></ul>
+    <figure class="specimen" data-r data-spec><img alt="" width="1200" height="900"><span class="yr" data-yr></span></figure>
+    <article class="note" data-r aria-live="polite">
+      <h3 data-name></h3>
+      <dl>
+        <div><dt>Typowa usterka</dt><dd data-why></dd></div>
+        <div><dt>Co robimy</dt><dd data-done></dd></div>
+        <div><dt>Zwykle trwa</dt><dd data-time></dd></div>
+      </dl>
+      <p class="p"><span data-price></span> <small style="font:600 14px var(--text); text-transform:none">zwykle</small></p>
+    </article>
+    <p class="hint soft" data-r>Rowery, które naprawiamy najczęściej, i to, co zwykle w nich wymieniamy. Strzałkami ← → przełączasz modele.</p>
+  </div>
+</section>
+
 <section class="stairs wrap" aria-label="Jak to działa" data-reveal>
   <ol>
     <li style="--c:1;--i:0" data-r><div><h3>Najpierw przywozisz rower.</h3><p>Rano, od 8:00. Bez umawiania, wystarczy przywieszka z telefonu albo dwa słowa przy ladzie.</p></div></li>
@@ -294,11 +380,15 @@
     <li style="--c:5;--i:2" data-r><div><h3>Ty mówisz: tak albo nie.</h3><p>Zużyte części oddajemy w woreczku, żebyś widział, co wymieniliśmy.</p></div></li>
     <li style="--c:7;--i:3" data-r><div><h3>Odbierasz po 17.</h3><p>Rower stoi przy drzwiach, umyty napęd, opony napompowane. Pełny przegląd: następnego dnia.</p></div></li>
   </ol>
+  <div class="worn" data-r>
+    <figure><img src="assets/consumed-v-brake-pads-front.jpg" width="1200" height="900" loading="lazy" alt="Starte klocki hamulcowe V-brake"><figcaption>Klocki po trzech sezonach</figcaption></figure>
+    <figure><img src="assets/003-bicycle-tire-worn-through-with-visible.jpg" width="1200" height="675" loading="lazy" alt="Opona rowerowa przetarta do osnowy"><figcaption>Opona przetarta do osnowy</figcaption></figure>
+  </div>
 </section>
 
 <section class="offer" aria-labelledby="offer-h" data-reveal>
   <div class="wrap">
-    <h2 id="offer-h" class="display s" data-r>Wiosenny przegląd <span class="price">180 zł</span> i jedziesz.</h2>
+    <h2 id="offer-h" class="display s" data-r>Przegląd <span class="price">180 zł</span><br>i jedziesz.</h2>
     <div class="grid foot">
       <p data-r>W cenie: regulacja hamulców i przerzutek, centrowanie kół, mycie i smarowanie napędu, dokręcenie wszystkiego, co się luzuje. Części liczymy osobno i zawsze pytamy.</p>
       <div class="ctas" data-r>
@@ -317,7 +407,7 @@
       <p><b>Jak dojechać</b>Tramwaj do Korony albo rowerem przez kładkę Bernatka</p>
     </div>
     <div class="text" data-r>
-      <p><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy w warsztacie rowerowym" style="object-position:30% 50%">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej, bo w okolicy nie było nikogo, kto naprawi rower w jeden dzień. <span class="soft">Dziś w warsztacie są trzy stojaki, ściana kluczy i lada, przy której zawsze ktoś pompuje dętkę za darmo.</span></p>
+      <p><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy w warsztacie rowerowym" style="object-position:30% 50%">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej, bo nikt w okolicy nie naprawiał roweru w jeden dzień. <span class="soft">Dziś są tu trzy stojaki i ściana kluczy.</span></p>
       <p class="soft">Naprawiamy wszystko, co ma dwa koła: miejskie damki, szosy, rowery cargo i dziecięce biegówki. Elektryków nie bierzemy, za to chętnie <a href="#przywieszka">doradzimy, gdzie je oddać</a>.</p>
     </div>
   </div>
@@ -333,7 +423,7 @@
 
 <section class="contact wrap" aria-labelledby="kontakt-h" data-reveal>
   <div class="grid">
-    <p class="s" data-r>Dzwoń, gdy coś stuka, piszczy albo nie chce się zmienić. Zwykle wiemy, co to, po pierwszym zdaniu.</p>
+    <p class="s" data-r>Coś stuka albo piszczy? Zadzwoń, zwykle wiemy, co to, po pierwszym zdaniu.</p>
     <div class="row-m">
       <figure data-r><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" loading="lazy" alt="Piasta i szprychy koła rowerowego"></figure>
       <div class="links" data-r>
@@ -350,7 +440,7 @@
 <footer>
   <div class="big" aria-hidden="true">Szprycha</div>
   <div class="row"><span>Szprycha · warsztat rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
-  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> i <a href="https://commons.wikimedia.org/w/index.php?curid=107955681">smary</a> Alextredz, CC BY-SA 4.0. Przez Wikimedia Commons.</p>
+  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> i <a href="https://commons.wikimedia.org/w/index.php?curid=107955681">smary</a> Alextredz, CC BY-SA 4.0. <a href="https://commons.wikimedia.org/wiki/File:Romet_Wagant_bicycle_(1).jpg">Romet Wagant</a>, <a href="https://commons.wikimedia.org/wiki/File:Romet_Flaming_bicycle_in_Krak%C3%B3w_(3).jpg">Romet Flaming</a>, <a href="https://commons.wikimedia.org/wiki/File:Red_Romet_bicycle_in_Krak%C3%B3w_(1).jpg">czerwona damka</a> Lukas 3z, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_bicycle_in_Krak%C3%B3w.jpg">Romet w Krakowie</a> Lukas 3z, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Dutch_bicycle.jpg">holender</a> i <a href="https://commons.wikimedia.org/wiki/File:Roadster_bicycle_(Dutch).jpg">roadster</a> Petar Milošević, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Consumed_V-BRAKE_pads_front.JPG">klocki</a> Nemo bis, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:003_Bicycle_tire_worn_through_with_visible_casing_thread_-_mechanical_failure.jpg">opona</a> Marek Ślusarczyk, CC BY 3.0. Rowery w katalogu sfotografowano na ulicach Krakowa i Holandii. Przez Wikimedia Commons.</p>
 </footer>
 
 <script src="assets/concept.js"></script>
@@ -388,7 +478,7 @@
     var picked = [].filter.call(chips, function (c) { return c.getAttribute("aria-pressed") === "true"; });
     var total = 0, extra = 0;
     picked.forEach(function (c) { total += +c.dataset.price; extra = Math.max(extra, +c.dataset.days); });
-    jobs.textContent = picked.length ? picked.map(function (c) { return c.dataset.job; }).join(", ") : "Zaznacz usługę obok";
+    jobs.textContent = picked.length ? picked.map(function (c) { return c.dataset.job; }).join(", ") : "wybierz usługę";
     sum.textContent = (picked.some(function (c) { return c.dataset.job === "łańcuch"; }) ? "od " : "") + total + " zł";
     rd.textContent = picked.length ? ready(extra) : "—";
     send.disabled = !picked.length;
@@ -402,6 +492,46 @@
     e.preventDefault();
     done.textContent = "Przywieszka " + no.textContent.replace("Nr ", "nr ") + " czeka przy ladzie. Odbiór: " + rd.textContent.toLowerCase() + ".";
   });
+
+  // ---------- Rowery, które tu stały ----------
+  var BIKES = [
+    { n: "Romet Wagant", y: "1984", img: "romet-wagant-bicycle-1.jpg", h: 936, why: "skrzypi suport, linki ledwo chodzą", done: "suport, nowe linki i pancerze, klocki", time: "1 dzień", p: "210 zł" },
+    { n: "Romet Flaming", y: "1979", img: "romet-flaming-bicycle-in-krakow-3.jpg", h: 1218, why: "stał latami w piwnicy", done: "opony, dętki, hamulce, smarowanie piast", time: "2 dni", p: "240 zł" },
+    { n: "Damka z koszykiem", y: "lata 90.", img: "red-romet-bicycle-in-krakow-1.jpg", h: 915, why: "zima pod balkonem", done: "pełny przegląd, nowy łańcuch", time: "2 dni", p: "220 zł" },
+    { n: "Holender", y: "2009", img: "dutch-bicycle.jpg", h: 775, why: "przerzutka w piaście nie łapie trójki", done: "regulacja Nexusa, nowa linka", time: "1 dzień", p: "75 zł" },
+    { n: "Miejski z bagażnikiem", y: "2016", img: "romet-bicycle-in-krakow.jpg", h: 900, why: "przebita dętka", done: "dętka 28″, sprawdzenie opony", time: "20 minut", p: "45 zł" },
+    { n: "Roadster", y: "1992", img: "roadster-bicycle-dutch.jpg", h: 794, why: "koło bije i ociera o hamulec", done: "centrowanie, dwie szprychy", time: "1 dzień", p: "100 zł" },
+  ];
+  var wheel = document.querySelector("[data-wheel]"), spec = document.querySelector("[data-spec]"), simg = spec.querySelector("img");
+  var cur = 0, note = document.querySelector(".shelf .note");
+  BIKES.forEach(function (b, i) {
+    var li = document.createElement("li"), bt = document.createElement("button");
+    bt.type = "button"; bt.setAttribute("role", "tab"); bt.textContent = b.n;
+    bt.addEventListener("click", function () { show(i); });
+    li.appendChild(bt); wheel.appendChild(li);
+  });
+  function show(i) {
+    cur = (i + BIKES.length) % BIKES.length; var b = BIKES[cur];
+    wheel.querySelectorAll("button").forEach(function (x, j) { x.setAttribute("aria-selected", String(j === cur)); x.tabIndex = j === cur ? 0 : -1; });
+    spec.classList.add("swap");
+    setTimeout(function () { simg.src = "assets/" + b.img; simg.height = b.h; simg.alt = b.n + " na ulicy"; spec.classList.remove("swap"); }, 180);
+    spec.querySelector("[data-yr]").textContent = b.y;
+        note.querySelector("[data-name]").textContent = b.n;
+    note.querySelector("[data-why]").textContent = b.why;
+    note.querySelector("[data-done]").textContent = b.done;
+    note.querySelector("[data-time]").textContent = b.time;
+    note.querySelector("[data-price]").textContent = b.p;
+  }
+  wheel.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show(cur + 1); wheel.querySelectorAll("button")[cur].focus(); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show(cur - 1); wheel.querySelectorAll("button")[cur].focus(); }
+  });
+  show(0);
+
+  // Kolejka na dziś: ile rowerów stoi i ile miejsc zostało na jutro (stałe w ciągu dnia).
+  var seed = now.getDate() * 7 + now.getMonth() * 3;
+  document.querySelector("[data-q]").textContent = 4 + (seed % 5);
+  document.querySelector("[data-free]").textContent = 1 + (seed % 4);
 })();
 </script>
 </body>

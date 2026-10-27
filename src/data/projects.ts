@@ -237,6 +237,7 @@ export const projects: Project[] = [
   },
   {
     id: "rubryka",
+    demoUrl: "/demo/rubryka",
     niche: "services",
     slug: "rubryka",
     title: "Rubryka",
@@ -298,6 +299,7 @@ export const projects: Project[] = [
   },
   {
     id: "kotwica",
+    demoUrl: "/demo/kotwica",
     niche: "dental",
     slug: "kotwica",
     title: "Kotwica",
@@ -328,6 +330,7 @@ export const projects: Project[] = [
   },
   {
     id: "korzenna",
+    demoUrl: "/demo/korzenna",
     niche: "restaurants",
     slug: "korzenna",
     title: "Korzenna",
@@ -358,6 +361,7 @@ export const projects: Project[] = [
   },
   {
     id: "przystan",
+    demoUrl: "/demo/przystan",
     niche: "dental",
     slug: "przystan",
     title: "Przystań",
