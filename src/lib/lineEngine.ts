@@ -59,6 +59,10 @@ export class LineEngine {
   private pins = new Float64Array(0);
   private total = 1;
   private lo = 0;
+  /** Small sets do not loop: the line stops at its ends and a narrow set sits in the middle. */
+  private loop = true;
+  private minOffset = 0;
+  private maxOffset = 0;
 
   private offset = savedOffset;
   private lastOffset = savedOffset;
@@ -98,11 +102,23 @@ export class LineEngine {
     if (visible) this.wake();
   }
 
-  setLayout(g: LineGeometry, items: LineItem[], loopLength: number) {
+  setLayout(g: LineGeometry, items: LineItem[], loopLength: number, loop = true) {
     const fresh = !this.g;
     this.g = g;
     this.m = motionFor(g.compact);
     this.total = loopLength;
+    this.loop = loop;
+    if (!loop) {
+      const left = Math.min(...items.map((i) => i.base));
+      const right = Math.max(...items.map((i) => i.base + i.w));
+      const margin = g.compact ? 20 : g.width * 0.06;
+      if (right - left + 2 * margin <= g.width) {
+        this.minOffset = this.maxOffset = (g.width - (right - left)) / 2 - left;
+      } else {
+        this.minOffset = g.width - margin - right;
+        this.maxOffset = margin - left;
+      }
+    }
     const widest = Math.max(...items.map((i) => i.w));
     this.lo = -(widest + g.gap);
     this.pins = new Float64Array(items.length);
@@ -195,6 +211,16 @@ export class LineEngine {
       if (Math.abs(this.velocity) < MIN_VELOCITY) this.velocity = 0;
     }
 
+    if (!this.loop) {
+      const bound = Math.min(this.maxOffset, Math.max(this.minOffset, this.offset));
+      const over = this.offset - bound;
+      if (over !== 0 && !this.dragging) {
+        // Past an end: the line eases back instead of hitting a wall.
+        if (!this.tween) this.velocity = 0;
+        this.offset = Math.abs(over) < 0.5 ? bound : this.offset - over * Math.min(1, dt / 110);
+      }
+    }
+
     const instant = (this.offset - this.lastOffset) / dt;
     this.lastOffset = this.offset;
     this.flow += (instant - this.flow) * Math.min(1, dt / 60);
@@ -211,11 +237,11 @@ export class LineEngine {
     const items = this.items;
     for (let i = 0; i < items.length; i++) {
       const it = items[i];
-      it.x = wrap(this.lo, this.lo + this.total, it.base + this.offset);
+      it.x = this.loop ? wrap(this.lo, this.lo + this.total, it.base + this.offset) : it.base + this.shown();
       this.pins[i] = it.x + it.w / 2;
     }
 
-    let restless = windy || this.dragging || this.tween !== null || this.velocity !== 0 || this.flow !== 0 || Math.abs(this.sag - sagTarget) > 0.05;
+    let restless = (!this.loop && this.shown() !== this.offset) || (!this.loop && (this.offset < this.minOffset - 0.5 || this.offset > this.maxOffset + 0.5)) || windy || this.dragging || this.tween !== null || this.velocity !== 0 || this.flow !== 0 || Math.abs(this.sag - sagTarget) > 0.05;
     const swing = this.reduced ? 0 : swingTarget(this.flow, m);
     const shift = this.reduced ? 0 : -clampUnit(this.flow / 1.2) * m.parallax;
 
@@ -245,6 +271,13 @@ export class LineEngine {
 
     if (restless) this.raf = requestAnimationFrame(this.frame);
   };
+
+  /** Offset as drawn: while dragging past an end of a short line the pull meets resistance. */
+  private shown() {
+    if (this.loop) return this.offset;
+    const bound = Math.min(this.maxOffset, Math.max(this.minOffset, this.offset));
+    return bound + (this.offset - bound) * (this.dragging ? 0.35 : 1);
+  }
 
   // ——— input ———
 

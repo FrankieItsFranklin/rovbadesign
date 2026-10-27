@@ -1,7 +1,7 @@
 // Every project on the line. To add one: drop its images into public/work/<id>/
 // (or run `npm run shots <id>` after adding it to scripts/capture.mjs) and append an entry here.
 
-export type CardAspect = "4/5" | "1/1" | "3/4";
+export type CardAspect = "4/5" | "1/1" | "3/4" | "16/10";
 export type ProjectStatus = "Live" | "Prototype" | "Concept";
 export type Niche = "restaurants" | "dental" | "beauty" | "services";
 
@@ -73,7 +73,7 @@ export const projects: Project[] = [
     cardRotation: -2.4,
     cardDrop: 0,
     cardScale: 1,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: true,
   },
   {
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     cardRotation: 1.1,
     cardDrop: 6,
     cardScale: 1.04,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: true,
   },
   {
@@ -136,7 +136,7 @@ export const projects: Project[] = [
     cardRotation: -0.7,
     cardDrop: -4,
     cardScale: 0.92,
-    cardAspectRatio: "3/4",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     cardRotation: 2,
     cardDrop: 3,
     cardScale: 1.08,
-    cardAspectRatio: "1/1",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -198,7 +198,7 @@ export const projects: Project[] = [
     cardRotation: -1.5,
     cardDrop: 8,
     cardScale: 1,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: true,
   },
   {
@@ -230,7 +230,7 @@ export const projects: Project[] = [
     cardRotation: 1.7,
     cardDrop: -3,
     cardScale: 0.97,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -260,7 +260,7 @@ export const projects: Project[] = [
     cardRotation: 0.6,
     cardDrop: -2,
     cardScale: 0.94,
-    cardAspectRatio: "3/4",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -291,7 +291,7 @@ export const projects: Project[] = [
     cardRotation: -1.9,
     cardDrop: 5,
     cardScale: 1.02,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -321,7 +321,7 @@ export const projects: Project[] = [
     cardRotation: 1.4,
     cardDrop: 0,
     cardScale: 1,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: true,
   },
   {
@@ -351,7 +351,7 @@ export const projects: Project[] = [
     cardRotation: -0.9,
     cardDrop: -5,
     cardScale: 1.06,
-    cardAspectRatio: "1/1",
+    cardAspectRatio: "16/10",
     featured: false,
   },
   {
@@ -381,7 +381,7 @@ export const projects: Project[] = [
     cardRotation: -1.2,
     cardDrop: 2,
     cardScale: 0.98,
-    cardAspectRatio: "4/5",
+    cardAspectRatio: "16/10",
     featured: false,
   },
 ];

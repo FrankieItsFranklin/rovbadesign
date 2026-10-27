@@ -69,15 +69,15 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
               {work.map((p) => (
                 <li key={p.id}>
                   <Link href={localePath(lang, `/work/${p.slug}`)} className="group block">
-                    <span className="relative block aspect-[4/5] overflow-hidden rounded-[6px] bg-paper-2">
+                    <span className="relative block aspect-[16/10] overflow-hidden rounded-[6px] bg-paper-2">
                       <Image
-                        src={p.cover}
+                        src={p.desktopImages[0]}
                         alt={d.card.alt(p.title)}
                         fill
                         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 28vw"
                         quality={80}
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                        style={{ objectPosition: p.coverPosition }}
+                        style={{ objectPosition: "50% 0%" }}
                       />
                     </span>
                     <span className="mt-4 block text-[20px] font-semibold tracking-[-0.01em]">{p.title}</span>

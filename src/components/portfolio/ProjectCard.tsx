@@ -40,16 +40,17 @@ export function ProjectCard({ project, size, lang, copy, first, cardRef, onOpen 
           <span className="card-print">
             <span className="card-shot">
               <Image
-                src={project.cover}
+                // The first desktop screen at 1440 × 900, so the print shows the hero as it really looks.
+                src={project.desktopImages[0]}
                 alt={dictionaries[lang].card.alt(project.title)}
                 fill
-                sizes="(max-width: 640px) 56vw, (max-width: 1024px) 30vw, 340px"
+                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 46vw, 480px"
                 quality={80}
                 // Every print can swing into view at any moment, so none waits for lazy loading.
                 loading="eager"
                 fetchPriority={first ? "high" : "auto"}
                 draggable={false}
-                style={{ objectPosition: project.coverPosition }}
+                style={{ objectPosition: "50% 0%" }}
               />
             </span>
             <span className="card-shade" />

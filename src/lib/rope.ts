@@ -30,7 +30,8 @@ export function measureLine(width: number, height: number): LineGeometry {
   // Hang the prints in the band between the header and the footer copy, a little above its middle.
   const bandTop = compact ? 84 : 96;
   const bandBottom = height - (compact ? 200 : 190);
-  const block = sag + cardWidth * 1.25 + (compact ? 56 : 0);
+  // Prints are landscape desktop screens (see cardSize): their height is 10/16 of a widened card.
+  const block = sag + cardWidth * (compact ? 1.32 : 1.68) * 0.625 + (compact ? 56 : 0);
   return {
     width,
     height,
@@ -45,11 +46,13 @@ export function measureLine(width: number, height: number): LineGeometry {
   };
 }
 
-const ASPECT: Record<CardAspect, number> = { "4/5": 5 / 4, "1/1": 1, "3/4": 4 / 3 };
+const ASPECT: Record<CardAspect, number> = { "4/5": 5 / 4, "1/1": 1, "3/4": 4 / 3, "16/10": 10 / 16 };
 
 export function cardSize(g: LineGeometry, scale: number, aspect: CardAspect) {
   // Square prints are a little narrower so they do not read as bigger than their neighbours.
-  const w = Math.round(g.cardWidth * scale * (aspect === "1/1" ? 0.94 : 1));
+  // Landscape prints carry a desktop first screen at its real proportions, so they are wider.
+  const widen = aspect === "16/10" ? (g.compact ? 1.32 : 1.68) : aspect === "1/1" ? 0.94 : 1;
+  const w = Math.round(g.cardWidth * scale * widen);
   return { w, h: Math.round(w * ASPECT[aspect]) };
 }
 

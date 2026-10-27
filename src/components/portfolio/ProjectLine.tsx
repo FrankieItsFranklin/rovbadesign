@@ -20,22 +20,26 @@ const ROLL_IN_MS = 1700;
 /** The opening splash's length, read from the CSS that runs it (0 when skipped or with reduced motion). */
 const splashDelay = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--splash")) || 0;
 
+/** The line runs in a circle only when a set is big enough to feel endless. */
+export const LOOP_MIN = 5;
+
 function buildLayout(g: LineGeometry, projects: Project[]) {
+  const loop = projects.length >= LOOP_MIN;
   const sizes = projects.map((p) => cardSize(g, p.cardScale, p.cardAspectRatio));
-  const loop = sizes.reduce((sum, s) => sum + s.w + g.gap, 0);
+  const loopWidth = sizes.reduce((sum, s) => sum + s.w + g.gap, 0);
   const widest = Math.max(...sizes.map((s) => s.w));
   // Enough copies of the set that the viewport is never left with a hole while wrapping.
-  const copies = Math.max(1, Math.ceil((g.width + 2 * (widest + g.gap)) / loop));
-  const start = g.compact ? g.width * 0.2 : g.width * 0.07;
+  const copies = loop ? Math.max(1, Math.ceil((g.width + 2 * (widest + g.gap)) / loopWidth)) : 1;
+  const start = loop ? (g.compact ? g.width * 0.2 : g.width * 0.07) : 0;
   const entries = [];
   for (let c = 0; c < copies; c++) {
-    let cursor = c * loop + start;
+    let cursor = c * loopWidth + start;
     for (let i = 0; i < projects.length; i++) {
       entries.push({ key: `${c}-${projects[i].id}`, project: projects[i], size: sizes[i], copy: c > 0, base: cursor });
       cursor += sizes[i].w + g.gap;
     }
   }
-  return { loopLength: loop * copies, entries };
+  return { loopLength: loopWidth * copies, entries, loop };
 }
 
 export function ProjectLine({ projects, lang }: { projects: Project[]; lang: Lang }) {
@@ -81,6 +85,7 @@ export function ProjectLine({ projects, lang }: { projects: Project[]; lang: Lan
         drop: e.project.cardDrop,
       })),
       layout.loopLength,
+      layout.loop,
     );
     if (stage.classList.contains("is-ready")) return;
     const id = requestAnimationFrame(() => {
