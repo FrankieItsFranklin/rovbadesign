@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Milanovo — Ristorante, Pizzeria, Caffè</title>
+<title>Ventotto — Ristorante, Pizzeria, Caffè</title>
 <meta name="description" content="Włoska restauracja na rogu Mokotowskiej od 1987 roku: bar espresso od ósmej, pizza z pieca opalanego dębem, makaron robiony rano. Koncept ROVBA Design.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,13 +26,13 @@
   :focus-visible { outline:2px solid var(--wine); outline-offset:3px; }
   .on-dark :focus-visible { outline-color:var(--cream); }
   h1, h2, h3 { font-family:var(--serif); font-weight:500; letter-spacing:-.02em; text-wrap:balance; overflow-wrap:break-word; min-width:0; }
-  .pill { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:0 24px; border-radius:999px; background:var(--cream); color:var(--green); font:600 15px var(--sans); text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, color 180ms ease, transform 140ms var(--ease-out); }
-  .pill:hover { background:#fff; }
+  .pill { display:inline-flex; align-items:center; justify-content:center; gap:.5em; min-height:50px; padding:0 26px; border-radius:0; background:var(--cream); color:var(--green); font:italic 500 19px/1 var(--serif); letter-spacing:.01em; text-decoration:none; border:0; cursor:pointer; box-shadow:inset 0 0 0 1px currentColor; transition:background-color 180ms ease, color 180ms ease, transform 140ms var(--ease-out); }
+  .pill:hover { background:var(--green); color:var(--cream); box-shadow:inset 0 0 0 1px var(--cream); }
   .pill:active { transform:scale(.97); }
   .pill.wine { background:var(--wine); color:var(--cream); }
-  .pill.wine:hover { background:#64192a; }
-  .pill.line { background:transparent; box-shadow:inset 0 0 0 1.5px currentColor; color:inherit; }
-  .pill.line:hover { background:var(--cream); color:var(--wine); }
+  .pill.wine:hover { background:var(--green); }
+  .pill.line { background:transparent; color:inherit; }
+  .pill.line:hover { background:var(--cream); color:var(--green); }
 
   .js [data-reveal] [data-r] { opacity:0; transform:translateY(22px); transition:opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
   .js [data-reveal].is-in [data-r] { opacity:1; transform:none; }
@@ -78,7 +78,7 @@
   .tabs button i { font-style:normal; display:inline-block; margin-left:8px; padding:2px 10px; border-radius:999px; background:var(--wine); color:var(--cream); font:600 12px var(--sans); vertical-align:middle; }
   .tabs button::after { content:""; position:absolute; left:0; right:24px; bottom:-1px; height:3px; background:var(--wine); transform:scaleX(0); transform-origin:left; transition:transform 360ms var(--ease-out); }
   .tabs button[aria-selected="true"]::after { transform:none; }
-  .tabs button[aria-selected="true"] b { color:var(--wine); font-style:italic; }
+  .tabs button[aria-selected="true"] b { color:var(--wine); }
   .tabs button:hover b { color:var(--wine); }
   .panel { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:64px; padding-top:56px; }
   .panel[hidden] { display:none; }
@@ -144,8 +144,9 @@
   .visit .info a { color:var(--cream); text-underline-offset:4px; }
   form.res { background:var(--paper); color:var(--ink); padding:36px; display:grid; grid-template-columns:1fr 1fr; gap:18px; align-self:start; }
   form.res h3 { grid-column:1 / -1; font-size:34px; color:var(--green); }
-  form.res label { display:grid; gap:6px; font-size:14px; font-weight:600; }
-  form.res input, form.res select { font:500 16px var(--sans); min-height:48px; padding:0 14px; border:1px solid #bdb39b; background:#fff; color:var(--ink); border-radius:4px; }
+  form.res label { display:grid; gap:4px; font:italic 400 17px var(--serif); color:var(--green); }
+  form.res input, form.res select { font:400 20px var(--serif); min-height:46px; padding:0 2px; border:0; border-bottom:1px solid var(--green); background:transparent; color:var(--ink); border-radius:0; appearance:none; }
+  form.res input:focus-visible, form.res select:focus-visible { outline:none; border-bottom-width:2px; border-color:var(--wine); }
   form.res .full { grid-column:1 / -1; }
   form.res .pill { justify-self:start; }
   .res-done:empty { display:none; }
@@ -185,7 +186,7 @@
 </head>
 <body>
 <nav class="top on-dark" aria-label="Główna">
-  <a class="mark" href="#top">MILANOVO</a>
+  <a class="mark" href="#top">VENTOTTO</a>
   <span class="links"><a href="#dzien">Menu</a><a href="#forno">Pizza</a><a href="#cantina">Wino</a><a href="#historia">Od 1987</a><a href="#stolik">Kontakt</a></span>
   <a class="pill" href="#stolik">Zarezerwuj stolik</a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="sheet" data-menu-btn>Menu</button>
@@ -198,7 +199,7 @@
 <main id="top">
 <section class="hero on-dark">
   <div class="copy">
-    <h1><span>Milanovo</span> <em>dal 1987</em></h1>
+    <h1><span>Ventotto</span> <em>dal 1987</em></h1>
     <div style="display:grid; gap:32px">
       <p>Pizza z pieca opalanego dębem, makaron robiony rano i espresso, które pije się przy barze.</p>
       <div class="acts"><a class="pill" href="#stolik">Zarezerwuj stolik</a><a class="pill line" href="#dzien">Zobacz kartę</a></div>
@@ -206,14 +207,14 @@
     </div>
   </div>
   <figure>
-    <img src="assets/wood-fired-pizza-oven-at-baronessa-italian.jpg" width="1920" height="1689" alt="Piec do pizzy wyłożony czerwoną mozaiką, w środku płonie drewno">
+    <img src="assets/v-hero-oven.jpg" width="1600" height="1200" alt="Wiejska kuchnia z piecem opalanym drewnem, kamienna ściana i drewniany stół">
     <p class="now" data-now><i aria-hidden="true"></i><span data-now-text>Piec rozpalamy o 11:30</span></p>
   </figure>
 </section>
 
 <section class="day" id="dzien" data-reveal>
   <div class="day-head">
-    <h2 data-r>Jeden dzień w Milanovo</h2>
+    <h2 data-r>Jeden dzień w Ventotto</h2>
     <p data-r>Rano bar, w południe szybki obiad, wieczorem pełna kolacja. Karta zmienia się razem z porą dnia, więc pokazujemy tę, która obowiązuje teraz.</p>
   </div>
   <div class="tabs" role="tablist" aria-label="Pora dnia" data-r>
@@ -222,7 +223,7 @@
     <button role="tab" id="t-cena" aria-controls="p-cena" aria-selected="false" tabindex="-1" data-from="17" data-to="23">17:00 – 23:00<b>Cena</b></button>
   </div>
   <div class="panel" role="tabpanel" id="p-rano" aria-labelledby="t-rano">
-    <figure><img src="assets/espresso-machine-and-counter-of-a-coffee.jpg" width="1920" height="1280" loading="lazy" alt="Ekspres kolbowy i lada baru kawowego"></figure>
+    <figure><img src="assets/v-rano.jpg" width="1920" height="1440" loading="lazy" alt="Cappuccino i cornetto z cukrem pudrem na barze"></figure>
     <div>
       <p class="intro">Rano bar działa jak w Mediolanie: espresso na stojąco, cornetto prosto z pieca, gazeta na ladzie.</p>
       <ul class="card">
@@ -236,7 +237,7 @@
     </div>
   </div>
   <div class="panel" role="tabpanel" id="p-pranzo" aria-labelledby="t-pranzo" hidden>
-    <figure><img src="assets/le-orecchiette-di-bari.jpg" width="1920" height="1440" loading="lazy" alt="Ręcznie robiony makaron orecchiette suszący się na tacach w zaułku Bari"></figure>
+    <figure><img src="assets/v-pranzo.jpg" width="1864" height="1360" loading="lazy" alt="Talerz tagliatelle al ragù na stole w restauracji"></figure>
     <div>
       <p class="intro">W południe makaron jest robiony od rana, a obiad dnia zmieścisz w przerwie.</p>
       <ul class="card">
@@ -249,7 +250,7 @@
     </div>
   </div>
   <div class="panel" role="tabpanel" id="p-cena" aria-labelledby="t-cena" hidden>
-    <figure><img src="assets/ossobuco-risotto-milanese.jpg" width="1920" height="1440" loading="lazy" alt="Ossobuco z risotto szafranowym na białym talerzu"></figure>
+    <figure><img src="assets/v-cena.jpg" width="1920" height="1277" loading="lazy" alt="Stolik nakryty na kolację: kieliszki, świeca i kwiat"></figure>
     <div>
       <p class="intro">Wieczorem cała karta: antipasti, pizza z pieca i wino z naszej piwnicy.</p>
       <ul class="card">
@@ -326,10 +327,9 @@
     <div>
       <h2 data-r>Stolik na wieczór</h2>
       <div class="info">
-        <div data-r><h3>Rezerwacje</h3><p><a href="tel:+48220000000">+48 22 000 00 00</a><br><a href="mailto:stolik@milanovo.pl">stolik@milanovo.pl</a></p></div>
+        <div data-r><h3>Rezerwacje</h3><p><a href="tel:+48220000000">+48 22 000 00 00</a><br><a href="mailto:stolik@ventotto.example">stolik@ventotto.example</a></p></div>
         <div data-r><h3>Godziny</h3><p>Pon – Pt 8:00 – 23:00<br>Sob – Nd 10:00 – 23:00<br>Kuchnia od 12:00</p></div>
         <div data-r><h3>Adres</h3><p>ul. Mokotowska 41<br>00-551 Warszawa</p></div>
-        <div data-r><h3>Bar</h3><p>Do baru nie trzeba rezerwacji. Przy ladzie stoi się do 12:00.</p></div>
       </div>
     </div>
     <form class="res" data-r data-res>
@@ -345,9 +345,9 @@
     </form>
   </div>
   <footer class="foot">
-    <div class="big" aria-hidden="true">Milanovo</div>
-    <div class="row"><span>Milanovo · Ristorante, Pizzeria, Caffè · ul. Mokotowska 41</span><span>Koncept ROVBA Design · lokal, historia i ceny są fikcyjne</span></div>
-    <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Wood-fired_Pizza_Oven_at_Baronessa_Italian_Restaurant.jpg">piec</a> Zacatillo1, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Espresso_machine_and_counter_of_a_coffee_bar_in_Rome.jpg">bar w Rzymie</a> Wilfredor, CC0; <a href="https://commons.wikimedia.org/wiki/File:Le_orecchiette_di_Bari.jpg">orecchiette</a> Maddy16869, CC BY-SA 4.0; <a href="https://www.rawpixel.com/image/448258/authentic-italian-pizza-pieces">margherita</a> Jakub Kapusnak, CC0; <a href="https://commons.wikimedia.org/w/index.php?curid=36179861">ossobuco</a> Micaela &amp; Massimo, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Cantina_vini_di_un_ristorante_a_Oschiri.jpg">piwnica</a> Basilicofresco, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Montefalco_rosso_DOC.jpg">Montefalco Rosso</a> Jonathanischoice, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=11769909">tiramisu</a> Raffaele Diomede, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Ulica_Mokotowska_przy_Wilczej_przed_1939.jpg">Mokotowska przed 1939</a>, domena publiczna. Przez Wikimedia Commons i rawpixel. Zdjęcia nie przedstawiają lokalu Milanovo.</p>
+    <div class="big" aria-hidden="true">Ventotto</div>
+    <div class="row"><span>Ventotto · Ristorante, Pizzeria, Caffè · ul. Mokotowska 41</span><span>Koncept ROVBA Design · lokal, historia i ceny są fikcyjne</span></div>
+    <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Castel_del_Piano-Cucina_con_forno_a_legna.jpg">kuchnia z piecem</a>, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Cornetto_e_cappuccino.jpg">cornetto e cappuccino</a> Ensahequ, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Tagliatelle_al_ragu_Bolognese.jpg">tagliatelle</a> Petar Milošević, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:DZ6_2628_Cozy_candlelit_dinner_for_two_elegant_Thai_restaurant_setting_with_twinkling_lights_and_a_delicate_orchid_centerpiece.jpg">kolacja przy świecy</a> PattayaPatrol, CC BY-SA 4.0; <a href="https://www.rawpixel.com/image/448258/authentic-italian-pizza-pieces">margherita</a> Jakub Kapusnak, CC0; <a href="https://commons.wikimedia.org/wiki/File:Cantina_vini_di_un_ristorante_a_Oschiri.jpg">piwnica</a> Basilicofresco, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Montefalco_rosso_DOC.jpg">Montefalco Rosso</a> Jonathanischoice, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=11769909">tiramisu</a> Raffaele Diomede, CC BY 2.0; <a href="https://commons.wikimedia.org/wiki/File:Ulica_Mokotowska_przy_Wilczej_przed_1939.jpg">Mokotowska przed 1939</a>, domena publiczna. Przez Wikimedia Commons i rawpixel. Zdjęcia nie przedstawiają lokalu Ventotto.</p>
   </footer>
 </section>
 </main>
@@ -387,7 +387,7 @@
   date.min = iso; date.value = iso;
   document.querySelector("[data-res]").addEventListener("submit", function (e) {
     e.preventDefault();
-    document.querySelector("[data-res-done]").textContent = "Dziękujemy. W koncepcie nic nie wysyłamy, ale w prawdziwym Milanovo oddzwonilibyśmy w ciągu godziny.";
+    document.querySelector("[data-res-done]").textContent = "Dziękujemy. W koncepcie nic nie wysyłamy, ale w prawdziwym Ventotto oddzwonilibyśmy w ciągu godziny.";
   });
 })();
 </script>

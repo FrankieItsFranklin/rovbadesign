@@ -66,12 +66,12 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Cennik z wyszukiwarką i bez gwiazdek, tak jak obiecuje nagłówek.",
     ],
   },
-  milanovo: {
+  ventotto: {
     category: "Ristorante, pizzeria, caffè",
     city: "Warszawa",
     description:
       "Koncept studia dla włoskiej restauracji, która od 1987 roku stoi na tym samym rogu. Butelkowa zieleń, Bodoni i menu, które czyta się jak drukowaną kartę na stole.",
-    challenge: "Strony włoskich restauracji sięgają po obrusy w kratkę i flagi. Milanovo jest cichsze i starsze.",
+    challenge: "Strony włoskich restauracji sięgają po obrusy w kratkę i flagi. Ventotto jest cichsze i starsze.",
     approach: "Powściągliwość starych pieniędzy: jeden szeryf, trzy kolory, piec jako bohater i poranny bar espresso jako osobny rozdział.",
     details: [
       "Bodoni Moda w nazwie i daniach, Libre Franklin w cenach i godzinach.",
@@ -114,7 +114,7 @@ export const polishProjects: Record<string, PolishCopy> = {
     challenge: "Strony beauty bywają różowe, tłoczne i pełne promocji. Ten salon sprzedaje czas i uwagę.",
     approach: "Numer drzwi stał się identyfikacją: ogromny i blady za nazwą, a pod spodem usługi z prostymi cenami.",
     details: [
-      "Italiana w dużych rozmiarach, Manrope we wszystkim, co klientka musi przeczytać.",
+      "Instrument Serif w dużych rozmiarach, z wyraźnymi polskimi znakami, i Manrope we wszystkim, co klientka musi przeczytać.",
       "Archiwalne zdjęcie lustra w salonie z 1953 roku buduje nastrój, dopóki studio nie ma własnej sesji.",
       "Wybierz usługi i zobacz, jak wizyta układa się na jednej linii dnia: jedna klientka naraz.",
     ],
