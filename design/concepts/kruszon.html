@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=6">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=7">
 <style>
   .hero { position:relative; min-height:calc(100svh - 104px); display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; }
   .hero .pattern { position:absolute; right:-4vw; top:6%; width:min(50vw, 740px); z-index:0; }
@@ -21,7 +21,9 @@
   .hero .ctas { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
   .hero .stage { position:relative; z-index:1; height:100%; min-height:560px; }
   .hero .main { position:absolute; z-index:2; width:min(48vw, 760px); right:1%; top:22%; transform:rotate(-8deg); }
-  .hero .berry { z-index:3; }
+  /* truskawka i drobiny lecą nad kawałkiem tortu */
+  .hero .stage .scatter { z-index:3; }
+  .hero .berry { z-index:4; }
   .js .hero .main { animation:drop 1300ms 150ms var(--ease-out) both; }
   @keyframes drop { from { transform:translate(90px, -70px) rotate(10deg) scale(.86); opacity:0; } to { transform:rotate(-8deg); opacity:1; } }
 
@@ -139,7 +141,6 @@
   <div class="stage" aria-hidden="true" data-fly-box data-scatter="czek:4 krusz:6 cukier:3" data-scatter-x="5-95">
     <img class="main cut" src="assets/kruszon/gen/kawalek-tortu.webp" width="901" height="651" alt="" fetchpriority="high">
     <img class="flyer cut berry" style="--w:clamp(120px,12vw,200px)" data-fly="16 18 10 46 -28 14" src="assets/kruszon/gen/truskawka.webp" width="862" height="901" alt="">
-    <img class="flyer cut" style="--w:clamp(80px,8vw,140px)" data-fly="88 95 92 40 18 -12" src="assets/kruszon/gen/owoce.webp" width="901" height="800" alt="">
   </div>
 </section>
 

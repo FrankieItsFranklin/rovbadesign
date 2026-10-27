@@ -7,6 +7,8 @@
 :root, html[data-pal="malina"] {
   --bg:#fbf4ec; --bg-2:#f3e6da; --card:#fffdfa; --accent:#d7263d; --accent-2:#b81c31; --accent-ink:#fffdfa;
   --ink:#341c17; --head:#4a2419; --soft:#7b5146; --script-c:#d98a78; --big:#d7263d; --pattern:#fffdfa; --crumb-a:#c4895d; --crumb-b:#e0b48a;
+  /* stopka w kolorze ciemnego dżemu truskawkowego */
+  --foot:#7d1323; --foot-ink:#fff1ec; --foot-big:#ffe1db; --foot-h:#ff9aa3; --foot-script:#ffc2bd;
 }
 /* Pistacja: zieleń pistacji i gorzka czekolada */
 html[data-pal="pistacja"] {
@@ -147,12 +149,12 @@ p { max-width:68ch; }
 .drawer .msg { font-weight:500; min-height:1.4em; }
 
 /* ---------- stopka ---------- */
-footer { background:var(--head); color:var(--bg); padding:70px var(--m) 40px; position:relative; overflow:hidden; }
+footer { background:var(--foot, var(--head)); color:var(--foot-ink, var(--bg)); padding:70px var(--m) 40px; position:relative; overflow:hidden; }
 footer .wrap { padding:0; }
-footer .big { font:400 clamp(110px, 20vw, 340px)/.8 var(--display); color:var(--accent); letter-spacing:.02em; }
-footer .script { font-size:clamp(34px, 3vw, 52px); color:var(--bg); margin-top:6px; margin-left:4px; }
+footer .big { font:400 clamp(110px, 20vw, 340px)/.8 var(--display); color:var(--foot-big, var(--accent)); letter-spacing:.02em; }
+footer .script { font-size:clamp(34px, 3vw, 52px); color:var(--foot-script, var(--bg)); margin-top:6px; margin-left:4px; }
 footer .cols { display:grid; grid-template-columns:repeat(4, 1fr); gap:24px; margin-top:44px; font-size:15px; }
-footer .cols b { display:block; font:400 24px var(--display); letter-spacing:.04em; color:var(--accent); margin-bottom:8px; }
+footer .cols b { display:block; font:400 24px var(--display); letter-spacing:.04em; color:var(--foot-h, var(--accent)); margin-bottom:8px; }
 footer .cols a { display:block; text-decoration:none; padding:3px 0; }
 footer .cols a:hover { text-decoration:underline; }
 footer .credits { margin-top:40px; font-size:13px; opacity:.75; max-width:75ch; }
