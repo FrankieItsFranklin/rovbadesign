@@ -52,10 +52,10 @@ npm run dev          # http://localhost:3801
 
 ## Заявки, аналитика, данные студии
 
-- **Форма заявки** → `src/app/api/contact/route.ts`, письмо через Resend. В Vercel → Settings → Environment Variables:
-  `RESEND_API_KEY`, `CONTACT_TO` (куда слать, можно несколько через запятую), `CONTACT_FROM`
-  (после подтверждения домена в Resend, напр. `ROVBA Design <formularz@rovbadesign.pl>`; до этого не задавать —
-  письма уходят с `onboarding@resend.dev` только на адрес владельца аккаунта Resend). Без ключа форма показывает e-mail.
+- **Форма заявки** → `src/app/api/contact/route.ts` присылает заявку сообщением от Telegram-бота.
+  В Vercel → Settings → Environment Variables: `TELEGRAM_BOT_TOKEN` (от @BotFather) и `TELEGRAM_CHAT_ID`
+  (кому слать; несколько через запятую). Бот должен получить от получателя /start хотя бы раз. Без переменных
+  форма показывает e-mail. Причины отказа Telegram пишутся в логи Vercel.
 - **Аналитика**: Vercel Web Analytics (`<Analytics />` в layout). Включить в дашборде проекта → Analytics → Enable.
 - **Данные студии** (владелец, NIP, телефон/WhatsApp, календарь, фото и био для «О студии»): `src/data/studio.ts`.
   Пустые поля на сайте не показываются. Цены пакетов: `PRICES` в `src/components/portfolio/OfferSection.tsx`.
