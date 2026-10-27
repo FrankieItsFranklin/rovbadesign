@@ -7,9 +7,10 @@
   .hero .lead { margin-top:22px; max-width:42ch; font-size:18px; }
   .hero .ctas { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
   .hero .stage { position:relative; z-index:1; height:100%; min-height:560px; }
-  .hero .main { position:absolute; z-index:2; width:min(44vw, 680px); right:4%; top:16%; transform:rotate(-14deg); }
+  .hero .main { position:absolute; z-index:2; width:min(48vw, 760px); right:1%; top:22%; transform:rotate(-8deg); }
+  .hero .berry { z-index:3; }
   .js .hero .main { animation:drop 1300ms 150ms var(--ease-out) both; }
-  @keyframes drop { from { transform:translate(80px, -60px) rotate(8deg) scale(.88); opacity:0; } to { transform:rotate(-14deg); opacity:1; } }
+  @keyframes drop { from { transform:translate(90px, -70px) rotate(10deg) scale(.86); opacity:0; } to { transform:rotate(-8deg); opacity:1; } }
 
   .count { position:relative; background:var(--card); padding:clamp(100px, 12vw, 160px) 0; overflow:hidden; }
   .count .wrap { display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center; }
@@ -73,7 +74,7 @@
     .hero { grid-template-columns:1fr; min-height:0; padding:32px 0 0; }
     .hero .txt { padding:0 16px; }
     .hero .stage { min-height:92vw; }
-    .hero .main { width:90vw; right:4%; top:6%; }
+    .hero .main { width:94vw; right:2%; top:10%; }
     .hero .pattern { width:110vw; top:auto; bottom:0; right:-30vw; }
     .count .wrap, .story, .teaser .wrap { grid-template-columns:minmax(0, 1fr); }
     .story.rev .t { order:0; }
@@ -101,14 +102,14 @@
     <div class="ctas"><a class="btn" href="kruszon-katalog.html">Zobacz witrynę</a><a class="btn dark" href="kruszon-tort.html">Zaprojektuj tort</a></div>
   </div>
   <div class="stage" aria-hidden="true" data-fly-box data-scatter="czek:4 krusz:6 cukier:3" data-scatter-x="5-95">
-    <img class="main cut" src="assets/kruszon/gen/drozdzowka.webp" width="901" height="776" alt="" fetchpriority="high">
-    <img class="flyer cut" style="--w:clamp(70px,7vw,120px)" data-fly="20 10 6 60 -30 20" src="assets/kruszon/gen/mieta-wanilia.webp" width="901" height="839" alt="">
+    <img class="main cut" src="assets/kruszon/gen/kawalek-tortu.webp" width="901" height="651" alt="" fetchpriority="high">
+    <img class="flyer cut berry" style="--w:clamp(120px,12vw,200px)" data-fly="16 18 10 46 -28 14" src="assets/kruszon/gen/truskawka.webp" width="862" height="901" alt="">
     <img class="flyer cut" style="--w:clamp(80px,8vw,140px)" data-fly="88 95 92 40 18 -12" src="assets/kruszon/gen/owoce.webp" width="901" height="800" alt="">
   </div>
 </section>
 
 <div class="flight" aria-hidden="true" data-scatter="czek:4 krusz:5 cukier:2">
-  <img class="flyer cut" style="--w:clamp(140px,16vw,260px)" data-fly="-20 30 120 60 -40 30" src="assets/kruszon/gen/paczek.webp" width="901" height="741" alt="">
+  <img class="flyer cut" style="--w:clamp(140px,16vw,260px)" data-fly="-20 30 120 60 -40 30" src="assets/kruszon/gen/drozdzowka.webp" width="901" height="776" alt="">
   <img class="flyer cut" style="--w:clamp(110px,11vw,180px)" data-fly="130 40 -30 50 30 -40" src="assets/kruszon/gen/makaroniki.webp" width="901" height="786" alt="">
 </div>
 
