@@ -3,10 +3,10 @@
   --display:"Bebas Neue", "Oswald", Impact, sans-serif; --script:"Caveat", "Segoe Script", cursive; --text:"Rubik", system-ui, sans-serif;
   --ease-out:cubic-bezier(.22,1,.36,1); --m:clamp(16px, 4vw, 64px); --r:22px;
 }
-/* Malina: kakao i malinowy róż na waniliowym tle (domyślna) */
+/* Malina (domyślna): kakao i czerwień dojrzałej truskawki na waniliowym tle */
 :root, html[data-pal="malina"] {
-  --bg:#fbf4ec; --bg-2:#f3e6da; --card:#fffdfa; --accent:#e5446d; --accent-2:#c92f58; --accent-ink:#fffdfa;
-  --ink:#341c17; --head:#4a2419; --soft:#7b5146; --script-c:#d58a7a; --big:#e5446d; --pattern:#fffdfa; --crumb-a:#c4895d; --crumb-b:#e0b48a;
+  --bg:#fbf4ec; --bg-2:#f3e6da; --card:#fffdfa; --accent:#d7263d; --accent-2:#b81c31; --accent-ink:#fffdfa;
+  --ink:#341c17; --head:#4a2419; --soft:#7b5146; --script-c:#d98a78; --big:#d7263d; --pattern:#fffdfa; --crumb-a:#c4895d; --crumb-b:#e0b48a;
 }
 /* Pistacja: zieleń pistacji i gorzka czekolada */
 html[data-pal="pistacja"] {

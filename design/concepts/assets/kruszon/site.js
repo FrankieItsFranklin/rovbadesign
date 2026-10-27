@@ -4,7 +4,7 @@
   var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
 
   // ---------- palety: przełącznik widoczny tylko przy ?pal w adresie ----------
-  var PALS = { malina: "#e5446d", pistacja: "#8fb35a", lukier: "#8fb6dc", karmel: "#ef8a2a" };
+  var PALS = { malina: "#d7263d", pistacja: "#8fb35a", lukier: "#8fb6dc", karmel: "#ef8a2a" };
   if (/[?&]pal=/.test(location.search)) {
     var sw = document.createElement("nav"); sw.className = "pal-switch"; sw.setAttribute("aria-label", "Palety kolorów");
     Object.keys(PALS).forEach(function (k) {

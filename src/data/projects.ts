@@ -476,7 +476,7 @@ export const projects: Project[] = [
     ...shots("kruszon"),
     coverPosition: "50% 0%",
     accent: "#5b3a29",
-    accentInk: "#e5446d",
+    accentInk: "#d7263d",
     cardRotation: -1.1,
     cardDrop: 2,
     cardScale: 1.04,
