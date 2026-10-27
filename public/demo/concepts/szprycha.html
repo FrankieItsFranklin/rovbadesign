@@ -58,7 +58,7 @@
   /* ---------- hero (VanMoof) ---------- */
   .hero { position:relative; min-height:100svh; display:grid; align-content:end; overflow:hidden; padding:120px var(--m) 0; }
   .hero > .bg { position:absolute; inset:0; z-index:0; }
-  .hero > .bg img { width:100%; height:100%; object-fit:cover; object-position:50% 40%; filter:grayscale(1) contrast(1.15) brightness(.38); transform:scale(1.04); }
+  .hero > .bg img { width:100%; height:100%; object-fit:cover; object-position:72% 35%; filter:grayscale(1) contrast(1.1) brightness(.42); transform:scale(1.04); }
   .js .hero > .bg img { animation:zoom 14s var(--ease) both; }
   @keyframes zoom { from { transform:scale(1.18); } to { transform:scale(1.04); } }
   .hero::after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(180deg, rgb(15 16 13 / .2), rgb(15 16 13 / .1) 40%, rgb(15 16 13 / .92)); }
@@ -198,7 +198,8 @@
   /* ---------- miejsce ---------- */
   .place { position:relative; min-height:86svh; display:grid; align-items:end; overflow:hidden; }
   .place > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .place::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgb(15 16 13 / .88)); }
+  .place::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 25%, rgb(15 16 13 / .9) 72%); }
+  @media (max-width: 900px) { .place::after { background:linear-gradient(180deg, transparent 10%, rgb(15 16 13 / .92) 50%); } .place > img { object-position:40% 30%; } }
   .place .in { position:relative; z-index:1; padding:var(--m); display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:end; max-width:1440px; margin-inline:auto; width:100%; }
   .place .in > div > p:last-child { font-size:clamp(20px, 1.8vw, 26px); line-height:1.35; max-width:36ch; }
   .place .facts { display:grid; gap:14px; font-size:15px; }
@@ -249,7 +250,7 @@
 
 <main>
 <section class="hero" aria-labelledby="h1">
-  <div class="bg"><img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" alt="" fetchpriority="high"></div>
+  <div class="bg"><img src="assets/sz-hero.jpg" width="2400" height="1600" alt="" fetchpriority="high"></div>
   <div class="in">
     <p class="now" data-now><i aria-hidden="true"></i><span data-now-t>Pn–pt 8:00–18:00 · sobota 9:00–14:00</span></p>
     <h1 id="h1" class="huge"><span>Oddaj rano<span class="dot">.</span></span><span>Odbierz po 17<span class="dot">.</span></span></h1>
@@ -334,7 +335,7 @@
 
 <section class="promise white pad" aria-labelledby="pr-h" data-reveal>
   <div class="wrap grid">
-    <figure data-r><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" loading="lazy" alt="Szprychy i piasta przedniego koła z bliska"></figure>
+    <figure data-r><img src="assets/sz-rotor.jpg" width="1064" height="1600" loading="lazy" alt="Mechanik prostuje tarczę hamulcową kluczem przy tylnym kole"></figure>
     <div>
       <p class="kick" data-r>Jak pracujemy</p>
       <h2 id="pr-h" class="h2" style="margin-top:14px" data-r>Cena, zanim odkręcimy pierwszą śrubę</h2>
@@ -363,16 +364,16 @@
 <section class="models light pad" aria-labelledby="mod-h" data-reveal>
   <div class="wrap">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap">
-      <div data-r><p class="kick">Co najczęściej stoi na stojaku</p><h2 id="mod-h" class="h2" style="margin-top:14px">Rowery z Krakowa</h2></div>
+      <div data-r><p class="kick">Co najczęściej stoi na stojaku</p><h2 id="mod-h" class="h2" style="margin-top:14px">Co do nas przyjeżdża</h2></div>
       <div class="rail-nav" data-r><button type="button" aria-label="Poprzednie" data-rail="-1">←</button><button type="button" aria-label="Następne" data-rail="1">→</button></div>
     </div>
     <div class="rail" data-rail-box>
-      <article class="model"><figure><img src="assets/romet-wagant-bicycle-1.jpg" width="1200" height="936" loading="lazy" alt="Niebieski Romet Wagant przy płocie"></figure><div class="tx"><h3>Romet Wagant</h3><p class="y">lata 80.</p><dl><dt>Typowa usterka</dt><dd>skrzypi suport, linki ledwo chodzą</dd></dl><p class="p">210 zł <small>zwykle · 1 dzień</small></p></div></article>
-      <article class="model"><figure><img src="assets/romet-flaming-bicycle-in-krakow-3.jpg" width="1200" height="1218" loading="lazy" alt="Składany Romet Flaming na chodniku"></figure><div class="tx"><h3>Romet Flaming</h3><p class="y">lata 70.</p><dl><dt>Typowa usterka</dt><dd>stał latami w piwnicy</dd></dl><p class="p">240 zł <small>zwykle · 2 dni</small></p></div></article>
-      <article class="model"><figure><img src="assets/red-romet-bicycle-in-krakow-1.jpg" width="1200" height="915" loading="lazy" alt="Bordowa damka z koszykiem w śniegu"></figure><div class="tx"><h3>Damka z koszykiem</h3><p class="y">lata 90.</p><dl><dt>Typowa usterka</dt><dd>zima pod balkonem</dd></dl><p class="p">220 zł <small>zwykle · 2 dni</small></p></div></article>
-      <article class="model"><figure><img src="assets/dutch-bicycle.jpg" width="1200" height="775" loading="lazy" alt="Czarny rower holenderski"></figure><div class="tx"><h3>Holender</h3><p class="y">2009</p><dl><dt>Typowa usterka</dt><dd>przerzutka w piaście nie łapie biegu</dd></dl><p class="p">75 zł <small>zwykle · 1 dzień</small></p></div></article>
-      <article class="model"><figure><img src="assets/romet-bicycle-in-krakow.jpg" width="1200" height="900" loading="lazy" alt="Srebrny rower miejski przy stojaku"></figure><div class="tx"><h3>Miejski z bagażnikiem</h3><p class="y">2016</p><dl><dt>Typowa usterka</dt><dd>przebita dętka</dd></dl><p class="p">45 zł <small>zwykle · 20 min</small></p></div></article>
-      <article class="model"><figure><img src="assets/roadster-bicycle-dutch.jpg" width="1200" height="794" loading="lazy" alt="Czarny roadster na ulicy"></figure><div class="tx"><h3>Roadster</h3><p class="y">1992</p><dl><dt>Typowa usterka</dt><dd>koło bije i ociera o hamulec</dd></dl><p class="p">100 zł <small>zwykle · 1 dzień</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-damka.jpg" width="1400" height="877" loading="lazy" alt="Bordowa damka z koszykiem przy żółtej ścianie"></figure><div class="tx"><h3>Damka z koszykiem</h3><p class="y">lata 90.</p><dl><dt>Typowa usterka</dt><dd>zima pod balkonem, zardzewiały łańcuch</dd></dl><p class="p">220 zł <small>zwykle · 2 dni</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-holender.jpg" width="1068" height="1600" loading="lazy" alt="Czarny rower holenderski z wiklinowym koszem"></figure><div class="tx"><h3>Holender</h3><p class="y">2009</p><dl><dt>Typowa usterka</dt><dd>przerzutka w piaście nie łapie biegu</dd></dl><p class="p">75 zł <small>zwykle · 1 dzień</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-miejski.jpg" width="1400" height="830" loading="lazy" alt="Błękitny rower miejski przy niebieskiej ścianie"></figure><div class="tx"><h3>Miejski</h3><p class="y">2016</p><dl><dt>Typowa usterka</dt><dd>przebita dętka, luźny błotnik</dd></dl><p class="p">45 zł <small>zwykle · 20 min</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-szosa.jpg" width="1400" height="775" loading="lazy" alt="Czarna szosówka przy drewnianej ścianie"></figure><div class="tx"><h3>Szosówka</h3><p class="y">2021</p><dl><dt>Typowa usterka</dt><dd>hamulce tarczowe piszczą</dd></dl><p class="p">90 zł <small>zwykle · 1 dzień</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-goral.jpg" width="900" height="1600" loading="lazy" alt="Czarno-czerwony rower górski na parkingu"></figure><div class="tx"><h3>Góral</h3><p class="y">2019</p><dl><dt>Typowa usterka</dt><dd>amortyzator siada, napęd zużyty</dd></dl><p class="p">260 zł <small>zwykle · 2 dni</small></p></div></article>
+      <article class="model"><figure><img src="assets/sz-trekking.jpg" width="1400" height="788" loading="lazy" alt="Turkusowy rower z koszykiem i skrzynką na bagażniku"></figure><div class="tx"><h3>Trekking z bagażnikiem</h3><p class="y">2014</p><dl><dt>Typowa usterka</dt><dd>koło bije i ociera o hamulec</dd></dl><p class="p">100 zł <small>zwykle · 1 dzień</small></p></div></article>
     </div>
   </div>
 </section>
@@ -383,7 +384,7 @@
       <p class="kick">Cennik</p>
       <h2 id="pr2-h" class="h2" style="margin-top:14px">Wisi nad stołem</h2>
       <p>Ceny robocizny brutto. Części liczymy według cen z hurtowni, z narzutem najwyżej 15%.</p>
-      <figure><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy i narzędzi w warsztacie"></figure>
+      <figure><img src="assets/sz-tools.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy i narzędzi w warsztacie"></figure>
     </div>
     <div data-r>
       <details open><summary>Przeglądy</summary><table><tbody>
@@ -413,7 +414,7 @@
 </section>
 
 <section class="place" aria-labelledby="pl-h" data-reveal>
-  <img src="assets/tenement-house-5-bohaterow-getta-square-podgorze.jpg" width="1920" height="1439" loading="lazy" alt="Kamienica przy placu Bohaterów Getta na Podgórzu">
+  <img src="assets/sz-street.jpg" width="2400" height="1595" loading="lazy" alt="Rowerzysta na pustej ulicy w świetle zachodzącego słońca">
   <div class="in">
     <div data-r><p class="kick" style="color:#d9d7cf">O warsztacie</p><p id="pl-h" style="margin-top:14px">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej w 2014 roku, bo nikt na Podgórzu nie naprawiał roweru w jeden dzień.</p></div>
     <div class="facts" data-r>
@@ -439,7 +440,7 @@
 <footer>
   <div class="big" data-fit aria-hidden="true">Szprycha</div>
   <div class="row"><span>Szprycha · serwis rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
-  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> Alextredz, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_Wagant_bicycle_(1).jpg">Romet Wagant</a>, <a href="https://commons.wikimedia.org/wiki/File:Romet_Flaming_bicycle_in_Krak%C3%B3w_(3).jpg">Romet Flaming</a>, <a href="https://commons.wikimedia.org/wiki/File:Red_Romet_bicycle_in_Krak%C3%B3w_(1).jpg">damka</a> Lukas 3z, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_bicycle_in_Krak%C3%B3w.jpg">rower miejski</a> Lukas 3z, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Dutch_bicycle.jpg">holender</a> i <a href="https://commons.wikimedia.org/wiki/File:Roadster_bicycle_(Dutch).jpg">roadster</a> Petar Milošević, CC BY-SA 4.0. Przez Wikimedia Commons.</p>
+  <p class="credits">Zdjęcia z <a href="https://unsplash.com">Unsplash</a>: <a href="https://unsplash.com/photos/a-man-working-on-a-bike-in-a-garage--cxC8iFx6V4">warsztat</a>, <a href="https://unsplash.com/photos/a-person-cutting-a-bicycle-vW0w7Bpz_m4">tarcza</a> i <a href="https://unsplash.com/photos/a-bunch-of-tools-hanging-up-on-a-wall-2Qlj2Gaft7w">narzędzia</a> Anton Savinov; <a href="https://unsplash.com/photos/female-beach-cruiser-bike-leaning-on-yellow-painted-wall-Lpqg7ypu2B4">damka</a> Chris Barbalis; <a href="https://unsplash.com/photos/female-beach-cruiser-bike-on-wall-va6b5ag3Jvo">holender</a> Fernando Meloni; <a href="https://unsplash.com/photos/blue-city-bike-parked-beside-blue-painted-wall-UaHV4WzVArk">miejski</a> Liza Pooor; <a href="https://unsplash.com/photos/black-road-bike-against-wooden-wall-sw9Vozf6j_4">szosówka</a> Dmitrii Vaccinium; <a href="https://unsplash.com/photos/mountain-bike-against-corrugated-wall-vZAk_n9Plfc">góral</a> streetsh; <a href="https://unsplash.com/photos/blue-and-black-city-bike-on-white-flooring-bFDdb5Yl_-w">trekking</a> Sagar Rana; <a href="https://unsplash.com/photos/man-riding-bicycle-on-road-during-daytime-ZPpC98Vus3k">ulica</a> Tobias Cornille.</p>
 </footer>
 
 <script src="assets/concept.js"></script>
