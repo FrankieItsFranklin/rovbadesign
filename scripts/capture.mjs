@@ -9,16 +9,19 @@ const OUT = path.resolve("public/work");
 // cover: размер окна, кадр которого становится принтом на верёвке
 // desktop/mobile: позиции кадров — доля высоты окна или CSS-селектор секции
 const SOURCES = [
-  { id: "finir", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, "#uslugi", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
+  { id: "szkliwo", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, "#uslugi", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
   { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "tilia", url: "http://localhost:4324/", cover: [1280, 1600], desktop: [0, 1.2, 2.6], mobile: [0, 1.3, 3] },
-  { id: "piernicova", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "korzenna", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "rubryka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "sobaniec", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "przystan", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "kotwica", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "lident", url: "http://localhost:4000/static/lident/?notes=off", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "fiszka", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "ventotto", url: "concept:ventotto", cover: [1280, 1600], desktop: [0, "#dzien", "#cantina"], mobile: [0, "#dzien", "#forno"] },
   { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, "#cennik", "#termin"], mobile: [0, "#termin", "#barberzy"] },
+  { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#cennik", "#przywieszka"], mobile: [0, "#przywieszka", "#cennik"] },
+  { id: "ostrozka", url: "concept:ostrozka", cover: [1280, 1600], desktop: [0, "#bukiet", "#cennik"], mobile: [0, "#bukiet", "#cennik"] },
+  { id: "bochen", url: "concept:bochen", cover: [1280, 1600], desktop: [0, "#z-pieca", "#chleby"], mobile: [0, "#z-pieca", "#chleby"] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
 ];
 

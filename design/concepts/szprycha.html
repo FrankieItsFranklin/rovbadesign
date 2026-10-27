@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szprycha — warsztat rowerowy, Józefińska 17, Podgórze</title>
+<meta name="description" content="Warsztat rowerowy na Podgórzu: oddajesz rower rano, odbierasz po 17. Cennik na ścianie i przywieszka z ceną, zanim zaczniemy.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+  :root {
+    --bg:#ecebe7; --surface:#e1dfd9; --ink:#38450f; --muted:#5d683a; --line:#c9c8bd; --card:#d9c7a3; --card-ink:#3b2f17;
+    --display:"Big Shoulders", "Arial Narrow", sans-serif; --text:"Public Sans", system-ui, sans-serif;
+    --step-small:clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem); --step-body:clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    --step-lead:clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem); --step-head:clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
+    --ease-out:cubic-bezier(.22,1,.36,1); --m:28px; --r:14px;
+  }
+  * { box-sizing:border-box; margin:0; }
+  html, body { overflow-x:clip; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font:400 var(--step-body)/1.5 var(--text); -webkit-font-smoothing:antialiased; }
+  ::selection { background:var(--ink); color:var(--bg); }
+  img { display:block; max-width:100%; height:auto; }
+  a { color:inherit; }
+  :focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
+  .display { font-family:var(--display); font-weight:800; text-transform:uppercase; line-height:.88; letter-spacing:-.005em; }
+  .soft { color:var(--muted); }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 26px; border-radius:var(--r); background:var(--ink); color:var(--bg); font:600 16px var(--text); text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, transform 140ms var(--ease-out); }
+  .btn:hover { background:#2a340a; }
+  .btn:active { transform:scale(.97); }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  .wrap { padding-inline:var(--m); max-width:1600px; margin-inline:auto; }
+  .grid { display:grid; grid-template-columns:repeat(12, 1fr); column-gap:24px; }
+
+  .js [data-reveal] [data-r] { opacity:0; transform:translateY(24px); transition:opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  .js [data-reveal].is-in [data-r] { opacity:1; transform:none; }
+
+  /* ---------- hero ---------- */
+  .top { position:absolute; inset:0 0 auto; z-index:3; display:flex; justify-content:space-between; align-items:center; padding:22px var(--m); font-size:15px; }
+  .top .mark { font:800 22px var(--display); text-transform:uppercase; text-decoration:none; letter-spacing:.02em; }
+  .top nav { display:flex; gap:28px; }
+  .top nav a { text-decoration:none; background:linear-gradient(currentColor,currentColor) left bottom / 0 1.5px no-repeat; transition:background-size 240ms var(--ease-out); padding:6px 0; }
+  .top nav a:hover { background-size:100% 1.5px; }
+  .top .short { display:none; }
+  .hero { position:relative; min-height:100svh; display:grid; grid-template-rows:1fr auto auto 1fr auto; padding:0 var(--m) 44px; }
+  .sentence { grid-row:2; font-size:clamp(96px, 12.4vw, 230px); line-height:.9; }
+  .sentence .ln { display:flex; align-items:baseline; gap:.22em; white-space:nowrap; }
+  .sentence .ln + .ln { margin-top:.06em; }
+  .strip { flex:1; align-self:center; height:.72em; min-width:1.6em; border-radius:var(--r); overflow:hidden; position:relative; transform:translateY(-.02em); }
+  .strip img { width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+  .js .strip { clip-path:inset(0 100% 0 0 round var(--r)); animation:shutter 1100ms 250ms var(--ease-out) forwards; }
+  .js .strip img { transform:scale(1.12); animation:settle 1500ms 250ms var(--ease-out) forwards; }
+  @keyframes shutter { to { clip-path:inset(0 0 0 0 round var(--r)); } }
+  @keyframes settle { to { transform:none; } }
+  .sentence .w { display:inline-block; }
+  .js .sentence .w { animation:rise 900ms var(--ease-out) both; }
+  .js .sentence .ln:nth-child(2) .w { animation-delay:120ms; }
+  @keyframes rise { from { opacity:0; transform:translateY(30%); } to { opacity:1; transform:none; } }
+  .hero .act { grid-row:3; justify-self:center; margin-top:clamp(56px, 9vh, 120px); }
+  .hero .sub { grid-row:5; justify-self:center; text-align:center; max-width:44ch; font-size:var(--step-lead); line-height:1.35; }
+  .hero .now { display:inline-flex; gap:10px; align-items:center; margin-top:14px; font-size:var(--step-small); }
+  .hero .now i { width:9px; height:9px; border-radius:50%; background:var(--muted); }
+  .hero .now[data-open="true"] i { background:#6f8f12; box-shadow:0 0 0 0 rgb(111 143 18 / .5); animation:pulse 2.2s infinite; }
+  @keyframes pulse { 70% { box-shadow:0 0 0 9px rgb(111 143 18 / 0); } 100% { box-shadow:0 0 0 0 rgb(111 143 18 / 0); } }
+
+  section { padding-block:clamp(110px, 14vw, 180px); }
+
+  /* ---------- cennik: statement + tabela po prawej ---------- */
+  .list h2 { font-size:clamp(40px, 4.5vw, 68px); line-height:.98; }
+  .list h2 span { display:block; padding-left:3vw; }
+  .list .body { margin-top:96px; align-items:end; }
+  .list figure { grid-column:1 / 5; }
+  .list figure img { aspect-ratio:4/5; object-fit:cover; width:100%; border-radius:var(--r); }
+  .list .name { grid-column:7; align-self:start; font-size:14px; padding-top:4px; }
+  .list table { grid-column:8 / 13; border-collapse:collapse; width:100%; font-size:16px; }
+  .list td { padding:13px 0; vertical-align:baseline; }
+  .list td:first-child { color:var(--muted); width:30%; padding-right:12px; }
+  .list td:last-child { text-align:right; white-space:nowrap; font-weight:600; }
+  .list tr.gap td { padding-top:44px; }
+
+  /* ---------- przywieszka ---------- */
+  .tagsec { background:var(--surface); }
+  .tagsec .grid { align-items:start; }
+  .tagsec .intro { grid-column:1 / 6; }
+  .tagsec h2 { font-size:var(--step-head); }
+  .tagsec .intro p { margin-top:24px; max-width:40ch; }
+  .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:36px; }
+  .chip { min-height:48px; padding:0 18px; border-radius:var(--r); border:1.5px solid var(--ink); background:transparent; color:var(--ink); font:600 16px var(--text); cursor:pointer; transition:background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out); }
+  .chip small { font-weight:400; margin-left:6px; }
+  .chip:hover { background:rgb(56 69 15 / .08); }
+  .chip:active { transform:scale(.97); }
+  .chip[aria-pressed="true"] { background:var(--ink); color:var(--bg); }
+  .tag-wrap { grid-column:7 / 12; position:relative; padding-top:46px; }
+  .tag { position:relative; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:70px 32px 32px; box-shadow:0 1px 0 rgb(0 0 0 / .06), 0 30px 40px -30px rgb(40 30 10 / .55); transform:rotate(-2.2deg); transform-origin:50% 0; transition:transform 600ms var(--ease-out); }
+  .tag.bump { animation:swing 900ms var(--ease-out); }
+  @keyframes swing { 0% { transform:rotate(-2.2deg); } 30% { transform:rotate(1.8deg); } 60% { transform:rotate(-3deg); } 100% { transform:rotate(-2.2deg); } }
+  .tag::before { content:""; position:absolute; top:22px; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:50%; background:var(--surface); box-shadow:inset 0 0 0 4px #c5b28b; }
+  .tag::after { content:""; position:absolute; top:-46px; left:50%; width:2px; height:80px; margin-left:-1px; background:linear-gradient(#8a7a55, #6b5c3a); transform:rotate(8deg); transform-origin:bottom; }
+  .tag .no { display:flex; justify-content:space-between; font:800 18px var(--display); text-transform:uppercase; letter-spacing:.06em; border-bottom:2px solid currentColor; padding-bottom:10px; }
+  .tag dl { margin-top:18px; display:grid; gap:14px; }
+  .tag dl div { display:grid; grid-template-columns:7.5em 1fr; gap:12px; border-bottom:1px dashed rgb(59 47 23 / .35); padding-bottom:12px; }
+  .tag dt { font-size:14px; }
+  .tag dd { font:800 26px/1.05 var(--display); text-transform:uppercase; }
+  .tag dd.list-dd { font:600 16px/1.4 var(--text); text-transform:none; }
+  .tag .sum dd { font-size:44px; }
+  .tag label { display:block; margin-top:18px; font-size:14px; }
+  .tag input { display:block; width:100%; margin-top:6px; min-height:48px; padding:0 14px; border:0; border-radius:10px; background:#f3ead7; color:var(--card-ink); font:600 18px var(--text); }
+  .tag .btn { width:100%; margin-top:16px; }
+  .tag .done { margin-top:12px; font-weight:600; min-height:1.5em; }
+
+  /* ---------- schody ---------- */
+  .stairs ol { list-style:none; padding:0; display:grid; gap:56px; }
+  .stairs li { display:grid; grid-template-columns:repeat(12, 1fr); column-gap:24px; }
+  .stairs li > div { grid-column:var(--c) / 13; }
+  .stairs h3 { font-family:var(--display); font-weight:800; text-transform:uppercase; font-size:clamp(36px, 4.6vw, 76px); line-height:1; }
+  .stairs p { margin-top:12px; max-width:34ch; font-size:17px; }
+  .stairs li:last-child h3 { color:#6f8f12; }
+
+  /* ---------- cena jako zdanie ---------- */
+  .offer { background:var(--ink); color:var(--bg); min-height:80svh; display:grid; align-content:center; }
+  .offer .s { font-size:clamp(56px, 8.4vw, 150px); line-height:.95; }
+  .offer .price { display:inline-block; background:var(--bg); color:var(--ink); padding:0 .15em; border-radius:10px; line-height:1; }
+  .offer .foot { margin-top:64px; align-items:end; }
+  .offer .foot p { grid-column:1 / 7; font-size:20px; max-width:46ch; }
+  .offer .foot .ctas { grid-column:10 / 13; justify-self:end; text-align:right; }
+  .offer .btn { background:var(--bg); color:var(--ink); }
+  .offer .btn:hover { background:#fff; }
+  .offer .ctas a.more { display:block; margin-top:14px; font-size:16px; }
+
+  /* ---------- o nas ---------- */
+  .about .grid { align-items:start; }
+  .about .facts { grid-column:1 / 3; display:grid; gap:18px; font-size:14px; }
+  .about .facts b { display:block; font-weight:600; }
+  .about .text { grid-column:3 / 13; font-size:clamp(24px, 2.5vw, 38px); line-height:1.2; }
+  .about .text img { float:left; width:3.6em; height:3.6em; object-fit:cover; margin:.12em .5em 0 0; }
+  .about .text p + p { margin-top:1.2em; }
+  .about .text .soft a { color:var(--ink); }
+
+  /* ---------- ulica ---------- */
+  .street { padding-block:0; }
+  .street .pics { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:12px; }
+  .street figure { overflow:hidden; border-radius:var(--r); }
+  .street img { width:100%; height:clamp(260px, 32vw, 520px); object-fit:cover; transition:transform 1200ms var(--ease-out); }
+  .street figure:hover img { transform:scale(1.04); }
+  .street figcaption { font-size:var(--step-small); margin-top:8px; }
+
+  /* ---------- kontakt ---------- */
+  .contact { padding-top:160px; padding-bottom:120px; }
+  .contact .grid { align-items:start; }
+  .contact .s { grid-column:1 / 6; font-size:clamp(26px, 3vw, 44px); line-height:1.1; }
+  .contact figure { grid-column:8 / 10; }
+  .contact figure img { width:160px; height:160px; object-fit:cover; }
+  .contact .links { grid-column:10 / 13; }
+  .contact .links h2 { font:600 18px var(--text); }
+  .contact .links a { display:block; margin-top:20px; font-size:18px; }
+  .contact .links a + a { margin-top:8px; }
+  .contact .links p { margin-top:16px; font-size:14px; }
+
+  footer { background:var(--ink); color:var(--bg); padding:56px var(--m) 40px; }
+  footer .big { font:800 clamp(80px, 19vw, 340px)/.8 var(--display); text-transform:uppercase; letter-spacing:-.01em; }
+  footer .row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; margin-top:32px; font-size:15px; }
+  footer .credits { margin-top:24px; font-size:13px; opacity:.8; max-width:120ch; }
+  footer .credits a { color:inherit; }
+
+  @media (max-width: 900px) {
+    :root { --m:16px; }
+    .top nav a:not(.short) { display:none; }
+    .top .short { display:inline; }
+    .hero { grid-template-rows:1fr auto auto auto 1fr; padding-bottom:32px; }
+    .sentence { font-size:15vw; text-align:left; }
+    .sentence .ln { display:block; white-space:normal; }
+    .sentence .strip { display:block; width:100%; height:auto; aspect-ratio:2/1; margin:.08em 0 .1em; }
+    .hero .act { margin-top:32px; justify-self:start; }
+    .hero .sub { grid-row:4; justify-self:start; text-align:left; margin-top:24px; font-size:16px; }
+    .grid { grid-template-columns:minmax(0, 1fr); }
+    .grid > * { grid-column:1 / -1 !important; }
+    .list h2 { font-size:9.5vw; } .list h2 span { padding-left:0; }
+    .list .body { margin-top:48px; }
+    .list .name { display:none; }
+    .list figure { order:2; width:60%; justify-self:end; margin-top:40px; }
+    .list td:first-child { width:auto; }
+    .tag-wrap { margin-top:56px; }
+    .stairs ol { gap:40px; }
+    .stairs li > div { grid-column:1 / -1; padding-left:calc(var(--i) * 6vw); }
+    .stairs h3 { font-size:8.4vw; }
+    .stairs p { font-size:16px; }
+    .offer .s { font-size:11vw; }
+    .offer .price { display:block; width:max-content; margin:.08em 0; }
+    .offer .foot .ctas { justify-self:stretch; text-align:left; margin-top:28px; }
+    .offer .foot .btn { width:100%; }
+    .about .text { font-size:22px; line-height:1.25; }
+    .about .text img { width:110px; height:110px; }
+    .about .facts { order:2; grid-template-columns:repeat(3, 1fr); font-size:13px; margin-top:32px; }
+    .street .pics { grid-template-columns:1fr; }
+    .street img { height:62vw; }
+    .contact { padding-top:110px; padding-bottom:80px; }
+    .contact .s { font-size:7.4vw; }
+    .contact .row-m { display:grid; grid-template-columns:96px minmax(0, 1fr); gap:16px; margin-top:32px; }
+    .contact .links a { overflow-wrap:anywhere; }
+    .contact figure img { width:96px; height:96px; }
+  }
+  @media (min-width: 901px) { .contact .row-m { display:contents; } }
+  @media (prefers-reduced-motion: reduce) {
+    .js .strip, .js .strip img, .js .sentence .w, .tag.bump, .hero .now i { animation:none !important; clip-path:none !important; transform:none !important; opacity:1 !important; }
+    .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">Szprycha</a>
+  <nav aria-label="Strona">
+    <a href="#cennik">Cennik</a>
+    <a href="#przywieszka">Przywieszka</a>
+    <a href="#dojazd">Dojazd</a>
+    <a class="short" href="#przywieszka">Wycena</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="h1" style="padding-top:0">
+  <h1 id="h1" class="display sentence">
+    <span class="ln"><span class="w">Oddaj rano,</span><span class="strip"><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" alt="Szprychy przedniego koła roweru z bliska" fetchpriority="high"></span></span>
+    <span class="ln"><span class="w">odbierz po 17.</span></span>
+  </h1>
+  <a class="btn act" href="#przywieszka">Wypisz przywieszkę</a>
+  <div class="sub">
+    <p>Warsztat rowerowy przy Józefińskiej 17 na Podgórzu. Cenę znasz, zanim odkręcimy pierwszą śrubę.</p>
+    <p class="now" data-status><i aria-hidden="true"></i><span data-status-text>Pn–pt 8:00–18:00, sobota 9:00–14:00</span></p>
+  </div>
+</section>
+
+<section class="list wrap" id="cennik" aria-labelledby="cennik-h" data-reveal>
+  <h2 id="cennik-h" class="display" data-r>Cennik, który wisi<span>nad stołem.</span></h2>
+  <div class="grid body">
+    <figure data-r><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Klucze i narzędzia rowerowe zawieszone na ścianie warsztatu"></figure>
+    <p class="name soft" data-r>Usługi</p>
+    <table data-r>
+      <tbody>
+        <tr><td>Przegląd</td><td>Pełny, z myciem napędu</td><td>180 zł</td></tr>
+        <tr><td>Przegląd</td><td>Podstawowy: hamulce, przerzutki, koła</td><td>110 zł</td></tr>
+        <tr class="gap"><td>Hamulce</td><td>Regulacja, jedna oś</td><td>35 zł</td></tr>
+        <tr><td>Hamulce</td><td>Odpowietrzenie hydrauliki</td><td>90 zł</td></tr>
+        <tr><td>Przerzutki</td><td>Regulacja przód i tył</td><td>60 zł</td></tr>
+        <tr><td>Napęd</td><td>Wymiana łańcucha</td><td>40 zł + łańcuch</td></tr>
+        <tr class="gap"><td>Koło</td><td>Centrowanie</td><td>50 zł</td></tr>
+        <tr><td>Koło</td><td>Wymiana dętki</td><td>30 zł + dętka</td></tr>
+        <tr><td>Koło</td><td>Wymiana szprychy</td><td>25 zł za sztukę</td></tr>
+        <tr class="gap"><td>Inne</td><td>Montaż bagażnika lub błotników</td><td>45 zł</td></tr>
+        <tr><td>Inne</td><td>Przechowanie roweru zimą, miesiąc</td><td>60 zł</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="tagsec" id="przywieszka" aria-labelledby="tag-h" data-reveal>
+  <div class="wrap grid">
+    <div class="intro">
+      <h2 id="tag-h" class="display" data-r>Wypisz przywieszkę</h2>
+      <p data-r>Na każdym rowerze w warsztacie wisi kartonowa przywieszka: co robimy, ile to kosztuje i kiedy odbierasz. Zaznacz, co dolega Twojemu, a wypiszemy ją od razu.</p>
+      <div class="chips" role="group" aria-label="Co trzeba zrobić" data-r>
+        <button type="button" class="chip" aria-pressed="false" data-job="hamulce" data-price="35" data-days="0">Hamulce<small>35 zł</small></button>
+        <button type="button" class="chip" aria-pressed="false" data-job="przerzutki" data-price="60" data-days="0">Przerzutki<small>60 zł</small></button>
+        <button type="button" class="chip" aria-pressed="false" data-job="dętka" data-price="45" data-days="0">Złapałem gumę<small>45 zł</small></button>
+        <button type="button" class="chip" aria-pressed="false" data-job="koło" data-price="50" data-days="0">Koło bije<small>50 zł</small></button>
+        <button type="button" class="chip" aria-pressed="false" data-job="łańcuch" data-price="99" data-days="0">Łańcuch skacze<small>od 99 zł</small></button>
+        <button type="button" class="chip" aria-pressed="false" data-job="przegląd" data-price="180" data-days="1">Pełny przegląd<small>180 zł</small></button>
+      </div>
+    </div>
+    <div class="tag-wrap" data-r>
+      <form class="tag" data-tag aria-label="Przywieszka naprawy">
+        <p class="no"><span>Szprycha</span><span data-no>Nr 0000</span></p>
+        <dl>
+          <div><dt>Do zrobienia</dt><dd class="list-dd" data-jobs>Zaznacz usługę obok</dd></div>
+          <div class="sum"><dt>Razem</dt><dd data-sum>0 zł</dd></div>
+          <div><dt>Odbiór</dt><dd data-ready>—</dd></div>
+        </dl>
+        <label>Telefon, oddzwonimy przed odbiorem <input type="tel" inputmode="tel" autocomplete="tel" placeholder="500 000 000" required></label>
+        <button class="btn" type="submit" disabled data-send>Zostaw rower na tę przywieszkę</button>
+        <p class="done" role="status" data-done></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="stairs wrap" aria-label="Jak to działa" data-reveal>
+  <ol>
+    <li style="--c:1;--i:0" data-r><div><h3>Najpierw przywozisz rower.</h3><p>Rano, od 8:00. Bez umawiania, wystarczy przywieszka z telefonu albo dwa słowa przy ladzie.</p></div></li>
+    <li style="--c:3;--i:1" data-r><div><h3>Potem go oglądamy.</h3><p>Do 11:00 dzwonimy, jeśli znajdziemy coś poza przywieszką. Bez Twojej zgody nic nie dopisujemy.</p></div></li>
+    <li style="--c:5;--i:2" data-r><div><h3>Ty mówisz: tak albo nie.</h3><p>Zużyte części oddajemy w woreczku, żebyś widział, co wymieniliśmy.</p></div></li>
+    <li style="--c:7;--i:3" data-r><div><h3>Odbierasz po 17.</h3><p>Rower stoi przy drzwiach, umyty napęd, opony napompowane. Pełny przegląd: następnego dnia.</p></div></li>
+  </ol>
+</section>
+
+<section class="offer" aria-labelledby="offer-h" data-reveal>
+  <div class="wrap">
+    <h2 id="offer-h" class="display s" data-r>Wiosenny przegląd <span class="price">180 zł</span> i jedziesz.</h2>
+    <div class="grid foot">
+      <p data-r>W cenie: regulacja hamulców i przerzutek, centrowanie kół, mycie i smarowanie napędu, dokręcenie wszystkiego, co się luzuje. Części liczymy osobno i zawsze pytamy.</p>
+      <div class="ctas" data-r>
+        <a class="btn" href="#przywieszka">Wypisz przywieszkę</a>
+        <a class="more" href="#cennik">Cały cennik</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about wrap" aria-label="O warsztacie" data-reveal>
+  <div class="grid">
+    <div class="facts" data-r>
+      <p><b>Gdzie</b>Józefińska 17, Podgórze</p>
+      <p><b>Od kiedy</b>Od 2014 roku</p>
+      <p><b>Jak dojechać</b>Tramwaj do Korony albo rowerem przez kładkę Bernatka</p>
+    </div>
+    <div class="text" data-r>
+      <p><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy w warsztacie rowerowym" style="object-position:30% 50%">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej, bo w okolicy nie było nikogo, kto naprawi rower w jeden dzień. <span class="soft">Dziś w warsztacie są trzy stojaki, ściana kluczy i lada, przy której zawsze ktoś pompuje dętkę za darmo.</span></p>
+      <p class="soft">Naprawiamy wszystko, co ma dwa koła: miejskie damki, szosy, rowery cargo i dziecięce biegówki. Elektryków nie bierzemy, za to chętnie <a href="#przywieszka">doradzimy, gdzie je oddać</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="street wrap" id="dojazd" aria-label="Podgórze" data-reveal>
+  <div class="pics">
+    <figure data-r><img src="assets/tenement-house-5-bohaterow-getta-square-podgorze.jpg" width="1920" height="1439" loading="lazy" alt="Kamienica przy placu Bohaterów Getta na Podgórzu"><figcaption class="soft">Podgórze, dwie przecznice od warsztatu</figcaption></figure>
+    <figure data-r><img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" loading="lazy" alt="Rowery zawieszone na ścianie warsztatu rowerowego"><figcaption class="soft">Tak wygląda dzień w warsztacie</figcaption></figure>
+    <figure data-r><img src="assets/bike-repair-oils-grease-cleaners-and-tyre.jpg" width="1920" height="1280" loading="lazy" alt="Butelki ze smarami i środkami do czyszczenia na półce"><figcaption class="soft">Smary, odtłuszczacze, uszczelniacz do opon</figcaption></figure>
+  </div>
+</section>
+
+<section class="contact wrap" aria-labelledby="kontakt-h" data-reveal>
+  <div class="grid">
+    <p class="s" data-r>Dzwoń, gdy coś stuka, piszczy albo nie chce się zmienić. Zwykle wiemy, co to, po pierwszym zdaniu.</p>
+    <div class="row-m">
+      <figure data-r><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" loading="lazy" alt="Piasta i szprychy koła rowerowego"></figure>
+      <div class="links" data-r>
+        <h2 id="kontakt-h">Masz pytanie o naprawę?</h2>
+        <a href="tel:+48120000000">12 000 00 00</a>
+        <a href="mailto:warsztat@szprycha.example">warsztat@szprycha.example</a>
+        <p class="soft">Kraków, ul. Józefińska 17. Pn–pt 8:00–18:00, sobota 9:00–14:00. Na e-maile odpisujemy tego samego dnia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="big" aria-hidden="true">Szprycha</div>
+  <div class="row"><span>Szprycha · warsztat rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
+  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> i <a href="https://commons.wikimedia.org/w/index.php?curid=107955681">smary</a> Alextredz, CC BY-SA 4.0. Przez Wikimedia Commons.</p>
+</footer>
+
+<script src="assets/concept.js"></script>
+<script>
+(function () {
+  var now = new Date(), h = now.getHours() + now.getMinutes() / 60, wd = now.getDay();
+  var DAYS = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+  function open(d) { return d >= 1 && d <= 6; }
+  function close(d) { return d === 6 ? 14 : 18; }
+
+  var st = document.querySelector("[data-status]"), stt = document.querySelector("[data-status-text]");
+  if (open(wd) && h >= (wd === 6 ? 9 : 8) && h < close(wd)) { st.dataset.open = "true"; stt.textContent = "Teraz otwarte do " + close(wd) + ":00 · ul. Józefińska 17"; }
+  else stt.textContent = "Teraz zamknięte · pn–pt 8:00–18:00, sobota 9:00–14:00";
+
+  // Odbiór: przywieziony do 10:00 w dzień roboczy jest gotowy tego dnia po 17 (w sobotę o 13).
+  // Później albo w dzień zamknięty — następnego dnia roboczego. Pełny przegląd dokłada jeden dzień.
+  function nextOpen(d) { var x = new Date(d); do { x.setDate(x.getDate() + 1); } while (!open(x.getDay())); return x; }
+  function ready(extra) {
+    var d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (!open(wd) || h >= 10) d = nextOpen(d);
+    for (var i = 0; i < extra; i++) d = nextOpen(d);
+    var t = d.getDay() === 6 ? "13:00" : "17:00";
+    var today = d.toDateString() === now.toDateString();
+    var tomorrow = d.toDateString() === new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toDateString();
+    return (today ? "Dziś" : tomorrow ? "Jutro" : DAYS[d.getDay()]) + ", po " + t;
+  }
+
+  var tag = document.querySelector("[data-tag]"), chips = document.querySelectorAll("[data-job]");
+  var no = tag.querySelector("[data-no]"), jobs = tag.querySelector("[data-jobs]"), sum = tag.querySelector("[data-sum]");
+  var rd = tag.querySelector("[data-ready]"), send = tag.querySelector("[data-send]"), done = tag.querySelector("[data-done]");
+  var start = now.getMonth() * 300 + now.getDate() * 9 + 112;
+  no.textContent = "Nr " + String(start).padStart(4, "0");
+
+  function update() {
+    var picked = [].filter.call(chips, function (c) { return c.getAttribute("aria-pressed") === "true"; });
+    var total = 0, extra = 0;
+    picked.forEach(function (c) { total += +c.dataset.price; extra = Math.max(extra, +c.dataset.days); });
+    jobs.textContent = picked.length ? picked.map(function (c) { return c.dataset.job; }).join(", ") : "Zaznacz usługę obok";
+    sum.textContent = (picked.some(function (c) { return c.dataset.job === "łańcuch"; }) ? "od " : "") + total + " zł";
+    rd.textContent = picked.length ? ready(extra) : "—";
+    send.disabled = !picked.length;
+    done.textContent = "";
+    tag.classList.remove("bump"); void tag.offsetWidth; tag.classList.add("bump");
+  }
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () { c.setAttribute("aria-pressed", String(c.getAttribute("aria-pressed") !== "true")); update(); });
+  });
+  tag.addEventListener("submit", function (e) {
+    e.preventDefault();
+    done.textContent = "Przywieszka " + no.textContent.replace("Nr ", "nr ") + " czeka przy ladzie. Odbiór: " + rd.textContent.toLowerCase() + ".";
+  });
+})();
+</script>
+</body>
+</html>

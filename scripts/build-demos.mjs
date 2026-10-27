@@ -1,5 +1,5 @@
 // Builds public copies of fictional projects into public/demo/<id>/ (served at /demo/<id>/).
-// Only fictional work goes here: prototypes for real businesses carry their real contacts.
+// Only fictional work goes here.
 // Usage: npm run demos [id ...]
 import { execSync } from "node:child_process";
 import fs from "node:fs";
@@ -11,6 +11,8 @@ const env = { ...process.env, PATH: `${NODE_BIN}:${process.env.PATH}` };
 
 const DEMOS = [
   { id: "tilia", kind: "astro", dir: path.join(process.env.HOME, "Desktop/сайты/tilia") },
+  { id: "szkliwo", kind: "astro", dir: path.join(process.env.HOME, "Desktop/сайты/finir") },
+  { id: "fiszka", kind: "copy", dir: path.join(process.env.HOME, "Desktop/сайты/lident-prototype") },
   { id: "concepts", kind: "static", dir: path.resolve("design/concepts") },
 ];
 
@@ -46,6 +48,11 @@ for (const demo of DEMOS) {
     for (const f of fs.readdirSync(target)) if (/^sitemap.*\.xml$|^robots\.txt$/.test(f)) fs.rmSync(path.join(target, f));
     fs.rmSync(path.join(demo.dir, "dist"), { recursive: true, force: true });
     prefixRootLinks(target, `/demo/${demo.id}`);
+  } else if (demo.kind === "copy") {
+    // Static site with relative links: the built pages and their assets, without sources and notes.
+    fs.mkdirSync(target, { recursive: true });
+    for (const f of fs.readdirSync(demo.dir)) if (f.endsWith(".html")) fs.copyFileSync(path.join(demo.dir, f), path.join(target, f));
+    fs.cpSync(path.join(demo.dir, "assets"), path.join(target, "assets"), { recursive: true });
   } else {
     fs.mkdirSync(target, { recursive: true });
     for (const f of fs.readdirSync(demo.dir)) {

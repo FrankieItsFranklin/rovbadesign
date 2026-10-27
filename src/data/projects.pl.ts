@@ -11,12 +11,12 @@ type PolishCopy = {
 };
 
 export const polishProjects: Record<string, PolishCopy> = {
-  finir: {
+  szkliwo: {
     category: "Gabinet stomatologiczny",
     city: "Warszawa",
     description:
       "Mały gabinet na Żoliborzu, wydrukowany jak polskie ulotki farmaceutyczne z lat 60. i 70. Każdy zabieg to osobna ulotka w jednej płaskiej farbie, z lekarzem, ceną i prostym następnym krokiem.",
-    challenge: "Strony dentystów w Warszawie wyglądają jak ten sam biały gabinet z uśmiechem ze stocku. Finir potrzebował głosu, którego nie skopiuje sąsiad.",
+    challenge: "Strony dentystów w Warszawie wyglądają jak ten sam biały gabinet z uśmiechem ze stocku. Szkliwo potrzebowało głosu, którego nie skopiuje sąsiad.",
     approach:
       "Sięgnęliśmy po język ulotek, które polskie zakłady farmaceutyczne rozsyłały do rejonowych przychodni: płaskie plamy koloru, wysokie wąskie nazwy dzielone na sylaby i jeden czarny pas.",
     details: [
@@ -52,17 +52,17 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Tablica terminów pokazuje najbliższy wolny fotel, więc nagłówek „Wtorek?” sam sobie odpowiada.",
     ],
   },
-  lident: {
+  fiszka: {
     category: "Gabinet stomatologiczny",
     city: "Warszawa",
     description:
-      "Prototyp dla gabinetu na Mokotowie, zrobiony na rozmowę z klientem. Strona jest kartoteką pacjentów: każda sekcja to kolorowa przekładka z indeksem, a pierwszy ekran to karta wizyty. Dotknij zęba, który niepokoi, a formularz już wie, gdzie boli.",
+      "Gabinet na Mokotowie, którego nazwa to fiszka z kartoteki, a strona jest kartoteką pacjentów: każda sekcja to kolorowa przekładka z indeksem, a pierwszy ekran to karta wizyty. Dotknij zęba, który niepokoi, a formularz już wie, gdzie boli.",
     challenge: "Pacjenci rzadko znają nazwę swojego problemu. Wiedzą za to, który to ząb.",
     approach:
       "Interaktywny schemat zębów zamienia objaw w wypełnioną prośbę o wizytę, a cennik odpowiada na pytania przed telefonem.",
     details: [
       "Ząb, objaw, rezerwacja: trzy dotknięcia od pierwszego ekranu do wypełnionego formularza.",
-      "Karty katalogowe z czerwoną linią nagłówka i niebieskimi liniami; to, co gabinet musi jeszcze dostarczyć, jest wpisane na maszynie jak puste pole formularza.",
+      "Karty katalogowe z czerwoną linią nagłówka i niebieskimi liniami; lekarze to karty z kartoteki, z inicjałami zamiast portretów.",
       "Wybrany ząb jest zakreskowany czerwonym ołówkiem, tak jak dentysta zaznacza ząb do leczenia na karcie.",
     ],
   },
@@ -132,30 +132,69 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Osiem podstron; każda cena i każdy etap leczenia zapisane jako edytowalne dane.",
     ],
   },
-  piernicova: {
+  korzenna: {
     category: "Restauracja",
     city: "Toruń",
     description:
-      "Polska restauracja przy średniowiecznych murach Torunia, z piernikiem jako cichym podpisem. Rezerwacja przychodzi jako drukowany bilecik zawieszony na mosiężnej szynie.",
+      "Polska restauracja przy ulicy Podmurnej, pod średniowiecznymi murami Torunia, z piernikiem jako cichym podpisem. Nazwa wlewa się lukrem w pierwszym ekranie, a rezerwacja przychodzi jako drukowany bilecik na mosiężnej szynie.",
     challenge: "Restauracja z mocną lokalną historią i kartą, która zmienia się z sezonem.",
     approach: "Ciepła, piernikowa sala, jesienna karta jako dane do przeglądania i bilet rezerwacji, który wygląda jak papier.",
     details: [
       "Formularz rezerwacji to dwuetapowy bilet z pieczątką na końcu.",
       "Cała sezonowa karta z cenami, z filtrem składników.",
-      "Pędzelkowa nazwa nad solidnym, książkowym szeryfem.",
+      "Pędzelkowa nazwa, która wypełnia się lukrem jak forma, nad solidnym, książkowym szeryfem.",
     ],
   },
-  sobaniec: {
+  przystan: {
     category: "Rodzinny gabinet stomatologiczny",
     city: "Białystok",
     description:
-      "Wspólny gabinet w centrum Białegostoku, w którym mama i syn leczą pacjentów obok siebie. Nowa strona zastępuje stary WordPress i odpowiada na prawdziwe pytania: kto, za ile i jak się zapisać.",
-    challenge: "Sześćdziesiąt pozycji cennika, troje lekarzy i zapisy podzielone między telefon a zewnętrzny kalendarz.",
+      "Rodzinny gabinet w centrum Białegostoku, w którym mama i syn leczą pacjentów obok siebie. Strona od razu odpowiada na prawdziwe pytania: kto, za ile i jak się zapisać.",
+    challenge: "Sześćdziesiąt pozycji cennika, cztery osoby w zespole i zapisy przez telefon.",
     approach: "Głęboki morski pierwszy ekran, prawdziwe liczby zamiast haseł i pełny cennik w sześciu rozdziałach.",
     details: [
-      "Każda liczba na stronie pochodzi od gabinetu: oceny z datą, lata doświadczenia, ceny.",
+      "Liczby zamiast przymiotników: lata praktyki, cena pierwszej wizyty, znieczulenie w cenie.",
       "Głęboki morski z delikatną brzoskwinią, spokojny dla dzieci i ich dziadków.",
       "Jedna długa strona z cennikiem, zespołem, opiniami i pytaniami w osobnych rozdziałach.",
+    ],
+  },
+  szprycha: {
+    category: "Warsztat rowerowy",
+    city: "Kraków",
+    description:
+      "Koncept studia dla warsztatu rowerowego na Podgórzu, który naprawia rower w jeden dzień: oddajesz rano, odbierasz po siedemnastej. Nagłówek mówi dokładnie to, a koło stoi w miejscu słowa.",
+    challenge: "Warsztaty ukrywają ceny i nikt nie wie, kiedy rower będzie gotowy.",
+    approach: "Kartonowa przywieszka, która wisi na każdym rowerze w warsztacie, stała się zapisem: zaznaczasz, co nie działa, a przywieszka wpisuje cenę i godzinę odbioru.",
+    details: [
+      "Przywieszka liczy cenę i dzień odbioru według godziny na Twoim telefonie i kołysze się, gdy coś się zmienia.",
+      "Big Shoulders w oliwkowych wersalikach, w rozmiarze plakatu, nad Public Sans.",
+      "Kość i jedna oliwkowa zieleń, kolor starej ramy.",
+    ],
+  },
+  ostrozka: {
+    category: "Kwiaciarnia",
+    city: "Poznań",
+    description:
+      "Koncept studia dla kwiaciarni przy Rynku Wildeckim w Poznaniu, nazwanej od ostróżki. Strona jest bilecikiem, który wkłada się do każdego bukietu, a bukiety wychodzą w szarym papierze i sznurku.",
+    challenge: "Strony kwiaciarni sprzedają te same róże ze stocku. Ten stragan sprzedaje to, co rano przyjechało z giełdy.",
+    approach: "Pierwszy ekran to sam bilecik; pod nim sześć karteczek z bukietami tygodnia i kreator, który owija łodygi w papier, gdy je dodajesz.",
+    details: [
+      "Dodawaj łodygi po jednej, a bukiet rośnie w szarym papierze, z ceną i Twoimi słowami na bileciku.",
+      "XIX-wieczne ryciny botaniczne ostróżki obok zdjęć targu.",
+      "Trzy kamienne szarości i jedna szałwiowa zieleń, żeby cały kolor niosły kwiaty.",
+    ],
+  },
+  bochen: {
+    category: "Piekarnia na zakwasie",
+    city: "Wrocław",
+    description:
+      "Koncept studia dla piekarni na zakwasie na Nadodrzu, w której piec otwiera się co półtorej godziny. Jeden kształt prowadzi całą stronę: owalny bochenek z jednym nacięciem.",
+    challenge: "Ludzie przychodzą po ciepły chleb i nigdy nie wiedzą, kiedy on jest.",
+    approach: "Dzisiejsze blachy są na stronie jako rząd bochenków, które wypełniają się skórką, kiedy każda wychodzi z pieca.",
+    details: [
+      "Tablica pieca czyta zegar: co się teraz piecze, co ostatnio wyszło i ile zostało do następnej blachy.",
+      "Owalny bochenek z jednym nacięciem to znak, przycisk, maska każdego zdjęcia i punktor w karcie.",
+      "Mączna biel, brąz skórki i ciemne żyto na nocną zmianę.",
     ],
   },
 };
