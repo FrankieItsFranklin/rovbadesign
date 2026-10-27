@@ -41,7 +41,7 @@
 
   /* ---------- nawigacja ---------- */
   .nav { position:fixed; inset:0 0 auto; z-index:50; display:flex; align-items:center; gap:24px; padding:16px var(--m); transition:background-color 300ms, box-shadow 300ms, padding 300ms; }
-  .nav.solid { background:rgb(246 241 233 / .94); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); padding-block:10px; }
+  .nav.solid { background:rgb(246 241 233 / .97); box-shadow:0 1px 0 var(--line); padding-block:10px; }
   .nav .logo { font:italic 400 32px/1 var(--serif); text-decoration:none; margin-right:auto; letter-spacing:-.01em; }
   .nav .logo i { color:var(--blue); font-style:normal; }
   .nav .links { display:flex; gap:22px; font-size:15px; font-weight:500; }
@@ -108,7 +108,9 @@
   .studio .head p { color:var(--ink-2); max-width:44ch; justify-self:end; }
   .studio .grid { display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(20px, 3vw, 44px); margin-top:44px; align-items:start; }
   .stage { position:sticky; top:84px; background:radial-gradient(120% 90% at 50% 30%, #fbf7f0 0%, #f1e9dc 70%, #e8dece 100%); border-radius:28px; overflow:hidden; height:min(calc(100svh - 110px), 820px); width:100%; }
-  .stage svg { width:100%; height:100%; display:block; }
+  .stage svg { width:100%; height:100%; display:block; transform-origin:50% 92%; }
+  .js .stage[data-live] svg { animation:sway 7s ease-in-out infinite alternate; will-change:transform; }
+  @keyframes sway { from { transform:rotate(-.7deg); } to { transform:rotate(.7deg); } }
   .stage .meta { position:absolute; left:22px; top:18px; right:22px; display:flex; justify-content:space-between; gap:10px; font-size:14px; color:var(--ink-2); pointer-events:none; }
   .stage .meta b { color:var(--ink); font-weight:600; }
   .stage .empty { position:absolute; inset:auto 0 44% 0; text-align:center; font:italic 400 30px/1.1 var(--serif); color:var(--ink-2); pointer-events:none; transition:opacity 300ms; }
@@ -121,7 +123,7 @@
   .picker { list-style:none; padding:0; display:grid; }
   .picker li { display:grid; grid-template-columns:52px 1fr auto; gap:14px; align-items:center; padding:10px 0; border-top:1px solid #efe8dc; }
   .picker li:first-child { border-top:0; }
-  .picker svg { width:52px; height:52px; display:block; background:var(--paper); border-radius:14px; padding:4px; }
+  .picker img { width:52px; height:52px; display:block; background:var(--paper); border-radius:14px; padding:4px; object-fit:contain; }
   .picker .nm { font:400 22px/1.05 var(--serif); }
   .picker .nm small { display:block; font:400 13px/1.3 var(--sans); color:var(--ink-2); margin-top:3px; }
   .step { display:inline-flex; align-items:center; background:var(--paper); border-radius:999px; }
@@ -264,7 +266,7 @@
   @media (max-width: 560px) { .nav .btn { display:none; } .nav .pill span { display:none; } }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
-    .ticker .row, .js .hero .pic img, .js .tagcard, .nav .pill.bump { animation:none; }
+    .ticker .row, .js .hero .pic img, .js .tagcard, .nav .pill.bump, .js .stage[data-live] svg { animation:none; }
     .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
   }
 </style>
@@ -313,7 +315,7 @@
       <p data-r>Dodawaj łodygi, a bukiet ułoży się w papierze tak, jak wiążemy go przy straganie. Na bileciku napiszemy ręcznie, co chcesz.</p>
     </div>
     <div class="grid">
-      <div class="stage" data-stage>
+      <div class="stage" data-stage data-live>
         <svg viewBox="0 0 600 700" role="img" aria-labelledby="bq-desc" data-svg>
           <title id="bq-desc">Podgląd bukietu</title>
           <defs>
@@ -326,17 +328,18 @@
             <linearGradient id="g-leaf" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#3b5534"/><stop offset="1" stop-color="#718d5b"/></linearGradient>
             <linearGradient id="g-paper" x1="0" x2="1"><stop offset="0" data-ps="0"/><stop offset=".55" data-ps="1"/><stop offset="1" data-ps="0"/></linearGradient>
             <linearGradient id="g-paper-in" x1="0" y1="0" x2="0" y2="1"><stop offset="0" data-ps="2"/><stop offset="1" data-ps="0"/></linearGradient>
-            <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.9 .62" result="a"/><feComposite in="a" in2="SourceGraphic" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter>
+            <pattern id="noise" patternUnits="userSpaceOnUse" width="128" height="128"><image data-noise width="128" height="128"/></pattern><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.9 .62" result="a"/><feComposite in="a" in2="SourceGraphic" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter>
             <filter id="soft" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3a2a14" flood-opacity=".22"/></filter>
           </defs>
           <ellipse cx="300" cy="664" rx="140" ry="11" fill="#3a2a14" opacity=".12"/>
-          <g data-sway>
-            <path data-back filter="url(#grain)" fill="url(#g-paper-in)"/>
+          <g>
+            <path data-back fill="url(#g-paper-in)"/><path data-nz="back" fill="url(#noise)"/>
             <g data-l-leaf></g><g data-l-spike></g><g data-l-branch></g><g data-l-cloud></g>
             <path data-stems-l fill="none" stroke="#56743f" stroke-width="2.6" stroke-linecap="round"/>
             <g data-l-head></g>
-            <path data-front-l filter="url(#grain)" fill="url(#g-paper)"/>
-            <path data-front-r fill="url(#g-paper)" style="filter:url(#grain) drop-shadow(-3px 0 4px rgb(58 42 20 / .2))"/>
+            <path data-front-l fill="url(#g-paper)"/><path data-nz="l" fill="url(#noise)"/>
+            <path data-shadow fill="#3a2a14" opacity=".14" transform="translate(-4 1)"/>
+            <path data-front-r fill="url(#g-paper)"/><path data-nz="r" fill="url(#noise)"/>
             <path data-folds fill="none" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
             <g data-ends></g>
             <g data-tie></g>
@@ -591,7 +594,6 @@ document.documentElement.classList.add("js");
     },
     leaf: function () { return '<path d="M0 0C15 -22 15 -62 0 -88C-15 -62 -15 -22 0 0Z" fill="url(#g-leaf)"/><path d="M0 -4V-80" stroke="#2f4529" stroke-width=".8" opacity=".6"/>'; }
   };
-  var THUMB = { spike:"-28 -158 56 162", branch:"-34 -150 64 154", cloud:"-80 -92 160 100", head:"-50 -50 100 100" };
 
   // ---------- karty: wiadra, picker, cennik, bukiety tygodnia, pasek ----------
   var stemsUl = document.querySelector("[data-stems]"), picker = document.querySelector("[data-picker]"), priceT = document.querySelector("[data-price-stems]");
@@ -601,14 +603,34 @@ document.documentElement.classList.add("js");
   ORDER.forEach(function (k, i) {
     var f = F[k], unit = f.k === "branch" || f.k === "cloud" ? "gałązka" : "łodyga";
     stemsUl.insertAdjacentHTML("beforeend", '<li class="stem" data-r><figure><img src="assets/' + f.img + '" width="' + f.w + '" height="' + f.h + '" loading="lazy" alt="' + f.alt + '"></figure><div class="tx"><h3>' + f.n + '</h3><p class="note">' + f.note + '</p><div class="row"><span class="pr">' + f.p + ' zł <small>/ ' + unit + '</small></span><button type="button" class="add" data-add="' + k + '" data-n="0" aria-label="Dodaj do bukietu: ' + f.n + '">+ do bukietu</button></div></div></li>');
-    picker.insertAdjacentHTML("beforeend", '<li><svg viewBox="' + THUMB[f.k] + '" aria-hidden="true"></svg><span class="nm">' + f.n + '<small>' + f.p + ' zł · ' + f.note + '</small></span><span class="step"><button type="button" data-minus="' + k + '" aria-label="Odejmij: ' + f.n + '">−</button><output data-out="' + k + '">0</output><button type="button" data-plus="' + k + '" aria-label="Dodaj: ' + f.n + '">+</button></span></li>');
+    picker.insertAdjacentHTML("beforeend", '<li><img data-thumb="' + k + '" alt="" width="52" height="52"><span class="nm">' + f.n + '<small>' + f.p + ' zł · ' + f.note + '</small></span><span class="step"><button type="button" data-minus="' + k + '" aria-label="Odejmij: ' + f.n + '">−</button><output data-out="' + k + '">0</output><button type="button" data-plus="' + k + '" aria-label="Dodaj: ' + f.n + '">+</button></span></li>');
     priceT.insertAdjacentHTML("beforeend", "<tr><td>" + f.n + "<small>" + f.note + "</small></td><td>" + f.p + " zł</td></tr>");
   });
-  // miniatury: własna kopia gradientów z unikalnymi id
-  picker.querySelectorAll("svg").forEach(function (s, i) {
-    var pre = "t" + i + "-", own = function (m) { return m.replace(/id="/g, 'id="' + pre).replace(/url\(#/g, "url(#" + pre); };
-    s.innerHTML = "<defs>" + own(defs.replace(/<filter[\s\S]*?<\/filter>/g, "")) + "</defs>" + own(DRAW[ORDER[i]]());
-  });
+  // ---------- rastry: każdy kwiat rysujemy raz do bitmapy ----------
+  // Scena przesuwa wtedy ~40 obrazków zamiast tysięcy wektorowych płatków.
+  var BOX = { head:[-50, -50, 100, 100], spike:[-28, -158, 56, 162], branch:[-34, -150, 64, 154], cloud:[-80, -92, 160, 100], leaf:[-16, -92, 32, 96] };
+  var gradDefs = defs.replace(/<filter[\s\S]*?<\/filter>/g, "").replace(/<pattern[\s\S]*?<\/pattern>/g, ""), RASTER = {};
+  function boxOf(kind) { return BOX[F[kind] ? F[kind].k : "leaf"]; }
+  function vecSrc(kind) { var b = boxOf(kind); return "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="' + b[2] * 4 + '" height="' + b[3] * 4 + '" viewBox="' + b.join(" ") + '"><defs>' + gradDefs + "</defs>" + DRAW[kind]() + "</svg>"); }
+  function rasterize(kind) {
+    return new Promise(function (done) {
+      var b = boxOf(kind), img = new Image(), src = vecSrc(kind);
+      img.onload = function () {
+        try {
+          var c = document.createElement("canvas"); c.width = b[2] * 4; c.height = b[3] * 4;
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (bl) { RASTER[kind] = bl ? URL.createObjectURL(bl) : src; done(); }, "image/png");
+        } catch (e) { RASTER[kind] = src; done(); }
+      };
+      img.onerror = function () { RASTER[kind] = src; done(); };
+      img.src = src;
+    });
+  }
+  function noiseTile() {
+    var c = document.createElement("canvas"); c.width = c.height = 128; var x = c.getContext("2d"), d = x.createImageData(128, 128), R = rnd(4);
+    for (var i = 0; i < d.data.length; i += 4) { var v = R(), dark = v < .5; d.data[i] = d.data[i + 1] = d.data[i + 2] = dark ? 40 : 255; d.data[i + 3] = Math.round(Math.abs(v - .5) * 2 * (dark ? 32 : 26)); }
+    x.putImageData(d, 0, 0); return c.toDataURL("image/png");
+  }
 
   function recipePrice(w) { var p = 0; for (var k in w.r) p += F[k].p * w.r[k]; return p + (w.tie === "wstazka" ? 5 : 0); }
   var weekG = document.querySelector("[data-week]");
@@ -622,15 +644,16 @@ document.documentElement.classList.add("js");
   // ---------- scena ----------
   var svg = document.querySelector("[data-svg]"), L = {};
   ["leaf", "spike", "branch", "cloud", "head"].forEach(function (k) { L[k] = svg.querySelector("[data-l-" + k + "]"); });
-  var back = svg.querySelector("[data-back]"), frontL = svg.querySelector("[data-front-l]"), frontR = svg.querySelector("[data-front-r]"), folds = svg.querySelector("[data-folds]"), ends = svg.querySelector("[data-ends]"), tieG = svg.querySelector("[data-tie]"), tagG = svg.querySelector("[data-tag]"), stemsP = svg.querySelector("[data-stems-l]"), sway = svg.querySelector("[data-sway]");
+  var back = svg.querySelector("[data-back]"), frontL = svg.querySelector("[data-front-l]"), frontR = svg.querySelector("[data-front-r]"), shadow = svg.querySelector("[data-shadow]"), nz = { back:svg.querySelector('[data-nz="back"]'), l:svg.querySelector('[data-nz="l"]'), r:svg.querySelector('[data-nz="r"]') }, folds = svg.querySelector("[data-folds]"), ends = svg.querySelector("[data-ends]"), tieG = svg.querySelector("[data-tie]"), tagG = svg.querySelector("[data-tag]"), stemsP = svg.querySelector("[data-stems-l]"), stage = document.querySelector("[data-stage]"), lastR = -1;
   var stops = svg.querySelectorAll("[data-ps]");
   var CX = 300, CY = 270, BX = 300, BY = 452;
   var nodes = {}, leaves = [], curR = 70, tgtR = 70;
 
   function layerOf(kind) { return F[kind] ? F[kind].k : "leaf"; }
   function mk(id, kind) {
-    var g = document.createElementNS(NS, "g");
-    g.innerHTML = DRAW[kind](); L[layerOf(kind)].appendChild(g);
+    var g = document.createElementNS(NS, "g"), b = boxOf(kind), im = document.createElementNS(NS, "image");
+    im.setAttribute("href", RASTER[kind] || vecSrc(kind)); im.setAttribute("x", b[0]); im.setAttribute("y", b[1]); im.setAttribute("width", b[2]); im.setAttribute("height", b[3]);
+    g.appendChild(im); L[layerOf(kind)].appendChild(g);
     return { id:id, kind:kind, g:g, x:CX, y:CY - 160, r:0, s:.35, o:0, vx:0, vy:0, vr:0, vs:0, tx:CX, ty:CY, tr:0, ts:1, to:1 };
   }
   function set(st, x, y, r, s) {
@@ -678,11 +701,14 @@ document.documentElement.classList.add("js");
   function f1(v) { return v.toFixed(1); }
   function paperColors() { var p = PAPER[S.paper]; stops.forEach(function (s) { s.setAttribute("stop-color", p[+s.dataset.ps]); }); folds.setAttribute("stroke", p[2]); }
   function drawPaper(R) {
+    if (Math.abs(R - lastR) < .05) return; lastR = R;
     var top = CY - R * 1.02 - 22, w = R * 1.08 + 30, lo = CY + R * .36 + 30;
     back.setAttribute("d", "M" + f1(BX - 24) + " " + f1(BY + 6) + "L" + f1(CX - w) + " " + f1(CY - R * .2) + "C" + f1(CX - w * .7) + " " + f1(top) + " " + f1(CX + w * .7) + " " + f1(top - 10) + " " + f1(CX + w) + " " + f1(CY - R * .26) + "L" + f1(BX + 24) + " " + f1(BY + 6) + "Z");
     frontL.setAttribute("d", "M" + f1(BX - 6) + " " + f1(BY + 150) + "L" + f1(BX - 36) + " " + f1(BY + 10) + "L" + f1(CX - w * 1.02) + " " + f1(CY + R * .02 + 10) + "Q" + f1(CX - R * .5) + " " + f1(lo + 26) + " " + f1(CX + R * .34) + " " + f1(lo + 6) + "L" + f1(BX + 14) + " " + f1(BY + 10) + "L" + f1(BX + 22) + " " + f1(BY + 150) + "Z");
     frontR.setAttribute("d", "M" + f1(BX - 22) + " " + f1(BY + 150) + "L" + f1(BX - 14) + " " + f1(BY + 12) + "L" + f1(CX - R * .22) + " " + f1(lo + 14) + "Q" + f1(CX + R * .62) + " " + f1(lo + 18) + " " + f1(CX + w) + " " + f1(CY - R * .04 + 6) + "L" + f1(BX + 36) + " " + f1(BY + 10) + "L" + f1(BX + 8) + " " + f1(BY + 150) + "Z");
     folds.setAttribute("d", "M" + f1(BX - 20) + " " + f1(BY + 8) + "L" + f1(CX - R * .62) + " " + f1(lo + 4) + "M" + f1(BX + 18) + " " + f1(BY + 10) + "L" + f1(CX + R * .7) + " " + f1(lo - 2) + "M" + f1(BX - 2) + " " + f1(BY + 30) + "L" + f1(BX - 4) + " " + f1(BY + 140));
+    nz.back.setAttribute("d", back.getAttribute("d")); nz.l.setAttribute("d", frontL.getAttribute("d"));
+    nz.r.setAttribute("d", frontR.getAttribute("d")); shadow.setAttribute("d", frontR.getAttribute("d"));
   }
   function drawEnds() {
     var n = Math.max(3, Math.min(9, Math.round(S.stems.length / 2.5))), s = "";
@@ -705,7 +731,7 @@ document.documentElement.classList.add("js");
   function drawTag() {
     var txt = S.msg.trim(), lines = txt ? wrapText(txt, 16) : ["tu napiszemy", "Twój bilecik"], h = 50 + lines.length * 21;
     var s = '<path d="M' + (BX + 6) + " " + (BY + 34) + "Q" + (BX + 40) + " " + (BY + 70) + " " + (BX + 86) + " " + (BY + 92) + '" fill="none" stroke="#9c7a4c" stroke-width="1.6"/>';
-    s += '<g data-card transform="translate(' + (BX + 86) + " " + (BY + 92) + ')"><g transform="rotate(-7)"><rect x="-16" y="-4" width="150" height="' + h + '" rx="5" fill="#fffdf8" stroke="#e1d7c5" filter="url(#soft)"/><circle cx="-2" cy="9" r="4" fill="#ece3d4" stroke="#d6cab5"/>';
+    s += '<g data-card transform="translate(' + (BX + 86) + " " + (BY + 92) + ')"><g transform="rotate(-7)"><rect x="-14" y="0" width="150" height="' + h + '" rx="5" fill="#3a2a14" opacity=".1"/><rect x="-16" y="-4" width="150" height="' + h + '" rx="5" fill="#fffdf8" stroke="#e1d7c5"/><circle cx="-2" cy="9" r="4" fill="#ece3d4" stroke="#d6cab5"/>';
     s += '<text x="12" y="16" font-family="Instrument Sans, sans-serif" font-size="9" letter-spacing="1.6" fill="#7c8279">OSTRÓŻKA · WILDA</text>';
     lines.forEach(function (l, i) { s += '<text x="12" y="' + (44 + i * 21) + '" font-family="Caveat, cursive" font-size="22" font-weight="500" fill="' + (txt ? "#1e2a20" : "#a8a397") + '">' + esc(l) + "</text>"; });
     tagG.innerHTML = s + "</g></g>";
@@ -733,18 +759,14 @@ document.documentElement.classList.add("js");
     leaves.forEach(function (lf) { energy += stepNode(lf); place(lf); });
     stemsP.setAttribute("d", d);
     drawPaper(curR);
-    if (!reduce && visible) {
-      var tt = (t || 0) / 1000, c = tagG.querySelector("[data-card]");
-      sway.setAttribute("transform", "rotate(" + (Math.sin(tt * .9) * .7).toFixed(2) + " " + BX + " " + (BY + 150) + ")");
-      if (c) c.firstChild.setAttribute("transform", "rotate(" + (-7 + Math.sin(tt * 1.4) * 2.4).toFixed(2) + ")");
-      raf = requestAnimationFrame(frame);
-    } else if (energy > .05) raf = requestAnimationFrame(frame);
+    // pętla działa tylko, dopóki coś się układa; kołysanie robi CSS
+    if (energy > .05) raf = requestAnimationFrame(frame);
   }
   // na telefonie kadrujemy scenę ciaśniej, żeby bukiet był większy
   var mq = matchMedia("(max-width: 900px)");
   function crop() { svg.setAttribute("viewBox", mq.matches ? "50 40 500 630" : "0 0 600 700"); }
   crop(); mq.addEventListener ? mq.addEventListener("change", crop) : mq.addListener(crop);
-  if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) wake(); }).observe(document.querySelector("[data-stage]"));
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; stage.toggleAttribute("data-live", visible); }).observe(document.querySelector("[data-stage]"));
 
   // ---------- stan i panel ----------
   var tot = document.querySelector("[data-tot]"), when = document.querySelector("[data-when]"), bd = document.querySelector("[data-bd]"), warn = document.querySelector("[data-warn]"), pill = document.querySelector("[data-pill]");
@@ -830,9 +852,13 @@ document.documentElement.classList.add("js");
   document.querySelector("[data-order-o]").addEventListener("change", function (e) { pick("[data-deliv]", e.target.value); });
   document.querySelector("[data-notify]").addEventListener("submit", function (e) { e.preventDefault(); e.target.querySelector("[data-ok]").textContent = "Zapisane. Napiszemy, gdy przyjdą pierwsze piwonie."; });
 
-  // start: mały bukiet, żeby scena nie była pusta
+  // start: najpierw rastry kwiatów, potem mały bukiet, żeby scena nie była pusta
   paperColors(); drawTie(); drawTag();
-  load(EWA[0]);
+  svg.querySelector("[data-noise]").setAttribute("href", noiseTile());
+  Promise.all(Object.keys(DRAW).map(rasterize)).then(function () {
+    document.querySelectorAll("[data-thumb]").forEach(function (im) { im.src = RASTER[im.dataset.thumb]; });
+    if (!S.stems.length) load(EWA[0]);
+  });
 
   // ---------- dopasuj stopkę ----------
   var big = document.querySelector("[data-fit]");
