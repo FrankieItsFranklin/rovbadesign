@@ -175,13 +175,13 @@ export const polishProjects: Record<string, PolishCopy> = {
     category: "Kwiaciarnia",
     city: "Poznań",
     description:
-      "Koncept studia dla kwiaciarni przy Rynku Wildeckim w Poznaniu, nazwanej od ostróżki. Strona jest bilecikiem, który wkłada się do każdego bukietu, a bukiety wychodzą w szarym papierze i sznurku.",
+      "Koncept studia dla kwiaciarni przy Rynku Wildeckim w Poznaniu, nazwanej od ostróżki. Redakcyjny szeryf, całe pola koloru i zdjęcia pojedynczych łodyg, tak jak sprzedają najlepsze marki kwiatowe, przeniesione na stragan, który wszystko owija w szary papier.",
     challenge: "Strony kwiaciarni sprzedają te same róże ze stocku. Ten stragan sprzedaje to, co rano przyjechało z giełdy.",
-    approach: "Pierwszy ekran to sam bilecik; pod nim sześć karteczek z bukietami tygodnia i kreator, który owija łodygi w papier, gdy je dodajesz.",
+    approach: "Dzisiejsze wiadra jako kafle pojedynczych odmian, sześć bukietów tygodnia, które wczytują się do kreatora, i pracownia bukietu narysowana w kodzie: łodygi spadają w kopułę, papier i sznurek owijają je, a Twoje słowa trafiają na bilecik.",
     details: [
-      "Dodawaj łodygi po jednej, a bukiet rośnie w szarym papierze, z ceną i Twoimi słowami na bileciku.",
-      "XIX-wieczne ryciny botaniczne ostróżki obok zdjęć targu.",
-      "Trzy kamienne szarości i jedna szałwiowa zieleń, żeby cały kolor niosły kwiaty.",
+      "Osiem kwiatów narysowanych w SVG, ułożonych po spirali słonecznika ze sprężynową fizyką. Papier, sznurek albo lniana wstążka i bilecik, który się kołysze.",
+      "Pojedyncze łodygi na gładkim tle dla wiader, bukiety w szarym papierze dla okazji.",
+      "Kremowy papier, błękit ostróżki dla każdej akcji i jedno pole bordo dalii dla zamówień.",
     ],
   },
   kruszon: {
