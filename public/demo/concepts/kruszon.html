@@ -72,7 +72,11 @@
   .teaser .btn { margin-top:28px; }
   .teaser ul { list-style:none; padding:0; margin-top:22px; display:grid; gap:8px; }
   .teaser li { display:flex; gap:10px; align-items:center; } .teaser li::before { content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); }
-  .teaser-cake { display:block; max-width:560px; margin-inline:auto; }
+  /* tło za tortem: truskawka i kruszonka lecą za nim, tort na pierwszym planie */
+  .teaser-stage { position:relative; padding:40px 0; }
+  .teaser-stage .scatter { z-index:1; }
+  .teaser-stage .teaser-bg { z-index:2; }
+  .teaser-cake { position:relative; z-index:3; display:block; max-width:560px; margin-inline:auto; }
   .teaser-cake img { width:100%; transform:rotate(-3deg); transition:transform 700ms var(--ease-out); }
   .teaser-cake:hover img { transform:rotate(2deg) scale(1.03); }
   @media (prefers-reduced-motion: reduce) { .teaser-cake img { transition:none; } }
@@ -218,9 +222,10 @@
       <ul><li>od 8 do 60 osób, do trzech pięter</li><li>przekrój pokazuje, co jest w środku</li><li>odbiór w jednej z trzech cukierni</li></ul>
       <a class="btn" href="kruszon-tort.html">Zaprojektuj tort</a>
     </div>
-    <div data-r>
+    <div class="teaser-stage" data-r data-fly-box data-scatter="krusz:9 cukier:2">
+      <img class="flyer cut teaser-bg" aria-hidden="true" style="--w:clamp(90px,9vw,150px)" data-fly="-2 78 6 16 -24 18" src="assets/kruszon/gen/truskawka.webp" width="862" height="901" alt="">
       <a class="teaser-cake" href="kruszon-tort.html" aria-label="Zaprojektuj tort">
-        <img class="cut" src="assets/kruszon/gen/tort-pietrowy.webp" width="819" height="901" loading="lazy" alt="Dwupiętrowy tort z truskawkową polewą, truskawkami, makaronikami i kruszonką na paterze">
+        <img class="cut" src="assets/kruszon/gen/tort-pietrowy.webp" width="890" height="901" loading="lazy" alt="Dwupiętrowy tort z truskawkową polewą, truskawkami, makaronikami i kruszonką na paterze">
       </a>
     </div>
   </div>
