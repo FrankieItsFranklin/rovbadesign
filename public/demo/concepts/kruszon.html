@@ -72,7 +72,10 @@
   .teaser .btn { margin-top:28px; }
   .teaser ul { list-style:none; padding:0; margin-top:22px; display:grid; gap:8px; }
   .teaser li { display:flex; gap:10px; align-items:center; } .teaser li::before { content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); }
-  .teaser svg { width:100%; height:auto; }
+  .teaser-cake { display:block; max-width:560px; margin-inline:auto; }
+  .teaser-cake img { width:100%; transform:rotate(-3deg); transition:transform 700ms var(--ease-out); }
+  .teaser-cake:hover img { transform:rotate(2deg) scale(1.03); }
+  @media (prefers-reduced-motion: reduce) { .teaser-cake img { transition:none; } }
 
   .shops-t { padding-block:clamp(110px, 12vw, 160px); }
   .shops-t .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:40px; }
@@ -216,13 +219,9 @@
       <a class="btn" href="kruszon-tort.html">Zaprojektuj tort</a>
     </div>
     <div data-r>
-      <svg viewBox="0 0 400 360" aria-hidden="true">
-        <ellipse cx="200" cy="330" rx="170" ry="20" fill="rgb(0 0 0 / .08)"/>
-        <ellipse cx="200" cy="300" rx="160" ry="34" fill="var(--bg-2)"/><rect x="40" y="200" width="320" height="100" fill="#f6e3cf"/><ellipse cx="200" cy="300" rx="160" ry="34" fill="#f6e3cf" opacity="0"/><path d="M40 300a160 34 0 0 0 320 0" fill="#ecd3b9"/><ellipse cx="200" cy="200" rx="160" ry="34" fill="#fff6ea"/>
-        <rect x="90" y="110" width="220" height="90" fill="var(--accent)"/><path d="M90 200a110 24 0 0 0 220 0" fill="var(--accent-2)"/><ellipse cx="200" cy="110" rx="110" ry="24" fill="#fff6ea"/>
-        <path d="M90 110 q8 30 14 0 q8 40 16 0 q8 24 16 0 q8 36 16 0 q8 26 16 0 q8 40 16 0 q8 22 16 0 q8 34 16 0 q8 26 16 0 q8 38 16 0 q8 24 16 0 q8 30 16 0 q8 22 16 0 Z" fill="#5a2e1e"/>
-        <g fill="#d8283a"><circle cx="150" cy="104" r="9"/><circle cx="180" cy="98" r="9"/><circle cx="222" cy="98" r="9"/><circle cx="252" cy="104" r="9"/></g>
-      </svg>
+      <a class="teaser-cake" href="kruszon-tort.html" aria-label="Zaprojektuj tort">
+        <img class="cut" src="assets/kruszon/gen/tort-pietrowy.webp" width="819" height="901" loading="lazy" alt="Dwupiętrowy tort z truskawkową polewą, truskawkami, makaronikami i kruszonką na paterze">
+      </a>
     </div>
   </div>
 </section>
