@@ -28,7 +28,7 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){{var m=location.search.match(/[?&]pal=(\\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")}})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=2">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=3">
 """
 
 SPRITES = """<svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -72,7 +72,7 @@ DRAWER = """<div class="scrim" data-scrim></div>
 </aside>
 """
 
-CREDITS = """Zdjęcia (ciastka wycięte z tła na potrzeby strony): <a href="https://commons.wikimedia.org/wiki/File:Danish_(1).jpg">drożdżówka</a> i <a href="https://commons.wikimedia.org/wiki/File:Cupcake_(1).jpg">babeczka</a> Renee Comet, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Part_de_galette_des_rois_2013.jpg">ciasto francuskie</a> Lionel Allorge, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Souffl%C3%A9-style_cheesecake_001.jpg">sernik puszysty</a> Ocdp, CC0; <a href="https://commons.wikimedia.org/wiki/File:2023_Sernik_z_rodzynkami.jpg">sernik z rodzynkami</a> Jacek Halicki, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Marmorkuchen-Minigugelhupf_angeschnitten_2022.jpg">babka</a> VSchagow, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Jelly_Doughnut_Retouched.jpg">pączek w przekroju</a> Kevin Payravi, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Fat-Doughnut-Brooklyn-Strawberry-Filled.jpg">pączek</a> Evan-Amos, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_tart,_2015-06-06.jpg">kruche</a> Crisco 1492, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:VanillaMacaron.jpg">makaroniki</a> Michelle Naherny, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg">wiśnie</a> Benjamint444, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg">truskawka</a> Joselodos, CC0; <a href="https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa).jpg">truskawki</a> Ivar Leidus, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons."""
+CREDITS = """Zdjęcia wyrobów: wizualizacje przygotowane dla projektu. Zdjęcia z pracowni: <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons."""
 
 FOOTER = f"""<footer>
   <div class="wrap">
@@ -99,6 +99,6 @@ for fname, key, title, desc in PAGES:
     if m: script, src = m.group(0), src[:m.start()]
     html = (HEAD.format(pal=DEFAULT_PAL, title=title, desc=desc) + style + "</head>\n<body>\n" + SPRITES + header(key) +
             "<main>\n" + src.strip() + "\n</main>\n" + DRAWER + FOOTER +
-            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=2"></script>\n' + script + "\n</body>\n</html>\n")
+            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=3"></script>\n' + script + "\n</body>\n</html>\n")
     (OUT / fname).write_text(html, encoding="utf-8")
     print("ok", fname)

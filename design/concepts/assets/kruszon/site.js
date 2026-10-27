@@ -73,18 +73,16 @@
 
   // ---------- witryna ----------
   var P = window.KRUSZON_PRODUCTS = [
-    { id: "sernik", k: "torty", n: "Sernik z rodzynkami", w: "kawałek 0,15 kg", p: 9, img: "sernik.webp", badge: "Hit", d: "Na twarogu z Łowicza, z rodzynkami moczonymi w rumie i kruszonką na wierzchu.", al: "mleko, jaja, gluten" },
-    { id: "japonski", k: "torty", n: "Sernik puszysty", w: "cały, 0,8 kg", p: 58, img: "sernik-japonski.webp", d: "Lekki jak suflet, pieczony w kąpieli wodnej. Najlepszy następnego dnia.", al: "mleko, jaja, gluten" },
-    { id: "francuskie", k: "torty", n: "Pithivier migdałowy", w: "kawałek 0,14 kg", p: 11, img: "francuskie.webp", badge: "Nowość", d: "Ciasto francuskie na maśle z kremem migdałowym. Tylko w październiku.", al: "gluten, mleko, jaja, migdały" },
-    { id: "babka", k: "torty", n: "Babka marmurkowa", w: "cała, 0,45 kg", p: 24, img: "babka.webp", d: "Waniliowo-kakaowa, wilgotna, pieczona w małych formach.", al: "gluten, mleko, jaja" },
-    { id: "kruche", k: "ciastka", n: "Kruche z truskawką", w: "1 szt., 0,07 kg", p: 6, img: "kruche.webp", d: "Kruche ciasto na żółtkach i dżem z truskawek z Kaszub.", al: "gluten, mleko, jaja" },
-    { id: "makaroniki", k: "ciastka", n: "Makaroniki waniliowe", w: "3 szt.", p: 15, img: "makaroniki.webp", badge: "Nowość", d: "Z mąki migdałowej i prawdziwej wanilii z Madagaskaru.", al: "migdały, jaja, mleko" },
-    { id: "babeczka", k: "ciastka", n: "Babeczka czekoladowa", w: "1 szt., 0,09 kg", p: 8, img: "babeczka.webp", d: "Mokra w środku, z kremem z gorzkiej czekolady.", al: "gluten, mleko, jaja" },
-    { id: "truskawki", k: "ciastka", n: "Tartaletka z truskawką", w: "1 szt.", p: 12, img: "truskawki.webp", d: "Krem waniliowy, świeże truskawki, kruchy spód.", al: "gluten, mleko, jaja" },
+    { id: "sernik", k: "torty", n: "Sernik z kruszonką", w: "kawałek 0,15 kg", p: 10, img: "sernik.webp", badge: "Hit", d: "Na twarogu z Łowicza, na kruchym spodzie, z grubą warstwą maślanej kruszonki.", al: "mleko, jaja, gluten" },
+    { id: "truskawkowy", k: "torty", n: "Tort truskawkowy", w: "kawałek 0,16 kg", p: 14, img: "tort-truskawkowy.webp", badge: "Nowość", d: "Biszkopt, śmietanka, prażone truskawki w środku i świeże na wierzchu.", al: "mleko, jaja, gluten" },
+    { id: "czekoladowy", k: "torty", n: "Tort czekoladowy", w: "kawałek 0,16 kg", p: 14, img: "tort-czekoladowy.webp", d: "Trzy warstwy biszkoptu kakaowego, krem czekoladowy i lustrzana polewa.", al: "mleko, jaja, gluten, soja" },
+    { id: "babka", k: "torty", n: "Babka marmurkowa", w: "cała, 0,8 kg", p: 36, img: "babka.webp", d: "Waniliowo-kakaowa, wilgotna, oprószona cukrem pudrem.", al: "gluten, mleko, jaja" },
+    { id: "kremowka", k: "ciastka", n: "Kremówka", w: "1 szt., 0,14 kg", p: 9, img: "kremowka.webp", badge: "Hit", d: "Ciasto francuskie na maśle i krem budyniowy z prawdziwą wanilią.", al: "gluten, mleko, jaja" },
+    { id: "tartaletka", k: "ciastka", n: "Tartaletka z truskawkami", w: "1 szt., 0,12 kg", p: 13, img: "tartaletka.webp", d: "Kruchy spód, krem waniliowy, truskawki i siekane pistacje.", al: "gluten, mleko, jaja, pistacje" },
+    { id: "makaroniki", k: "ciastka", n: "Makaroniki", w: "3 szt.: malina, pistacja, wanilia", p: 16, img: "makaroniki.webp", badge: "Nowość", d: "Z mąki migdałowej, nadziewane konfiturą, kremem pistacjowym i waniliowym.", al: "migdały, pistacje, jaja, mleko" },
     { id: "paczek", k: "paczki", n: "Pączek z różą", w: "1 szt., 0,09 kg", p: 4.5, img: "paczek.webp", badge: "Hit", d: "Z konfiturą z płatków róży gotowaną latem, w cukrze pudrze.", al: "gluten, mleko, jaja" },
-    { id: "przekroj", k: "paczki", n: "Pączek z konfiturą", w: "1 szt., 0,09 kg", p: 5, img: "paczek-przekroj.webp", d: "Z konfiturą wiśniową i lukrem.", al: "gluten, mleko, jaja" },
+    { id: "przekroj", k: "paczki", n: "Pączek z konfiturą", w: "1 szt., 0,09 kg", p: 5, img: "paczek-przekroj.webp", d: "Z konfiturą wiśniową, nadziewany ręcznie, dużo nadzienia.", al: "gluten, mleko, jaja" },
     { id: "drozdzowka", k: "paczki", n: "Drożdżówka z kruszonką", w: "1 szt., 0,12 kg", p: 6.5, img: "drozdzowka.webp", d: "Nasza nazwa w jednym ciastku: dużo kruszonki, mało ciasta.", al: "gluten, mleko, jaja" },
-    { id: "wisnie", k: "paczki", n: "Drożdżowe z wiśnią", w: "1 szt., 0,12 kg", p: 7, img: "wisnie.webp", d: "Z wiśniami z własnych słoików.", al: "gluten, mleko, jaja" },
   ];
   var zl = window.KRUSZON_ZL = function (v) { return (Math.round(v * 100) / 100).toLocaleString("pl-PL", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 }) + " zł"; };
   var CAT = { torty: "Ciasta i torty", ciastka: "Ciastka", paczki: "Pączki i drożdżowe" };
@@ -95,7 +93,7 @@
     P.filter(function (x) { return !cat || x.k === cat; }).slice(0, lim).forEach(function (x) {
       var li = document.createElement("li"); li.className = "prod"; li.dataset.k = x.k;
       li.innerHTML = (x.badge ? '<span class="badge">' + x.badge + "</span>" : "") +
-        '<div class="ph"><img class="cut" src="assets/kruszon/cut/' + x.img + '" alt="' + x.n + '" loading="lazy"></div>' +
+        '<div class="ph"><img class="cut" src="assets/kruszon/gen/' + x.img + '" alt="' + x.n + '" loading="lazy"></div>' +
         '<p class="k">' + CAT[x.k] + "</p><h3>" + x.n + '</h3><p class="w">' + x.w + "</p>" +
         (full ? '<p class="d">' + x.d + '</p><p class="al">Alergeny: ' + x.al + "</p>" : "") +
         '<div class="bot"><span class="pr">' + zl(x.p) + '</span><button type="button" class="add" aria-label="Dodaj do koszyka: ' + x.n + '"><svg aria-hidden="true"><use href="#cart"/></svg></button></div>';
@@ -119,7 +117,7 @@
     Object.keys(cart).forEach(function (id) {
       var x = P.find(function (p) { return p.id === id; }); if (!x) return; var q = cart[id]; tot += q * x.p; n += q;
       var li = document.createElement("li");
-      li.innerHTML = '<img src="assets/kruszon/cut/' + x.img + '" alt=""><div><b>' + x.n + "</b><small>" + zl(x.p) + ' / szt.</small></div><div class="qty"><button type="button" aria-label="Mniej">−</button><span>' + q + '</span><button type="button" aria-label="Więcej">+</button></div>';
+      li.innerHTML = '<img src="assets/kruszon/gen/' + x.img + '" alt=""><div><b>' + x.n + "</b><small>" + zl(x.p) + ' / szt.</small></div><div class="qty"><button type="button" aria-label="Mniej">−</button><span>' + q + '</span><button type="button" aria-label="Więcej">+</button></div>';
       var bs = li.querySelectorAll("button"); bs[0].addEventListener("click", function () { add(id, -1); }); bs[1].addEventListener("click", function () { add(id, 1); });
       lines.appendChild(li);
     });

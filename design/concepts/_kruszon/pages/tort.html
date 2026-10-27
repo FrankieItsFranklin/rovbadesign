@@ -10,8 +10,6 @@
   .canvas .sec { position:absolute; right:12px; top:12px; width:30%; background:var(--card); border-radius:14px; padding:8px; box-shadow:0 14px 30px -18px rgb(0 0 0 / .4); transition:transform 400ms var(--ease-out); }
   .canvas .sec p { font-size:12px; color:var(--soft); margin:2px 4px 4px; }
   .canvas[data-view="przekroj"] .sec { transform:scale(2.6); transform-origin:100% 0; }
-  .flame { animation:flick 900ms ease-in-out infinite alternate; transform-box:fill-box; transform-origin:50% 100%; }
-  @keyframes flick { to { transform:scaleY(1.12) scaleX(.9) rotate(4deg); } }
   .sum { display:grid; grid-template-columns:1fr auto; gap:6px 18px; align-items:end; }
   .sum .price { font:400 clamp(54px, 5vw, 76px)/1 var(--display); color:var(--head); grid-row:span 2; }
   .sum .meta { text-align:right; font-size:15px; }
@@ -67,7 +65,6 @@
     .row2c { grid-template-columns:1fr; }
     .how .grid { grid-template-columns:1fr 1fr; gap:12px; }
   }
-  @media (prefers-reduced-motion: reduce) { .flame { animation:none; } }
 </style>
 
 <section class="phead wrap" aria-labelledby="h1">
@@ -184,10 +181,7 @@
         <label><input type="radio" name="fruit" value="borówki"><span><i style="--c:#3d4a8a"></i>Borówki</span></label>
         <label><input type="radio" name="fruit" value="maliny"><span><i style="--c:#d2386c"></i>Maliny</span></label>
       </div></fieldset>
-      <div class="row2c">
-        <label class="field">Napis na tabliczce <input name="text" maxlength="20" value="Sto lat!"></label>
-        <label class="field">Świeczki: <output data-candles-out>6</output><input type="range" name="candles" min="0" max="9" value="6"></label>
-      </div>
+      <label class="field">Napis na tabliczce <input name="text" maxlength="20" value="Sto lat!"></label>
       <div class="nav"><button type="button" class="btn ghost" data-prev>Wstecz</button><button type="button" class="btn" data-next>Dalej: odbiór</button></div>
     </div>
 
@@ -212,7 +206,7 @@
     <div class="grid">
       <article data-r><b>1</b><h3>Oddzwaniamy</h3><p>W godzinach pracy cukierni, zwykle w ciągu godziny. Ustalamy szczegóły i ewentualne alergie.</p></article>
       <article data-r><b>2</b><h3>Pieczemy</h3><p>Biszkopt dzień wcześniej, krem i dekoracje w dniu odbioru, żeby owoce były świeże.</p></article>
-      <article data-r><b>3</b><h3>Pakujemy</h3><p>W karton z okienkiem, z instrukcją przechowywania i świeczkami, jeśli je wybrałeś.</p></article>
+      <article data-r><b>3</b><h3>Pakujemy</h3><p>W karton z okienkiem, z instrukcją przechowywania i nożem do krojenia.</p></article>
       <article data-r><b>4</b><h3>Odbierasz</h3><p>Płacisz przy odbiorze. Na Widzewie wyniesiemy tort do samochodu.</p></article>
     </div>
   </div>
@@ -230,7 +224,7 @@
     fruit: { truskawki: "#d8283a", "wiśnie": "#7a0f22", "borówki": "#3d4a8a", maliny: "#d2386c" },
   };
   var PRICE = { kg: 95, base: { waniliowy: 0, czekoladowy: 15, orzechowy: 20, "red velvet": 25 }, cream: { "śmietankowy": 0, mascarpone: 15, czekoladowy: 15, pistacjowy: 30 }, fill: 25, coat: 15, drip: 30, tier: 70,
-    deco: { owoce: 35, makaroniki: 42, kwiaty: 55, "płatki": 30, tabliczka: 15 }, candle: 2 };
+    deco: { owoce: 35, makaroniki: 42, kwiaty: 55, "płatki": 30, tabliczka: 15 } };
   var zl = function (n) { return Math.round(n) + " zł"; };
   var g = function (n) { var el = f.querySelector('[name="' + n + '"]:checked'); return el ? el.value : null; };
   var decos = function () { return [].map.call(f.querySelectorAll('[name="deco"]:checked'), function (i) { return i.value; }); };
@@ -250,9 +244,19 @@
   function draw() {
     tierRule();
     var s = +g("size"), tiers = +g("tiers"), coat = C.coat[g("coat")], drip = C.drip[g("drip")], side = g("side"), base = C.base[g("base")], cream = C.cream[g("cream")], D = decos(), fruitC = C.fruit[g("fruit")];
-    var candles = +f.candles.value, text = f.text.value;
+    var text = f.text.value;
     all.innerHTML = "";
-    el("defs", {}).innerHTML = '<linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>';
+    el("defs", {}).innerHTML = '<linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>' +
+      '<radialGradient id="gStraw" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff6a6a"/><stop offset=".55" stop-color="#d8283a"/><stop offset="1" stop-color="#8e1222"/></radialGradient>' +
+      '<radialGradient id="gCut" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#fff3ec"/><stop offset=".5" stop-color="#ff9c9a"/><stop offset="1" stop-color="#d8283a"/></radialGradient>' +
+      '<radialGradient id="gRasp" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#ff8fb0"/><stop offset=".6" stop-color="#d2386c"/><stop offset="1" stop-color="#8f1d44"/></radialGradient>' +
+      '<radialGradient id="gBlue" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#8a97c9"/><stop offset=".5" stop-color="#4a5794"/><stop offset="1" stop-color="#232a52"/></radialGradient>' +
+      '<radialGradient id="gCherry" cx=".32" cy=".3" r=".8"><stop offset="0" stop-color="#d23a4c"/><stop offset=".55" stop-color="#8a1426"/><stop offset="1" stop-color="#4a0712"/></radialGradient>' +
+      '<linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e08a"/><stop offset=".45" stop-color="#d2a33a"/><stop offset="1" stop-color="#8f6a1c"/></linearGradient>' +
+      '<radialGradient id="gTop" cx=".42" cy=".35" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>' +
+      '<linearGradient id="gPlq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3a24"/><stop offset=".12" stop-color="#4a2416"/><stop offset="1" stop-color="#341a10"/></linearGradient>' +
+      '<radialGradient id="gPetalP" cx=".5" cy=".95" r=".95"><stop offset="0" stop-color="#ef9fb3"/><stop offset="1" stop-color="#fff4f6"/></radialGradient>' +
+      '<radialGradient id="gPetalW" cx=".5" cy=".95" r=".95"><stop offset="0" stop-color="#f2dcb6"/><stop offset="1" stop-color="#fffaf2"/></radialGradient>';
     var cx = 300, plateY = 520, R = 120 + Math.min(1, (s - 8) / 52) * 110, H = tiers === 1 ? 120 : tiers === 2 ? 100 : 86;
     // patera
     el("ellipse", { cx: cx, cy: 580, rx: 150, ry: 14, fill: "rgb(0 0 0 / .08)" });
@@ -271,10 +275,17 @@
         el("path", { d: body, fill: coat, opacity: .45 });
       } else {
         el("path", { d: body, fill: coat });
-        if (side === "rustykalne") for (var w = 0; w < 5; w++) { var y2 = yt + 14 + w * (H - 20) / 5; el("path", { d: "M" + (cx - r + 6) + " " + y2 + " A" + r + " " + ry + " 0 0 0 " + (cx + r - 6) + " " + y2, fill: "none", stroke: shade(coat, -0.12), "stroke-width": 3, "stroke-dasharray": (18 + w * 6) + " 14", "stroke-linecap": "round" }); }
+        // rustykalne: poziome fale kremu po szpachelce, cień pod każdym grzbietem i jasny refleks nad nim
+        if (side === "rustykalne") for (var w = 0; w < 5; w++) {
+          var y2 = yt + 12 + w * (H - 16) / 5, amp = 1.5 + rnd(w + t * 5) * 1.5, seg = 10, dpath = "";
+          for (var q = 0; q <= seg; q++) { var th2 = Math.PI - (q / seg) * Math.PI, xq = cx + Math.cos(th2) * r, yq = y2 + Math.sin(th2) * ry + Math.sin(q * 1.3 + w) * amp; dpath += (q ? " L" : "M") + xq.toFixed(1) + " " + yq.toFixed(1); }
+          el("path", { d: dpath, fill: "none", stroke: shade(coat, -0.09), "stroke-width": 5, "stroke-opacity": .55, "stroke-linecap": "round", "stroke-linejoin": "round" });
+          el("path", { d: dpath, fill: "none", stroke: "#fff", "stroke-width": 1.6, "stroke-opacity": .45, transform: "translate(0 -3)", "stroke-linecap": "round" });
+        }
       }
       el("path", { d: body, fill: "url(#sh)" });
       el("ellipse", { cx: cx, cy: yt, rx: r, ry: ry, fill: drip || shade(coat, 0.25) });
+      el("ellipse", { cx: cx, cy: yt, rx: r, ry: ry, fill: "url(#gTop)" });
       if (drip) {
         // pas polewy wzdłuż przedniej krawędzi i krople zaokrąglone na końcach
         el("path", { d: "M" + (cx - r) + " " + yt + " A" + r + " " + ry + " 0 0 0 " + (cx + r) + " " + yt + " L" + (cx + r) + " " + (yt + 9) + " A" + r + " " + ry + " 0 0 1 " + (cx - r) + " " + (yt + 9) + " Z", fill: drip });
@@ -287,35 +298,91 @@
         }
         el("ellipse", { cx: cx - r * 0.3, cy: yt - ry * 0.2, rx: r * 0.35, ry: ry * 0.25, fill: "#fff", opacity: .14 });
       }
-      if (D.indexOf("płatki") > -1) for (var p = 0; p < 7; p++) { var px = cx - r * 0.8 + rnd(p + t * 9) * r * 1.6, py = yt + 18 + rnd(p + t * 13) * (H - 30); el("path", { d: "M" + px + " " + py + " l5 -3 l4 4 l-3 5 l-6 -1 Z", fill: "#d4a52c" }); }
+      // złote płatki: cienkie, połamane drobiny przy górnej krawędzi boku, z jednej strony tortu
+      if (D.indexOf("płatki") > -1) for (var p = 0; p < 4; p++) {
+        var u = 0.1 + rnd(p + t * 9) * 0.7, px = cx + u * r, py = yt + Math.sqrt(1 - u * u) * ry + 5 + rnd(p + t * 13) * H * 0.25;
+        var a1 = 2 + rnd(p * 7 + t) * 3.5, a2 = 1 + rnd(p * 5 + t) * 2, rot = rnd(p * 3 + t) * 180;
+        el("path", { d: "M" + px + " " + py + " l" + a1 + " " + (-a2) + " l" + (a2 * 0.6) + " " + (a1 * 0.5) + " l" + (-a1 * 0.7) + " " + (a2 * 1.3) + " Z", fill: "url(#gGold)", opacity: .95, transform: "rotate(" + rot.toFixed(0) + " " + px.toFixed(1) + " " + py.toFixed(1) + ")" });
+      }
       top = { r: r, ry: ry, yt: yt }; yb = yt;
     }
-    // dekoracje na wierzchu, od tyłu do przodu
-    var items = [], tr = top.r, ty = top.yt, try_ = top.ry;
-    if (D.indexOf("owoce") > -1) for (var k = 0; k < Math.round(tr / 14); k++) { var an = (k / Math.round(tr / 14)) * Math.PI * 2; items.push({ z: Math.sin(an), x: cx + Math.cos(an) * (tr - 18), y: ty + Math.sin(an) * (try_ - 6), type: "fruit" }); }
-    if (D.indexOf("makaroniki") > -1) for (var m = 0; m < 4; m++) { var am = Math.PI + 0.5 + m * 0.55; items.push({ z: Math.sin(am) - 0.1, x: cx + Math.cos(am) * tr * 0.55, y: ty + Math.sin(am) * try_ * 0.55, type: "mac", c: ["#f4c4cd", "#d3e2b4", "#f7e3a6", "#cfe0f1"][m] }); }
-    if (D.indexOf("kwiaty") > -1) [[-0.45, 0.25], [-0.25, 0.45], [-0.6, 0.55]].forEach(function (q, qi) { items.push({ z: q[1], x: cx + q[0] * tr, y: ty + q[1] * try_, type: "flower", s: qi === 0 ? 1.2 : 0.9 }); });
-    for (var cnd = 0; cnd < candles; cnd++) { var ac = (cnd / Math.max(1, candles)) * Math.PI * 2 + 0.3; items.push({ z: Math.sin(ac) * 0.4, x: cx + Math.cos(ac) * tr * 0.3, y: ty + Math.sin(ac) * try_ * 0.3, type: "candle", c: ["#e5446d", "#8fb6dc", "#f2c94c", "#8fb35a"][cnd % 4] }); }
-    if (D.indexOf("tabliczka") > -1 && text.trim()) items.push({ z: -0.2, x: cx, y: ty - 4, type: "plaque" });
+    // dekoracje na wierzchu, od tyłu do przodu. Owoce leżą luźnym wieńcem: kąt i odległość od brzegu lekko się wahają,
+    // od przodu wieniec jest gęstszy, z tyłu rzadszy, a kilka owoców schodzi do środka, jak kładzie je cukiernik.
+    var items = [], tr = top.r, ty = top.yt, try_ = top.ry, fr = g("fruit");
+    var onTop = function (u, v) { return { x: cx + u * tr, y: ty + v * try_ }; };
+    if (D.indexOf("owoce") > -1) {
+      var nF = Math.round(tr / 11), fs = fr === "borówki" ? 0.85 : fr === "maliny" ? 1 : 1.15;
+      for (var k = 0; k < nF; k++) {
+        var an = (k + rnd(k * 5) * 0.6) / nF * Math.PI * 2, rr2 = 0.78 + rnd(k * 11) * 0.12, pt2 = onTop(Math.cos(an) * rr2, Math.sin(an) * rr2);
+        items.push({ z: Math.sin(an) * rr2, x: pt2.x, y: pt2.y, type: "fruit", s: (0.85 + rnd(k * 13) * 0.3) * fs, rot: (rnd(k * 17) - 0.5) * 70, cut: fr === "truskawki" && k % 3 === 1 });
+        if (fr === "borówki" && k % 2 === 0) { var pt3 = onTop(Math.cos(an + 0.08) * (rr2 - 0.1), Math.sin(an + 0.08) * (rr2 - 0.1)); items.push({ z: Math.sin(an) * (rr2 - 0.1), x: pt3.x, y: pt3.y, type: "fruit", s: 0.8 * fs, rot: 0 }); }
+      }
+      if (!D.length || D.indexOf("tabliczka") === -1) for (var k2 = 0; k2 < 3; k2++) { var p4 = onTop(-0.15 + k2 * 0.16, 0.05 + rnd(k2 + 50) * 0.2); items.push({ z: 0.1 + k2 * 0.05, x: p4.x, y: p4.y, type: "fruit", s: 1.05 * fs, rot: (rnd(k2 * 9) - 0.5) * 60 }); }
+    }
+    var hasPlq = D.indexOf("tabliczka") > -1 && text.trim(), plx = hasPlq && D.indexOf("kwiaty") > -1 ? -0.18 : 0;
+    if (D.indexOf("makaroniki") > -1) (hasPlq ? [[-0.5, 0.42, -14], [-0.1, 0.58, 6], [0.32, 0.48, 18]] : [[-0.42, 0.18, -14], [-0.16, 0.36, 6], [0.2, 0.32, 18]]).forEach(function (q, m) { var pm = onTop(q[0], q[1]); items.push({ z: q[1] + 0.02, x: pm.x, y: pm.y, type: "mac", c: ["#f4b8c6", "#cfdca6", "#f6e2b4"][m], rot: q[2] }); });
+    if (D.indexOf("kwiaty") > -1) (hasPlq ? [[0.6, 0.0, 1.5], [0.7, 0.3, 1.1], [0.42, 0.42, 1]] : [[0.42, -0.02, 1.6], [0.62, 0.22, 1.2], [0.26, 0.3, 1.05]]).forEach(function (q) { var pf = onTop(q[0], q[1]); items.push({ z: q[1], x: pf.x, y: pf.y, type: "flower", s: q[2] }); });
+    if (D.indexOf("tabliczka") > -1 && text.trim()) // tabliczka wbita przy tylnej krawędzi, żeby nic z przodu nie zasłaniało napisu
+    if (hasPlq) items.push({ z: -0.5, x: cx + plx * tr, y: ty - try_ * 0.42, type: "plaque" });
+    var shadow = function (x, y, rx2, ry2) { el("ellipse", { cx: x, cy: y, rx: rx2, ry: ry2, fill: "rgb(40 20 10 / .16)" }); };
     items.sort(function (a, b) { return a.z - b.z; }).forEach(function (o) {
+      var x = o.x, y = o.y, S = o.s || 1;
       if (o.type === "fruit") {
-        if (g("fruit") === "borówki") { el("circle", { cx: o.x, cy: o.y - 6, r: 7, fill: fruitC }); el("circle", { cx: o.x - 2, cy: o.y - 8, r: 2, fill: "#fff", opacity: .3 }); }
-        else if (g("fruit") === "wiśnie") { el("circle", { cx: o.x, cy: o.y - 8, r: 9, fill: fruitC }); el("path", { d: "M" + o.x + " " + (o.y - 16) + " q5 -14 12 -16", stroke: "#4c6b2a", "stroke-width": 2, fill: "none" }); }
-        else if (g("fruit") === "maliny") { for (var b = 0; b < 5; b++) el("circle", { cx: o.x - 5 + (b % 3) * 5, cy: o.y - 8 - Math.floor(b / 3) * 5, r: 4, fill: b % 2 ? fruitC : shade(fruitC, -0.15) }); }
-        else { el("path", { d: "M" + (o.x - 9) + " " + (o.y - 10) + " q9 26 18 0 q-9 -6 -18 0 Z", fill: fruitC }); el("path", { d: "M" + (o.x - 7) + " " + (o.y - 11) + " l7 -6 l7 6", fill: "#4c8a2a" }); }
+        var gr = el("g", { transform: "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") rotate(" + (o.rot || 0).toFixed(0) + ") scale(" + S.toFixed(2) + ")" });
+        if (fr === "borówki") {
+          shadow(1, 4, 8, 2.6); gr.appendChild(all.lastChild);
+          el("circle", { cx: 0, cy: -4, r: 7, fill: "url(#gBlue)" }, gr);
+          el("path", { d: "M-2.4 -9.6 l2.4 1.6 l2.4 -1.6 l-1 2.6 l1.4 1.8 h-5.6 l1.4 -1.8 Z", fill: "#1c2244", opacity: .8 }, gr);
+          el("ellipse", { cx: -2.6, cy: -6.4, rx: 2.2, ry: 1.4, fill: "#fff", opacity: .25 }, gr);
+        } else if (fr === "wiśnie") {
+          shadow(1, 5, 10, 3); gr.appendChild(all.lastChild);
+          el("path", { d: "M1 -13 C 3 -24, 8 -30, 15 -33", stroke: "#5d7a2e", "stroke-width": 1.8, fill: "none", "stroke-linecap": "round" }, gr);
+          el("circle", { cx: 15, cy: -33, r: 1.4, fill: "#3e4f1d" }, gr);
+          el("path", { d: "M0 -13 C -8 -15, -10 -6, -7 -1 C -4 4, 4 4, 7 -1 C 10 -6, 8 -15, 0 -13 Z", fill: "url(#gCherry)" }, gr);
+          el("ellipse", { cx: -3.5, cy: -8, rx: 2.4, ry: 1.6, fill: "#fff", opacity: .55, transform: "rotate(-30 -3.5 -8)" }, gr);
+        } else if (fr === "maliny") {
+          shadow(0, 4, 9, 3); gr.appendChild(all.lastChild);
+          var dr = [[0, -3], [-5, -4], [5, -4], [-2.5, -8], [2.5, -8], [-6, -9], [6, -9], [0, -12], [-3.5, -13], [3.5, -13]];
+          dr.forEach(function (d2, di) { el("circle", { cx: d2[0], cy: d2[1], r: 3.3 - di * 0.06, fill: "url(#gRasp)" }, gr); });
+          el("circle", { cx: 0, cy: -14.5, r: 1.6, fill: "#6e1232", opacity: .7 }, gr);
+        } else if (o.cut) {
+          shadow(0, 5, 11, 3); gr.appendChild(all.lastChild);
+          el("path", { d: "M0 -22 C -10 -22, -13 -12, -10 -5 C -7 2, -2 5, 0 6 C 2 5, 7 2, 10 -5 C 13 -12, 10 -22, 0 -22 Z", fill: "url(#gStraw)" }, gr);
+          el("path", { d: "M0 -19 C -8 -19, -10 -11, -8 -5 C -5 1, -1 3, 0 4 C 1 3, 5 1, 8 -5 C 10 -11, 8 -19, 0 -19 Z", fill: "url(#gCut)" }, gr);
+          el("path", { d: "M0 -17 C -2 -12, -2 -6, 0 1 C 2 -6, 2 -12, 0 -17 Z", fill: "#fff6f0", opacity: .9 }, gr);
+          el("path", { d: "M-6 -22 l3 -4 l3 3 l3 -3 l3 4 Z", fill: "#4f8a2c" }, gr);
+        } else {
+          shadow(0, 5, 11, 3.2); gr.appendChild(all.lastChild);
+          el("path", { d: "M0 -20 C -11 -20, -13 -10, -9 -3 C -6 3, -2 6, 0 7 C 2 6, 6 3, 9 -3 C 13 -10, 11 -20, 0 -20 Z", fill: "url(#gStraw)" }, gr);
+          [[-5, -12], [0, -14], [5, -11], [-3, -6], [3, -5], [0, 1], [-7, -7], [7, -6]].forEach(function (sd) { el("ellipse", { cx: sd[0], cy: sd[1], rx: .8, ry: 1.2, fill: "#f6d36a", opacity: .9 }, gr); });
+          el("ellipse", { cx: -4.5, cy: -13, rx: 2.4, ry: 3.6, fill: "#fff", opacity: .22, transform: "rotate(-20 -4.5 -13)" }, gr);
+          el("path", { d: "M0 -20 L-9 -25 L-4 -21 L-6 -28 L-1 -22 L0 -29 L1 -22 L6 -28 L4 -21 L9 -25 Z", fill: "#4f8a2c" }, gr);
+        }
       } else if (o.type === "mac") {
-        el("ellipse", { cx: o.x, cy: o.y - 6, rx: 16, ry: 6, fill: o.c }); el("rect", { x: o.x - 15, y: o.y - 14, width: 30, height: 6, fill: "#fff6e9" }); el("ellipse", { cx: o.x, cy: o.y - 14, rx: 16, ry: 6, fill: o.c });
+        var gm = el("g", { transform: "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") rotate(" + o.rot + ")" });
+        shadow(0, 2, 19, 5); gm.appendChild(all.lastChild);
+        var dk = shade(o.c, -0.12);
+        el("ellipse", { cx: 0, cy: -3, rx: 17, ry: 6, fill: dk }, gm);
+        el("path", { d: "M-16 -6 q2 3 4 0 q2 3 4 0 q2 3 4 0 q2 3 4 0 q2 3 4 0 q2 3 4 0 q2 3 4 0 q2 3 4 0 L16 -9 L-16 -9 Z", fill: shade(o.c, -0.05) }, gm);
+        el("rect", { x: -15, y: -13, width: 30, height: 4.5, rx: 2, fill: "#fff3e3" }, gm);
+        el("path", { d: "M-16 -13 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 q2 2.6 4 0 L16 -15 L-16 -15 Z", fill: shade(o.c, -0.05) }, gm);
+        el("ellipse", { cx: 0, cy: -16, rx: 17, ry: 6.5, fill: o.c }, gm);
+        el("ellipse", { cx: -5, cy: -18, rx: 7, ry: 2.2, fill: "#fff", opacity: .28 }, gm);
       } else if (o.type === "flower") {
-        for (var pt = 0; pt < 5; pt++) { var ap = pt / 5 * Math.PI * 2; el("ellipse", { cx: o.x + Math.cos(ap) * 9 * o.s, cy: o.y - 8 + Math.sin(ap) * 5 * o.s, rx: 8 * o.s, ry: 5 * o.s, fill: g("coat") === "pudrowy róż" ? "#fff6ea" : "#f4c4cd", transform: "rotate(" + (ap * 57.3) + " " + (o.x + Math.cos(ap) * 9 * o.s) + " " + (o.y - 8 + Math.sin(ap) * 5 * o.s) + ")" }); }
-        el("circle", { cx: o.x, cy: o.y - 8, r: 4 * o.s, fill: "#f2c94c" });
-      } else if (o.type === "candle") {
-        el("rect", { x: o.x - 3, y: o.y - 40, width: 6, height: 38, rx: 2, fill: o.c }); el("rect", { x: o.x - 3, y: o.y - 34, width: 6, height: 3, fill: "#fff", opacity: .7 }); el("rect", { x: o.x - 3, y: o.y - 22, width: 6, height: 3, fill: "#fff", opacity: .7 });
-        el("path", { d: "M" + o.x + " " + (o.y - 58) + " q7 10 0 16 q-7 -6 0 -16 Z", fill: "#ffb238", class: "flame" });
+        var gf = el("g", { transform: "translate(" + x.toFixed(1) + " " + (y - 3).toFixed(1) + ") scale(" + S + " " + (S * 0.62).toFixed(2) + ")" });
+        var pf2 = g("coat") === "pudrowy róż" ? "url(#gPetalW)" : "url(#gPetalP)";
+        el("ellipse", { cx: 0, cy: 5, rx: 22, ry: 10, fill: "rgb(40 20 10 / .12)" }, gf);
+        el("path", { d: "M-16 2 q-12 -2 -16 6 q10 4 16 -6 Z", fill: "#7ea25a" }, gf); el("path", { d: "M14 4 q12 0 16 8 q-11 2 -16 -8 Z", fill: "#6c9150" }, gf);
+        for (var pt = 0; pt < 5; pt++) { var ap = pt / 5 * 360 - 90; el("path", { d: "M0 0 C -9 -6, -10 -18, -3 -21 Q 0 -18 3 -21 C 10 -18, 9 -6, 0 0 Z", fill: pf2, transform: "rotate(" + ap + ")" }, gf); }
+        for (var pt2 = 0; pt2 < 5; pt2++) el("path", { d: "M0 0 C -5 -4, -6 -11, -2 -13 Q 0 -11 2 -13 C 6 -11, 5 -4, 0 0 Z", fill: "#fffaf5", opacity: .85, transform: "rotate(" + (pt2 / 5 * 360 - 54) + ")" }, gf);
+        el("circle", { cx: 0, cy: 0, r: 3.6, fill: "#e8b83c" }, gf);
+        for (var st = 0; st < 6; st++) el("circle", { cx: Math.cos(st) * 4.5, cy: Math.sin(st) * 4.5, r: .9, fill: "#b47e1e" }, gf);
       } else if (o.type === "plaque") {
-        var wpl = Math.min(tr * 1.3, 40 + text.length * 11);
-        el("rect", { x: o.x - 2, y: o.y - 72, width: 4, height: 70, fill: "#4a2416" });
-        el("rect", { x: o.x - wpl / 2, y: o.y - 112, width: wpl, height: 42, rx: 8, fill: "#4a2416" });
-        var tx = el("text", { x: o.x, y: o.y - 83, "text-anchor": "middle", "font-family": "Caveat, cursive", "font-size": 26, fill: "#f6e3c6" }); tx.textContent = text;
+        var avail = tr * (plx ? 1.1 : 1.4), fsz = Math.max(11, Math.min(24, (avail - 24) / (text.length * 0.47))), wpl = Math.min(avail, 26 + text.length * fsz * 0.47), hp = Math.max(30, fsz + 18), by = y + 4;
+        el("ellipse", { cx: x, cy: by + 2, rx: wpl * 0.55, ry: 5, fill: "rgb(40 20 10 / .18)" });
+        el("rect", { x: x - wpl / 2, y: by - hp, width: wpl, height: hp, rx: 6, fill: "url(#gPlq)" });
+        el("rect", { x: x - wpl / 2 + 3, y: by - hp + 3, width: wpl - 6, height: hp - 6, rx: 4, fill: "none", stroke: "#f6e3c6", "stroke-opacity": .35, "stroke-width": 1 });
+        var tx = el("text", { x: x, y: by - hp / 2 + 8, "text-anchor": "middle", "font-family": "Caveat, cursive", "font-size": fsz.toFixed(1), fill: "#f8ecd8" }); tx.textContent = text;
       }
     });
     // wyśrodkuj tort w pionie, zmniejsz, jeśli się nie mieści (skala zostaje ta sama przy zmianie wielkości)
@@ -346,13 +413,11 @@
     if (g("coat") !== "biały") lines.push(["Kolor kremu: " + g("coat"), PRICE.coat]);
     if (drip) lines.push(["Polewa: " + g("drip"), PRICE.drip]);
     D.forEach(function (d) { if (d !== "tabliczka" || text.trim()) lines.push([d === "płatki" ? "Złote płatki" : d === "tabliczka" ? "Tabliczka z napisem" : d[0].toUpperCase() + d.slice(1), PRICE.deco[d]]); });
-    if (candles) lines.push([candles + " świeczki", candles * PRICE.candle]);
     var tot = lines.reduce(function (a, l) { return a + l[1]; }, 0);
     document.querySelector("[data-price]").textContent = zl(tot);
     document.querySelector("[data-meta]").textContent = kg.toLocaleString("pl-PL", { maximumFractionDigits: 1 }) + " kg · " + s + " osób · " + tiers + (tiers === 1 ? " piętro" : " piętra");
     var days = tiers === 3 ? 5 : 3; document.querySelector("[data-ready]").textContent = "najwcześniej za " + days + " dni";
     document.querySelector("[data-breakdown]").innerHTML = lines.map(function (l) { return "<li><span>" + l[0] + "</span><span>" + zl(l[1]) + "</span></li>"; }).join("");
-    document.querySelector("[data-candles-out]").textContent = candles;
     var dEl = f.querySelector("[data-date]"), min = new Date(); min.setDate(min.getDate() + days);
     var iso = min.getFullYear() + "-" + String(min.getMonth() + 1).padStart(2, "0") + "-" + String(min.getDate()).padStart(2, "0");
     dEl.min = iso; if (!dEl.value || dEl.value < iso) dEl.value = iso;
@@ -362,17 +427,17 @@
 
   // stan w adresie: #s=12&t=1&b=…
   var KEYS = ["size", "tiers", "base", "cream", "fill", "side", "coat", "drip", "fruit"];
-  function save() { var q = new URLSearchParams(); KEYS.forEach(function (k) { q.set(k, g(k)); }); q.set("deco", decos().join(",")); q.set("text", f.text.value); q.set("candles", f.candles.value); history.replaceState(null, "", location.pathname + location.search + "#" + q.toString()); }
+  function save() { var q = new URLSearchParams(); KEYS.forEach(function (k) { q.set(k, g(k)); }); q.set("deco", decos().join(",")); q.set("text", f.text.value); history.replaceState(null, "", location.pathname + location.search + "#" + q.toString()); }
   function load(q) {
     KEYS.forEach(function (k) { var v = q.get(k); var i = v && f.querySelector('[name="' + k + '"][value="' + CSS.escape(v) + '"]'); if (i) i.checked = true; });
     if (q.has("deco")) { var ds = q.get("deco").split(","); f.querySelectorAll('[name="deco"]').forEach(function (i) { i.checked = ds.indexOf(i.value) > -1; }); }
-    if (q.has("text")) f.text.value = q.get("text"); if (q.has("candles")) f.candles.value = q.get("candles");
+    if (q.has("text")) f.text.value = q.get("text");
   }
   var PRE = {
-    urodziny: "size=12&tiers=1&base=czekoladowy&cream=czekoladowy&fill=wiśnia&side=gładkie&coat=czekolada&drip=karmel&fruit=wiśnie&deco=owoce,tabliczka&text=Sto lat!&candles=6",
-    dziecko: "size=12&tiers=1&base=waniliowy&cream=śmietankowy&fill=malina&side=gładkie&coat=pudrowy róż&drip=malina&fruit=maliny&deco=makaroniki,tabliczka&text=Hania 4&candles=4",
-    komunia: "size=30&tiers=2&base=waniliowy&cream=mascarpone&fill=truskawka&side=gładkie&coat=biały&drip=brak&fruit=truskawki&deco=kwiaty,tabliczka,płatki&text=Pamiątka Komunii&candles=0",
-    slub: "size=60&tiers=3&base=waniliowy&cream=mascarpone&fill=malina&side=naked&coat=biały&drip=brak&fruit=borówki&deco=kwiaty,owoce,płatki&text=&candles=0",
+    urodziny: "size=12&tiers=1&base=czekoladowy&cream=czekoladowy&fill=wiśnia&side=gładkie&coat=czekolada&drip=karmel&fruit=wiśnie&deco=owoce,tabliczka&text=Sto lat!",
+    dziecko: "size=12&tiers=1&base=waniliowy&cream=śmietankowy&fill=malina&side=gładkie&coat=pudrowy róż&drip=malina&fruit=maliny&deco=makaroniki,tabliczka&text=Hania 4",
+    komunia: "size=30&tiers=2&base=waniliowy&cream=mascarpone&fill=truskawka&side=gładkie&coat=biały&drip=brak&fruit=truskawki&deco=kwiaty,tabliczka,płatki&text=Pamiątka Komunii",
+    slub: "size=60&tiers=3&base=waniliowy&cream=mascarpone&fill=malina&side=naked&coat=biały&drip=brak&fruit=borówki&deco=kwiaty,owoce,płatki&text=",
   };
   document.querySelectorAll("[data-preset]").forEach(function (b) { b.addEventListener("click", function () { load(new URLSearchParams(PRE[b.dataset.preset])); draw(); save(); }); });
   document.querySelector("[data-random]").addEventListener("click", function () {
