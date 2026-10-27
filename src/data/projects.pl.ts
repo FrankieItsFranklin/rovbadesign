@@ -162,13 +162,13 @@ export const polishProjects: Record<string, PolishCopy> = {
     category: "Warsztat rowerowy",
     city: "Kraków",
     description:
-      "Koncept studia dla warsztatu rowerowego na Podgórzu, który naprawia rower w jeden dzień: oddajesz rano, odbierasz po siedemnastej. Nagłówek mówi dokładnie to, a koło stoi w miejscu słowa.",
+      "Koncept studia dla warsztatu rowerowego na Podgórzu, który naprawia rower w jeden dzień: oddajesz rano, odbierasz po siedemnastej. Ciemno, głośno i z ceną z góry, tak jak marki sprzedają rowery, a nie tak, jak warsztaty ukrywają naprawy.",
     challenge: "Warsztaty ukrywają ceny i nikt nie wie, kiedy rower będzie gotowy.",
-    approach: "Kartonowa przywieszka, która wisi na każdym rowerze w warsztacie, stała się zapisem: zaznaczasz, co nie działa, a przywieszka wpisuje cenę i godzinę odbioru.",
+    approach: "Pięć usług o stałej cenie, jak linia modeli, i rower, który można klikać: dotykasz hamulców albo koła, a kartonowa przywieszka wpisuje cenę i godzinę odbioru.",
     details: [
-      "Przywieszka liczy cenę i dzień odbioru według godziny na Twoim telefonie i kołysze się, gdy coś się zmienia.",
-      "Big Shoulders w oliwkowych wersalikach, w rozmiarze plakatu, nad Public Sans.",
-      "Kość i jedna oliwkowa zieleń, kolor starej ramy.",
+      "Klikalny rower w konturze. Przywieszka liczy cenę, typ roweru i dzień odbioru według godziny na Twoim telefonie i kołysze się, gdy coś się zmienia.",
+      "Archivo, rozciągnięty szeroko w plakatowych nagłówkach i numerze telefonu, w normalnej szerokości w reszcie.",
+      "Warsztatowa czerń, kość i jedna sygnałowa limonka, kolor kamizelki odblaskowej.",
     ],
   },
   ostrozka: {

@@ -3,350 +3,328 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Szprycha — warsztat rowerowy, Józefińska 17, Podgórze</title>
-<meta name="description" content="Warsztat rowerowy na Podgórzu: oddajesz rower rano, odbierasz po 17. Cennik na ścianie i przywieszka z ceną, zanim zaczniemy.">
+<title>Szprycha — serwis rowerowy, Józefińska 17, Podgórze</title>
+<meta name="description" content="Serwis rowerowy na Podgórzu w Krakowie. Oddajesz rano, odbierasz po 17. Kliknij, co nie działa, a zobaczysz cenę i godzinę odbioru, zanim przyjedziesz.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,100,400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js")</script>
 <style>
+  /* Szprycha v2. Referencje: VanMoof (ciemny ekran, jedna sygnałowa barwa, typografia na cały ekran),
+     Cowboy (na przemian zdjęcie z miasta i sam rower), Brompton (linia usług w rzędzie + dobór w trzech krokach),
+     Star Bicycle (konfigurator jako główne działanie). Poprzednia wersja: ../../../_archive/szprycha-v1.html */
   :root {
-    --bg:#ecebe7; --surface:#e1dfd9; --ink:#38450f; --muted:#5d683a; --line:#c9c8bd; --card:#d9c7a3; --card-ink:#3b2f17;
-    --display:"Big Shoulders", "Arial Narrow", sans-serif; --text:"Public Sans", system-ui, sans-serif;
-    --step-small:clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem); --step-body:clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-    --step-lead:clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem); --step-head:clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
-    --ease-out:cubic-bezier(.22,1,.36,1); --m:28px; --r:14px;
+    --ink:#0f100d; --ink-2:#1a1b17; --line:#2b2c27; --bone:#f1efe9; --paper:#ffffff; --grey:#8d8c84; --mute:#5d5c56;
+    --sig:#d4f53c; --sig-2:#bfe024;
+    --f:"Archivo", "Helvetica Neue", Arial, sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1); --m:clamp(16px, 4vw, 56px); --r:18px;
   }
   * { box-sizing:border-box; margin:0; }
   html, body { overflow-x:clip; }
   html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--ink); font:400 var(--step-body)/1.5 var(--text); -webkit-font-smoothing:antialiased; }
-  ::selection { background:var(--ink); color:var(--bg); }
+  body { background:var(--ink); color:var(--bone); font:400 17px/1.55 var(--f); -webkit-font-smoothing:antialiased; }
+  ::selection { background:var(--sig); color:var(--ink); }
   img { display:block; max-width:100%; height:auto; }
   a { color:inherit; }
-  :focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
-  .display { font-family:var(--display); font-weight:800; text-transform:uppercase; line-height:.88; letter-spacing:-.005em; }
-  .soft { color:var(--muted); }
-  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 26px; border-radius:var(--r); background:var(--ink); color:var(--bg); font:600 16px var(--text); text-decoration:none; border:0; cursor:pointer; transition:background-color 180ms ease, transform 140ms var(--ease-out); }
-  .btn:hover { background:#2a340a; }
-  .btn:active { transform:scale(.97); }
-  .btn:disabled { opacity:.45; cursor:not-allowed; }
-  .wrap { padding-inline:var(--m); max-width:1600px; margin-inline:auto; }
-  .grid { display:grid; grid-template-columns:repeat(12, 1fr); column-gap:24px; }
-
-  .js [data-reveal] [data-r] { opacity:0; transform:translateY(24px); transition:opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  button { font:inherit; color:inherit; }
+  :focus-visible { outline:3px solid var(--sig); outline-offset:3px; }
+  p { max-width:62ch; }
+  .wrap { max-width:1440px; margin-inline:auto; padding-inline:var(--m); }
+  .huge { font-weight:850; font-stretch:115%; text-transform:uppercase; letter-spacing:-.035em; line-height:.86; }
+  .h2 { font-weight:800; font-stretch:112%; text-transform:uppercase; letter-spacing:-.03em; line-height:.92; font-size:clamp(40px, 5.4vw, 88px); }
+  .kick { font:600 13px/1 var(--f); letter-spacing:.14em; text-transform:uppercase; color:var(--grey); }
+  .dot { color:var(--sig); }
+  .btn { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 26px; border-radius:999px; background:var(--sig); color:var(--ink); font:700 15px var(--f); letter-spacing:.02em; text-decoration:none; border:0; cursor:pointer; transition:background-color 160ms, transform 160ms var(--ease); }
+  .btn:hover { background:var(--sig-2); }
+  .btn:active { transform:scale(.96); }
+  .btn.ghost { background:transparent; color:currentColor; box-shadow:inset 0 0 0 1.5px currentColor; }
+  .btn.ghost:hover { background:rgb(128 128 128 / .12); }
+  .light { background:var(--bone); color:var(--ink); }
+  .white { background:var(--paper); color:var(--ink); }
+  .light .kick, .white .kick { color:var(--mute); }
+  .js [data-reveal] [data-r] { opacity:0; transform:translateY(26px); transition:opacity 800ms var(--ease), transform 800ms var(--ease); }
   .js [data-reveal].is-in [data-r] { opacity:1; transform:none; }
 
-  /* ---------- hero ---------- */
-  .top { position:absolute; inset:0 0 auto; z-index:3; display:flex; justify-content:space-between; align-items:center; padding:22px var(--m); font-size:15px; }
-  .top .mark { font:800 22px var(--display); text-transform:uppercase; text-decoration:none; letter-spacing:.02em; }
-  .top nav { display:flex; gap:28px; }
-  .top nav a { text-decoration:underline; text-decoration-color:transparent; text-underline-offset:6px; text-decoration-thickness:1.5px; transition:text-decoration-color 200ms ease; padding:6px 0; }
-  .top nav a:hover { text-decoration-color:currentColor; }
-  .top .short { display:none; }
-  .hero { position:relative; min-height:100svh; display:grid; grid-template-rows:1fr auto auto 1fr auto; padding:0 var(--m) 44px; }
-  .sentence { grid-row:2; font-size:clamp(96px, 12.4vw, 230px); line-height:.9; }
-  .sentence .ln { display:flex; align-items:baseline; gap:.22em; white-space:nowrap; }
-  .sentence .ln + .ln { margin-top:.06em; }
-  .strip { flex:1; align-self:center; height:.72em; min-width:1.6em; border-radius:var(--r); overflow:hidden; position:relative; transform:translateY(-.02em); }
-  
-  .js .strip { clip-path:inset(0 100% 0 0 round var(--r)); animation:shutter 1100ms 250ms var(--ease-out) forwards; }
-  .js .strip img { transform:scale(1.12); animation:settle 1500ms 250ms var(--ease-out) forwards; }
-  /* Koło kręci się powoli w szczelinie zdania: kwadrat szerszy od paska, obracany wokół piasty. */
-  .strip .spin { position:absolute; left:-6%; width:112%; aspect-ratio:1; top:50%; translate:0 -50%; animation:spin 40s linear infinite; }
-  .strip .spin img { width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
-  @keyframes spin { to { rotate:360deg; } }
-  @keyframes shutter { to { clip-path:inset(0 0 0 0 round var(--r)); } }
-  @keyframes settle { to { transform:none; } }
-  .sentence .w { display:inline-block; }
-  .js .sentence .w { animation:rise 900ms var(--ease-out) both; }
-  .js .sentence .ln:nth-child(2) .w { animation-delay:120ms; }
-  @keyframes rise { from { opacity:0; transform:translateY(30%); } to { opacity:1; transform:none; } }
-  .hero .act { grid-row:3; justify-self:center; margin-top:clamp(56px, 9vh, 120px); }
-  .hero .sub { grid-row:5; justify-self:center; text-align:center; max-width:44ch; font-size:var(--step-lead); line-height:1.35; }
-  .hero .now { display:inline-flex; gap:10px; align-items:center; margin-top:14px; font-size:var(--step-small); }
-  .hero .now i { width:9px; height:9px; border-radius:50%; background:var(--muted); }
-  .hero .now[data-open="true"] i { background:#6f8f12; box-shadow:0 0 0 0 rgb(111 143 18 / .5); animation:pulse 2.2s infinite; }
-  @keyframes pulse { 70% { box-shadow:0 0 0 9px rgb(111 143 18 / 0); } 100% { box-shadow:0 0 0 0 rgb(111 143 18 / 0); } }
+  /* ---------- nagłówek ---------- */
+  .nav { position:fixed; inset:0 0 auto; z-index:40; display:flex; align-items:center; gap:28px; padding:18px var(--m); transition:background-color 300ms, padding 300ms; }
+  .nav.solid { background:rgb(15 16 13 / .92); backdrop-filter:blur(10px); padding-block:12px; }
+  .nav .mark { font-weight:850; font-stretch:125%; font-size:22px; letter-spacing:-.02em; text-decoration:none; text-transform:uppercase; }
+  .nav .links { display:flex; gap:26px; margin-left:auto; font-weight:500; font-size:15px; }
+  .nav .links a { text-decoration:none; opacity:.85; } .nav .links a:hover { opacity:1; text-decoration:underline; text-underline-offset:6px; text-decoration-color:var(--sig); }
+  .nav .btn { min-height:44px; padding:0 20px; white-space:nowrap; }
+  .nav .tel { font-weight:700; text-decoration:none; }
 
-  section { padding-block:clamp(110px, 14vw, 180px); }
-  section.window { padding-block:0; }
+  /* ---------- hero (VanMoof) ---------- */
+  .hero { position:relative; min-height:100svh; display:grid; align-content:end; overflow:hidden; padding:120px var(--m) 0; }
+  .hero > .bg { position:absolute; inset:0; z-index:0; }
+  .hero > .bg img { width:100%; height:100%; object-fit:cover; object-position:50% 40%; filter:grayscale(1) contrast(1.15) brightness(.38); transform:scale(1.04); }
+  .js .hero > .bg img { animation:zoom 14s var(--ease) both; }
+  @keyframes zoom { from { transform:scale(1.18); } to { transform:scale(1.04); } }
+  .hero::after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(180deg, rgb(15 16 13 / .2), rgb(15 16 13 / .1) 40%, rgb(15 16 13 / .92)); }
+  .hero .in { position:relative; z-index:1; max-width:1440px; margin-inline:auto; width:100%; }
+  .hero h1 { font-size:clamp(64px, 11.2vw, 196px); }
+  .hero h1 > span { display:block; }
+  .js .hero h1 > span { animation:rise 1000ms var(--ease) both; } .js .hero h1 > span + span { animation-delay:120ms; }
+  @keyframes rise { from { opacity:0; transform:translateY(40%); } to { opacity:1; transform:none; } }
+  .hero .row { display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:end; margin-top:36px; }
+  .hero .lead { font-size:clamp(18px, 1.5vw, 22px); line-height:1.45; max-width:44ch; }
+  .hero .acts { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+  .hero .bar { display:grid; grid-template-columns:repeat(4, 1fr); margin-top:56px; border-top:1px solid rgb(255 255 255 / .18); }
+  .hero .bar div { padding:22px 20px 26px 0; }
+  .hero .bar b { display:block; font-weight:800; font-stretch:115%; font-size:clamp(28px, 2.6vw, 40px); letter-spacing:-.02em; }
+  .hero .bar span { font-size:14px; color:#c9c7bf; }
+  .now { display:inline-flex; align-items:center; gap:10px; font-size:15px; margin-bottom:22px; }
+  .now i { width:10px; height:10px; border-radius:50%; background:var(--grey); }
+  .now[data-open] i { background:var(--sig); box-shadow:0 0 0 0 rgb(212 245 60 / .6); animation:pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow:0 0 0 10px rgb(212 245 60 / 0); } 100% { box-shadow:0 0 0 0 rgb(212 245 60 / 0); } }
 
-  /* ---------- cennik: statement + tabela po prawej ---------- */
-  .list h2 { font-size:clamp(40px, 4.5vw, 68px); line-height:.98; }
-  .list h2 span { display:block; padding-left:3vw; }
-  .list .body { margin-top:96px; align-items:end; }
-  .list figure { grid-column:1 / 5; }
-  .list figure img { aspect-ratio:4/5; object-fit:cover; width:100%; border-radius:var(--r); }
-  .list .name { grid-column:7; align-self:start; font-size:14px; padding-top:4px; }
-  .list table { grid-column:8 / 13; border-collapse:collapse; width:100%; font-size:16px; }
-  .list td { padding:13px 0; vertical-align:baseline; }
-  .list td:first-child { color:var(--muted); width:30%; padding-right:12px; }
-  .list td:last-child { text-align:right; white-space:nowrap; font-weight:600; }
-  .list tr.gap td { padding-top:44px; }
+  section.pad { padding-block:clamp(100px, 11vw, 160px); }
 
-  /* ---------- przywieszka ---------- */
-  .tagsec { background:var(--surface); }
-  .tagsec .grid { align-items:start; }
-  .tagsec .intro { grid-column:1 / 6; }
-  .tagsec h2 { font-size:var(--step-head); }
-  .tagsec .intro p { margin-top:24px; max-width:40ch; }
-  .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:36px; }
-  .chip { min-height:48px; padding:0 18px; border-radius:var(--r); border:1.5px solid var(--ink); background:transparent; color:var(--ink); font:600 16px var(--text); cursor:pointer; transition:background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out); }
-  .chip small { font-weight:400; margin-left:6px; }
-  .chip:hover { background:rgb(56 69 15 / .08); }
-  .chip:active { transform:scale(.97); }
-  .chip[aria-pressed="true"] { background:var(--ink); color:var(--bg); }
-  .tag-wrap { grid-column:7 / 12; position:relative; padding-top:46px; }
-  .tag { position:relative; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:70px 32px 32px; transform:rotate(-2.2deg); transform-origin:50% 0; transition:transform 600ms var(--ease-out); }
-  .tag.bump { animation:swing 900ms var(--ease-out); }
-  @keyframes swing { 0% { transform:rotate(-2.2deg); } 30% { transform:rotate(1.8deg); } 60% { transform:rotate(-3deg); } 100% { transform:rotate(-2.2deg); } }
-  .tag::before { content:""; position:absolute; top:22px; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:50%; background:var(--surface); box-shadow:inset 0 0 0 4px #c5b28b; }
-  .tag::after { content:""; position:absolute; top:-46px; left:50%; width:2px; height:80px; margin-left:-1px; background:linear-gradient(#8a7a55, #6b5c3a); transform:rotate(8deg); transform-origin:bottom; }
-  .tag .no { display:flex; justify-content:space-between; font:800 18px var(--display); text-transform:uppercase; letter-spacing:.06em; padding-bottom:6px; }
-  .tag dl { margin-top:18px; display:grid; gap:14px; }
-  .tag dl div { display:grid; grid-template-columns:7.5em 1fr; gap:12px; background:#cfbb93; padding:10px 12px; }
-  .tag dt { font-size:14px; }
-  .tag dd { font:800 26px/1.05 var(--display); text-transform:uppercase; }
-  .tag dd.list-dd { font:600 16px/1.4 var(--text); text-transform:none; }
-  .tag .sum dd { font-size:44px; }
-  .tag label { display:block; margin-top:18px; font-size:14px; }
-  .tag input { display:block; width:100%; margin-top:6px; min-height:48px; padding:0 14px; border:0; border-radius:10px; background:#f3ead7; color:var(--card-ink); font:600 18px var(--text); }
-  .tag .btn { width:100%; margin-top:16px; }
-  .tag .done { margin-top:12px; font-weight:600; min-height:1.5em; }
+  /* ---------- linia usług (Brompton) ---------- */
+  .line .head { display:flex; justify-content:space-between; align-items:end; gap:24px; flex-wrap:wrap; margin-bottom:48px; }
+  .line .head p { color:var(--mute); }
+  .cards { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; }
+  .card { background:var(--paper); border-radius:var(--r); padding:26px 22px 24px; display:flex; flex-direction:column; gap:12px; transition:transform 350ms var(--ease), box-shadow 350ms; }
+  .card:hover { transform:translateY(-6px); box-shadow:0 24px 40px -28px rgb(0 0 0 / .35); }
+  .card .n { font:600 13px var(--f); letter-spacing:.12em; color:var(--mute); }
+  .card h3 { font-weight:800; font-stretch:112%; text-transform:uppercase; font-size:28px; line-height:.95; letter-spacing:-.02em; }
+  .card .who { font-size:15px; color:var(--mute); }
+  .card ul { list-style:none; padding:0; display:grid; gap:6px; font-size:15px; }
+  .card li { display:flex; gap:8px; } .card li::before { content:""; flex:none; width:6px; height:6px; margin-top:9px; border-radius:50%; background:var(--ink); }
+  .card .foot { margin-top:auto; display:flex; justify-content:space-between; align-items:end; gap:8px; padding-top:16px; border-top:1px solid #e7e5de; }
+  .card .pr { font-weight:800; font-stretch:112%; font-size:30px; letter-spacing:-.02em; line-height:1; }
+  .card .pr small { display:block; font:500 13px var(--f); letter-spacing:0; color:var(--mute); }
+  .card .t { font-size:14px; text-align:right; color:var(--mute); }
+  .card .btn { min-height:44px; padding:0 18px; font-size:14px; width:100%; justify-content:center; margin-top:12px; }
+  .card.hl { background:var(--ink); color:var(--bone); }
+  .card.hl .who, .card.hl .n, .card.hl .t, .card.hl .pr small { color:#b9b7ae; }
+  .card.hl li::before { background:var(--sig); }
+  .card.hl .foot { border-top-color:var(--line); }
 
-  /* ---------- schody ---------- */
-  .stairs ol { list-style:none; padding:0; display:grid; gap:56px; }
-  .stairs li { display:grid; grid-template-columns:repeat(12, 1fr); column-gap:24px; }
-  .stairs li > div { grid-column:var(--c) / 13; }
-  .stairs h3 { font-family:var(--display); font-weight:800; text-transform:uppercase; font-size:clamp(36px, 4.6vw, 76px); line-height:1; }
-  .stairs p { margin-top:12px; max-width:34ch; font-size:17px; }
-  .stairs li:last-child h3 { color:#6f8f12; }
+  /* ---------- konfigurator (Star Bicycle) ---------- */
+  .cfg .grid { display:grid; grid-template-columns:1.25fr .75fr; gap:clamp(24px, 4vw, 56px); align-items:start; margin-top:44px; }
+  .bike-box { background:var(--ink-2); border-radius:24px; padding:20px; position:relative; }
+  .bike-box svg { width:100%; height:auto; display:block; }
+  .bike-box .hint { position:absolute; left:24px; top:20px; font-size:14px; color:var(--grey); }
+  .part { cursor:pointer; }
+  .part .ln { fill:none; stroke:#5e5f57; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; transition:stroke 200ms; }
+  .part .thin { stroke-width:2.5; }
+  .part .hit { fill:none; stroke:transparent; stroke-width:34; stroke-linecap:round; }
+  .part:hover .ln { stroke:#a9aa9e; }
+  .part[aria-pressed="true"] .ln { stroke:var(--sig); }
+  .part:focus-visible { outline:none; } .part:focus-visible .ln { stroke:#fff; }
+  .lab { font:600 13px var(--f); fill:#8d8c84; paint-order:stroke; stroke:var(--ink-2); stroke-width:6px; stroke-linejoin:round; letter-spacing:.08em; text-transform:uppercase; pointer-events:none; transition:fill 200ms; }
+  .lab.on { fill:var(--sig); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .chips button { border:0; border-radius:999px; min-height:44px; padding:0 16px; background:var(--ink-2); color:var(--bone); font:600 14px var(--f); cursor:pointer; box-shadow:inset 0 0 0 1px var(--line); transition:background-color 160ms, color 160ms; }
+  .chips button[aria-pressed="true"] { background:var(--sig); color:var(--ink); box-shadow:none; }
+  .ticket { background:var(--bone); color:var(--ink); border-radius:16px 16px 22px 22px; padding:28px 26px 24px; position:sticky; top:90px; }
+  .ticket::before { content:""; position:absolute; top:16px; left:50%; width:18px; height:18px; margin-left:-9px; border-radius:50%; background:var(--ink); }
+  .ticket .top { display:flex; justify-content:space-between; font:600 13px var(--f); letter-spacing:.12em; text-transform:uppercase; color:var(--mute); padding-top:18px; }
+  .ticket ul { list-style:none; padding:0; margin-top:18px; display:grid; gap:10px; }
+  .ticket li { display:flex; justify-content:space-between; gap:12px; font-size:15px; padding-bottom:10px; border-bottom:1px dashed #cfccc2; }
+  .ticket li b { font-weight:700; white-space:nowrap; }
+  .ticket .empty { color:var(--mute); font-size:15px; margin-top:18px; }
+  .ticket .sum { display:flex; justify-content:space-between; align-items:end; margin-top:18px; }
+  .ticket .sum b { font-weight:850; font-stretch:115%; font-size:52px; letter-spacing:-.03em; line-height:.9; }
+  .ticket .sum span { font-size:14px; color:var(--mute); text-align:right; }
+  .ticket .ready { margin-top:14px; padding:12px 14px; border-radius:12px; background:var(--ink); color:var(--bone); font-weight:600; display:flex; justify-content:space-between; gap:12px; }
+  .ticket .ready span:last-child { color:var(--sig); }
+  .ticket label { display:block; margin-top:16px; font-size:14px; color:var(--mute); }
+  .ticket input { display:block; width:100%; margin-top:6px; min-height:50px; border-radius:12px; border:1.5px solid #d8d5cb; background:#fff; padding:0 14px; font:500 17px var(--f); color:var(--ink); }
+  .ticket .btn { width:100%; justify-content:center; margin-top:12px; background:var(--ink); color:var(--bone); }
+  .ticket .btn:hover { background:#000; }
+  .ticket .btn:disabled { opacity:.4; cursor:not-allowed; }
+  .ticket .done { margin-top:12px; font-weight:600; min-height:1.4em; }
+  .ticket.bump { animation:swing 800ms var(--ease); transform-origin:50% 0; }
+  @keyframes swing { 30% { transform:rotate(1.6deg); } 60% { transform:rotate(-1.2deg); } }
 
-  /* ---------- cena jako zdanie ---------- */
-  .offer { background:var(--ink); color:var(--bg); min-height:80svh; display:grid; align-content:center; }
-  .offer .s { font-size:clamp(56px, 8.4vw, 150px); line-height:.95; }
-  .offer .price { display:inline-block; background:var(--bg); color:var(--ink); padding:0 .15em; border-radius:10px; line-height:1; }
-  .offer .foot { margin-top:64px; align-items:end; }
-  .offer .foot p { grid-column:1 / 7; font-size:20px; max-width:46ch; }
-  .offer .foot .ctas { grid-column:10 / 13; justify-self:end; text-align:right; }
-  .offer .btn { background:var(--bg); color:var(--ink); }
-  .offer .btn:hover { background:#fff; }
-  .offer .ctas a.more { display:block; margin-top:14px; font-size:16px; }
+  /* ---------- obietnica (Cowboy: sam rower na białym) ---------- */
+  .promise .grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px, 6vw, 96px); align-items:center; }
+  .promise figure { margin:0; border-radius:24px; overflow:hidden; aspect-ratio:4/5; background:#eceae4; }
+  .promise figure img { width:100%; height:100%; object-fit:cover; transition:transform 1400ms var(--ease); }
+  .promise figure:hover img { transform:scale(1.04); }
+  .promise h2 { font-size:clamp(40px, 4.6vw, 74px); }
+  .promise ol { list-style:none; padding:0; margin-top:40px; display:grid; gap:26px; }
+  .promise li { display:grid; grid-template-columns:72px 1fr; gap:18px; align-items:start; }
+  .promise li b { font-weight:850; font-stretch:115%; font-size:44px; line-height:.9; letter-spacing:-.03em; }
+  .promise li h3 { font-weight:700; font-size:20px; }
+  .promise li p { margin-top:4px; color:var(--mute); }
 
-  /* ---------- o nas ---------- */
-  .about .grid { align-items:start; }
-  .about .facts { grid-column:1 / 3; display:grid; gap:18px; font-size:14px; }
-  .about .facts b { display:block; font-weight:600; }
-  .about .text { grid-column:3 / 13; font-size:clamp(24px, 2.5vw, 38px); line-height:1.2; }
-  .about .text img { float:left; width:3.6em; height:3.6em; object-fit:cover; margin:.12em .5em 0 0; }
-  .about .text p + p { margin-top:1.2em; }
-  .about .text .soft a { color:var(--ink); }
+  /* ---------- dzień w warsztacie ---------- */
+  .day .steps { display:grid; grid-template-columns:repeat(4, 1fr); margin-top:56px; position:relative; }
+  .day .steps::before { content:""; position:absolute; left:0; right:0; top:11px; height:2px; background:var(--line); }
+  .day .steps::after { content:""; position:absolute; left:0; top:11px; height:2px; width:var(--p, 0%); background:var(--sig); transition:width 1200ms var(--ease); }
+  .day .step { position:relative; padding-right:28px; }
+  .day .step i { display:block; position:relative; z-index:1; width:24px; height:24px; border-radius:50%; background:var(--ink); box-shadow:inset 0 0 0 2px var(--line); transition:box-shadow 400ms, background-color 400ms; }
+  .day .step.on i { background:var(--sig); box-shadow:none; }
+  .day .step b { display:block; margin-top:22px; font-weight:850; font-stretch:115%; font-size:clamp(40px, 4vw, 64px); letter-spacing:-.03em; line-height:.9; }
+  .day .step h3 { margin-top:12px; font-weight:700; font-size:20px; }
+  .day .step p { margin-top:6px; color:#bdbbb3; font-size:16px; }
 
-  /* ---------- ulica ---------- */
-  .street { padding-block:0; }
-  .street .pics { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:12px; }
-  .street figure { overflow:hidden; border-radius:var(--r); }
-  .street img { width:100%; height:clamp(260px, 32vw, 520px); object-fit:cover; transition:transform 1200ms var(--ease-out); }
-  .street figure:hover img { transform:scale(1.04); }
-  .street figcaption { font-size:var(--step-small); margin-top:8px; }
+  /* ---------- modele (Cowboy: rower w mieście) ---------- */
+  .models .rail { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(300px, 30%); gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:16px; margin-top:44px; scrollbar-width:thin; }
+  .model { scroll-snap-align:start; background:var(--paper); border-radius:var(--r); overflow:hidden; }
+  .model figure { margin:0; aspect-ratio:4/3; overflow:hidden; }
+  .model img { width:100%; height:100%; object-fit:cover; transition:transform 900ms var(--ease); }
+  .model:hover img { transform:scale(1.05); }
+  .model .tx { padding:20px 22px 22px; }
+  .model h3 { font-weight:800; font-stretch:112%; text-transform:uppercase; font-size:24px; letter-spacing:-.02em; }
+  .model .y { font-size:14px; color:var(--mute); }
+  .model dl { margin-top:12px; display:grid; gap:6px; font-size:15px; }
+  .model dt { font-size:13px; color:var(--mute); }
+  .model .p { margin-top:14px; display:flex; justify-content:space-between; align-items:end; font-weight:800; font-stretch:112%; font-size:26px; }
+  .model .p small { font:500 13px var(--f); color:var(--mute); }
+  .rail-nav { display:flex; gap:8px; }
+  .rail-nav button { width:48px; height:48px; border-radius:50%; border:0; background:var(--ink); color:var(--bone); cursor:pointer; font-size:20px; transition:transform 160ms var(--ease); }
+  .rail-nav button:active { transform:scale(.92); }
+
+  /* ---------- cennik ---------- */
+  .prices .grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(32px, 6vw, 96px); align-items:start; }
+  .prices .side { position:sticky; top:100px; }
+  .prices .side p { margin-top:18px; color:var(--mute); }
+  .prices .side figure { margin:28px 0 0; border-radius:var(--r); overflow:hidden; }
+  .prices details { border-bottom:1px solid #e2dfd6; }
+  .prices summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:22px 0; font-weight:800; font-stretch:112%; text-transform:uppercase; font-size:24px; letter-spacing:-.02em; }
+  .prices summary::-webkit-details-marker { display:none; }
+  .prices summary::after { content:"+"; font-weight:400; font-size:28px; transition:transform 250ms var(--ease); }
+  .prices details[open] summary::after { transform:rotate(45deg); }
+  .prices table { width:100%; border-collapse:collapse; margin-bottom:20px; font-size:16px; }
+  .prices td { padding:10px 0; vertical-align:baseline; border-top:1px solid #efece5; }
+  .prices td:last-child { text-align:right; font-weight:700; white-space:nowrap; padding-left:16px; }
+  .prices td small { display:block; color:var(--mute); font-size:13px; }
+
+  /* ---------- miejsce ---------- */
+  .place { position:relative; min-height:86svh; display:grid; align-items:end; overflow:hidden; }
+  .place > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .place::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgb(15 16 13 / .88)); }
+  .place .in { position:relative; z-index:1; padding:var(--m); display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:end; max-width:1440px; margin-inline:auto; width:100%; }
+  .place .in > div > p:last-child { font-size:clamp(20px, 1.8vw, 26px); line-height:1.35; max-width:36ch; }
+  .place .facts { display:grid; gap:14px; font-size:15px; }
+  .place .facts b { display:block; font-weight:700; color:var(--sig); }
 
   /* ---------- kontakt ---------- */
-  .contact { padding-top:160px; padding-bottom:120px; }
-  .contact .grid { align-items:start; }
-  .contact .s { grid-column:1 / 6; font-size:clamp(22px, 2.3vw, 34px); line-height:1.2; }
-  .contact figure { grid-column:8 / 10; }
-  .contact figure img { width:160px; height:160px; object-fit:cover; }
-  .contact .links { grid-column:10 / 13; }
-  .contact .links h2 { font:600 18px var(--text); }
-  .contact .links a { display:block; margin-top:20px; font-size:18px; }
-  .contact .links a + a { margin-top:8px; }
-  .contact .links p { margin-top:16px; font-size:14px; }
+  .contact .grid { display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:end; }
+  .contact .tel { display:block; font-weight:850; font-stretch:115%; font-size:clamp(52px, 8.4vw, 148px); letter-spacing:-.035em; line-height:.9; text-decoration:none; margin-top:18px; transition:color 200ms; }
+  .contact .tel, footer .big { white-space:nowrap; }
+  .contact .grid > div { min-width:0; }
+  .contact .tel:hover { color:var(--sig); }
+  .contact dl { display:grid; gap:16px; font-size:16px; }
+  .contact dt { color:var(--grey); font-size:13px; letter-spacing:.12em; text-transform:uppercase; }
+  .contact dd a { text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--sig); }
+  footer { padding:40px var(--m) 36px; border-top:1px solid var(--line); }
+  footer .big { font-weight:850; font-stretch:125%; text-transform:uppercase; font-size:clamp(70px, 15.6vw, 270px); letter-spacing:-.045em; line-height:.8; color:var(--sig); }
+  footer .row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; margin-top:28px; font-size:14px; color:#bdbbb3; }
+  footer .credits { margin-top:18px; font-size:13px; color:#8d8c84; max-width:90ch; }
 
-  /* ---------- okno warsztatu: szczelina z hero otwiera się na pełną szerokość ---------- */
-  .window { padding:0 var(--m); }
-  .window figure { position:relative; overflow:hidden; border-radius:var(--r); height:clamp(380px, 72vh, 760px); }
-  .window img { width:100%; height:100%; object-fit:cover; transform:scale(1.08); transition:transform 1600ms var(--ease-out); }
-  .window.is-in img { transform:none; }
-  .window .facts { position:absolute; left:24px; right:24px; bottom:24px; display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; }
-  .window .facts p { background:var(--bg); padding:16px 18px; font-size:16px; line-height:1.35; }
-  .window .facts b { display:block; font:800 clamp(30px, 3vw, 46px)/1 var(--display); text-transform:uppercase; margin-bottom:6px; }
-
-  /* ---------- rowery, które tu stały: katalog jak kartoteka okazów ---------- */
-  .shelf .grid { align-items:center; }
-  .shelf h2 { font-size:var(--step-head); grid-column:1 / -1; margin-bottom:56px; }
-  .wheel { grid-column:1 / 4; list-style:none; padding:0; display:grid; gap:4px; }
-  .wheel button { all:unset; cursor:pointer; display:block; padding:8px 0; font:800 clamp(22px, 2vw, 30px)/1 var(--display); text-transform:uppercase; color:var(--muted); opacity:.55; transition:opacity 220ms, color 220ms, transform 300ms var(--ease-out); transform-origin:left center; }
-  .wheel button:hover { opacity:.9; }
-  .wheel button[aria-selected="true"] { color:var(--ink); opacity:1; transform:translateX(10px) scale(1.12); }
-  .wheel button:focus-visible { outline:3px solid var(--ink); outline-offset:4px; }
-  .specimen { grid-column:4 / 10; background:var(--surface); border-radius:var(--r); aspect-ratio:5/4; display:grid; place-items:center; overflow:hidden; position:relative; }
-  .specimen img { width:100%; height:100%; object-fit:cover; transition:opacity 300ms ease, transform 600ms var(--ease-out); }
-  .specimen.swap img { opacity:0; transform:scale(1.03); }
-  .specimen .yr { position:absolute; left:18px; top:14px; background:var(--bg); padding:4px 12px; border-radius:999px; font-size:14px; font-weight:600; }
-  .note { grid-column:10 / 13; background:var(--card); color:var(--card-ink); border-radius:10px 10px 18px 18px; padding:28px 22px 24px; transform:rotate(1.6deg); }
-  .note .n { font:800 16px var(--display); text-transform:uppercase; letter-spacing:.06em; }
-  .note h3 { font:800 30px/1 var(--display); text-transform:uppercase; }
-  .note dl { margin-top:16px; display:grid; gap:10px; font-size:15px; }
-  .note dt { font-size:13px; opacity:.8; }
-  .note dd { font-weight:600; }
-  .note .p { margin-top:6px; font:800 36px/1 var(--display); }
-  .shelf .hint { grid-column:4 / 10; margin-top:14px; font-size:14px; }
-
-  /* ---------- zużyte części przy schodach ---------- */
-  .stairs { position:relative; }
-  .worn { position:absolute; left:var(--m); bottom:0; width:min(36%, 520px); display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .worn figure { margin:0; }
-  .worn img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--r); }
-  .worn figcaption { margin-top:8px; font-size:14px; color:var(--muted); }
-  .list .spec { display:block; font-size:13px; color:var(--muted); margin-top:2px; letter-spacing:.02em; }
-
-  footer { background:var(--ink); color:var(--bg); padding:56px var(--m) 40px; }
-  footer .big { font:800 clamp(80px, 19vw, 340px)/.8 var(--display); text-transform:uppercase; letter-spacing:-.01em; }
-  footer .row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; margin-top:32px; font-size:15px; }
-  footer .credits { margin-top:24px; font-size:13px; opacity:.8; max-width:75ch; }
-  footer .credits a { color:inherit; }
-
+  @media (max-width: 1100px) { .cards { grid-template-columns:repeat(3, 1fr); } }
   @media (max-width: 900px) {
     :root { --m:16px; }
-    .top nav a:not(.short) { display:none; }
-    .top .short { display:inline; }
-    .hero { grid-template-rows:1fr auto auto auto 1fr; padding-bottom:32px; }
-    .sentence { font-size:15vw; text-align:left; }
-    .sentence .ln { display:block; white-space:normal; }
-    .sentence .strip { display:block; width:100%; height:auto; aspect-ratio:2/1; margin:.08em 0 .1em; }
-    .hero .act { margin-top:32px; justify-self:start; }
-    .hero .sub { grid-row:4; justify-self:start; text-align:left; margin-top:24px; font-size:16px; }
-    .grid { grid-template-columns:minmax(0, 1fr); }
-    .grid > * { grid-column:1 / -1 !important; }
-    .list h2 { font-size:9.5vw; } .list h2 span { padding-left:0; }
-    .list .body { margin-top:48px; }
-    .list .name { display:none; }
-    .list figure { order:2; width:60%; justify-self:end; margin-top:40px; }
-    .list td:first-child { width:auto; }
-    .tag-wrap { margin-top:56px; }
-    .stairs ol { gap:40px; }
-    .stairs li > div { grid-column:1 / -1; padding-left:calc(var(--i) * 6vw); }
-    .stairs h3 { font-size:8.4vw; }
-    .stairs p { font-size:16px; }
-    .offer .s { font-size:12vw; }
-    .offer .price { display:inline-block; }
-    .offer .foot .ctas { justify-self:stretch; text-align:left; margin-top:28px; }
-    .offer .foot .btn { width:100%; }
-    .about .text { font-size:22px; line-height:1.25; }
-    .about .text img { width:110px; height:110px; }
-    .about .facts { order:2; grid-template-columns:repeat(3, 1fr); font-size:13px; margin-top:32px; }
-
-    .window .facts { grid-template-columns:1fr 1fr; left:12px; right:12px; bottom:12px; gap:8px; }
-    .window .facts p { padding:12px; font-size:14px; }
-    .window figure { height:120vw; }
-    .wheel { display:flex; flex-wrap:wrap; gap:4px 16px; }
-    .wheel li { flex:none; scroll-snap-align:start; }
-    .wheel button[aria-selected="true"] { transform:none; }
-    .specimen { margin-top:20px; }
-    .note { margin-top:24px; transform:none; }
-    .worn { position:static; width:100%; margin-top:48px; }
-    .street .pics { grid-template-columns:1fr; }
-    .street img { height:62vw; }
-    .contact { padding-top:110px; padding-bottom:80px; }
-    .contact .s { font-size:22px; }
-    .contact .row-m { display:grid; grid-template-columns:96px minmax(0, 1fr); gap:16px; margin-top:32px; }
-    .contact .links a { overflow-wrap:anywhere; }
-    .contact figure img { width:96px; height:96px; }
+    .nav .links, .nav .tel { display:none; } .nav .btn { margin-left:auto; padding:0 16px; font-size:14px; }
+    .day.pad, .models.pad { padding-block:72px; }
+    .hero h1 { font-size:16.5vw; }
+    .hero .row, .cfg .grid, .promise .grid, .prices .grid, .place .in, .contact .grid { grid-template-columns:minmax(0, 1fr); }
+    .hero .acts { justify-content:flex-start; }
+    .hero .bar { grid-template-columns:1fr 1fr; }
+    .cards { grid-template-columns:minmax(0, 1fr); }
+    .ticket, .prices .side { position:relative; top:0; }
+    .day .steps { grid-template-columns:1fr; gap:28px; } .day .steps::before, .day .steps::after { display:none; }
+    .models .rail { grid-auto-columns:82%; }
+    .promise figure { aspect-ratio:1; }
   }
-  @media (min-width: 901px) { .contact .row-m { display:contents; } }
   @media (prefers-reduced-motion: reduce) {
-    .js .strip, .js .strip img, .strip .spin, .js .sentence .w, .tag.bump, .hero .now i { animation:none !important; clip-path:none !important; transform:none !important; opacity:1 !important; }
+    .js .hero > .bg img, .js .hero h1 > span, .now[data-open] i, .ticket.bump { animation:none; }
     .js [data-reveal] [data-r] { opacity:1; transform:none; transition:none; }
   }
 </style>
 </head>
 <body>
-
-<header class="top">
-  <a class="mark" href="#">Szprycha</a>
-  <nav aria-label="Strona">
-    <a href="#cennik">Cennik</a>
-    <a href="#przywieszka">Przywieszka</a>
-    <a href="#rowery">Modele</a>
-    <a href="#dojazd">Dojazd</a>
-    <a class="short" href="#przywieszka">Wycena</a>
-  </nav>
+<header class="nav" data-nav>
+  <a class="mark" href="#">Szprycha<span class="dot">.</span></a>
+  <nav class="links" aria-label="Strona"><a href="#uslugi">Usługi</a><a href="#co-nie-dziala">Co nie działa?</a><a href="#cennik">Cennik</a><a href="#kontakt">Kontakt</a></nav>
+  <a class="tel" href="tel:+48120000000">12 000 00 00</a>
+  <a class="btn" href="#co-nie-dziala">Wycena w minutę</a>
 </header>
 
 <main>
-<section class="hero" aria-labelledby="h1" style="padding-top:0">
-  <h1 id="h1" class="display sentence">
-    <span class="ln"><span class="w">Oddaj rano,</span><span class="strip"><span class="spin"><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" alt="Szprychy przedniego koła roweru z bliska" fetchpriority="high"></span></span></span>
-    <span class="ln"><span class="w">odbierz po 17.</span></span>
-  </h1>
-  <a class="btn act" href="#przywieszka">Wypisz przywieszkę</a>
-  <div class="sub">
-    <p>Warsztat rowerowy przy Józefińskiej 17 na Podgórzu. Cenę znasz, zanim odkręcimy pierwszą śrubę.</p>
-    <p class="now" data-status><i aria-hidden="true"></i><span data-status-text>Pn–pt 8:00–18:00, sobota 9:00–14:00</span></p>
-  </div>
-</section>
-
-
-<section class="window" aria-label="Warsztat" data-reveal>
-  <figure>
-    <img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" loading="lazy" alt="Rowery zawieszone na ścianie warsztatu, stojak naprawczy na środku">
-    <div class="facts">
-      <p><b data-q>6</b>rowerów dziś na stojakach</p>
-      <p><b data-free>3</b>wolne miejsca na jutro rano</p>
-      <p><b>1 dzień</b>zwykła naprawa, przegląd dwa</p>
-      <p><b>0 zł</b>pompowanie kół przy ladzie</p>
+<section class="hero" aria-labelledby="h1">
+  <div class="bg"><img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" alt="" fetchpriority="high"></div>
+  <div class="in">
+    <p class="now" data-now><i aria-hidden="true"></i><span data-now-t>Pn–pt 8:00–18:00 · sobota 9:00–14:00</span></p>
+    <h1 id="h1" class="huge"><span>Oddaj rano<span class="dot">.</span></span><span>Odbierz po 17<span class="dot">.</span></span></h1>
+    <div class="row">
+      <p class="lead">Serwis rowerowy przy Józefińskiej 17 na Podgórzu. Kliknij, co nie działa, a zobaczysz cenę i godzinę odbioru, zanim przyjedziesz.</p>
+      <div class="acts"><a class="btn" href="#co-nie-dziala">Wybierz, co nie działa</a><a class="btn ghost" href="#cennik">Cennik</a></div>
     </div>
-  </figure>
-</section>
-
-<section class="list wrap" id="cennik" aria-labelledby="cennik-h" data-reveal>
-  <h2 id="cennik-h" class="display" data-r>Cennik, który wisi<span>nad stołem.</span></h2>
-  <div class="grid body">
-    <figure data-r><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Klucze i narzędzia rowerowe zawieszone na ścianie warsztatu"></figure>
-    <p class="name soft" data-r>Usługi</p>
-    <table data-r>
-      <tbody>
-        <tr><td>Przegląd</td><td>Pełny, z myciem napędu<span class="spec">śruby dokręcane kluczem 5 Nm</span></td><td>180 zł</td></tr>
-        <tr><td>Przegląd</td><td>Podstawowy: hamulce, przerzutki, koła</td><td>110 zł</td></tr>
-        <tr class="gap"><td>Hamulce</td><td>Regulacja, jedna oś</td><td>35 zł</td></tr>
-        <tr><td>Hamulce</td><td>Odpowietrzenie hydrauliki<span class="spec">olej mineralny lub DOT</span></td><td>90 zł</td></tr>
-        <tr><td>Przerzutki</td><td>Regulacja przód i tył<span class="spec">1×, 2×, 3× · 7–12 rz.</span></td><td>60 zł</td></tr>
-        <tr><td>Napęd</td><td>Wymiana łańcucha<span class="spec">zużycie powyżej 0,75%</span></td><td>40 zł + łańcuch</td></tr>
-        <tr class="gap"><td>Koło</td><td>Centrowanie<span class="spec">bicie do 0,3 mm</span></td><td>50 zł</td></tr>
-        <tr><td>Koło</td><td>Wymiana dętki<span class="spec">28″ · 700×35C · 26″ · 20″</span></td><td>30 zł + dętka</td></tr>
-        <tr><td>Koło</td><td>Wymiana szprychy</td><td>25 zł za sztukę</td></tr>
-        <tr class="gap"><td>Inne</td><td>Montaż bagażnika lub błotników</td><td>45 zł</td></tr>
-        <tr><td>Inne</td><td>Przechowanie roweru zimą, miesiąc</td><td>60 zł</td></tr>
-      </tbody>
-    </table>
+    <div class="bar">
+      <div><b>1 dzień</b><span>zwykła naprawa</span></div>
+      <div><b data-q>6</b><span>rowerów dziś na stojakach</span></div>
+      <div><b>od 30 zł</b><span>wymiana dętki</span></div>
+      <div><b>0 zł</b><span>pompowanie kół przy ladzie</span></div>
+    </div>
   </div>
 </section>
 
-<section class="tagsec" id="przywieszka" aria-labelledby="tag-h" data-reveal>
-  <div class="wrap grid">
-    <div class="intro">
-      <h2 id="tag-h" class="display" data-r>Wypisz przywieszkę</h2>
-      <p data-r>Na każdym rowerze w warsztacie wisi kartonowa przywieszka: co robimy, ile to kosztuje i kiedy odbierasz. Zaznacz, co dolega Twojemu, a wypiszemy ją od razu.</p>
-      <div class="chips" role="group" aria-label="Co trzeba zrobić" data-r>
-        <button type="button" class="chip" aria-pressed="false" data-job="hamulce" data-price="35" data-days="0">Hamulce<small>35 zł</small></button>
-        <button type="button" class="chip" aria-pressed="false" data-job="przerzutki" data-price="60" data-days="0">Przerzutki<small>60 zł</small></button>
-        <button type="button" class="chip" aria-pressed="false" data-job="dętka" data-price="45" data-days="0">Złapałem gumę<small>45 zł</small></button>
-        <button type="button" class="chip" aria-pressed="false" data-job="koło" data-price="50" data-days="0">Koło bije<small>50 zł</small></button>
-        <button type="button" class="chip" aria-pressed="false" data-job="łańcuch" data-price="99" data-days="0">Łańcuch skacze<small>od 99 zł</small></button>
-        <button type="button" class="chip" aria-pressed="false" data-job="przegląd" data-price="180" data-days="1">Pełny przegląd<small>180 zł</small></button>
+<section class="line light pad" id="uslugi" aria-labelledby="line-h" data-reveal>
+  <div class="wrap">
+    <div class="head">
+      <div data-r><p class="kick">Pięć usług, cena z góry</p><h2 id="line-h" class="h2" style="margin-top:14px">Wybierz swój serwis</h2></div>
+      <p data-r>Każda usługa ma stałą cenę i czas. Części liczymy osobno i zawsze dzwonimy, zanim cokolwiek wymienimy.</p>
+    </div>
+    <div class="cards">
+      <article class="card" data-r><p class="n">01</p><h3>Szybka naprawa</h3><p class="who">Guma, luźny hamulec, skacze łańcuch.</p><ul><li>dętka albo opona</li><li>regulacja jednego hamulca</li><li>smarowanie łańcucha</li></ul><div class="foot"><span class="pr">od 30 zł<small>+ części</small></span><span class="t">20–40 min<br>na miejscu</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="kolo-tyl">Wybierz</a></article>
+      <article class="card" data-r><p class="n">02</p><h3>Przegląd podstawowy</h3><p class="who">Rower jeździ, ale prosi o uwagę.</p><ul><li>hamulce i przerzutki</li><li>centrowanie kół</li><li>dokręcenie wszystkiego</li></ul><div class="foot"><span class="pr">110 zł<small>bez części</small></span><span class="t">1 dzień<br>odbiór po 17</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="przeglad">Wybierz</a></article>
+      <article class="card hl" data-r><p class="n">03 · najczęściej</p><h3>Przegląd pełny</h3><p class="who">Po zimie albo przed dłuższą trasą.</p><ul><li>wszystko z podstawowego</li><li>mycie i smarowanie napędu</li><li>łożyska, stery, suport</li></ul><div class="foot"><span class="pr">180 zł<small>bez części</small></span><span class="t">2 dni<br>z myciem</span></div><a class="btn" href="#co-nie-dziala" data-preset="pelny">Wybierz</a></article>
+      <article class="card" data-r><p class="n">04</p><h3>Koło i napęd</h3><p class="who">Koło bije, łańcuch zużyty, trzeszczy suport.</p><ul><li>centrowanie, szprychy</li><li>łańcuch, kaseta, korba</li><li>pomiar zużycia gratis</li></ul><div class="foot"><span class="pr">od 50 zł<small>+ części</small></span><span class="t">1 dzień</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="naped">Wybierz</a></article>
+      <article class="card" data-r><p class="n">05</p><h3>Zima u nas</h3><p class="who">Nie masz gdzie trzymać roweru.</p><ul><li>przechowanie w suchym</li><li>przegląd wiosną taniej</li><li>odbiór w dowolny dzień</li></ul><div class="foot"><span class="pr">60 zł<small>za miesiąc</small></span><span class="t">od listopada<br>do marca</span></div><a class="btn ghost" href="#kontakt">Zapytaj</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="cfg pad" id="co-nie-dziala" aria-labelledby="cfg-h" data-reveal>
+  <div class="wrap">
+    <p class="kick" data-r>Wycena w minutę</p>
+    <h2 id="cfg-h" class="h2" style="margin-top:14px" data-r>Kliknij, co nie działa<span class="dot">.</span></h2>
+    <div class="grid">
+      <div data-r>
+        <div class="bike-box">
+          <p class="hint">Dotknij części roweru · można kilka</p>
+          <svg viewBox="0 0 820 500" role="group" aria-label="Rower: wybierz części do naprawy">
+            <g class="part" data-part="kolo-tyl" role="button" tabindex="0" aria-pressed="false" aria-label="Tylne koło i opona"><circle class="hit" cx="200" cy="330" r="128"/><circle class="ln" cx="200" cy="330" r="128"/><circle class="ln thin" cx="200" cy="330" r="112"/><g data-spokes="200 330"></g></g>
+            <g class="part" data-part="kolo-przod" role="button" tabindex="0" aria-pressed="false" aria-label="Przednie koło i opona"><circle class="hit" cx="620" cy="330" r="128"/><circle class="ln" cx="620" cy="330" r="128"/><circle class="ln thin" cx="620" cy="330" r="112"/><g data-spokes="620 330"></g></g>
+            <g class="part" data-part="rama" role="button" tabindex="0" aria-pressed="false" aria-label="Rama, stery i suport"><path class="hit" d="M200 330 L390 335 L345 168 Z M345 168 L560 182 L390 335 M560 182 L578 140"/><path class="ln" d="M200 330 L390 335 L345 168 Z M345 168 L560 182 L390 335 M560 182 L578 140"/></g>
+            <g class="part" data-part="widelec" role="button" tabindex="0" aria-pressed="false" aria-label="Widelec i kierownica"><path class="hit" d="M578 140 L620 330 M560 120 L600 112 Q630 108 640 132"/><path class="ln" d="M578 140 L620 330 M556 118 L598 110 Q628 106 640 132"/></g>
+            <g class="part" data-part="siodlo" role="button" tabindex="0" aria-pressed="false" aria-label="Siodło i sztyca"><path class="hit" d="M345 168 L336 128 M300 122 L372 122"/><path class="ln" d="M345 168 L336 126 M300 124 Q330 112 374 122"/></g>
+            <g class="part" data-part="naped" role="button" tabindex="0" aria-pressed="false" aria-label="Napęd: łańcuch, korba, kaseta"><circle class="hit" cx="390" cy="335" r="36"/><circle class="ln" cx="390" cy="335" r="34"/><circle class="ln thin" cx="200" cy="330" r="22"/><path class="ln thin" d="M392 301 L202 308 M392 369 L202 352"/><path class="ln" d="M390 335 L418 378 M408 378 L432 378"/></g>
+            <g class="part" data-part="przerzutki" role="button" tabindex="0" aria-pressed="false" aria-label="Przerzutki i linki"><path class="hit" d="M206 352 L222 392 L196 398 M560 182 Q470 260 392 300"/><path class="ln" d="M206 352 L222 390 L198 396"/><path class="ln thin" d="M560 182 Q470 262 400 312 M400 312 Q300 330 220 368" stroke-dasharray="4 6"/></g>
+            <g class="part" data-part="hamulce" role="button" tabindex="0" aria-pressed="false" aria-label="Hamulce"><path class="hit" d="M332 186 L262 214 M604 220 L628 214 M600 112 L612 96"/><path class="ln" d="M326 190 L292 203 M268 212 L292 203 L296 214"/><path class="ln" d="M600 214 L628 208 L632 222"/><path class="ln thin" d="M604 112 L618 94"/></g>
+            <text class="lab" data-l="kolo-tyl" x="200" y="482" text-anchor="middle">Koło tylne</text>
+            <text class="lab" data-l="kolo-przod" x="620" y="482" text-anchor="middle">Koło przednie</text>
+            <text class="lab" data-l="siodlo" x="336" y="100" text-anchor="middle">Siodło</text>
+            <text class="lab" data-l="widelec" x="650" y="90" text-anchor="middle">Kierownica</text>
+            <text class="lab" data-l="rama" x="470" y="236" text-anchor="middle">Rama</text>
+            <text class="lab" data-l="naped" x="440" y="414" text-anchor="middle">Napęd</text>
+            <text class="lab" data-l="hamulce" x="250" y="196" text-anchor="middle">Hamulce</text>
+            <text class="lab" data-l="przerzutki" x="120" y="420" text-anchor="middle">Przerzutki</text>
+          </svg>
+        </div>
+        <p class="kick" style="margin-top:28px">Jaki rower?</p>
+        <div class="chips" role="group" aria-label="Rodzaj roweru" data-kind>
+          <button type="button" aria-pressed="true" data-x="1">Miejski</button><button type="button" aria-pressed="false" data-x="1.1">Szosowy</button><button type="button" aria-pressed="false" data-x="1.15">Górski / gravel</button><button type="button" aria-pressed="false" data-x=".8">Dziecięcy</button><button type="button" aria-pressed="false" data-x="1.3">Cargo</button>
+        </div>
+        <p class="kick" style="margin-top:22px">Na kiedy?</p>
+        <div class="chips" role="group" aria-label="Termin" data-when>
+          <button type="button" aria-pressed="true" data-w="0">Jak najszybciej</button><button type="button" aria-pressed="false" data-w="1">Jutro wystarczy</button><button type="button" aria-pressed="false" data-w="3">Bez pośpiechu · −10%</button>
+        </div>
       </div>
-    </div>
-    <div class="tag-wrap" data-r>
-      <form class="tag" data-tag aria-label="Przywieszka naprawy">
-        <p class="no"><span>Szprycha</span><span data-no>Nr 0000</span></p>
-        <dl>
-          <div><dt>Do zrobienia</dt><dd class="list-dd" data-jobs>wybierz usługę</dd></div>
-          <div class="sum"><dt>Razem</dt><dd data-sum>0 zł</dd></div>
-          <div><dt>Odbiór</dt><dd data-ready>—</dd></div>
-        </dl>
-        <label>Telefon, oddzwonimy przed odbiorem <input type="tel" inputmode="tel" autocomplete="tel" placeholder="500 000 000" required></label>
+      <form class="ticket" data-ticket aria-label="Przywieszka naprawy" data-r>
+        <p class="top"><span>Szprycha · przywieszka</span><span data-no>Nr 0000</span></p>
+        <ul data-lines></ul>
+        <p class="empty" data-empty>Nic jeszcze nie wybrano. Dotknij części roweru.</p>
+        <div class="sum"><b data-sum>0 zł</b><span>szacunkowo,<br>bez części</span></div>
+        <div class="ready"><span>Odbiór</span><span data-ready>—</span></div>
+        <label>Telefon, oddzwonimy przed naprawą <input type="tel" inputmode="tel" autocomplete="tel" placeholder="500 000 000"></label>
         <button class="btn" type="submit" disabled data-send>Zostaw rower na tę przywieszkę</button>
         <p class="done" role="status" data-done></p>
       </form>
@@ -354,184 +332,219 @@
   </div>
 </section>
 
-
-<section class="shelf wrap pad-s" id="rowery" aria-labelledby="shelf-h" data-reveal>
-  <div class="grid">
-    <h2 id="shelf-h" class="display" data-r>Co najczęściej stoi na stojaku</h2>
-    <ul class="wheel" role="tablist" aria-label="Rowery" data-r data-wheel></ul>
-    <figure class="specimen" data-r data-spec><img alt="" width="1200" height="900"><span class="yr" data-yr></span></figure>
-    <article class="note" data-r aria-live="polite">
-      <h3 data-name></h3>
-      <dl>
-        <div><dt>Typowa usterka</dt><dd data-why></dd></div>
-        <div><dt>Co robimy</dt><dd data-done></dd></div>
-        <div><dt>Zwykle trwa</dt><dd data-time></dd></div>
-      </dl>
-      <p class="p"><span data-price></span> <small style="font:600 14px var(--text); text-transform:none">zwykle</small></p>
-    </article>
-    <p class="hint soft" data-r>Rowery, które naprawiamy najczęściej, i to, co zwykle w nich wymieniamy. Strzałkami ← → przełączasz modele.</p>
+<section class="promise white pad" aria-labelledby="pr-h" data-reveal>
+  <div class="wrap grid">
+    <figure data-r><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" loading="lazy" alt="Szprychy i piasta przedniego koła z bliska"></figure>
+    <div>
+      <p class="kick" data-r>Jak pracujemy</p>
+      <h2 id="pr-h" class="h2" style="margin-top:14px" data-r>Cena, zanim odkręcimy pierwszą śrubę</h2>
+      <ol>
+        <li data-r><b>01</b><div><h3>Wycena przed naprawą</h3><p>Dzwonimy, jeśli znajdziemy coś więcej. Bez Twojej zgody nic nie dopisujemy do rachunku.</p></div></li>
+        <li data-r><b>02</b><div><h3>Stare części w woreczku</h3><p>Dostajesz wszystko, co wymieniliśmy, żebyś widział, za co płacisz.</p></div></li>
+        <li data-r><b>03</b><div><h3>Gwarancja 30 dni</h3><p>Jeśli coś, co regulowaliśmy, się rozkręci, poprawiamy od ręki i za darmo.</p></div></li>
+      </ol>
+    </div>
   </div>
 </section>
 
-<section class="stairs wrap" aria-label="Jak to działa" data-reveal>
-  <ol>
-    <li style="--c:1;--i:0" data-r><div><h3>Najpierw przywozisz rower.</h3><p>Rano, od 8:00. Bez umawiania, wystarczy przywieszka z telefonu albo dwa słowa przy ladzie.</p></div></li>
-    <li style="--c:3;--i:1" data-r><div><h3>Potem go oglądamy.</h3><p>Do 11:00 dzwonimy, jeśli znajdziemy coś poza przywieszką. Bez Twojej zgody nic nie dopisujemy.</p></div></li>
-    <li style="--c:5;--i:2" data-r><div><h3>Ty mówisz: tak albo nie.</h3><p>Zużyte części oddajemy w woreczku, żebyś widział, co wymieniliśmy.</p></div></li>
-    <li style="--c:7;--i:3" data-r><div><h3>Odbierasz po 17.</h3><p>Rower stoi przy drzwiach, umyty napęd, opony napompowane. Pełny przegląd: następnego dnia.</p></div></li>
-  </ol>
-  <div class="worn" data-r>
-    <figure><img src="assets/consumed-v-brake-pads-front.jpg" width="1200" height="900" loading="lazy" alt="Starte klocki hamulcowe V-brake"><figcaption>Klocki po trzech sezonach</figcaption></figure>
-    <figure><img src="assets/003-bicycle-tire-worn-through-with-visible.jpg" width="1200" height="675" loading="lazy" alt="Opona rowerowa przetarta do osnowy"><figcaption>Opona przetarta do osnowy</figcaption></figure>
-  </div>
-</section>
-
-<section class="offer" aria-labelledby="offer-h" data-reveal>
+<section class="day pad" aria-labelledby="day-h" data-reveal>
   <div class="wrap">
-    <h2 id="offer-h" class="display s" data-r>Przegląd <span class="price">180 zł</span><br>i jedziesz.</h2>
-    <div class="grid foot">
-      <p data-r>W cenie: regulacja hamulców i przerzutek, centrowanie kół, mycie i smarowanie napędu, dokręcenie wszystkiego, co się luzuje. Części liczymy osobno i zawsze pytamy.</p>
-      <div class="ctas" data-r>
-        <a class="btn" href="#przywieszka">Wypisz przywieszkę</a>
-        <a class="more" href="#cennik">Cały cennik</a>
-      </div>
+    <p class="kick" data-r>Dzień Twojego roweru</p>
+    <h2 id="day-h" class="h2" style="margin-top:14px" data-r>Od ósmej do siedemnastej</h2>
+    <div class="steps" data-steps>
+      <div class="step" data-h="8" data-r><i></i><b>8:00</b><h3>Przywozisz rower</h3><p>Bez umawiania. Wystarczy przywieszka z telefonu albo dwa słowa przy ladzie.</p></div>
+      <div class="step" data-h="11" data-r><i></i><b>11:00</b><h3>Dzwonimy</h3><p>Jeśli znajdziemy coś poza przywieszką, mówimy co i za ile.</p></div>
+      <div class="step" data-h="13" data-r><i></i><b>13:00</b><h3>Naprawiamy</h3><p>Trzy stojaki, ściana kluczy, części na miejscu albo z hurtowni w godzinę.</p></div>
+      <div class="step" data-h="17" data-r><i></i><b>17:00</b><h3>Odbierasz</h3><p>Rower przy drzwiach, umyty napęd, opony napompowane.</p></div>
     </div>
   </div>
 </section>
 
-<section class="about wrap" aria-label="O warsztacie" data-reveal>
-  <div class="grid">
+<section class="models light pad" aria-labelledby="mod-h" data-reveal>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap">
+      <div data-r><p class="kick">Co najczęściej stoi na stojaku</p><h2 id="mod-h" class="h2" style="margin-top:14px">Rowery z Krakowa</h2></div>
+      <div class="rail-nav" data-r><button type="button" aria-label="Poprzednie" data-rail="-1">←</button><button type="button" aria-label="Następne" data-rail="1">→</button></div>
+    </div>
+    <div class="rail" data-rail-box>
+      <article class="model"><figure><img src="assets/romet-wagant-bicycle-1.jpg" width="1200" height="936" loading="lazy" alt="Niebieski Romet Wagant przy płocie"></figure><div class="tx"><h3>Romet Wagant</h3><p class="y">lata 80.</p><dl><dt>Typowa usterka</dt><dd>skrzypi suport, linki ledwo chodzą</dd></dl><p class="p">210 zł <small>zwykle · 1 dzień</small></p></div></article>
+      <article class="model"><figure><img src="assets/romet-flaming-bicycle-in-krakow-3.jpg" width="1200" height="1218" loading="lazy" alt="Składany Romet Flaming na chodniku"></figure><div class="tx"><h3>Romet Flaming</h3><p class="y">lata 70.</p><dl><dt>Typowa usterka</dt><dd>stał latami w piwnicy</dd></dl><p class="p">240 zł <small>zwykle · 2 dni</small></p></div></article>
+      <article class="model"><figure><img src="assets/red-romet-bicycle-in-krakow-1.jpg" width="1200" height="915" loading="lazy" alt="Bordowa damka z koszykiem w śniegu"></figure><div class="tx"><h3>Damka z koszykiem</h3><p class="y">lata 90.</p><dl><dt>Typowa usterka</dt><dd>zima pod balkonem</dd></dl><p class="p">220 zł <small>zwykle · 2 dni</small></p></div></article>
+      <article class="model"><figure><img src="assets/dutch-bicycle.jpg" width="1200" height="775" loading="lazy" alt="Czarny rower holenderski"></figure><div class="tx"><h3>Holender</h3><p class="y">2009</p><dl><dt>Typowa usterka</dt><dd>przerzutka w piaście nie łapie biegu</dd></dl><p class="p">75 zł <small>zwykle · 1 dzień</small></p></div></article>
+      <article class="model"><figure><img src="assets/romet-bicycle-in-krakow.jpg" width="1200" height="900" loading="lazy" alt="Srebrny rower miejski przy stojaku"></figure><div class="tx"><h3>Miejski z bagażnikiem</h3><p class="y">2016</p><dl><dt>Typowa usterka</dt><dd>przebita dętka</dd></dl><p class="p">45 zł <small>zwykle · 20 min</small></p></div></article>
+      <article class="model"><figure><img src="assets/roadster-bicycle-dutch.jpg" width="1200" height="794" loading="lazy" alt="Czarny roadster na ulicy"></figure><div class="tx"><h3>Roadster</h3><p class="y">1992</p><dl><dt>Typowa usterka</dt><dd>koło bije i ociera o hamulec</dd></dl><p class="p">100 zł <small>zwykle · 1 dzień</small></p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="prices white pad" id="cennik" aria-labelledby="pr2-h" data-reveal>
+  <div class="wrap grid">
+    <div class="side" data-r>
+      <p class="kick">Cennik</p>
+      <h2 id="pr2-h" class="h2" style="margin-top:14px">Wisi nad stołem</h2>
+      <p>Ceny robocizny brutto. Części liczymy według cen z hurtowni, z narzutem najwyżej 15%.</p>
+      <figure><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy i narzędzi w warsztacie"></figure>
+    </div>
+    <div data-r>
+      <details open><summary>Przeglądy</summary><table><tbody>
+        <tr><td>Przegląd podstawowy<small>hamulce, przerzutki, koła, dokręcenie</small></td><td>110 zł</td></tr>
+        <tr><td>Przegląd pełny<small>z myciem napędu, łożyska, stery, suport</small></td><td>180 zł</td></tr>
+        <tr><td>Przegląd roweru dziecięcego</td><td>70 zł</td></tr></tbody></table></details>
+      <details><summary>Hamulce</summary><table><tbody>
+        <tr><td>Regulacja, jedna oś</td><td>35 zł</td></tr>
+        <tr><td>Wymiana klocków<small>V-brake lub tarczowe</small></td><td>30 zł + klocki</td></tr>
+        <tr><td>Odpowietrzenie hydrauliki<small>olej mineralny lub DOT</small></td><td>90 zł</td></tr></tbody></table></details>
+      <details><summary>Napęd i przerzutki</summary><table><tbody>
+        <tr><td>Regulacja przerzutek przód i tył<small>1×, 2×, 3× · 7–12 rzędów</small></td><td>60 zł</td></tr>
+        <tr><td>Wymiana łańcucha<small>przy zużyciu powyżej 0,75%</small></td><td>40 zł + łańcuch</td></tr>
+        <tr><td>Wymiana linek i pancerzy</td><td>50 zł</td></tr>
+        <tr><td>Suport: wymiana</td><td>70 zł</td></tr></tbody></table></details>
+      <details><summary>Koła</summary><table><tbody>
+        <tr><td>Wymiana dętki<small>28″ · 700×35C · 26″ · 20″</small></td><td>30 zł + dętka</td></tr>
+        <tr><td>Centrowanie<small>bicie do 0,3 mm</small></td><td>50 zł</td></tr>
+        <tr><td>Wymiana szprychy</td><td>25 zł / szt.</td></tr>
+        <tr><td>Montaż opon tubeless</td><td>80 zł</td></tr></tbody></table></details>
+      <details><summary>Inne</summary><table><tbody>
+        <tr><td>Montaż bagażnika lub błotników</td><td>45 zł</td></tr>
+        <tr><td>Montaż fotelika dziecięcego</td><td>40 zł</td></tr>
+        <tr><td>Przechowanie roweru zimą</td><td>60 zł / mies.</td></tr></tbody></table></details>
+    </div>
+  </div>
+</section>
+
+<section class="place" aria-labelledby="pl-h" data-reveal>
+  <img src="assets/tenement-house-5-bohaterow-getta-square-podgorze.jpg" width="1920" height="1439" loading="lazy" alt="Kamienica przy placu Bohaterów Getta na Podgórzu">
+  <div class="in">
+    <div data-r><p class="kick" style="color:#d9d7cf">O warsztacie</p><p id="pl-h" style="margin-top:14px">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej w 2014 roku, bo nikt na Podgórzu nie naprawiał roweru w jeden dzień.</p></div>
     <div class="facts" data-r>
-      <p><b>Gdzie</b>Józefińska 17, Podgórze</p>
-      <p><b>Od kiedy</b>Od 2014 roku</p>
-      <p><b>Jak dojechać</b>Tramwaj do Korony albo rowerem przez kładkę Bernatka</p>
-    </div>
-    <div class="text" data-r>
-      <p><img src="assets/tools-at-somerville-bike-kitchen-2.jpg" width="1400" height="933" loading="lazy" alt="Ściana kluczy w warsztacie rowerowym" style="object-position:30% 50%">Marta i Kuba Zając otworzyli Szprychę w dawnej pracowni szewskiej, bo nikt w okolicy nie naprawiał roweru w jeden dzień. <span class="soft">Dziś są tu trzy stojaki i ściana kluczy.</span></p>
-      <p class="soft">Naprawiamy wszystko, co ma dwa koła: miejskie damki, szosy, rowery cargo i dziecięce biegówki. Elektryków nie bierzemy, za to chętnie <a href="#przywieszka">doradzimy, gdzie je oddać</a>.</p>
+      <p><b>Adres</b>ul. Józefińska 17, 30-529 Kraków</p>
+      <p><b>Dojazd</b>Tramwaj do Korony albo rowerem przez kładkę Bernatka</p>
+      <p><b>Nie naprawiamy</b>rowerów elektrycznych, ale powiemy, gdzie je oddać</p>
     </div>
   </div>
 </section>
 
-<section class="street wrap" id="dojazd" aria-label="Podgórze" data-reveal>
-  <div class="pics">
-    <figure data-r><img src="assets/tenement-house-5-bohaterow-getta-square-podgorze.jpg" width="1920" height="1439" loading="lazy" alt="Kamienica przy placu Bohaterów Getta na Podgórzu"><figcaption class="soft">Podgórze, dwie przecznice od warsztatu</figcaption></figure>
-    <figure data-r><img src="assets/bike-workshop-bicycle-repair-shop.jpg" width="1400" height="933" loading="lazy" alt="Rowery zawieszone na ścianie warsztatu rowerowego"><figcaption class="soft">Tak wygląda dzień w warsztacie</figcaption></figure>
-    <figure data-r><img src="assets/bike-repair-oils-grease-cleaners-and-tyre.jpg" width="1920" height="1280" loading="lazy" alt="Butelki ze smarami i środkami do czyszczenia na półce"><figcaption class="soft">Smary, odtłuszczacze, uszczelniacz do opon</figcaption></figure>
-  </div>
-</section>
-
-<section class="contact wrap" aria-labelledby="kontakt-h" data-reveal>
-  <div class="grid">
-    <p class="s" data-r>Coś stuka albo piszczy? Zadzwoń, zwykle wiemy, co to, po pierwszym zdaniu.</p>
-    <div class="row-m">
-      <figure data-r><img src="assets/bicycle-wheel.jpg" width="1405" height="1917" loading="lazy" alt="Piasta i szprychy koła rowerowego"></figure>
-      <div class="links" data-r>
-        <h2 id="kontakt-h">Masz pytanie o naprawę?</h2>
-        <a href="tel:+48120000000">12 000 00 00</a>
-        <a href="mailto:warsztat@szprycha.example">warsztat@szprycha.example</a>
-        <p class="soft">Kraków, ul. Józefińska 17. Pn–pt 8:00–18:00, sobota 9:00–14:00. Na e-maile odpisujemy tego samego dnia.</p>
-      </div>
-    </div>
+<section class="contact pad" id="kontakt" aria-labelledby="ct-h" data-reveal>
+  <div class="wrap grid">
+    <div data-r><p class="kick" id="ct-h">Coś stuka albo piszczy? Zadzwoń</p><a class="tel" data-fit href="tel:+48120000000">12 000 00 00</a></div>
+    <dl data-r>
+      <div><dt>Godziny</dt><dd>Pn–pt 8:00–18:00 · sobota 9:00–14:00</dd></div>
+      <div><dt>E-mail</dt><dd><a href="mailto:warsztat@szprycha.example">warsztat@szprycha.example</a>, odpisujemy tego samego dnia</dd></div>
+      <div><dt>Adres</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=J%C3%B3zefi%C5%84ska%2017%2C%20Krak%C3%B3w" target="_blank" rel="noopener">ul. Józefińska 17, Podgórze</a></dd></div>
+    </dl>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="big" aria-hidden="true">Szprycha</div>
-  <div class="row"><span>Szprycha · warsztat rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
-  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> i <a href="https://commons.wikimedia.org/w/index.php?curid=107955681">smary</a> Alextredz, CC BY-SA 4.0. <a href="https://commons.wikimedia.org/wiki/File:Romet_Wagant_bicycle_(1).jpg">Romet Wagant</a>, <a href="https://commons.wikimedia.org/wiki/File:Romet_Flaming_bicycle_in_Krak%C3%B3w_(3).jpg">Romet Flaming</a>, <a href="https://commons.wikimedia.org/wiki/File:Red_Romet_bicycle_in_Krak%C3%B3w_(1).jpg">czerwona damka</a> Lukas 3z, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_bicycle_in_Krak%C3%B3w.jpg">Romet w Krakowie</a> Lukas 3z, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Dutch_bicycle.jpg">holender</a> i <a href="https://commons.wikimedia.org/wiki/File:Roadster_bicycle_(Dutch).jpg">roadster</a> Petar Milošević, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Consumed_V-BRAKE_pads_front.JPG">klocki</a> Nemo bis, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:003_Bicycle_tire_worn_through_with_visible_casing_thread_-_mechanical_failure.jpg">opona</a> Marek Ślusarczyk, CC BY 3.0. Rowery w katalogu sfotografowano na ulicach Krakowa i Holandii. Przez Wikimedia Commons.</p>
+  <div class="big" data-fit aria-hidden="true">Szprycha</div>
+  <div class="row"><span>Szprycha · serwis rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
+  <p class="credits">Zdjęcia: <a href="https://commons.wikimedia.org/w/index.php?curid=107955683">warsztat</a> Alextredz, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg">koło</a> Dhodges, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/w/index.php?curid=151686258">narzędzia</a> 4300streetcar, CC BY 4.0; <a href="https://commons.wikimedia.org/w/index.php?curid=180515984">plac Bohaterów Getta</a> Igor123121, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_Wagant_bicycle_(1).jpg">Romet Wagant</a>, <a href="https://commons.wikimedia.org/wiki/File:Romet_Flaming_bicycle_in_Krak%C3%B3w_(3).jpg">Romet Flaming</a>, <a href="https://commons.wikimedia.org/wiki/File:Red_Romet_bicycle_in_Krak%C3%B3w_(1).jpg">damka</a> Lukas 3z, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Romet_bicycle_in_Krak%C3%B3w.jpg">rower miejski</a> Lukas 3z, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Dutch_bicycle.jpg">holender</a> i <a href="https://commons.wikimedia.org/wiki/File:Roadster_bicycle_(Dutch).jpg">roadster</a> Petar Milošević, CC BY-SA 4.0. Przez Wikimedia Commons.</p>
 </footer>
 
 <script src="assets/concept.js"></script>
 <script>
 (function () {
-  var now = new Date(), h = now.getHours() + now.getMinutes() / 60, wd = now.getDay();
-  var DAYS = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
-  function open(d) { return d >= 1 && d <= 6; }
-  function close(d) { return d === 6 ? 14 : 18; }
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, now = new Date(), wd = now.getDay(), hr = now.getHours() + now.getMinutes() / 60;
+  var open = function (d) { return d >= 1 && d <= 6; }, close = function (d) { return d === 6 ? 14 : 18; };
 
-  var st = document.querySelector("[data-status]"), stt = document.querySelector("[data-status-text]");
-  if (open(wd) && h >= (wd === 6 ? 9 : 8) && h < close(wd)) { st.dataset.open = "true"; stt.textContent = "Teraz otwarte do " + close(wd) + ":00 · ul. Józefińska 17"; }
+  var nav = document.querySelector("[data-nav]");
+  addEventListener("scroll", function () { nav.classList.toggle("solid", scrollY > 80); }, { passive: true });
+
+  var st = document.querySelector("[data-now]"), stt = document.querySelector("[data-now-t]");
+  if (open(wd) && hr >= (wd === 6 ? 9 : 8) && hr < close(wd)) { st.setAttribute("data-open", ""); stt.textContent = "Teraz otwarte do " + close(wd) + ":00 · ul. Józefińska 17"; }
   else stt.textContent = "Teraz zamknięte · pn–pt 8:00–18:00, sobota 9:00–14:00";
+  document.querySelector("[data-q]").textContent = 4 + ((now.getDate() * 7 + now.getMonth() * 3) % 5);
 
-  // Odbiór: przywieziony do 10:00 w dzień roboczy jest gotowy tego dnia po 17 (w sobotę o 13).
-  // Później albo w dzień zamknięty — następnego dnia roboczego. Pełny przegląd dokłada jeden dzień.
+  // szprychy w kołach
+  document.querySelectorAll("[data-spokes]").forEach(function (g) {
+    var c = g.dataset.spokes.split(" ").map(Number), d = "";
+    for (var i = 0; i < 16; i++) { var a = i / 16 * Math.PI * 2; d += "M" + c[0] + " " + c[1] + " L" + (c[0] + Math.cos(a) * 110).toFixed(1) + " " + (c[1] + Math.sin(a) * 110).toFixed(1) + " "; }
+    var p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", d); p.setAttribute("class", "ln thin"); p.style.opacity = .5; g.appendChild(p);
+  });
+
+  // ---------- konfigurator: części roweru → pozycje na przywieszce ----------
+  var JOBS = {
+    "kolo-tyl": [["Dętka lub opona, tył", 45, 0], ["Centrowanie koła", 50, 0]],
+    "kolo-przod": [["Dętka lub opona, przód", 35, 0], ["Centrowanie koła", 50, 0]],
+    "hamulce": [["Regulacja hamulców, obie osie", 60, 0], ["Wymiana klocków", 30, 0]],
+    "naped": [["Czyszczenie i smarowanie napędu", 50, 0], ["Wymiana łańcucha", 40, 0]],
+    "przerzutki": [["Regulacja przerzutek", 60, 0], ["Linki i pancerze", 50, 0]],
+    "rama": [["Stery i suport: kontrola, smarowanie", 70, 1]],
+    "widelec": [["Kierownica, mostek, stery", 40, 0]],
+    "siodlo": [["Siodło, sztyca, pozycja", 25, 0]],
+  };
+  var PRESET = { przeglad: ["hamulce", "przerzutki", "kolo-tyl", "kolo-przod"], pelny: ["hamulce", "przerzutki", "kolo-tyl", "kolo-przod", "naped", "rama", "widelec"], naped: ["naped"], "kolo-tyl": ["kolo-tyl"] };
+  // pakiety z karty usług: części w pakiecie nie liczą się osobno
+  var PKG = { przeglad: ["Przegląd podstawowy", 110, 0], pelny: ["Przegląd pełny, z myciem", 180, 1] }, pkg = null;
+  var parts = [].slice.call(document.querySelectorAll("[data-part]")), chosen = {};
+  var lines = document.querySelector("[data-lines]"), sumEl = document.querySelector("[data-sum]"), ready = document.querySelector("[data-ready]");
+  var send = document.querySelector("[data-send]"), ticket = document.querySelector("[data-ticket]"), done = document.querySelector("[data-done]");
+  document.querySelector("[data-no]").textContent = "Nr " + String(now.getMonth() * 300 + now.getDate() * 9 + 112).padStart(4, "0");
+  var pressed = function (sel) { return document.querySelector(sel + " [aria-pressed='true']"); };
   function nextOpen(d) { var x = new Date(d); do { x.setDate(x.getDate() + 1); } while (!open(x.getDay())); return x; }
-  function ready(extra) {
+  function readyText(extra) {
     var d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    if (!open(wd) || h >= 10) d = nextOpen(d);
+    if (!open(wd) || hr >= 10) d = nextOpen(d);
     for (var i = 0; i < extra; i++) d = nextOpen(d);
-    var t = d.getDay() === 6 ? "13:00" : "17:00";
-    var today = d.toDateString() === now.toDateString();
-    var tomorrow = d.toDateString() === new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toDateString();
-    return (today ? "Dziś" : tomorrow ? "Jutro" : DAYS[d.getDay()]) + ", po " + t;
+    var t = d.getDay() === 6 ? "13:00" : "17:00", day = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"][d.getDay()];
+    var same = d.toDateString() === now.toDateString(), tm = d.toDateString() === new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toDateString();
+    return (same ? "dziś" : tm ? "jutro" : day) + ", po " + t;
   }
-
-  var tag = document.querySelector("[data-tag]"), chips = document.querySelectorAll("[data-job]");
-  var no = tag.querySelector("[data-no]"), jobs = tag.querySelector("[data-jobs]"), sum = tag.querySelector("[data-sum]");
-  var rd = tag.querySelector("[data-ready]"), send = tag.querySelector("[data-send]"), done = tag.querySelector("[data-done]");
-  var start = now.getMonth() * 300 + now.getDate() * 9 + 112;
-  no.textContent = "Nr " + String(start).padStart(4, "0");
-
-  function update() {
-    var picked = [].filter.call(chips, function (c) { return c.getAttribute("aria-pressed") === "true"; });
-    var total = 0, extra = 0;
-    picked.forEach(function (c) { total += +c.dataset.price; extra = Math.max(extra, +c.dataset.days); });
-    jobs.textContent = picked.length ? picked.map(function (c) { return c.dataset.job; }).join(", ") : "wybierz usługę";
-    sum.textContent = (picked.some(function (c) { return c.dataset.job === "łańcuch"; }) ? "od " : "") + total + " zł";
-    rd.textContent = picked.length ? ready(extra) : "—";
-    send.disabled = !picked.length;
-    done.textContent = "";
-    tag.classList.remove("bump"); void tag.offsetWidth; tag.classList.add("bump");
+  function render(bump) {
+    var x = +pressed("[data-kind]").dataset.x, w = +pressed("[data-when]").dataset.w, tot = 0, extra = 0, html = "";
+    if (pkg) { var pp = Math.round(PKG[pkg][1] * x / 5) * 5; tot += pp; extra = PKG[pkg][2]; html += "<li><span>" + PKG[pkg][0] + "</span><b>" + pp + " zł</b></li>"; }
+    parts.forEach(function (p) {
+      var on = !!chosen[p.dataset.part]; p.setAttribute("aria-pressed", String(on));
+      var l = document.querySelector('[data-l="' + p.dataset.part + '"]'); if (l) l.classList.toggle("on", on);
+      if (!on || (pkg && PRESET[pkg].indexOf(p.dataset.part) > -1)) return;
+      JOBS[p.dataset.part].forEach(function (j) { var pr = Math.round(j[1] * x / 5) * 5; tot += pr; extra = Math.max(extra, j[2]); html += "<li><span>" + j[0] + "</span><b>" + pr + " zł</b></li>"; });
+    });
+    var n = Object.keys(chosen).length; if (n >= 4 && !pkg) extra = Math.max(extra, 1);
+    if (w === 3 && n) { html += "<li><span>Bez pośpiechu, odbiór za 3 dni</span><b>−" + Math.round(tot * 0.1) + " zł</b></li>"; tot = Math.round(tot * 0.9); }
+    lines.innerHTML = html; document.querySelector("[data-empty]").hidden = n > 0;
+    sumEl.textContent = (n ? "~" : "") + tot + " zł";
+    ready.textContent = n ? readyText(Math.max(extra, w)) : "—";
+    send.disabled = !n; done.textContent = "";
+    if (bump && !reduce) { ticket.classList.remove("bump"); void ticket.offsetWidth; ticket.classList.add("bump"); }
   }
-  chips.forEach(function (c) {
-    c.addEventListener("click", function () { c.setAttribute("aria-pressed", String(c.getAttribute("aria-pressed") !== "true")); update(); });
+  function toggle(id) { if (pkg && PRESET[pkg].indexOf(id) > -1) pkg = null; if (chosen[id]) delete chosen[id]; else chosen[id] = 1; render(true); }
+  parts.forEach(function (p) {
+    p.addEventListener("click", function () { toggle(p.dataset.part); });
+    p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(p.dataset.part); } });
   });
-  tag.addEventListener("submit", function (e) {
-    e.preventDefault();
-    done.textContent = "Przywieszka " + no.textContent.replace("Nr ", "nr ") + " czeka przy ladzie. Odbiór: " + rd.textContent.toLowerCase() + ".";
+  ["[data-kind]", "[data-when]"].forEach(function (sel) {
+    document.querySelectorAll(sel + " button").forEach(function (b) { b.addEventListener("click", function () { document.querySelectorAll(sel + " button").forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); }); render(true); }); });
   });
+  document.querySelectorAll("[data-preset]").forEach(function (a) { a.addEventListener("click", function () { chosen = {}; pkg = PKG[a.dataset.preset] ? a.dataset.preset : null; (PRESET[a.dataset.preset] || []).forEach(function (k) { chosen[k] = 1; }); render(true); }); });
+  ticket.addEventListener("submit", function (e) {
+    e.preventDefault(); var tel = ticket.querySelector("input");
+    if (!tel.value.trim()) { done.textContent = "Podaj telefon, żebyśmy mogli oddzwonić."; tel.focus(); return; }
+    done.textContent = "Przywieszka " + document.querySelector("[data-no]").textContent.replace("Nr ", "nr ") + " czeka przy ladzie. Odbiór: " + ready.textContent + ".";
+  });
+  render(false);
 
-  // ---------- Rowery, które tu stały ----------
-  var BIKES = [
-    { n: "Romet Wagant", y: "1984", img: "romet-wagant-bicycle-1.jpg", h: 936, why: "skrzypi suport, linki ledwo chodzą", done: "suport, nowe linki i pancerze, klocki", time: "1 dzień", p: "210 zł" },
-    { n: "Romet Flaming", y: "1979", img: "romet-flaming-bicycle-in-krakow-3.jpg", h: 1218, why: "stał latami w piwnicy", done: "opony, dętki, hamulce, smarowanie piast", time: "2 dni", p: "240 zł" },
-    { n: "Damka z koszykiem", y: "lata 90.", img: "red-romet-bicycle-in-krakow-1.jpg", h: 915, why: "zima pod balkonem", done: "pełny przegląd, nowy łańcuch", time: "2 dni", p: "220 zł" },
-    { n: "Holender", y: "2009", img: "dutch-bicycle.jpg", h: 775, why: "przerzutka w piaście nie łapie trójki", done: "regulacja Nexusa, nowa linka", time: "1 dzień", p: "75 zł" },
-    { n: "Miejski z bagażnikiem", y: "2016", img: "romet-bicycle-in-krakow.jpg", h: 900, why: "przebita dętka", done: "dętka 28″, sprawdzenie opony", time: "20 minut", p: "45 zł" },
-    { n: "Roadster", y: "1992", img: "roadster-bicycle-dutch.jpg", h: 794, why: "koło bije i ociera o hamulec", done: "centrowanie, dwie szprychy", time: "1 dzień", p: "100 zł" },
-  ];
-  var wheel = document.querySelector("[data-wheel]"), spec = document.querySelector("[data-spec]"), simg = spec.querySelector("img");
-  var cur = 0, note = document.querySelector(".shelf .note");
-  BIKES.forEach(function (b, i) {
-    var li = document.createElement("li"), bt = document.createElement("button");
-    bt.type = "button"; bt.setAttribute("role", "tab"); bt.textContent = b.n;
-    bt.addEventListener("click", function () { show(i); });
-    li.appendChild(bt); wheel.appendChild(li);
-  });
-  function show(i) {
-    cur = (i + BIKES.length) % BIKES.length; var b = BIKES[cur];
-    wheel.querySelectorAll("button").forEach(function (x, j) { x.setAttribute("aria-selected", String(j === cur)); x.tabIndex = j === cur ? 0 : -1; });
-    spec.classList.add("swap");
-    setTimeout(function () { simg.src = "assets/" + b.img; simg.height = b.h; simg.alt = b.n + " na ulicy"; spec.classList.remove("swap"); }, 180);
-    spec.querySelector("[data-yr]").textContent = b.y;
-        note.querySelector("[data-name]").textContent = b.n;
-    note.querySelector("[data-why]").textContent = b.why;
-    note.querySelector("[data-done]").textContent = b.done;
-    note.querySelector("[data-time]").textContent = b.time;
-    note.querySelector("[data-price]").textContent = b.p;
-  }
-  wheel.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show(cur + 1); wheel.querySelectorAll("button")[cur].focus(); }
-    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show(cur - 1); wheel.querySelectorAll("button")[cur].focus(); }
-  });
-  show(0);
+  // ---------- oś dnia: postęp do bieżącej godziny ----------
+  var steps = [].slice.call(document.querySelectorAll("[data-steps] .step")), box = document.querySelector("[data-steps]");
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (en, o) {
+    if (!en[0].isIntersecting) return; o.disconnect();
+    var k = steps.filter(function (s) { return hr >= +s.dataset.h; }).length;
+    if (!open(wd) || hr >= 18) k = 4;
+    k = Math.max(1, k);
+    box.style.setProperty("--p", ((k - 1) / 3 * 100) + "%");
+    steps.forEach(function (s, i) { setTimeout(function () { if (i < k) s.classList.add("on"); }, reduce ? 0 : 250 * i); });
+  }, { threshold: .4 }).observe(box);
 
-  // Kolejka na dziś: ile rowerów stoi i ile miejsc zostało na jutro (stałe w ciągu dnia).
-  var seed = now.getDate() * 7 + now.getMonth() * 3;
-  document.querySelector("[data-q]").textContent = 4 + (seed % 5);
-  document.querySelector("[data-free]").textContent = 1 + (seed % 4);
+  // ---------- karuzela modeli ----------
+  var rail = document.querySelector("[data-rail-box]");
+  document.querySelectorAll("[data-rail]").forEach(function (b) { b.addEventListener("click", function () { rail.scrollBy({ left: +b.dataset.rail * rail.clientWidth * 0.62, behavior: reduce ? "auto" : "smooth" }); }); });
+})();
+// dopasuj wielkie napisy do szerokości kolumny
+(function () {
+  var els = document.querySelectorAll("[data-fit]");
+  function fit() { els.forEach(function (el) { el.style.fontSize = ""; var pc = getComputedStyle(el.parentNode), w = el.parentNode.clientWidth - parseFloat(pc.paddingLeft) - parseFloat(pc.paddingRight), cs = getComputedStyle(el), f = parseFloat(cs.fontSize); el.style.display = "inline-block"; var n = el.scrollWidth; el.style.display = ""; if (n > w) el.style.fontSize = Math.floor(f * w / n * 0.98) + "px"; }); }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+  addEventListener("resize", fit);
 })();
 </script>
 </body>

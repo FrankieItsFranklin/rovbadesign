@@ -19,7 +19,7 @@ const SOURCES = [
   { id: "fiszka", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
   { id: "ventotto", url: "concept:ventotto", cover: [1280, 1600], desktop: [0, "#dzien", "#cantina"], mobile: [0, "#dzien", "#forno"] },
   { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, "#cennik", "#termin"], mobile: [0, "#termin", "#barberzy"] },
-  { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#cennik", "#przywieszka"], mobile: [0, "#przywieszka", "#cennik"] },
+  { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#uslugi", "#co-nie-dziala"], mobile: [0, "#co-nie-dziala", "#uslugi"] },
   { id: "ostrozka", url: "concept:ostrozka", cover: [1280, 1600], desktop: [0, "#bukiet", "#cennik"], mobile: [0, "#bukiet", "#cennik"] },
   { id: "kruszon", url: "concept:kruszon", cover: [1280, 1600], desktop: [0, ".cats", ".news"], mobile: [0, ".cats", ".news"] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
