@@ -1,0 +1,111 @@
+<style>
+  .phead .side { position:absolute; right:var(--m); top:52%; translate:0 -50%; width:min(28vw, 400px); }
+  .phead .lead, .phead h1, .phead .script { max-width:60%; }
+  .gens { background:var(--card); padding:clamp(100px, 11vw, 160px) 0; position:relative; overflow:hidden; }
+  .gens .top { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; }
+  .gens .script { font-size:clamp(42px, 4vw, 66px); }
+  .gens .num { font-size:clamp(160px, 20vw, 330px); color:var(--big); line-height:.82; }
+  .gens .cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:56px; }
+  .gen { background:var(--bg); border-radius:var(--r); padding:28px; }
+  .gen .ini { width:72px; height:72px; border-radius:50%; background:var(--accent); color:var(--accent-ink); display:grid; place-items:center; font:400 34px var(--display); }
+  .gen b { display:block; font:400 52px/1 var(--display); color:var(--head); margin-top:18px; }
+  .gen h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:6px; }
+  .gen p { margin-top:10px; font-size:15px; }
+
+  .day { padding:clamp(100px, 11vw, 160px) 0; position:relative; }
+  .day .script { font-size:clamp(42px, 4vw, 66px); }
+  .day h2 { font-size:clamp(56px, 6vw, 110px); color:var(--head); }
+  .clock { list-style:none; padding:0; margin-top:56px; display:grid; gap:14px; }
+  .clock li { display:grid; grid-template-columns:160px 1fr 1.1fr; gap:28px; align-items:center; background:var(--card); border-radius:var(--r); padding:18px 24px; }
+  .clock li[data-now] { outline:3px solid var(--accent); }
+  .clock .h { font:400 58px/1 var(--display); color:var(--big); }
+  .clock h3 { font:400 30px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .clock p { font-size:15px; margin-top:6px; }
+  .clock img { width:100%; height:120px; object-fit:cover; border-radius:14px; }
+  .clock .cutimg { object-fit:contain; background:var(--bg); padding:8px; }
+
+  .ingr { background:var(--card); padding:clamp(100px, 11vw, 160px) 0; position:relative; overflow:hidden; }
+  .ingr .script { font-size:clamp(42px, 4vw, 66px); }
+  .ingr h2 { font-size:clamp(56px, 6vw, 110px); color:var(--head); }
+  .ingr .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:48px; }
+  .ingr article { background:var(--bg); border-radius:var(--r); padding:26px; display:grid; gap:8px; }
+  .ingr article .k { font:400 22px var(--display); letter-spacing:.06em; color:var(--soft); }
+  .ingr article h3 { font:400 34px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .ingr article p { font-size:15px; }
+  .ingr article .km { font:400 44px/1 var(--display); color:var(--big); }
+
+  @media (max-width: 960px) {
+    .phead .side { position:relative; right:auto; top:auto; translate:none; width:60%; margin:24px 0 0 auto; }
+    .phead .lead, .phead h1, .phead .script { max-width:none; }
+    .gens .top, .gens .cards, .ingr .grid { grid-template-columns:minmax(0, 1fr); }
+    .clock li { grid-template-columns:90px 1fr; } .clock li img { grid-column:1 / -1; height:150px; }
+    .clock .h { font-size:42px; }
+  }
+</style>
+
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / O nas</p>
+  <p class="script over">trzy pokolenia</p>
+  <h1 id="h1" class="display over">Jedna kruszonka</h1>
+  <p class="lead over">Od kuchni w kamienicy na Bałutach do trzech cukierni. Przepis na kruszonkę się nie zmienił: masło, mąka i cukier po równo.</p>
+  <img class="side cut" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" alt="" aria-hidden="true">
+</section>
+
+<section class="gens" aria-labelledby="gens-h" data-reveal>
+  <div class="wrap over">
+    <div class="top">
+      <div data-r><p class="script">pieczemy w Łodzi od roku</p><p class="display num" aria-hidden="true">1991</p></div>
+      <div data-r><h2 id="gens-h" class="display" style="font-size:clamp(40px,3.6vw,60px);color:var(--head)">Rodzina, która wstaje o czwartej</h2><p style="margin-top:14px">Każde pokolenie dołożyło coś swojego, ale żadne nie zmieniło kruszonki.</p></div>
+    </div>
+    <div class="cards">
+      <article class="gen" data-r><span class="ini">IK</span><b>1991</b><h3>Babcia Irena</h3><p>Piekła drożdżówki dla sąsiadów z kamienicy przy Zgierskiej. Po roku ustawiała się po nie kolejka na klatce schodowej.</p></article>
+      <article class="gen" data-r><span class="ini">MK</span><b>1998</b><h3>Syn Marek</h3><p>Otworzył pierwszą cukiernię na Piotrkowskiej i nauczył się piec torty na zamówienie. Dziś prowadzi wszystkie trzy lokale.</p></article>
+      <article class="gen" data-r><span class="ini">OK</span><b>2019</b><h3>Wnuczka Ola</h3><p>Po szkole cukierniczej we Francji wróciła do pracowni. Od niej są makaroniki, pithivier i tort red velvet.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="day wrap" aria-labelledby="day-h" data-reveal>
+  <p class="script over" data-r>dzień w pracowni na Bałutach</p>
+  <h2 id="day-h" class="display over" data-r>Od piątej do północy</h2>
+  <ol class="clock" data-clock>
+    <li data-h="4" data-r><span class="h">4:00</span><div><h3>Ciasto drożdżowe</h3><p>Pierwsza zmiana zaczyna od drożdżówek. Ciasto rośnie godzinę w cieple pieca.</p></div><img src="assets/kruszon/sernik-pastel-de-queso-gastronomia-polaca-gniezno.jpg" width="1200" height="800" loading="lazy" alt="Cukierniczka przy stole w pracowni"></li>
+    <li data-h="5" data-r><span class="h">5:40</span><div><h3>Pierwsze pączki</h3><p>Smażymy na smalcu po dwie minuty z każdej strony, nadziewamy ręcznie różą.</p></div><img src="assets/kruszon/smazenie-paczkow.jpg" width="1200" height="1206" loading="lazy" alt="Smażenie pączków, fotografia archiwalna"></li>
+    <li data-h="6" data-r><span class="h">6:30</span><div><h3>Samochód do cukierni</h3><p>Trzy kursy: Bałuty, centrum, Widzew. Ciastka jadą w drewnianych skrzynkach.</p></div><img src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki na tacy"></li>
+    <li data-h="11" data-r><span class="h">11:00</span><div><h3>Druga partia</h3><p>Drugi raz pączki i serniki na popołudnie. Do 12:00 przyjmujemy zamówienia na ten sam dzień.</p></div><img class="cutimg" src="assets/kruszon/cut/sernik.webp" width="808" height="585" loading="lazy" alt="Sernik z rodzynkami"></li>
+    <li data-h="15" data-r><span class="h">15:00</span><div><h3>Torty na jutro</h3><p>Biszkopty pieczemy dzień wcześniej, żeby odpoczęły. Krem i owoce dopiero rano.</p></div><img class="cutimg" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" loading="lazy" alt="Puszysty sernik"></li>
+    <li data-h="20" data-r><span class="h">20:00</span><div><h3>Kruszonka na jutro</h3><p>Ostatnia rzecz przed zamknięciem: dwadzieścia kilo kruszonki do lodówki, na rano.</p></div><img class="cutimg" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" loading="lazy" alt="Drożdżówka z kruszonką"></li>
+  </ol>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(120px,13vw,220px)" data-fly="-25 35 125 60 -30 30" src="assets/kruszon/cut/paczek-przekroj.webp" width="889" height="519" alt="">
+  <img class="flyer cut" style="--w:clamp(90px,9vw,150px)" data-fly="125 65 -25 30 30 -30" src="assets/kruszon/cut/wisnie.webp" width="600" height="803" alt="">
+</div>
+
+<section class="ingr" aria-labelledby="ingr-h" data-reveal>
+  <div class="wrap over">
+    <p class="script" data-r>skąd to bierzemy</p>
+    <h2 id="ingr-h" class="display" data-r>Krótka lista</h2>
+    <div class="grid">
+      <article data-r><span class="k">masło</span><h3>Mleczarnia w Łowiczu</h3><p>Masło 82%, też do kruszonki. Margaryny nie ma w pracowni wcale.</p><span class="km">80 km</span></article>
+      <article data-r><span class="k">jajka</span><h3>Gospodarstwo pod Zgierzem</h3><p>Od kur z wolnego wybiegu, przywożone dwa razy w tygodniu.</p><span class="km">15 km</span></article>
+      <article data-r><span class="k">twaróg</span><h3>Łowicz, półtłusty</h3><p>Mielony trzy razy, dlatego sernik jest gładki bez dodatku mąki.</p><span class="km">80 km</span></article>
+      <article data-r><span class="k">róża</span><h3>Nasza konfitura</h3><p>Płatki róży z ogrodu pod Brzezinami, gotowane w czerwcu na cały rok.</p><span class="km">30 km</span></article>
+      <article data-r><span class="k">owoce</span><h3>Rynek Bałucki</h3><p>Truskawki i wiśnie w sezonie, mrożone z tego samego sadu zimą.</p><span class="km">2 km</span></article>
+      <article data-r><span class="k">mąka</span><h3>Młyn w Sieradzu</h3><p>Pszenna typ 450 do biszkoptów i 650 do drożdżowego.</p><span class="km">60 km</span></article>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  // podświetl etap dnia, który trwa teraz
+  var h = new Date().getHours(), items = [].slice.call(document.querySelectorAll("[data-clock] li")), cur = null;
+  items.forEach(function (li) { if (h >= +li.dataset.h) cur = li; });
+  if (cur) cur.setAttribute("data-now", "");
+})();
+</script>

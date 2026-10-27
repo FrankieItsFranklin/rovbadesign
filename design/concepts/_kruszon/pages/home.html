@@ -1,0 +1,214 @@
+<style>
+  .hero { position:relative; min-height:calc(100svh - 104px); display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; }
+  .hero .pattern { position:absolute; right:-4vw; top:6%; width:min(50vw, 740px); z-index:0; }
+  .hero .txt { padding:0 0 0 var(--m); max-width:680px; }
+  .hero .script { font-size:clamp(44px, 4.4vw, 70px); }
+  .hero h1 { font-size:clamp(56px, 6vw, 104px); color:var(--head); margin-top:6px; }
+  .hero .lead { margin-top:22px; max-width:42ch; font-size:18px; }
+  .hero .ctas { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .hero .stage { position:relative; z-index:1; height:100%; min-height:560px; }
+  .hero .main { position:absolute; width:min(44vw, 680px); right:4%; top:16%; transform:rotate(-14deg); }
+  .js .hero .main { animation:drop 1300ms 150ms var(--ease-out) both; }
+  @keyframes drop { from { transform:translate(80px, -60px) rotate(8deg) scale(.88); opacity:0; } to { transform:rotate(-14deg); opacity:1; } }
+
+  .count { position:relative; background:var(--card); padding:clamp(100px, 12vw, 160px) 0; overflow:hidden; }
+  .count .wrap { display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center; }
+  .count .script { font-size:clamp(46px, 4.4vw, 72px); }
+  .count .num { font-size:clamp(150px, 18vw, 300px); color:var(--big); line-height:.82; margin-top:4px; }
+  .count h2 { font:400 clamp(30px, 2.6vw, 42px)/1 var(--display); color:var(--head); text-transform:uppercase; }
+  .count p { margin-top:18px; max-width:46ch; }
+
+  .cats { padding-block:clamp(110px, 12vw, 170px) 40px; position:relative; }
+  .cats .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; }
+  .cat { position:relative; background:var(--card); border-radius:var(--r); padding:150px 26px 28px; text-align:center; margin-top:90px; transition:transform 400ms var(--ease-out); text-decoration:none; display:block; }
+  .cat:hover { transform:translateY(-8px); }
+  .cat img { position:absolute; left:50%; top:-90px; width:82%; translate:-50% 0; transition:transform 600ms var(--ease-out); }
+  .cat:hover img { transform:rotate(-6deg) scale(1.05); }
+  .cat h3 { font:400 46px/1 var(--display); color:var(--head); text-transform:uppercase; }
+  .cat .script { font-size:28px; margin-top:2px; }
+  .cat p { margin:14px auto 0; font-size:15px; }
+  .cat .btn { margin-top:20px; min-height:46px; padding:0 22px; }
+
+  .values { position:relative; padding:clamp(120px, 13vw, 190px) 0; text-align:center; overflow:hidden; }
+  .values .script { font-size:clamp(44px, 4.6vw, 76px); }
+  .values .big { font-size:clamp(90px, 11.5vw, 200px); color:var(--big); margin-top:12px; }
+  .values .lane { max-width:62vw; margin-inline:auto; }
+
+  .stories { display:grid; gap:clamp(70px, 8vw, 120px); padding-block:40px clamp(90px, 10vw, 140px); }
+  .story { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px, 6vw, 96px); align-items:center; }
+  .story.rev .t { order:2; }
+  .story h3 { font:400 clamp(30px, 2.6vw, 42px)/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .story .t p { margin-top:16px; max-width:52ch; }
+  .story .pics { position:relative; padding-bottom:12%; }
+  .story .pics .a { border-radius:var(--r); width:84%; margin-left:auto; aspect-ratio:4/3; object-fit:cover; }
+  .story .pics .b { position:absolute; left:0; bottom:0; width:40%; aspect-ratio:1; object-fit:cover; border-radius:var(--r); border:8px solid var(--bg); }
+
+  .news { padding-block:clamp(110px, 12vw, 160px); }
+  .news .head { display:flex; justify-content:space-between; align-items:end; gap:24px; flex-wrap:wrap; margin-bottom:40px; }
+  .news .script { font-size:clamp(40px, 4vw, 64px); }
+  .news h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); margin-top:2px; }
+
+  .teaser { background:var(--card); padding:clamp(110px, 12vw, 160px) 0; position:relative; overflow:hidden; }
+  .teaser .wrap { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .teaser .script { font-size:clamp(40px, 4vw, 64px); }
+  .teaser h2 { font-size:clamp(70px, 8vw, 150px); color:var(--big); margin-top:6px; }
+  .teaser p { margin-top:18px; font-size:18px; max-width:44ch; }
+  .teaser .btn { margin-top:28px; }
+  .teaser ul { list-style:none; padding:0; margin-top:22px; display:grid; gap:8px; }
+  .teaser li { display:flex; gap:10px; align-items:center; } .teaser li::before { content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); }
+  .teaser svg { width:100%; height:auto; }
+
+  .shops-t { padding-block:clamp(110px, 12vw, 160px); }
+  .shops-t .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:40px; }
+  .shops-t .script { font-size:clamp(40px, 4vw, 64px); }
+  .shops-t h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); }
+  .shop { background:var(--card); border-radius:var(--r); padding:26px; display:flex; flex-direction:column; gap:10px; text-decoration:none; transition:transform 300ms var(--ease-out); }
+  .shop:hover { transform:translateY(-6px); }
+  .shop h3 { font:400 34px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .shop .open { display:inline-flex; align-items:center; gap:8px; font-weight:500; font-size:15px; }
+  .shop .open i { width:9px; height:9px; border-radius:50%; background:#9aa08c; }
+  .shop .open[data-on] i { background:#4f9a4f; box-shadow:0 0 0 4px rgb(79 154 79 / .2); }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns:1fr; min-height:0; padding:32px 0 0; }
+    .hero .txt { padding:0 16px; }
+    .hero .stage { min-height:92vw; }
+    .hero .main { width:90vw; right:4%; top:6%; }
+    .hero .pattern { width:110vw; top:auto; bottom:0; right:-30vw; }
+    .count .wrap, .story, .teaser .wrap { grid-template-columns:minmax(0, 1fr); }
+    .story.rev .t { order:0; }
+    .cats .grid { grid-template-columns:1fr 1fr; gap:14px; }
+    .cat { padding:96px 14px 20px; margin-top:70px; }
+    .cat img { top:-62px; }
+    .cat h3 { font-size:34px; } .cat p { display:none; }
+    .values .lane { max-width:none; }
+    .shops-t .grid { grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .js .hero .main { animation:none; } }
+</style>
+
+<section class="hero" aria-labelledby="h1">
+  <svg class="pattern" viewBox="0 0 600 600" aria-hidden="true" fill="var(--pattern)">
+    <path d="M0 0h150a150 150 0 0 1-150 150Z"/><path d="M150 0h150v150a150 150 0 0 1-150-150Z"/><circle cx="375" cy="75" r="75"/><path d="M450 0h150v150A150 150 0 0 0 450 0Z"/>
+    <path d="M0 150a150 150 0 0 1 150 150H0Z"/><path d="M150 150h150a150 150 0 0 1-150 150Z"/><path d="M300 150h150v150a150 150 0 0 1-150-150Z"/><circle cx="525" cy="225" r="75"/>
+    <circle cx="75" cy="375" r="75"/><path d="M150 300h150a150 150 0 0 0-150 150Z"/><path d="M300 450V300h150a150 150 0 0 1-150 150Z"/><path d="M450 300a150 150 0 0 1 150 150H450Z"/>
+    <path d="M0 450a150 150 0 0 1 150 150H0Z"/><circle cx="225" cy="525" r="75"/><path d="M300 450h150v150a150 150 0 0 1-150-150Z"/><path d="M450 600a150 150 0 0 1 150-150v150Z"/>
+  </svg>
+  <div class="txt over">
+    <p class="script">Dla Ciebie</p>
+    <h1 id="h1" class="display">Dobre ciasta i torty<br>prosto z Piotrkowskiej</h1>
+    <p class="lead">Rodzinna cukiernia w Łodzi. Pieczemy na maśle i jajkach od wiejskich kur, codziennie od piątej rano, w trzech cukierniach naraz.</p>
+    <div class="ctas"><a class="btn" href="kruszon-katalog.html">Zobacz witrynę</a><a class="btn dark" href="kruszon-tort.html">Zaprojektuj tort</a></div>
+  </div>
+  <div class="stage" aria-hidden="true" data-fly-box>
+    <div class="crumbs" data-crumbs="12"></div>
+    <img class="main cut" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" alt="" fetchpriority="high">
+    <img class="flyer cut" style="--w:clamp(70px,7vw,120px)" data-fly="20 10 6 60 -30 20" src="assets/kruszon/cut/truskawka.webp" width="809" height="567" alt="">
+    <img class="flyer cut" style="--w:clamp(80px,8vw,140px)" data-fly="88 95 92 40 18 -12" src="assets/kruszon/cut/wisnie.webp" width="600" height="803" alt="">
+  </div>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(140px,16vw,260px)" data-fly="-20 30 120 60 -40 30" src="assets/kruszon/cut/paczek.webp" width="919" height="818" alt="">
+  <img class="flyer cut" style="--w:clamp(120px,13vw,210px)" data-fly="-40 70 140 20 20 -30" src="assets/kruszon/cut/kruche.webp" width="747" height="531" alt="">
+  <img class="flyer cut" style="--w:clamp(110px,11vw,180px)" data-fly="130 40 -30 50 30 -40" src="assets/kruszon/cut/makaroniki.webp" width="812" height="497" alt="">
+</div>
+
+<section class="count" aria-labelledby="count-h" data-reveal>
+  <div class="wrap over">
+    <div data-r>
+      <p class="script">tyle ciastek pieczemy dziennie</p>
+      <p class="display num" aria-hidden="true" data-countup="2400">2 400</p>
+    </div>
+    <div data-r>
+      <h2 id="count-h">Codziennie około 2 400 ciastek, pączków i kawałków ciasta</h2>
+      <p>Wszystko powstaje w jednej pracowni na Bałutach i o 6:30 jedzie do trzech cukierni. Czego nie sprzedamy do wieczora, oddajemy do jadłodzielni przy Zgierskiej.</p>
+      <p>Zamówione przez stronę ciastka odbierasz w wybranej cukierni, bez kolejki.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cats wrap" aria-label="Kategorie" data-reveal>
+  <div class="grid">
+    <a class="cat" href="kruszon-katalog.html#torty" data-r><img class="cut" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" loading="lazy" alt=""><h3>Torty</h3><p class="script">święto na co dzień</p><p>Serniki, babki i ciasta na kawałki albo w całości.</p><span class="btn">Zobacz</span></a>
+    <a class="cat" href="kruszon-katalog.html#ciastka" data-r><img class="cut" src="assets/kruszon/cut/kruche.webp" width="747" height="531" loading="lazy" alt=""><h3>Ciastka</h3><p class="script">chrupiące i miękkie</p><p>Kruche z dżemem, makaroniki i babeczki do kawy.</p><span class="btn">Zobacz</span></a>
+    <a class="cat" href="kruszon-katalog.html#paczki" data-r><img class="cut" src="assets/kruszon/cut/paczek.webp" width="919" height="818" loading="lazy" alt=""><h3>Pączki</h3><p class="script">z różą, jak trzeba</p><p>Pączki z różą, drożdżówki z kruszonką, chałka w piątek.</p><span class="btn">Zobacz</span></a>
+    <a class="cat" href="kruszon-tort.html" data-r><img class="cut" src="assets/kruszon/cut/babka.webp" width="730" height="404" loading="lazy" alt=""><h3>Na zamówienie</h3><p class="script">święto nie czeka</p><p>Zaprojektuj tort na urodziny, chrzest albo ślub.</p><span class="btn">Projektuj</span></a>
+  </div>
+</section>
+
+<section class="values" aria-labelledby="val-h" data-reveal>
+  <img class="flyer side cut" style="--w:clamp(120px,13vw,220px)" data-fly="9 -15 11 115 -30 25" src="assets/kruszon/cut/babeczka.webp" width="616" height="603" alt="" aria-hidden="true">
+  <img class="flyer side cut" style="--w:clamp(110px,12vw,200px)" data-fly="91 115 89 -15 20 -25" src="assets/kruszon/cut/truskawki.webp" width="883" height="529" alt="" aria-hidden="true">
+  <div class="lane over">
+    <p class="script" data-r>cały nasz przepis to</p>
+    <h2 id="val-h" class="display big" data-r>Masło, cukier<br>i czas</h2>
+  </div>
+</section>
+
+<div class="wrap stories">
+  <section class="story" aria-labelledby="s1" data-reveal>
+    <div class="t" data-r>
+      <h3 id="s1">Prawdziwe masło, nie margaryna</h3>
+      <p>Kruszonkę, od której mamy nazwę, robimy z masła, mąki i cukru w proporcji jeden do jednego do jednego. Jak u babci Ireny, która zaczęła piec w 1991 roku w kuchni na Bałutach.</p>
+      <p><a href="kruszon-o-nas.html">Jak wygląda dzień w pracowni</a></p>
+    </div>
+    <div class="pics" data-r><img class="a" src="assets/kruszon/sernik-pastel-de-queso-gastronomia-polaca-gniezno.jpg" width="1200" height="800" loading="lazy" alt="Cukierniczka przygotowuje sernik w pracowni"><img class="b" src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki z lukrem na tacy"></div>
+  </section>
+  <section class="story rev" aria-labelledby="s2" data-reveal>
+    <div class="t" data-r>
+      <h3 id="s2">Pączki smażymy rano, nie wieczorem</h3>
+      <p>Pierwsza partia wychodzi z tłuszczu o 5:40, druga o 11:00. Nadziewamy je ręcznie, różą z płatków, którą gotujemy latem na cały rok.</p>
+    </div>
+    <div class="pics" data-r><img class="a" src="assets/kruszon/smazenie-paczkow.jpg" width="1200" height="1206" loading="lazy" alt="Smażenie pączków w dużym garnku, fotografia archiwalna"><img class="b" src="assets/kruszon/cut/paczek-przekroj.webp" width="889" height="519" loading="lazy" alt="Przekrojony pączek z konfiturą" style="object-fit:contain;background:var(--card);padding:10px"></div>
+  </section>
+</div>
+
+<section class="news wrap" aria-labelledby="news-h" data-reveal>
+  <div class="head over">
+    <div data-r><p class="script">słodkie odkrycia</p><h2 id="news-h" class="display">Dziś w witrynie</h2></div>
+    <a class="btn dark" href="kruszon-katalog.html" data-r>Cała witryna</a>
+  </div>
+  <ul class="products" data-products data-limit="4" data-r></ul>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(150px,17vw,280px)" data-fly="120 30 -20 55 40 -30" src="assets/kruszon/cut/sernik.webp" width="808" height="585" alt="">
+  <img class="flyer cut" style="--w:clamp(110px,11vw,190px)" data-fly="-30 60 130 25 -20 40" src="assets/kruszon/cut/babeczka.webp" width="616" height="603" alt="">
+  <img class="flyer cut" style="--w:clamp(90px,9vw,150px)" data-fly="140 75 -40 40 -30 20" src="assets/kruszon/cut/wisnie.webp" width="600" height="803" alt="">
+</div>
+
+<section class="teaser" aria-labelledby="teaser-h" data-reveal>
+  <div class="wrap over">
+    <div data-r>
+      <p class="script">nie ma Twojego tortu?</p>
+      <h2 id="teaser-h" class="display">Zaprojektuj go</h2>
+      <p>Piętra, biszkopt, krem, nadzienie, boki, polewa i dekoracje. Tort rysuje się na ekranie, a cena liczy się od razu.</p>
+      <ul><li>od 8 do 60 osób, do trzech pięter</li><li>przekrój pokazuje, co jest w środku</li><li>odbiór w jednej z trzech cukierni</li></ul>
+      <a class="btn" href="kruszon-tort.html">Zaprojektuj tort</a>
+    </div>
+    <div data-r>
+      <svg viewBox="0 0 400 360" aria-hidden="true">
+        <ellipse cx="200" cy="330" rx="170" ry="20" fill="rgb(0 0 0 / .08)"/>
+        <ellipse cx="200" cy="300" rx="160" ry="34" fill="var(--bg-2)"/><rect x="40" y="200" width="320" height="100" fill="#f6e3cf"/><ellipse cx="200" cy="300" rx="160" ry="34" fill="#f6e3cf" opacity="0"/><path d="M40 300a160 34 0 0 0 320 0" fill="#ecd3b9"/><ellipse cx="200" cy="200" rx="160" ry="34" fill="#fff6ea"/>
+        <rect x="90" y="110" width="220" height="90" fill="var(--accent)"/><path d="M90 200a110 24 0 0 0 220 0" fill="var(--accent-2)"/><ellipse cx="200" cy="110" rx="110" ry="24" fill="#fff6ea"/>
+        <path d="M90 110 q8 30 14 0 q8 40 16 0 q8 24 16 0 q8 36 16 0 q8 26 16 0 q8 40 16 0 q8 22 16 0 q8 34 16 0 q8 26 16 0 q8 38 16 0 q8 24 16 0 q8 30 16 0 q8 22 16 0 Z" fill="#5a2e1e"/>
+        <g fill="#d8283a"><circle cx="150" cy="104" r="9"/><circle cx="180" cy="98" r="9"/><circle cx="222" cy="98" r="9"/><circle cx="252" cy="104" r="9"/></g>
+        <rect x="196" y="60" width="8" height="36" rx="2" fill="#fff"/><ellipse cx="200" cy="54" rx="5" ry="9" fill="#ffb238"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="shops-t wrap" aria-labelledby="shops-h" data-reveal>
+  <div class="over" data-r><p class="script">przyjdź po ciastko</p><h2 id="shops-h" class="display">Trzy cukiernie w Łodzi</h2></div>
+  <div class="grid">
+    <a class="shop" href="kruszon-cukiernie.html" data-r><h3>Piotrkowska 112</h3><p class="open" data-shop="7-20,7-20,7-20,7-20,7-20,8-20,9-16"><i></i><span>—</span></p><p>Centrum, przy pasażu. Kawiarnia na dwanaście stolików.</p></a>
+    <a class="shop" href="kruszon-cukiernie.html" data-r><h3>Zgierska 41</h3><p class="open" data-shop="6-19,6-19,6-19,6-19,6-19,7-15,closed"><i></i><span>—</span></p><p>Bałuty, przy pracowni. Ciepłe pączki od szóstej.</p></a>
+    <a class="shop" href="kruszon-cukiernie.html" data-r><h3>Piłsudskiego 95</h3><p class="open" data-shop="8-19,8-19,8-19,8-19,8-19,8-17,10-15"><i></i><span>—</span></p><p>Widzew, odbiór tortów z parkingiem.</p></a>
+  </div>
+</section>

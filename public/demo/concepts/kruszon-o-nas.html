@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pl" data-pal="malina">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O nas — Kruszon, cukiernia od 1991</title>
+<meta name="description" content="Trzy pokolenia, jedna kruszonka. Jak wygląda dzień w pracowni na Bałutach i skąd bierzemy masło, jajka i twaróg.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
+<link rel="stylesheet" href="assets/kruszon/site.css?v=2">
+<style>
+  .phead .side { position:absolute; right:var(--m); top:52%; translate:0 -50%; width:min(28vw, 400px); }
+  .phead .lead, .phead h1, .phead .script { max-width:60%; }
+  .gens { background:var(--card); padding:clamp(100px, 11vw, 160px) 0; position:relative; overflow:hidden; }
+  .gens .top { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; }
+  .gens .script { font-size:clamp(42px, 4vw, 66px); }
+  .gens .num { font-size:clamp(160px, 20vw, 330px); color:var(--big); line-height:.82; }
+  .gens .cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:56px; }
+  .gen { background:var(--bg); border-radius:var(--r); padding:28px; }
+  .gen .ini { width:72px; height:72px; border-radius:50%; background:var(--accent); color:var(--accent-ink); display:grid; place-items:center; font:400 34px var(--display); }
+  .gen b { display:block; font:400 52px/1 var(--display); color:var(--head); margin-top:18px; }
+  .gen h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:6px; }
+  .gen p { margin-top:10px; font-size:15px; }
+
+  .day { padding:clamp(100px, 11vw, 160px) 0; position:relative; }
+  .day .script { font-size:clamp(42px, 4vw, 66px); }
+  .day h2 { font-size:clamp(56px, 6vw, 110px); color:var(--head); }
+  .clock { list-style:none; padding:0; margin-top:56px; display:grid; gap:14px; }
+  .clock li { display:grid; grid-template-columns:160px 1fr 1.1fr; gap:28px; align-items:center; background:var(--card); border-radius:var(--r); padding:18px 24px; }
+  .clock li[data-now] { outline:3px solid var(--accent); }
+  .clock .h { font:400 58px/1 var(--display); color:var(--big); }
+  .clock h3 { font:400 30px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .clock p { font-size:15px; margin-top:6px; }
+  .clock img { width:100%; height:120px; object-fit:cover; border-radius:14px; }
+  .clock .cutimg { object-fit:contain; background:var(--bg); padding:8px; }
+
+  .ingr { background:var(--card); padding:clamp(100px, 11vw, 160px) 0; position:relative; overflow:hidden; }
+  .ingr .script { font-size:clamp(42px, 4vw, 66px); }
+  .ingr h2 { font-size:clamp(56px, 6vw, 110px); color:var(--head); }
+  .ingr .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:48px; }
+  .ingr article { background:var(--bg); border-radius:var(--r); padding:26px; display:grid; gap:8px; }
+  .ingr article .k { font:400 22px var(--display); letter-spacing:.06em; color:var(--soft); }
+  .ingr article h3 { font:400 34px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .ingr article p { font-size:15px; }
+  .ingr article .km { font:400 44px/1 var(--display); color:var(--big); }
+
+  @media (max-width: 960px) {
+    .phead .side { position:relative; right:auto; top:auto; translate:none; width:60%; margin:24px 0 0 auto; }
+    .phead .lead, .phead h1, .phead .script { max-width:none; }
+    .gens .top, .gens .cards, .ingr .grid { grid-template-columns:minmax(0, 1fr); }
+    .clock li { grid-template-columns:90px 1fr; } .clock li img { grid-column:1 / -1; height:150px; }
+    .clock .h { font-size:42px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cr1" viewBox="0 0 20 20"><path d="M3 9 7 3l7 1 4 6-3 7-8 1-4-4Z"/></symbol>
+  <symbol id="cr2" viewBox="0 0 20 20"><path d="M2 12 5 5l8-2 5 5-1 7-9 2Z"/></symbol>
+  <symbol id="cr3" viewBox="0 0 20 20"><path d="M5 4h7l5 7-4 6H6L2 11Z"/></symbol>
+  <symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.5 8H6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></symbol>
+</svg>
+<header class="bar">
+  <div class="row1">
+    <a class="logo" href="kruszon.html" aria-label="Kruszon, strona główna"><b>Kruszon</b><span>cukiernia od 1991</span></a>
+    <span class="hide">Łódź · trzy cukiernie</span>
+    <a class="tel hide" href="tel:+48420000000">42 000 00 00</a>
+    <span class="sp"></span>
+    <a class="pill hide" href="kruszon-cukiernie.html">Godziny otwarcia</a>
+    <a class="pill hide" href="kruszon-tort.html">Tort na zamówienie</a>
+    <button class="menu-btn" type="button" aria-expanded="false" data-menu-btn>Menu</button>
+    <button class="cart-btn" type="button" aria-label="Koszyk" data-cart-open><svg aria-hidden="true"><use href="#cart"/></svg><b data-count>0</b></button>
+  </div>
+  <div class="row2"><nav aria-label="Strony"><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html" aria-current="page">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></nav></div>
+</header>
+<div class="sheet" data-sheet role="dialog" aria-label="Menu"><button type="button" class="close" aria-label="Zamknij menu">×</button><a href="kruszon.html">Start</a><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></div>
+<main>
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / O nas</p>
+  <p class="script over">trzy pokolenia</p>
+  <h1 id="h1" class="display over">Jedna kruszonka</h1>
+  <p class="lead over">Od kuchni w kamienicy na Bałutach do trzech cukierni. Przepis na kruszonkę się nie zmienił: masło, mąka i cukier po równo.</p>
+  <img class="side cut" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" alt="" aria-hidden="true">
+</section>
+
+<section class="gens" aria-labelledby="gens-h" data-reveal>
+  <div class="wrap over">
+    <div class="top">
+      <div data-r><p class="script">pieczemy w Łodzi od roku</p><p class="display num" aria-hidden="true">1991</p></div>
+      <div data-r><h2 id="gens-h" class="display" style="font-size:clamp(40px,3.6vw,60px);color:var(--head)">Rodzina, która wstaje o czwartej</h2><p style="margin-top:14px">Każde pokolenie dołożyło coś swojego, ale żadne nie zmieniło kruszonki.</p></div>
+    </div>
+    <div class="cards">
+      <article class="gen" data-r><span class="ini">IK</span><b>1991</b><h3>Babcia Irena</h3><p>Piekła drożdżówki dla sąsiadów z kamienicy przy Zgierskiej. Po roku ustawiała się po nie kolejka na klatce schodowej.</p></article>
+      <article class="gen" data-r><span class="ini">MK</span><b>1998</b><h3>Syn Marek</h3><p>Otworzył pierwszą cukiernię na Piotrkowskiej i nauczył się piec torty na zamówienie. Dziś prowadzi wszystkie trzy lokale.</p></article>
+      <article class="gen" data-r><span class="ini">OK</span><b>2019</b><h3>Wnuczka Ola</h3><p>Po szkole cukierniczej we Francji wróciła do pracowni. Od niej są makaroniki, pithivier i tort red velvet.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="day wrap" aria-labelledby="day-h" data-reveal>
+  <p class="script over" data-r>dzień w pracowni na Bałutach</p>
+  <h2 id="day-h" class="display over" data-r>Od piątej do północy</h2>
+  <ol class="clock" data-clock>
+    <li data-h="4" data-r><span class="h">4:00</span><div><h3>Ciasto drożdżowe</h3><p>Pierwsza zmiana zaczyna od drożdżówek. Ciasto rośnie godzinę w cieple pieca.</p></div><img src="assets/kruszon/sernik-pastel-de-queso-gastronomia-polaca-gniezno.jpg" width="1200" height="800" loading="lazy" alt="Cukierniczka przy stole w pracowni"></li>
+    <li data-h="5" data-r><span class="h">5:40</span><div><h3>Pierwsze pączki</h3><p>Smażymy na smalcu po dwie minuty z każdej strony, nadziewamy ręcznie różą.</p></div><img src="assets/kruszon/smazenie-paczkow.jpg" width="1200" height="1206" loading="lazy" alt="Smażenie pączków, fotografia archiwalna"></li>
+    <li data-h="6" data-r><span class="h">6:30</span><div><h3>Samochód do cukierni</h3><p>Trzy kursy: Bałuty, centrum, Widzew. Ciastka jadą w drewnianych skrzynkach.</p></div><img src="assets/kruszon/paczkiatwikimania2024.jpg" width="1200" height="900" loading="lazy" alt="Pączki na tacy"></li>
+    <li data-h="11" data-r><span class="h">11:00</span><div><h3>Druga partia</h3><p>Drugi raz pączki i serniki na popołudnie. Do 12:00 przyjmujemy zamówienia na ten sam dzień.</p></div><img class="cutimg" src="assets/kruszon/cut/sernik.webp" width="808" height="585" loading="lazy" alt="Sernik z rodzynkami"></li>
+    <li data-h="15" data-r><span class="h">15:00</span><div><h3>Torty na jutro</h3><p>Biszkopty pieczemy dzień wcześniej, żeby odpoczęły. Krem i owoce dopiero rano.</p></div><img class="cutimg" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" loading="lazy" alt="Puszysty sernik"></li>
+    <li data-h="20" data-r><span class="h">20:00</span><div><h3>Kruszonka na jutro</h3><p>Ostatnia rzecz przed zamknięciem: dwadzieścia kilo kruszonki do lodówki, na rano.</p></div><img class="cutimg" src="assets/kruszon/cut/drozdzowka.webp" width="798" height="606" loading="lazy" alt="Drożdżówka z kruszonką"></li>
+  </ol>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(120px,13vw,220px)" data-fly="-25 35 125 60 -30 30" src="assets/kruszon/cut/paczek-przekroj.webp" width="889" height="519" alt="">
+  <img class="flyer cut" style="--w:clamp(90px,9vw,150px)" data-fly="125 65 -25 30 30 -30" src="assets/kruszon/cut/wisnie.webp" width="600" height="803" alt="">
+</div>
+
+<section class="ingr" aria-labelledby="ingr-h" data-reveal>
+  <div class="wrap over">
+    <p class="script" data-r>skąd to bierzemy</p>
+    <h2 id="ingr-h" class="display" data-r>Krótka lista</h2>
+    <div class="grid">
+      <article data-r><span class="k">masło</span><h3>Mleczarnia w Łowiczu</h3><p>Masło 82%, też do kruszonki. Margaryny nie ma w pracowni wcale.</p><span class="km">80 km</span></article>
+      <article data-r><span class="k">jajka</span><h3>Gospodarstwo pod Zgierzem</h3><p>Od kur z wolnego wybiegu, przywożone dwa razy w tygodniu.</p><span class="km">15 km</span></article>
+      <article data-r><span class="k">twaróg</span><h3>Łowicz, półtłusty</h3><p>Mielony trzy razy, dlatego sernik jest gładki bez dodatku mąki.</p><span class="km">80 km</span></article>
+      <article data-r><span class="k">róża</span><h3>Nasza konfitura</h3><p>Płatki róży z ogrodu pod Brzezinami, gotowane w czerwcu na cały rok.</p><span class="km">30 km</span></article>
+      <article data-r><span class="k">owoce</span><h3>Rynek Bałucki</h3><p>Truskawki i wiśnie w sezonie, mrożone z tego samego sadu zimą.</p><span class="km">2 km</span></article>
+      <article data-r><span class="k">mąka</span><h3>Młyn w Sieradzu</h3><p>Pszenna typ 450 do biszkoptów i 650 do drożdżowego.</p><span class="km">60 km</span></article>
+    </div>
+  </div>
+</section>
+</main>
+<div class="scrim" data-scrim></div>
+<aside class="drawer" aria-label="Koszyk" data-drawer aria-hidden="true">
+  <div class="dh"><h2>Koszyk</h2><button type="button" class="x" aria-label="Zamknij koszyk" data-cart-close>×</button></div>
+  <ul data-lines></ul>
+  <p class="empty" data-empty>Koszyk jest pusty. Dodaj ciastko przyciskiem z wózkiem.</p>
+  <div class="df">
+    <div class="tot"><span>Razem</span><span data-total>0 zł</span></div>
+    <label class="field">Odbiór dziś <select data-pick><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew</option></select></label>
+    <button class="btn" type="button" data-checkout>Zarezerwuj do odbioru</button>
+    <p class="msg" role="status" data-msg></p>
+  </div>
+</aside>
+<footer>
+  <div class="wrap">
+    <p class="script">cukiernia rodzinna od 1991</p>
+    <div class="big" aria-hidden="true">Kruszon</div>
+    <div class="cols">
+      <div><b>Cukiernie</b><a href="kruszon-cukiernie.html">Piotrkowska 112</a><a href="kruszon-cukiernie.html">Zgierska 41, Bałuty</a><a href="kruszon-cukiernie.html">Piłsudskiego 95, Widzew</a></div>
+      <div><b>Kontakt</b><a href="tel:+48420000000">42 000 00 00</a><a href="mailto:zamowienia@kruszon.example">zamowienia@kruszon.example</a></div>
+      <div><b>Słodycze</b><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a></div>
+      <div><b>Strona</b>ROVBA Design</div>
+    </div>
+    <p class="credits">Zdjęcia (ciastka wycięte z tła na potrzeby strony): <a href="https://commons.wikimedia.org/wiki/File:Danish_(1).jpg">drożdżówka</a> i <a href="https://commons.wikimedia.org/wiki/File:Cupcake_(1).jpg">babeczka</a> Renee Comet, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Part_de_galette_des_rois_2013.jpg">ciasto francuskie</a> Lionel Allorge, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Souffl%C3%A9-style_cheesecake_001.jpg">sernik puszysty</a> Ocdp, CC0; <a href="https://commons.wikimedia.org/wiki/File:2023_Sernik_z_rodzynkami.jpg">sernik z rodzynkami</a> Jacek Halicki, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Marmorkuchen-Minigugelhupf_angeschnitten_2022.jpg">babka</a> VSchagow, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Jelly_Doughnut_Retouched.jpg">pączek w przekroju</a> Kevin Payravi, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Fat-Doughnut-Brooklyn-Strawberry-Filled.jpg">pączek</a> Evan-Amos, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_tart,_2015-06-06.jpg">kruche</a> Crisco 1492, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:VanillaMacaron.jpg">makaroniki</a> Michelle Naherny, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg">wiśnie</a> Benjamint444, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg">truskawka</a> Joselodos, CC0; <a href="https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa).jpg">truskawki</a> Ivar Leidus, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
+  </div>
+</footer>
+<script src="assets/concept.js"></script>
+<script src="assets/kruszon/site.js?v=2"></script>
+<script>
+(function () {
+  // podświetl etap dnia, który trwa teraz
+  var h = new Date().getHours(), items = [].slice.call(document.querySelectorAll("[data-clock] li")), cur = null;
+  items.forEach(function (li) { if (h >= +li.dataset.h) cur = li; });
+  if (cur) cur.setAttribute("data-now", "");
+})();
+</script>
+
+</body>
+</html>

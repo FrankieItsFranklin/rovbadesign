@@ -188,13 +188,13 @@ export const polishProjects: Record<string, PolishCopy> = {
     category: "Cukiernia",
     city: "Łódź",
     description:
-      "Koncept studia dla rodzinnej cukierni w Łodzi, nazwanej od maślanej kruszonki, którą sypie na wszystko. Ciasta i pączki fruwają po kremowej stronie w deszczu okruszków, pod wysokimi żółtymi liczbami i odręcznymi dopiskami.",
+      "Koncept studia dla rodzinnej cukierni w Łodzi, nazwanej od maślanej kruszonki, którą sypie na wszystko. Pięć stron, po których przy przewijaniu przelatują ciastka i pączki, witryna z koszykiem i pracownia tortów, która rysuje tort piętro po piętrze.",
     challenge: "Trzy cukiernie, które mają pachnieć kuchnią babci, a przy tym przyjmować zamówienia jak sklep.",
-    approach: "Witryna z koszykiem do odbioru tego samego dnia i kreator tortu, który rysuje tort z góry, gdy wybierasz wielkość, krem, owoce i napis.",
+    approach: "Witryna z koszykiem do odbioru tego samego dnia i pracownia tortów: piętra, biszkopt, krem, nadzienie, boki, polewa i dekoracje, rysowane na żywo z przekrojem i ceną od wagi.",
     details: [
-      "Kreator rysuje tort z góry i liczy cenę od wagi; koszyk odkłada ciastka do odbioru w jednej z trzech cukierni.",
+      "Pracownia rysuje do trzech pięter z polewą, owocami, świeczkami i tabliczką, pokazuje przekrój i zapisuje projekt w linku.",
       "Ciastka sfotografowane na białym tle i wycięte, więc unoszą się nad stroną jak na tacy.",
-      "Wersaliki Bebas Neue w rozmiarze plakatu i odręczny Caveat wpisany w poprzek.",
+      "Ciastka przelatują przez pasy bez tekstu, a nagłówki i liczby zawsze zostają czyste.",
     ],
   },
 };

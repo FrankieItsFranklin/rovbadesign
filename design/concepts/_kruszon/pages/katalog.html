@@ -1,0 +1,59 @@
+<style>
+  .phead .side { position:absolute; right:var(--m); top:50%; translate:0 -50%; width:min(30vw, 420px); }
+  .phead .lead, .phead h1, .phead .script { max-width:60%; }
+  .catalog { padding-block:20px clamp(90px, 10vw, 140px); }
+  .catalog .bar2 { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:34px; }
+  .catalog .note { font-size:15px; color:var(--soft); }
+  .rules { background:var(--card); padding:clamp(80px, 9vw, 130px) 0; position:relative; overflow:hidden; }
+  .rules .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; }
+  .rules article { background:var(--bg); border-radius:var(--r); padding:28px; }
+  .rules b { display:block; font:400 64px/1 var(--display); color:var(--big); }
+  .rules h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:8px; }
+  .rules p { margin-top:10px; font-size:15px; }
+  .rules .script { font-size:clamp(40px, 4vw, 60px); }
+  .rules h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); margin-bottom:40px; }
+  @media (max-width: 960px) {
+    .phead .side { position:relative; right:auto; top:auto; translate:none; width:70%; margin:24px 0 0 auto; }
+    .phead .lead, .phead h1, .phead .script { max-width:none; }
+    .rules .grid { grid-template-columns:1fr 1fr; gap:12px; }
+  }
+</style>
+
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / Witryna</p>
+  <p class="script over">słodkie odkrycia</p>
+  <h1 id="h1" class="display over">Dziś w witrynie</h1>
+  <p class="lead over">Dwanaście rzeczy, które dziś rano wyszły z pieca. Zamów do 12:00, a odbierzesz je tego samego dnia w wybranej cukierni.</p>
+  <img class="side cut" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" alt="" aria-hidden="true">
+</section>
+
+<section class="catalog wrap" aria-label="Wyroby" data-reveal>
+  <div class="bar2 over" data-r>
+    <div class="filters" role="group" aria-label="Kategoria" data-filters>
+      <button type="button" aria-pressed="true" data-f="all">Wszystko</button><button type="button" aria-pressed="false" data-f="torty">Ciasta i torty</button><button type="button" aria-pressed="false" data-f="ciastka">Ciastka</button><button type="button" aria-pressed="false" data-f="paczki">Pączki i drożdżowe</button>
+    </div>
+    <p class="note">Ceny brutto. Alergeny przy każdej pozycji.</p>
+  </div>
+  <ul class="products" data-products data-full data-r></ul>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(140px,15vw,240px)" data-fly="-25 40 125 55 -30 30" src="assets/kruszon/cut/francuskie.webp" width="983" height="679" alt="">
+  <img class="flyer cut" style="--w:clamp(100px,10vw,170px)" data-fly="130 70 -30 30 30 -20" src="assets/kruszon/cut/truskawka.webp" width="809" height="567" alt="">
+</div>
+
+<section class="rules" aria-labelledby="rules-h" data-reveal>
+  <div class="wrap over">
+    <p class="script" data-r>żeby było prosto</p>
+    <h2 id="rules-h" class="display" data-r>Jak zamawiać</h2>
+    <div class="grid">
+      <article data-r><b>12:00</b><h3>Do południa</h3><p>Zamówienia z witryny złożone do 12:00 odbierasz tego samego dnia od 15:00.</p></article>
+      <article data-r><b>3 dni</b><h3>Torty</h3><p>Tort zaprojektowany na stronie upieczemy na trzeci dzień, trzypiętrowy na piąty.</p></article>
+      <article data-r><b>0 zł</b><h3>Odbiór</h3><p>Płacisz przy odbiorze, kartą, BLIK-iem albo gotówką. Bez zaliczek do 300 zł.</p></article>
+      <article data-r><b>19:00</b><h3>Po zamknięciu</h3><p>To, czego nie sprzedamy, trafia do jadłodzielni przy Zgierskiej.</p></article>
+    </div>
+  </div>
+</section>

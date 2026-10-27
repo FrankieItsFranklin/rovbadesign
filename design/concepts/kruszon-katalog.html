@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pl" data-pal="malina">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Witryna — Kruszon, cukiernia w Łodzi</title>
+<meta name="description" content="Ciasta, ciastka i pączki z dzisiejszej witryny z cenami, wagą i alergenami. Zamów do odbioru w jednej z trzech cukierni.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
+<link rel="stylesheet" href="assets/kruszon/site.css?v=2">
+<style>
+  .phead .side { position:absolute; right:var(--m); top:50%; translate:0 -50%; width:min(30vw, 420px); }
+  .phead .lead, .phead h1, .phead .script { max-width:60%; }
+  .catalog { padding-block:20px clamp(90px, 10vw, 140px); }
+  .catalog .bar2 { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:34px; }
+  .catalog .note { font-size:15px; color:var(--soft); }
+  .rules { background:var(--card); padding:clamp(80px, 9vw, 130px) 0; position:relative; overflow:hidden; }
+  .rules .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; }
+  .rules article { background:var(--bg); border-radius:var(--r); padding:28px; }
+  .rules b { display:block; font:400 64px/1 var(--display); color:var(--big); }
+  .rules h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:8px; }
+  .rules p { margin-top:10px; font-size:15px; }
+  .rules .script { font-size:clamp(40px, 4vw, 60px); }
+  .rules h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); margin-bottom:40px; }
+  @media (max-width: 960px) {
+    .phead .side { position:relative; right:auto; top:auto; translate:none; width:70%; margin:24px 0 0 auto; }
+    .phead .lead, .phead h1, .phead .script { max-width:none; }
+    .rules .grid { grid-template-columns:1fr 1fr; gap:12px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cr1" viewBox="0 0 20 20"><path d="M3 9 7 3l7 1 4 6-3 7-8 1-4-4Z"/></symbol>
+  <symbol id="cr2" viewBox="0 0 20 20"><path d="M2 12 5 5l8-2 5 5-1 7-9 2Z"/></symbol>
+  <symbol id="cr3" viewBox="0 0 20 20"><path d="M5 4h7l5 7-4 6H6L2 11Z"/></symbol>
+  <symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.5 8H6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></symbol>
+</svg>
+<header class="bar">
+  <div class="row1">
+    <a class="logo" href="kruszon.html" aria-label="Kruszon, strona główna"><b>Kruszon</b><span>cukiernia od 1991</span></a>
+    <span class="hide">Łódź · trzy cukiernie</span>
+    <a class="tel hide" href="tel:+48420000000">42 000 00 00</a>
+    <span class="sp"></span>
+    <a class="pill hide" href="kruszon-cukiernie.html">Godziny otwarcia</a>
+    <a class="pill hide" href="kruszon-tort.html">Tort na zamówienie</a>
+    <button class="menu-btn" type="button" aria-expanded="false" data-menu-btn>Menu</button>
+    <button class="cart-btn" type="button" aria-label="Koszyk" data-cart-open><svg aria-hidden="true"><use href="#cart"/></svg><b data-count>0</b></button>
+  </div>
+  <div class="row2"><nav aria-label="Strony"><a href="kruszon-katalog.html" aria-current="page">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></nav></div>
+</header>
+<div class="sheet" data-sheet role="dialog" aria-label="Menu"><button type="button" class="close" aria-label="Zamknij menu">×</button><a href="kruszon.html">Start</a><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></div>
+<main>
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / Witryna</p>
+  <p class="script over">słodkie odkrycia</p>
+  <h1 id="h1" class="display over">Dziś w witrynie</h1>
+  <p class="lead over">Dwanaście rzeczy, które dziś rano wyszły z pieca. Zamów do 12:00, a odbierzesz je tego samego dnia w wybranej cukierni.</p>
+  <img class="side cut" src="assets/kruszon/cut/sernik-japonski.webp" width="818" height="701" alt="" aria-hidden="true">
+</section>
+
+<section class="catalog wrap" aria-label="Wyroby" data-reveal>
+  <div class="bar2 over" data-r>
+    <div class="filters" role="group" aria-label="Kategoria" data-filters>
+      <button type="button" aria-pressed="true" data-f="all">Wszystko</button><button type="button" aria-pressed="false" data-f="torty">Ciasta i torty</button><button type="button" aria-pressed="false" data-f="ciastka">Ciastka</button><button type="button" aria-pressed="false" data-f="paczki">Pączki i drożdżowe</button>
+    </div>
+    <p class="note">Ceny brutto. Alergeny przy każdej pozycji.</p>
+  </div>
+  <ul class="products" data-products data-full data-r></ul>
+</section>
+
+<div class="flight" aria-hidden="true">
+  
+  <div class="crumbs" data-crumbs="10"></div>
+  <img class="flyer cut" style="--w:clamp(140px,15vw,240px)" data-fly="-25 40 125 55 -30 30" src="assets/kruszon/cut/francuskie.webp" width="983" height="679" alt="">
+  <img class="flyer cut" style="--w:clamp(100px,10vw,170px)" data-fly="130 70 -30 30 30 -20" src="assets/kruszon/cut/truskawka.webp" width="809" height="567" alt="">
+</div>
+
+<section class="rules" aria-labelledby="rules-h" data-reveal>
+  <div class="wrap over">
+    <p class="script" data-r>żeby było prosto</p>
+    <h2 id="rules-h" class="display" data-r>Jak zamawiać</h2>
+    <div class="grid">
+      <article data-r><b>12:00</b><h3>Do południa</h3><p>Zamówienia z witryny złożone do 12:00 odbierasz tego samego dnia od 15:00.</p></article>
+      <article data-r><b>3 dni</b><h3>Torty</h3><p>Tort zaprojektowany na stronie upieczemy na trzeci dzień, trzypiętrowy na piąty.</p></article>
+      <article data-r><b>0 zł</b><h3>Odbiór</h3><p>Płacisz przy odbiorze, kartą, BLIK-iem albo gotówką. Bez zaliczek do 300 zł.</p></article>
+      <article data-r><b>19:00</b><h3>Po zamknięciu</h3><p>To, czego nie sprzedamy, trafia do jadłodzielni przy Zgierskiej.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+<div class="scrim" data-scrim></div>
+<aside class="drawer" aria-label="Koszyk" data-drawer aria-hidden="true">
+  <div class="dh"><h2>Koszyk</h2><button type="button" class="x" aria-label="Zamknij koszyk" data-cart-close>×</button></div>
+  <ul data-lines></ul>
+  <p class="empty" data-empty>Koszyk jest pusty. Dodaj ciastko przyciskiem z wózkiem.</p>
+  <div class="df">
+    <div class="tot"><span>Razem</span><span data-total>0 zł</span></div>
+    <label class="field">Odbiór dziś <select data-pick><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew</option></select></label>
+    <button class="btn" type="button" data-checkout>Zarezerwuj do odbioru</button>
+    <p class="msg" role="status" data-msg></p>
+  </div>
+</aside>
+<footer>
+  <div class="wrap">
+    <p class="script">cukiernia rodzinna od 1991</p>
+    <div class="big" aria-hidden="true">Kruszon</div>
+    <div class="cols">
+      <div><b>Cukiernie</b><a href="kruszon-cukiernie.html">Piotrkowska 112</a><a href="kruszon-cukiernie.html">Zgierska 41, Bałuty</a><a href="kruszon-cukiernie.html">Piłsudskiego 95, Widzew</a></div>
+      <div><b>Kontakt</b><a href="tel:+48420000000">42 000 00 00</a><a href="mailto:zamowienia@kruszon.example">zamowienia@kruszon.example</a></div>
+      <div><b>Słodycze</b><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a></div>
+      <div><b>Strona</b>ROVBA Design</div>
+    </div>
+    <p class="credits">Zdjęcia (ciastka wycięte z tła na potrzeby strony): <a href="https://commons.wikimedia.org/wiki/File:Danish_(1).jpg">drożdżówka</a> i <a href="https://commons.wikimedia.org/wiki/File:Cupcake_(1).jpg">babeczka</a> Renee Comet, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Part_de_galette_des_rois_2013.jpg">ciasto francuskie</a> Lionel Allorge, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Souffl%C3%A9-style_cheesecake_001.jpg">sernik puszysty</a> Ocdp, CC0; <a href="https://commons.wikimedia.org/wiki/File:2023_Sernik_z_rodzynkami.jpg">sernik z rodzynkami</a> Jacek Halicki, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Marmorkuchen-Minigugelhupf_angeschnitten_2022.jpg">babka</a> VSchagow, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Jelly_Doughnut_Retouched.jpg">pączek w przekroju</a> Kevin Payravi, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Fat-Doughnut-Brooklyn-Strawberry-Filled.jpg">pączek</a> Evan-Amos, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_tart,_2015-06-06.jpg">kruche</a> Crisco 1492, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:VanillaMacaron.jpg">makaroniki</a> Michelle Naherny, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg">wiśnie</a> Benjamint444, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg">truskawka</a> Joselodos, CC0; <a href="https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa).jpg">truskawki</a> Ivar Leidus, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
+  </div>
+</footer>
+<script src="assets/concept.js"></script>
+<script src="assets/kruszon/site.js?v=2"></script>
+
+</body>
+</html>

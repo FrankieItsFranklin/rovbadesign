@@ -1,0 +1,116 @@
+<style>
+  .where { display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px, 4vw, 56px); align-items:start; padding-bottom:clamp(90px, 10vw, 140px); }
+  .map { position:sticky; top:122px; background:var(--card); border-radius:28px; padding:16px; }
+  .map svg { width:100%; height:auto; display:block; }
+  .map .st { fill:none; stroke:var(--bg-2); stroke-width:14; stroke-linecap:round; }
+  .map .st.main { stroke:#e9dccb; stroke-width:20; }
+  .map text.lab { font:500 13px var(--text); fill:var(--soft); }
+  .map .pin circle { fill:var(--head); transition:r 300ms var(--ease-out), fill 200ms; }
+  .map .pin text { font:400 22px var(--display); fill:var(--bg); }
+  .map .pin.on circle { fill:var(--accent); r:22; }
+  .map .pin.on text { fill:var(--accent-ink); }
+  .map .note { font-size:13px; color:var(--soft); margin:8px 6px 0; }
+  .list { display:grid; gap:18px; }
+  .shop { background:var(--card); border-radius:var(--r); padding:28px; display:grid; gap:12px; border:3px solid transparent; transition:border-color 200ms; cursor:pointer; }
+  .shop.on { border-color:var(--accent); }
+  .shop .hd { display:flex; justify-content:space-between; align-items:start; gap:16px; }
+  .shop h2 { font:400 44px/1 var(--display); text-transform:uppercase; color:var(--head); }
+  .shop .n { width:44px; height:44px; border-radius:50%; background:var(--head); color:var(--bg); display:grid; place-items:center; font:400 24px var(--display); flex:none; }
+  .shop .open { display:inline-flex; align-items:center; gap:8px; font-weight:500; }
+  .shop .open i { width:10px; height:10px; border-radius:50%; background:#9aa08c; }
+  .shop .open[data-on] i { background:#4f9a4f; box-shadow:0 0 0 4px rgb(79 154 79 / .2); }
+  .shop table { border-collapse:collapse; font-size:15px; width:100%; max-width:360px; }
+  .shop td { padding:4px 0; } .shop td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+  .shop tr[data-today] td { font-weight:600; color:var(--head); }
+  .tags { display:flex; gap:8px; flex-wrap:wrap; }
+  .tags span { background:var(--bg); border-radius:999px; padding:6px 12px; font-size:14px; }
+  .shop .acts { display:flex; gap:10px; flex-wrap:wrap; }
+  .shop .acts .btn { min-height:44px; padding:0 18px; font-size:13px; }
+  .faq { background:var(--card); padding:clamp(90px, 10vw, 140px) 0; }
+  .faq .script { font-size:clamp(40px, 4vw, 60px); }
+  .faq h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); }
+  .faq .qs { margin-top:36px; display:grid; gap:10px; max-width:860px; }
+  .faq details { background:var(--bg); border-radius:18px; }
+  .faq summary { list-style:none; cursor:pointer; padding:20px 24px; font:400 26px/1.1 var(--display); text-transform:uppercase; color:var(--head); display:flex; justify-content:space-between; gap:16px; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:"+"; font-family:var(--text); transition:transform 220ms var(--ease-out); }
+  .faq details[open] summary::after { transform:rotate(45deg); }
+  .faq details p { padding:0 24px 22px; }
+  @media (max-width: 960px) { .where { grid-template-columns:minmax(0, 1fr); } .map { position:relative; top:0; } }
+</style>
+
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / Cukiernie</p>
+  <p class="script over">przyjdź po ciastko</p>
+  <h1 id="h1" class="display over">Trzy cukiernie</h1>
+  <p class="lead over">Centrum, Bałuty i Widzew. Wszędzie ta sama witryna, bo ciastka przyjeżdżają z jednej pracowni o 6:30.</p>
+</section>
+
+<div class="wrap where">
+  <figure class="map" aria-label="Schemat Łodzi z trzema cukierniami">
+    <svg viewBox="0 0 560 560" data-map>
+      <rect width="560" height="560" rx="18" fill="var(--bg)"/>
+      <path class="st" d="M60 120 L500 140"/><path class="st" d="M40 400 L520 380"/><path class="st" d="M140 40 L170 520"/><path class="st" d="M420 30 L400 530"/>
+      <path class="st main" d="M280 20 L280 540"/>
+      <path class="st main" d="M280 300 L540 300"/>
+      <path class="st main" d="M280 220 L120 40"/>
+      <text class="lab" x="290" y="520">Piotrkowska</text><text class="lab" x="420" y="290">al. Piłsudskiego</text><text class="lab" x="128" y="96" transform="rotate(48 128 96)">Zgierska</text>
+      <path d="M60 470 q60 -20 120 0 t120 0" fill="none" stroke="#cfe0f1" stroke-width="10" stroke-linecap="round"/><text class="lab" x="70" y="500">Park na Zdrowiu →</text>
+      <g class="pin" data-pin="0"><circle cx="280" cy="330" r="18"/><text x="280" y="338" text-anchor="middle">1</text></g>
+      <g class="pin" data-pin="1"><circle cx="175" cy="118" r="18"/><text x="175" y="126" text-anchor="middle">2</text></g>
+      <g class="pin" data-pin="2"><circle cx="470" cy="300" r="18"/><text x="470" y="308" text-anchor="middle">3</text></g>
+    </svg>
+    <figcaption class="note">Schemat, nie mapa. Do nawigacji użyj przycisku „Wyznacz trasę”.</figcaption>
+  </figure>
+  <div class="list">
+    <article class="shop" data-i="0" data-reveal>
+      <div class="hd"><div><h2>Piotrkowska 112</h2><p class="open" data-shop="7-20,7-20,7-20,7-20,7-20,8-20,9-16"><i></i><span>—</span></p></div><span class="n">1</span></div>
+      <p>Centrum, w pasażu przy Piotrkowskiej. Kawiarnia na dwanaście stolików, kawa z ekspresu kolbowego, największa witryna.</p>
+      <div class="tags"><span>kawiarnia</span><span>toaleta</span><span>odbiór tortów</span></div>
+      <table><tbody><tr><td>Poniedziałek – piątek</td><td>7:00–20:00</td></tr><tr><td>Sobota</td><td>8:00–20:00</td></tr><tr><td>Niedziela</td><td>9:00–16:00</td></tr></tbody></table>
+      <div class="acts"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Piotrkowska%20112%2C%20%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener">Wyznacz trasę</a><a class="btn ghost" href="tel:+48420000000">Zadzwoń</a></div>
+    </article>
+    <article class="shop" data-i="1" data-reveal>
+      <div class="hd"><div><h2>Zgierska 41</h2><p class="open" data-shop="6-19,6-19,6-19,6-19,6-19,7-15,closed"><i></i><span>—</span></p></div><span class="n">2</span></div>
+      <p>Bałuty, w tym samym budynku co pracownia. Otwarta najwcześniej, pączki prosto z tłuszczu od szóstej.</p>
+      <div class="tags"><span>przy pracowni</span><span>ciepłe pączki od 6:00</span></div>
+      <table><tbody><tr><td>Poniedziałek – piątek</td><td>6:00–19:00</td></tr><tr><td>Sobota</td><td>7:00–15:00</td></tr><tr><td>Niedziela</td><td>zamknięte</td></tr></tbody></table>
+      <div class="acts"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Zgierska%2041%2C%20%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener">Wyznacz trasę</a><a class="btn ghost" href="tel:+48420000000">Zadzwoń</a></div>
+    </article>
+    <article class="shop" data-i="2" data-reveal>
+      <div class="hd"><div><h2>Piłsudskiego 95</h2><p class="open" data-shop="8-19,8-19,8-19,8-19,8-19,8-17,10-15"><i></i><span>—</span></p></div><span class="n">3</span></div>
+      <p>Widzew, przy przystanku tramwajowym. Tu najwygodniej odebrać duży tort: parking przed wejściem i pomoc przy samochodzie.</p>
+      <div class="tags"><span>parking</span><span>odbiór tortów</span><span>wejście bez schodów</span></div>
+      <table><tbody><tr><td>Poniedziałek – piątek</td><td>8:00–19:00</td></tr><tr><td>Sobota</td><td>8:00–17:00</td></tr><tr><td>Niedziela</td><td>10:00–15:00</td></tr></tbody></table>
+      <div class="acts"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Pi%C5%82sudskiego%2095%2C%20%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener">Wyznacz trasę</a><a class="btn ghost" href="tel:+48420000000">Zadzwoń</a></div>
+    </article>
+  </div>
+</div>
+
+<section class="faq" aria-labelledby="faq-h" data-reveal>
+  <div class="wrap">
+    <p class="script" data-r>zanim zadzwonisz</p>
+    <h2 id="faq-h" class="display" data-r>Pytania</h2>
+    <div class="qs" data-r>
+      <details open><summary>Czy mogę zamówić tort na jutro?</summary><p>Tort z projektanta pieczemy na trzeci dzień. Na jutro możemy przygotować sernik albo babkę z witryny w całości, zadzwoń do 12:00.</p></details>
+      <details><summary>Czy macie ciasta bez glutenu?</summary><p>Makaroniki są bez glutenu. Pracownia nie jest wolna od glutenu, więc przy celiakii nie możemy niczego zagwarantować.</p></details>
+      <details><summary>Co z ciastkami, których nie sprzedacie?</summary><p>Codziennie o 19:00 zawozimy je do jadłodzielni przy Zgierskiej.</p></details>
+      <details><summary>Czy dowozicie?</summary><p>Torty powyżej 30 osób dowozimy w Łodzi za 40 zł. Ciastka tylko z odbiorem w cukierni.</p></details>
+      <details><summary>Jak zapłacić?</summary><p>Przy odbiorze: karta, BLIK albo gotówka. Przy tortach powyżej 300 zł prosimy o zaliczkę 30%.</p></details>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var shops = document.querySelectorAll(".shop[data-i]"), pins = document.querySelectorAll("[data-pin]");
+  function on(i) { shops.forEach(function (s) { s.classList.toggle("on", +s.dataset.i === i); }); pins.forEach(function (p) { p.classList.toggle("on", +p.dataset.pin === i); }); }
+  shops.forEach(function (s) { s.addEventListener("mouseenter", function () { on(+s.dataset.i); }); s.addEventListener("click", function (e) { if (!e.target.closest("a")) on(+s.dataset.i); }); });
+  pins.forEach(function (p) { p.style.cursor = "pointer"; p.addEventListener("click", function () { var i = +p.dataset.pin; on(i); shops[i].scrollIntoView({ behavior: "smooth", block: "center" }); }); });
+  // dzisiejszy dzień w tabelach godzin
+  var d = new Date().getDay(), row = d === 0 ? 2 : d === 6 ? 1 : 0;
+  document.querySelectorAll(".shop table").forEach(function (t) { t.rows[row].setAttribute("data-today", ""); });
+  on(0);
+})();
+</script>

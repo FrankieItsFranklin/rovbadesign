@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="pl" data-pal="malina">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zaprojektuj tort — Kruszon, Łódź</title>
+<meta name="description" content="Zaprojektuj tort na zamówienie: piętra, biszkopt, krem, nadzienie, boki, polewa i dekoracje. Podgląd i cena na żywo.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var m=location.search.match(/[?&]pal=(\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")})()</script>
+<link rel="stylesheet" href="assets/kruszon/site.css?v=2">
+<style>
+  .phead h1 { max-width:12ch; }
+  .studio { display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, .75fr); gap:clamp(28px, 4vw, 64px); align-items:start; padding-bottom:clamp(90px, 10vw, 140px); }
+  .preview { position:sticky; top:122px; background:var(--card); border-radius:28px; padding:22px; display:grid; gap:14px; }
+  .preview .views { display:flex; gap:8px; }
+  .preview .views button { border:0; border-radius:999px; min-height:42px; padding:0 16px; background:var(--bg); font:600 13px var(--text); text-transform:uppercase; letter-spacing:.05em; cursor:pointer; color:var(--head); }
+  .preview .views button[aria-pressed="true"] { background:var(--head); color:var(--bg); }
+  .canvas { position:relative; background:var(--bg); border-radius:20px; overflow:hidden; }
+  .canvas svg { width:100%; height:auto; display:block; }
+  .canvas .sec { position:absolute; right:12px; top:12px; width:30%; background:var(--card); border-radius:14px; padding:8px; box-shadow:0 14px 30px -18px rgb(0 0 0 / .4); transition:transform 400ms var(--ease-out); }
+  .canvas .sec p { font-size:12px; color:var(--soft); margin:2px 4px 4px; }
+  .canvas[data-view="przekroj"] .sec { transform:scale(2.6); transform-origin:100% 0; }
+  .flame { animation:flick 900ms ease-in-out infinite alternate; transform-box:fill-box; transform-origin:50% 100%; }
+  @keyframes flick { to { transform:scaleY(1.12) scaleX(.9) rotate(4deg); } }
+  .sum { display:grid; grid-template-columns:1fr auto; gap:6px 18px; align-items:end; }
+  .sum .price { font:400 clamp(54px, 5vw, 76px)/1 var(--display); color:var(--head); grid-row:span 2; }
+  .sum .meta { text-align:right; font-size:15px; }
+  .sum details { grid-column:1 / -1; background:var(--bg); border-radius:14px; padding:10px 14px; font-size:15px; }
+  .sum summary { cursor:pointer; font-weight:500; }
+  .sum ul { list-style:none; padding:8px 0 2px; display:grid; gap:6px; }
+  .sum li { display:flex; justify-content:space-between; gap:12px; }
+  .tools { display:flex; gap:8px; flex-wrap:wrap; }
+  .tools .btn { min-height:44px; padding:0 18px; font-size:13px; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  .presets button { border:0; border-radius:999px; min-height:44px; padding:0 16px; background:var(--card); font:600 13px var(--text); text-transform:uppercase; letter-spacing:.05em; cursor:pointer; color:var(--head); transition:background-color 160ms, transform 160ms var(--ease-out); }
+  .presets button:hover { background:var(--bg-2); } .presets button:active { transform:scale(.96); }
+  .steps { display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+  .steps button { border:0; background:transparent; cursor:pointer; padding:10px 12px; border-radius:12px; font:600 14px var(--text); color:var(--soft); display:flex; gap:8px; align-items:center; }
+  .steps button i { width:26px; height:26px; border-radius:50%; background:var(--bg-2); display:grid; place-items:center; font:400 16px var(--display); font-style:normal; color:var(--head); }
+  .steps button[aria-selected="true"] { background:var(--card); color:var(--head); }
+  .steps button[aria-selected="true"] i { background:var(--accent); color:var(--accent-ink); }
+  .panel { display:grid; gap:26px; }
+  .panel[hidden] { display:none; }
+  .panel fieldset { border:0; padding:0; }
+  .panel legend { font:400 30px/1 var(--display); text-transform:uppercase; color:var(--head); margin-bottom:12px; }
+  .panel legend small { font:500 22px var(--script); text-transform:none; color:var(--soft); margin-left:8px; }
+  .choice { display:flex; flex-wrap:wrap; gap:10px; }
+  .choice label { position:relative; cursor:pointer; }
+  .choice input { position:absolute; opacity:0; inset:0; cursor:pointer; margin:0; }
+  .choice span { display:flex; align-items:center; gap:10px; min-height:48px; padding:0 18px; border-radius:999px; background:var(--card); font-weight:500; transition:background-color 160ms, color 160ms, transform 160ms var(--ease-out); }
+  .choice span i { width:18px; height:18px; border-radius:50%; background:var(--c); box-shadow:inset 0 0 0 1px rgb(0 0 0 / .14); }
+  .choice span em { font-style:normal; font-size:13px; opacity:.75; }
+  .choice input:checked + span { background:var(--head); color:var(--bg); }
+  .choice input:disabled + span { opacity:.4; cursor:not-allowed; }
+  .choice input:focus-visible + span { outline:3px solid var(--head); outline-offset:3px; }
+  .choice label:active span { transform:scale(.96); }
+  .hint { font-size:14px; color:var(--soft); margin-top:8px; }
+  .row2c { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field input[type="range"] { padding:0; background:none; accent-color:var(--accent); }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin-top:10px; }
+  .done { font-weight:600; min-height:1.5em; color:var(--head); }
+  .how { background:var(--card); padding:clamp(80px, 9vw, 130px) 0; }
+  .how .grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; margin-top:36px; }
+  .how article { background:var(--bg); border-radius:var(--r); padding:26px; }
+  .how b { font:400 60px/1 var(--display); color:var(--big); }
+  .how h3 { font:400 28px/1 var(--display); text-transform:uppercase; color:var(--head); margin-top:6px; }
+  .how p { margin-top:10px; font-size:15px; }
+  .how h2 { font-size:clamp(52px, 5.4vw, 92px); color:var(--head); }
+  .how .script { font-size:clamp(40px, 4vw, 60px); }
+  @media (max-width: 960px) {
+    .studio { grid-template-columns:minmax(0, 1fr); }
+    .preview { position:sticky; top:66px; z-index:5; padding:10px; border-radius:20px; gap:8px; }
+    .preview .views, .preview details, .preview .tools { display:none; }
+    .canvas svg { max-height:34vh; }
+    .canvas .sec { width:28%; }
+    .sum .price { font-size:40px; }
+    .row2c { grid-template-columns:1fr; }
+    .how .grid { grid-template-columns:1fr 1fr; gap:12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .flame { animation:none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cr1" viewBox="0 0 20 20"><path d="M3 9 7 3l7 1 4 6-3 7-8 1-4-4Z"/></symbol>
+  <symbol id="cr2" viewBox="0 0 20 20"><path d="M2 12 5 5l8-2 5 5-1 7-9 2Z"/></symbol>
+  <symbol id="cr3" viewBox="0 0 20 20"><path d="M5 4h7l5 7-4 6H6L2 11Z"/></symbol>
+  <symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.5 8H6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></symbol>
+</svg>
+<header class="bar">
+  <div class="row1">
+    <a class="logo" href="kruszon.html" aria-label="Kruszon, strona główna"><b>Kruszon</b><span>cukiernia od 1991</span></a>
+    <span class="hide">Łódź · trzy cukiernie</span>
+    <a class="tel hide" href="tel:+48420000000">42 000 00 00</a>
+    <span class="sp"></span>
+    <a class="pill hide" href="kruszon-cukiernie.html">Godziny otwarcia</a>
+    <a class="pill hide" href="kruszon-tort.html">Tort na zamówienie</a>
+    <button class="menu-btn" type="button" aria-expanded="false" data-menu-btn>Menu</button>
+    <button class="cart-btn" type="button" aria-label="Koszyk" data-cart-open><svg aria-hidden="true"><use href="#cart"/></svg><b data-count>0</b></button>
+  </div>
+  <div class="row2"><nav aria-label="Strony"><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html" aria-current="page">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></nav></div>
+</header>
+<div class="sheet" data-sheet role="dialog" aria-label="Menu"><button type="button" class="close" aria-label="Zamknij menu">×</button><a href="kruszon.html">Start</a><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a><a href="kruszon-cukiernie.html">Cukiernie</a></div>
+<main>
+<section class="phead wrap" aria-labelledby="h1">
+  <div class="crumbs" data-crumbs="9" style="left:64%"></div>
+  <p class="crumb-nav over"><a href="kruszon.html">Start</a> / Zaprojektuj tort</p>
+  <p class="script over">nie ma Twojego tortu?</p>
+  <h1 id="h1" class="display over">Zaprojektuj go sam</h1>
+  <p class="lead over">Wybierz wielkość, wnętrze, wykończenie i dekoracje. Tort rysuje się na bieżąco, przekrój pokazuje, co jest w środku, a cena liczy się od wagi.</p>
+</section>
+
+<div class="wrap studio" data-studio>
+  <div class="preview">
+    <div class="views" role="group" aria-label="Widok"><button type="button" aria-pressed="true" data-view="caly">Cały tort</button><button type="button" aria-pressed="false" data-view="przekroj">Przekrój</button></div>
+    <div class="canvas" data-canvas data-view="caly">
+      <svg viewBox="0 0 600 500" role="img" aria-label="Podgląd tortu" data-cake><g data-all style="transition:transform 500ms cubic-bezier(.22,1,.36,1)"></g></svg>
+      <div class="sec"><p>Przekrój</p><svg viewBox="0 0 240 180" aria-hidden="true" data-section></svg></div>
+    </div>
+    <div class="sum">
+      <span class="price" data-price aria-live="polite">0 zł</span>
+      <span class="meta" data-meta></span>
+      <span class="meta" data-ready></span>
+      <details><summary>Z czego składa się cena</summary><ul data-breakdown></ul></details>
+    </div>
+    <div class="tools"><button type="button" class="btn ghost" data-random>Losuj projekt</button><button type="button" class="btn ghost" data-share>Skopiuj link do projektu</button></div>
+  </div>
+
+  <form class="opts" data-builder novalidate>
+    <div class="presets" role="group" aria-label="Gotowe projekty">
+      <button type="button" data-preset="urodziny">Urodziny</button><button type="button" data-preset="dziecko">Dla dziecka</button><button type="button" data-preset="komunia">Komunia</button><button type="button" data-preset="slub">Ślub</button>
+    </div>
+    <div class="steps" role="tablist" aria-label="Etapy">
+      <button type="button" role="tab" aria-selected="true" data-step="0"><i>1</i>Wielkość</button>
+      <button type="button" role="tab" aria-selected="false" data-step="1"><i>2</i>Wnętrze</button>
+      <button type="button" role="tab" aria-selected="false" data-step="2"><i>3</i>Wykończenie</button>
+      <button type="button" role="tab" aria-selected="false" data-step="3"><i>4</i>Dekoracje</button>
+      <button type="button" role="tab" aria-selected="false" data-step="4"><i>5</i>Odbiór</button>
+    </div>
+
+    <div class="panel" role="tabpanel" data-panel="0">
+      <fieldset><legend>Ile osób <small>porcja to ok. 110 g</small></legend><div class="choice">
+        <label><input type="radio" name="size" value="8"><span>8 osób</span></label>
+        <label><input type="radio" name="size" value="12" checked><span>12 osób</span></label>
+        <label><input type="radio" name="size" value="20"><span>20 osób</span></label>
+        <label><input type="radio" name="size" value="30"><span>30 osób</span></label>
+        <label><input type="radio" name="size" value="45"><span>45 osób</span></label>
+        <label><input type="radio" name="size" value="60"><span>60 osób</span></label>
+      </div></fieldset>
+      <fieldset><legend>Piętra</legend><div class="choice">
+        <label><input type="radio" name="tiers" value="1" checked><span>Jedno</span></label>
+        <label><input type="radio" name="tiers" value="2"><span>Dwa <em>od 20 osób</em></span></label>
+        <label><input type="radio" name="tiers" value="3"><span>Trzy <em>od 30 osób</em></span></label>
+      </div><p class="hint">Wyższe piętra są mniejsze o jedną czwartą. Trzy piętra pieczemy na piąty dzień.</p></fieldset>
+      <div class="nav"><span></span><button type="button" class="btn" data-next>Dalej: wnętrze</button></div>
+    </div>
+
+    <div class="panel" role="tabpanel" data-panel="1" hidden>
+      <fieldset><legend>Biszkopt</legend><div class="choice">
+        <label><input type="radio" name="base" value="waniliowy" checked><span><i style="--c:#f3d9a0"></i>Waniliowy</span></label>
+        <label><input type="radio" name="base" value="czekoladowy"><span><i style="--c:#6b3e2a"></i>Czekoladowy</span></label>
+        <label><input type="radio" name="base" value="orzechowy"><span><i style="--c:#b98353"></i>Orzechowy</span></label>
+        <label><input type="radio" name="base" value="red velvet"><span><i style="--c:#a5323a"></i>Red velvet</span></label>
+      </div></fieldset>
+      <fieldset><legend>Krem</legend><div class="choice">
+        <label><input type="radio" name="cream" value="śmietankowy" checked><span><i style="--c:#fff6e9"></i>Śmietankowy</span></label>
+        <label><input type="radio" name="cream" value="mascarpone"><span><i style="--c:#fbedd6"></i>Mascarpone</span></label>
+        <label><input type="radio" name="cream" value="czekoladowy"><span><i style="--c:#8a5a3c"></i>Czekoladowy</span></label>
+        <label><input type="radio" name="cream" value="pistacjowy"><span><i style="--c:#c7d9a2"></i>Pistacjowy</span></label>
+      </div></fieldset>
+      <fieldset><legend>Nadzienie <small>między warstwami</small></legend><div class="choice">
+        <label><input type="radio" name="fill" value="brak" checked><span>Bez nadzienia</span></label>
+        <label><input type="radio" name="fill" value="truskawka"><span><i style="--c:#d8283a"></i>Truskawka</span></label>
+        <label><input type="radio" name="fill" value="wiśnia"><span><i style="--c:#7a0f22"></i>Wiśnia</span></label>
+        <label><input type="radio" name="fill" value="malina"><span><i style="--c:#d2386c"></i>Malina</span></label>
+        <label><input type="radio" name="fill" value="solony karmel"><span><i style="--c:#c27a2c"></i>Solony karmel</span></label>
+      </div></fieldset>
+      <div class="nav"><button type="button" class="btn ghost" data-prev>Wstecz</button><button type="button" class="btn" data-next>Dalej: wykończenie</button></div>
+    </div>
+
+    <div class="panel" role="tabpanel" data-panel="2" hidden>
+      <fieldset><legend>Boki</legend><div class="choice">
+        <label><input type="radio" name="side" value="gładkie" checked><span>Gładkie</span></label>
+        <label><input type="radio" name="side" value="naked"><span>Naked <em>widać warstwy</em></span></label>
+        <label><input type="radio" name="side" value="rustykalne"><span>Rustykalne <em>fale szpachelką</em></span></label>
+      </div></fieldset>
+      <fieldset><legend>Kolor kremu na zewnątrz</legend><div class="choice">
+        <label><input type="radio" name="coat" value="biały" checked><span><i style="--c:#fff6ea"></i>Biały</span></label>
+        <label><input type="radio" name="coat" value="pudrowy róż"><span><i style="--c:#f4c4cd"></i>Pudrowy róż</span></label>
+        <label><input type="radio" name="coat" value="pistacja"><span><i style="--c:#d3e2b4"></i>Pistacja</span></label>
+        <label><input type="radio" name="coat" value="błękit"><span><i style="--c:#cfe0f1"></i>Błękit</span></label>
+        <label><input type="radio" name="coat" value="karmel"><span><i style="--c:#e3ac6c"></i>Karmel</span></label>
+        <label><input type="radio" name="coat" value="czekolada"><span><i style="--c:#6a3d28"></i>Czekolada</span></label>
+      </div></fieldset>
+      <fieldset><legend>Polewa spływająca <small>drip</small></legend><div class="choice">
+        <label><input type="radio" name="drip" value="brak" checked><span>Bez polewy</span></label>
+        <label><input type="radio" name="drip" value="gorzka czekolada"><span><i style="--c:#4a2416"></i>Gorzka czekolada</span></label>
+        <label><input type="radio" name="drip" value="biała czekolada"><span><i style="--c:#f4ead8"></i>Biała czekolada</span></label>
+        <label><input type="radio" name="drip" value="karmel"><span><i style="--c:#c47a25"></i>Karmel</span></label>
+        <label><input type="radio" name="drip" value="malina"><span><i style="--c:#c22f55"></i>Malina</span></label>
+      </div></fieldset>
+      <div class="nav"><button type="button" class="btn ghost" data-prev>Wstecz</button><button type="button" class="btn" data-next>Dalej: dekoracje</button></div>
+    </div>
+
+    <div class="panel" role="tabpanel" data-panel="3" hidden>
+      <fieldset><legend>Na wierzchu <small>można kilka</small></legend><div class="choice">
+        <label><input type="checkbox" name="deco" value="owoce" checked><span>Owoce sezonowe</span></label>
+        <label><input type="checkbox" name="deco" value="makaroniki"><span>Makaroniki</span></label>
+        <label><input type="checkbox" name="deco" value="kwiaty"><span>Kwiaty z cukru</span></label>
+        <label><input type="checkbox" name="deco" value="płatki"><span>Złote płatki</span></label>
+        <label><input type="checkbox" name="deco" value="tabliczka" checked><span>Tabliczka z napisem</span></label>
+      </div></fieldset>
+      <fieldset><legend>Owoce</legend><div class="choice">
+        <label><input type="radio" name="fruit" value="truskawki" checked><span><i style="--c:#d8283a"></i>Truskawki</span></label>
+        <label><input type="radio" name="fruit" value="wiśnie"><span><i style="--c:#7a0f22"></i>Wiśnie</span></label>
+        <label><input type="radio" name="fruit" value="borówki"><span><i style="--c:#3d4a8a"></i>Borówki</span></label>
+        <label><input type="radio" name="fruit" value="maliny"><span><i style="--c:#d2386c"></i>Maliny</span></label>
+      </div></fieldset>
+      <div class="row2c">
+        <label class="field">Napis na tabliczce <input name="text" maxlength="20" value="Sto lat!"></label>
+        <label class="field">Świeczki: <output data-candles-out>6</output><input type="range" name="candles" min="0" max="9" value="6"></label>
+      </div>
+      <div class="nav"><button type="button" class="btn ghost" data-prev>Wstecz</button><button type="button" class="btn" data-next>Dalej: odbiór</button></div>
+    </div>
+
+    <div class="panel" role="tabpanel" data-panel="4" hidden>
+      <div class="row2c">
+        <label class="field">Na kiedy <input type="date" name="date" required data-date></label>
+        <label class="field">Odbiór <select name="shop"><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew (parking)</option></select></label>
+      </div>
+      <label class="field">Imię <input name="name" autocomplete="given-name" required></label>
+      <label class="field">Telefon, oddzwonimy z potwierdzeniem <input type="tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="500 000 000" required></label>
+      <label class="field">Uwagi dla cukiernika <span class="hint" style="margin:0">alergie, kolor, zdjęcie inspiracji przyniesiesz do cukierni</span><textarea name="notes" rows="3"></textarea></label>
+      <div class="nav"><button type="button" class="btn ghost" data-prev>Wstecz</button><button class="btn dark" type="submit">Zamów ten tort</button></div>
+      <p class="done" role="status" data-done></p>
+    </div>
+  </form>
+</div>
+
+<section class="how" aria-labelledby="how-h" data-reveal>
+  <div class="wrap">
+    <p class="script" data-r>co dalej</p>
+    <h2 id="how-h" class="display" data-r>Od projektu do stołu</h2>
+    <div class="grid">
+      <article data-r><b>1</b><h3>Oddzwaniamy</h3><p>W godzinach pracy cukierni, zwykle w ciągu godziny. Ustalamy szczegóły i ewentualne alergie.</p></article>
+      <article data-r><b>2</b><h3>Pieczemy</h3><p>Biszkopt dzień wcześniej, krem i dekoracje w dniu odbioru, żeby owoce były świeże.</p></article>
+      <article data-r><b>3</b><h3>Pakujemy</h3><p>W karton z okienkiem, z instrukcją przechowywania i świeczkami, jeśli je wybrałeś.</p></article>
+      <article data-r><b>4</b><h3>Odbierasz</h3><p>Płacisz przy odbiorze. Na Widzewie wyniesiemy tort do samochodu.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+<div class="scrim" data-scrim></div>
+<aside class="drawer" aria-label="Koszyk" data-drawer aria-hidden="true">
+  <div class="dh"><h2>Koszyk</h2><button type="button" class="x" aria-label="Zamknij koszyk" data-cart-close>×</button></div>
+  <ul data-lines></ul>
+  <p class="empty" data-empty>Koszyk jest pusty. Dodaj ciastko przyciskiem z wózkiem.</p>
+  <div class="df">
+    <div class="tot"><span>Razem</span><span data-total>0 zł</span></div>
+    <label class="field">Odbiór dziś <select data-pick><option>Piotrkowska 112</option><option>Zgierska 41, Bałuty</option><option>Piłsudskiego 95, Widzew</option></select></label>
+    <button class="btn" type="button" data-checkout>Zarezerwuj do odbioru</button>
+    <p class="msg" role="status" data-msg></p>
+  </div>
+</aside>
+<footer>
+  <div class="wrap">
+    <p class="script">cukiernia rodzinna od 1991</p>
+    <div class="big" aria-hidden="true">Kruszon</div>
+    <div class="cols">
+      <div><b>Cukiernie</b><a href="kruszon-cukiernie.html">Piotrkowska 112</a><a href="kruszon-cukiernie.html">Zgierska 41, Bałuty</a><a href="kruszon-cukiernie.html">Piłsudskiego 95, Widzew</a></div>
+      <div><b>Kontakt</b><a href="tel:+48420000000">42 000 00 00</a><a href="mailto:zamowienia@kruszon.example">zamowienia@kruszon.example</a></div>
+      <div><b>Słodycze</b><a href="kruszon-katalog.html">Witryna</a><a href="kruszon-tort.html">Zaprojektuj tort</a><a href="kruszon-o-nas.html">O nas</a></div>
+      <div><b>Strona</b>ROVBA Design</div>
+    </div>
+    <p class="credits">Zdjęcia (ciastka wycięte z tła na potrzeby strony): <a href="https://commons.wikimedia.org/wiki/File:Danish_(1).jpg">drożdżówka</a> i <a href="https://commons.wikimedia.org/wiki/File:Cupcake_(1).jpg">babeczka</a> Renee Comet, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Part_de_galette_des_rois_2013.jpg">ciasto francuskie</a> Lionel Allorge, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Souffl%C3%A9-style_cheesecake_001.jpg">sernik puszysty</a> Ocdp, CC0; <a href="https://commons.wikimedia.org/wiki/File:2023_Sernik_z_rodzynkami.jpg">sernik z rodzynkami</a> Jacek Halicki, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Marmorkuchen-Minigugelhupf_angeschnitten_2022.jpg">babka</a> VSchagow, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Jelly_Doughnut_Retouched.jpg">pączek w przekroju</a> Kevin Payravi, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Fat-Doughnut-Brooklyn-Strawberry-Filled.jpg">pączek</a> Evan-Amos, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_tart,_2015-06-06.jpg">kruche</a> Crisco 1492, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:VanillaMacaron.jpg">makaroniki</a> Michelle Naherny, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg">wiśnie</a> Benjamint444, CC BY-SA 3.0; <a href="https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg">truskawka</a> Joselodos, CC0; <a href="https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa).jpg">truskawki</a> Ivar Leidus, CC BY-SA 4.0; <a href="https://commons.wikimedia.org/wiki/File:PaczkiatWikimania2024.jpg">pączki na tacy</a> さえぼー, CC0; <a href="https://commons.wikimedia.org/wiki/File:Sma%C5%BCenie_p%C4%85czk%C3%B3w.jpg">smażenie pączków</a> Grażyna Rutowska, domena publiczna; <a href="https://commons.wikimedia.org/wiki/File:Sernik_-_Pastel_de_queso,_Gastronom%C3%ADa_polaca,_Gniezno,_Polonia1.jpg">pracownia</a> Diego Delso, CC BY-SA 3.0. Przez Wikimedia Commons.</p>
+  </div>
+</footer>
+<script src="assets/concept.js"></script>
+<script src="assets/kruszon/site.js?v=2"></script>
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg", f = document.querySelector("[data-builder]"), cake = document.querySelector("[data-cake]"), sec = document.querySelector("[data-section]");
+  var C = {
+    base: { waniliowy: "#f3d9a0", czekoladowy: "#6b3e2a", orzechowy: "#b98353", "red velvet": "#a5323a" },
+    cream: { "śmietankowy": "#fff6e9", mascarpone: "#fbedd6", czekoladowy: "#8a5a3c", pistacjowy: "#c7d9a2" },
+    fill: { brak: null, truskawka: "#d8283a", "wiśnia": "#7a0f22", malina: "#d2386c", "solony karmel": "#c27a2c" },
+    coat: { "biały": "#fff6ea", "pudrowy róż": "#f4c4cd", pistacja: "#d3e2b4", "błękit": "#cfe0f1", karmel: "#e3ac6c", czekolada: "#6a3d28" },
+    drip: { brak: null, "gorzka czekolada": "#4a2416", "biała czekolada": "#f4ead8", karmel: "#c47a25", malina: "#c22f55" },
+    fruit: { truskawki: "#d8283a", "wiśnie": "#7a0f22", "borówki": "#3d4a8a", maliny: "#d2386c" },
+  };
+  var PRICE = { kg: 95, base: { waniliowy: 0, czekoladowy: 15, orzechowy: 20, "red velvet": 25 }, cream: { "śmietankowy": 0, mascarpone: 15, czekoladowy: 15, pistacjowy: 30 }, fill: 25, coat: 15, drip: 30, tier: 70,
+    deco: { owoce: 35, makaroniki: 42, kwiaty: 55, "płatki": 30, tabliczka: 15 }, candle: 2 };
+  var zl = function (n) { return Math.round(n) + " zł"; };
+  var g = function (n) { var el = f.querySelector('[name="' + n + '"]:checked'); return el ? el.value : null; };
+  var decos = function () { return [].map.call(f.querySelectorAll('[name="deco"]:checked'), function (i) { return i.value; }); };
+  var all = cake.querySelector("[data-all]");
+  function el(n, a, parent) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); (parent || all).appendChild(e); return e; }
+  function shade(hex, k) { var n = parseInt(hex.slice(1), 16), r = n >> 16, gg = (n >> 8) & 255, b = n & 255; var f2 = function (c) { return Math.max(0, Math.min(255, Math.round(k < 0 ? c * (1 + k) : c + (255 - c) * k))); }; return "#" + ((1 << 24) + (f2(r) << 16) + (f2(gg) << 8) + f2(b)).toString(16).slice(1); }
+  var rnd = function (i) { var x = Math.sin(i * 12.9898 + 4.1) * 43758.5453; return x - Math.floor(x); };
+
+  function tierRule() {
+    var s = +g("size");
+    f.querySelector('[name="tiers"][value="2"]').disabled = s < 20;
+    f.querySelector('[name="tiers"][value="3"]').disabled = s < 30;
+    var t = f.querySelector('[name="tiers"]:checked');
+    if (t.disabled) f.querySelector('[name="tiers"][value="' + (s >= 20 ? 2 : 1) + '"]').checked = true;
+  }
+
+  function draw() {
+    tierRule();
+    var s = +g("size"), tiers = +g("tiers"), coat = C.coat[g("coat")], drip = C.drip[g("drip")], side = g("side"), base = C.base[g("base")], cream = C.cream[g("cream")], D = decos(), fruitC = C.fruit[g("fruit")];
+    var candles = +f.candles.value, text = f.text.value;
+    all.innerHTML = "";
+    el("defs", {}).innerHTML = '<linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>';
+    var cx = 300, plateY = 520, R = 120 + Math.min(1, (s - 8) / 52) * 110, H = tiers === 1 ? 120 : tiers === 2 ? 100 : 86;
+    // patera
+    el("ellipse", { cx: cx, cy: 580, rx: 150, ry: 14, fill: "rgb(0 0 0 / .08)" });
+    el("path", { d: "M270 " + (plateY + 18) + " L262 572 h76 L330 " + (plateY + 18) + " Z", fill: "#e9e1d6" });
+    el("ellipse", { cx: cx, cy: 572, rx: 70, ry: 10, fill: "#ddd3c6" });
+    el("ellipse", { cx: cx, cy: plateY + 10, rx: R + 46, ry: (R + 46) * 0.22, fill: "#d9cfc1" });
+    el("ellipse", { cx: cx, cy: plateY, rx: R + 46, ry: (R + 46) * 0.22, fill: "#f1ebe2" });
+    for (var c = 0; c < 9; c++) { var a = rnd(c) * Math.PI, rr = R + 14 + rnd(c + 30) * 26; el("use", { href: "#cr" + (1 + c % 3), x: cx + Math.cos(a) * rr - 6, y: plateY + Math.sin(a) * rr * 0.22 - 6, width: 12, height: 12, fill: c % 2 ? "#c9935f" : "#a8723f" }); }
+    var yb = plateY, top = null;
+    for (var t = 0; t < tiers; t++) {
+      var r = R * (1 - 0.25 * t), ry = r * 0.24, yt = yb - H;
+      var body = "M" + (cx - r) + " " + yt + " L" + (cx - r) + " " + yb + " A" + r + " " + ry + " 0 0 0 " + (cx + r) + " " + yb + " L" + (cx + r) + " " + yt + " Z";
+      if (side === "naked") {
+        el("path", { d: body, fill: base });
+        for (var L = 1; L <= 3; L++) { var y = yt + (H * L) / 4 - 5; el("path", { d: "M" + (cx - r) + " " + y + " A" + r + " " + ry + " 0 0 0 " + (cx + r) + " " + y + " L" + (cx + r) + " " + (y + 10) + " A" + r + " " + ry + " 0 0 1 " + (cx - r) + " " + (y + 10) + " Z", fill: cream }); }
+        el("path", { d: body, fill: coat, opacity: .45 });
+      } else {
+        el("path", { d: body, fill: coat });
+        if (side === "rustykalne") for (var w = 0; w < 5; w++) { var y2 = yt + 14 + w * (H - 20) / 5; el("path", { d: "M" + (cx - r + 6) + " " + y2 + " A" + r + " " + ry + " 0 0 0 " + (cx + r - 6) + " " + y2, fill: "none", stroke: shade(coat, -0.12), "stroke-width": 3, "stroke-dasharray": (18 + w * 6) + " 14", "stroke-linecap": "round" }); }
+      }
+      el("path", { d: body, fill: "url(#sh)" });
+      el("ellipse", { cx: cx, cy: yt, rx: r, ry: ry, fill: drip || shade(coat, 0.25) });
+      if (drip) {
+        // pas polewy wzdłuż przedniej krawędzi i krople zaokrąglone na końcach
+        el("path", { d: "M" + (cx - r) + " " + yt + " A" + r + " " + ry + " 0 0 0 " + (cx + r) + " " + yt + " L" + (cx + r) + " " + (yt + 9) + " A" + r + " " + ry + " 0 0 1 " + (cx - r) + " " + (yt + 9) + " Z", fill: drip });
+        var N = Math.round(r / 13);
+        for (var i = 1; i < N; i++) {
+          var th = Math.PI - (i / N) * Math.PI, x = cx + Math.cos(th) * r, y3 = yt + Math.sin(th) * ry + 4;
+          var len = 12 + rnd(i * 3 + t * 40) * (H * 0.5), wd = 9 + rnd(i + t * 7) * 6, sq = Math.abs(Math.cos(th));
+          wd *= 1 - sq * 0.55;
+          el("path", { d: "M" + (x - wd / 2) + " " + y3 + " v" + len + " a" + (wd / 2) + " " + (wd / 2) + " 0 0 0 " + wd + " 0 v-" + len + " Z", fill: drip });
+        }
+        el("ellipse", { cx: cx - r * 0.3, cy: yt - ry * 0.2, rx: r * 0.35, ry: ry * 0.25, fill: "#fff", opacity: .14 });
+      }
+      if (D.indexOf("płatki") > -1) for (var p = 0; p < 7; p++) { var px = cx - r * 0.8 + rnd(p + t * 9) * r * 1.6, py = yt + 18 + rnd(p + t * 13) * (H - 30); el("path", { d: "M" + px + " " + py + " l5 -3 l4 4 l-3 5 l-6 -1 Z", fill: "#d4a52c" }); }
+      top = { r: r, ry: ry, yt: yt }; yb = yt;
+    }
+    // dekoracje na wierzchu, od tyłu do przodu
+    var items = [], tr = top.r, ty = top.yt, try_ = top.ry;
+    if (D.indexOf("owoce") > -1) for (var k = 0; k < Math.round(tr / 14); k++) { var an = (k / Math.round(tr / 14)) * Math.PI * 2; items.push({ z: Math.sin(an), x: cx + Math.cos(an) * (tr - 18), y: ty + Math.sin(an) * (try_ - 6), type: "fruit" }); }
+    if (D.indexOf("makaroniki") > -1) for (var m = 0; m < 4; m++) { var am = Math.PI + 0.5 + m * 0.55; items.push({ z: Math.sin(am) - 0.1, x: cx + Math.cos(am) * tr * 0.55, y: ty + Math.sin(am) * try_ * 0.55, type: "mac", c: ["#f4c4cd", "#d3e2b4", "#f7e3a6", "#cfe0f1"][m] }); }
+    if (D.indexOf("kwiaty") > -1) [[-0.45, 0.25], [-0.25, 0.45], [-0.6, 0.55]].forEach(function (q, qi) { items.push({ z: q[1], x: cx + q[0] * tr, y: ty + q[1] * try_, type: "flower", s: qi === 0 ? 1.2 : 0.9 }); });
+    for (var cnd = 0; cnd < candles; cnd++) { var ac = (cnd / Math.max(1, candles)) * Math.PI * 2 + 0.3; items.push({ z: Math.sin(ac) * 0.4, x: cx + Math.cos(ac) * tr * 0.3, y: ty + Math.sin(ac) * try_ * 0.3, type: "candle", c: ["#e5446d", "#8fb6dc", "#f2c94c", "#8fb35a"][cnd % 4] }); }
+    if (D.indexOf("tabliczka") > -1 && text.trim()) items.push({ z: -0.2, x: cx, y: ty - 4, type: "plaque" });
+    items.sort(function (a, b) { return a.z - b.z; }).forEach(function (o) {
+      if (o.type === "fruit") {
+        if (g("fruit") === "borówki") { el("circle", { cx: o.x, cy: o.y - 6, r: 7, fill: fruitC }); el("circle", { cx: o.x - 2, cy: o.y - 8, r: 2, fill: "#fff", opacity: .3 }); }
+        else if (g("fruit") === "wiśnie") { el("circle", { cx: o.x, cy: o.y - 8, r: 9, fill: fruitC }); el("path", { d: "M" + o.x + " " + (o.y - 16) + " q5 -14 12 -16", stroke: "#4c6b2a", "stroke-width": 2, fill: "none" }); }
+        else if (g("fruit") === "maliny") { for (var b = 0; b < 5; b++) el("circle", { cx: o.x - 5 + (b % 3) * 5, cy: o.y - 8 - Math.floor(b / 3) * 5, r: 4, fill: b % 2 ? fruitC : shade(fruitC, -0.15) }); }
+        else { el("path", { d: "M" + (o.x - 9) + " " + (o.y - 10) + " q9 26 18 0 q-9 -6 -18 0 Z", fill: fruitC }); el("path", { d: "M" + (o.x - 7) + " " + (o.y - 11) + " l7 -6 l7 6", fill: "#4c8a2a" }); }
+      } else if (o.type === "mac") {
+        el("ellipse", { cx: o.x, cy: o.y - 6, rx: 16, ry: 6, fill: o.c }); el("rect", { x: o.x - 15, y: o.y - 14, width: 30, height: 6, fill: "#fff6e9" }); el("ellipse", { cx: o.x, cy: o.y - 14, rx: 16, ry: 6, fill: o.c });
+      } else if (o.type === "flower") {
+        for (var pt = 0; pt < 5; pt++) { var ap = pt / 5 * Math.PI * 2; el("ellipse", { cx: o.x + Math.cos(ap) * 9 * o.s, cy: o.y - 8 + Math.sin(ap) * 5 * o.s, rx: 8 * o.s, ry: 5 * o.s, fill: g("coat") === "pudrowy róż" ? "#fff6ea" : "#f4c4cd", transform: "rotate(" + (ap * 57.3) + " " + (o.x + Math.cos(ap) * 9 * o.s) + " " + (o.y - 8 + Math.sin(ap) * 5 * o.s) + ")" }); }
+        el("circle", { cx: o.x, cy: o.y - 8, r: 4 * o.s, fill: "#f2c94c" });
+      } else if (o.type === "candle") {
+        el("rect", { x: o.x - 3, y: o.y - 40, width: 6, height: 38, rx: 2, fill: o.c }); el("rect", { x: o.x - 3, y: o.y - 34, width: 6, height: 3, fill: "#fff", opacity: .7 }); el("rect", { x: o.x - 3, y: o.y - 22, width: 6, height: 3, fill: "#fff", opacity: .7 });
+        el("path", { d: "M" + o.x + " " + (o.y - 58) + " q7 10 0 16 q-7 -6 0 -16 Z", fill: "#ffb238", class: "flame" });
+      } else if (o.type === "plaque") {
+        var wpl = Math.min(tr * 1.3, 40 + text.length * 11);
+        el("rect", { x: o.x - 2, y: o.y - 72, width: 4, height: 70, fill: "#4a2416" });
+        el("rect", { x: o.x - wpl / 2, y: o.y - 112, width: wpl, height: 42, rx: 8, fill: "#4a2416" });
+        var tx = el("text", { x: o.x, y: o.y - 83, "text-anchor": "middle", "font-family": "Caveat, cursive", "font-size": 26, fill: "#f6e3c6" }); tx.textContent = text;
+      }
+    });
+    // wyśrodkuj tort w pionie, zmniejsz, jeśli się nie mieści (skala zostaje ta sama przy zmianie wielkości)
+    // prawy górny róg zostaje wolny dla przekroju: tort mieści się w dolnych 340 jednostkach
+    var bb = all.getBBox(), sc = Math.min(1, 340 / bb.height), cyv = 315, mid = bb.y + bb.height / 2;
+    all.style.transform = "translate(300px," + cyv + "px) scale(" + sc.toFixed(3) + ") translate(-300px," + (-mid).toFixed(1) + "px)";
+    // przekrój
+    sec.innerHTML = "";
+    var layers = [["base", 30], ["cream", 9], ["fill", 7], ["base", 26], ["cream", 9], ["base", 26]], y4 = 160;
+    var colOf = function (k) { return k === "base" ? base : k === "cream" ? cream : C.fill[g("fill")]; };
+    el("rect", { x: 14, y: 168, width: 212, height: 6, rx: 3, fill: "#e9e1d6" }, sec);
+    layers.forEach(function (Lr, li) {
+      var col = colOf(Lr[0]); if (!col) return;
+      y4 -= Lr[1];
+      el("path", { d: "M30 " + (y4 + Lr[1]) + " L30 " + y4 + " Q120 " + (y4 - 3 + (li % 2) * 5) + " 210 " + y4 + " L210 " + (y4 + Lr[1]) + " Z", fill: col }, sec);
+      if (Lr[0] === "base") for (var dd = 0; dd < 6; dd++) el("circle", { cx: 40 + rnd(li * 10 + dd) * 160, cy: y4 + 6 + rnd(li * 7 + dd) * (Lr[1] - 10), r: 1.6, fill: shade(col, -0.2) }, sec);
+    });
+    el("rect", { x: 22, y: y4 - 8, width: 8, height: 168 - y4 + 0, fill: coat }, sec);
+    el("rect", { x: 210, y: y4 - 8, width: 8, height: 168 - y4, fill: coat }, sec);
+    el("path", { d: "M22 " + (y4 - 8) + " L218 " + (y4 - 8) + " L218 " + y4 + " L22 " + y4 + " Z", fill: drip || coat }, sec);
+    if (drip) for (var q2 = 0; q2 < 7; q2++) el("path", { d: "M" + (28 + q2 * 28) + " " + y4 + " v" + (6 + rnd(q2) * 14) + " q4 6 8 0 v-" + (6 + rnd(q2) * 14), fill: drip }, sec);
+    // cena
+    var kg = s * 0.11, lines = [["Tort " + s + " os., " + kg.toLocaleString("pl-PL", { maximumFractionDigits: 1 }) + " kg × " + PRICE.kg + " zł", kg * PRICE.kg]];
+    if (PRICE.base[g("base")]) lines.push(["Biszkopt " + g("base"), PRICE.base[g("base")]]);
+    if (PRICE.cream[g("cream")]) lines.push(["Krem " + g("cream"), PRICE.cream[g("cream")]]);
+    if (g("fill") !== "brak") lines.push(["Nadzienie: " + g("fill"), PRICE.fill]);
+    if (tiers > 1) lines.push([(tiers - 1) + " dodatkowe piętro", PRICE.tier * (tiers - 1)]);
+    if (g("coat") !== "biały") lines.push(["Kolor kremu: " + g("coat"), PRICE.coat]);
+    if (drip) lines.push(["Polewa: " + g("drip"), PRICE.drip]);
+    D.forEach(function (d) { if (d !== "tabliczka" || text.trim()) lines.push([d === "płatki" ? "Złote płatki" : d === "tabliczka" ? "Tabliczka z napisem" : d[0].toUpperCase() + d.slice(1), PRICE.deco[d]]); });
+    if (candles) lines.push([candles + " świeczki", candles * PRICE.candle]);
+    var tot = lines.reduce(function (a, l) { return a + l[1]; }, 0);
+    document.querySelector("[data-price]").textContent = zl(tot);
+    document.querySelector("[data-meta]").textContent = kg.toLocaleString("pl-PL", { maximumFractionDigits: 1 }) + " kg · " + s + " osób · " + tiers + (tiers === 1 ? " piętro" : " piętra");
+    var days = tiers === 3 ? 5 : 3; document.querySelector("[data-ready]").textContent = "najwcześniej za " + days + " dni";
+    document.querySelector("[data-breakdown]").innerHTML = lines.map(function (l) { return "<li><span>" + l[0] + "</span><span>" + zl(l[1]) + "</span></li>"; }).join("");
+    document.querySelector("[data-candles-out]").textContent = candles;
+    var dEl = f.querySelector("[data-date]"), min = new Date(); min.setDate(min.getDate() + days);
+    var iso = min.getFullYear() + "-" + String(min.getMonth() + 1).padStart(2, "0") + "-" + String(min.getDate()).padStart(2, "0");
+    dEl.min = iso; if (!dEl.value || dEl.value < iso) dEl.value = iso;
+    cake.setAttribute("aria-label", "Tort na " + s + " osób, " + tiers + " piętra, krem " + g("coat") + (drip ? ", polewa " + g("drip") : "") + (D.length ? ", dekoracje: " + D.join(", ") : ""));
+    return tot;
+  }
+
+  // stan w adresie: #s=12&t=1&b=…
+  var KEYS = ["size", "tiers", "base", "cream", "fill", "side", "coat", "drip", "fruit"];
+  function save() { var q = new URLSearchParams(); KEYS.forEach(function (k) { q.set(k, g(k)); }); q.set("deco", decos().join(",")); q.set("text", f.text.value); q.set("candles", f.candles.value); history.replaceState(null, "", location.pathname + location.search + "#" + q.toString()); }
+  function load(q) {
+    KEYS.forEach(function (k) { var v = q.get(k); var i = v && f.querySelector('[name="' + k + '"][value="' + CSS.escape(v) + '"]'); if (i) i.checked = true; });
+    if (q.has("deco")) { var ds = q.get("deco").split(","); f.querySelectorAll('[name="deco"]').forEach(function (i) { i.checked = ds.indexOf(i.value) > -1; }); }
+    if (q.has("text")) f.text.value = q.get("text"); if (q.has("candles")) f.candles.value = q.get("candles");
+  }
+  var PRE = {
+    urodziny: "size=12&tiers=1&base=czekoladowy&cream=czekoladowy&fill=wiśnia&side=gładkie&coat=czekolada&drip=karmel&fruit=wiśnie&deco=owoce,tabliczka&text=Sto lat!&candles=6",
+    dziecko: "size=12&tiers=1&base=waniliowy&cream=śmietankowy&fill=malina&side=gładkie&coat=pudrowy róż&drip=malina&fruit=maliny&deco=makaroniki,tabliczka&text=Hania 4&candles=4",
+    komunia: "size=30&tiers=2&base=waniliowy&cream=mascarpone&fill=truskawka&side=gładkie&coat=biały&drip=brak&fruit=truskawki&deco=kwiaty,tabliczka,płatki&text=Pamiątka Komunii&candles=0",
+    slub: "size=60&tiers=3&base=waniliowy&cream=mascarpone&fill=malina&side=naked&coat=biały&drip=brak&fruit=borówki&deco=kwiaty,owoce,płatki&text=&candles=0",
+  };
+  document.querySelectorAll("[data-preset]").forEach(function (b) { b.addEventListener("click", function () { load(new URLSearchParams(PRE[b.dataset.preset])); draw(); save(); }); });
+  document.querySelector("[data-random]").addEventListener("click", function () {
+    KEYS.forEach(function (k) { var opts = [].filter.call(f.querySelectorAll('[name="' + k + '"]'), function (i) { return !i.disabled; }); opts[Math.floor(Math.random() * opts.length)].checked = true; });
+    f.querySelectorAll('[name="deco"]').forEach(function (i) { i.checked = Math.random() > 0.5; }); draw(); save();
+  });
+  document.querySelector("[data-share]").addEventListener("click", function (e) { save(); var b = e.currentTarget; try { navigator.clipboard.writeText(location.href); b.textContent = "Link skopiowany"; } catch (x) { b.textContent = "Link jest w pasku adresu"; } setTimeout(function () { b.textContent = "Skopiuj link do projektu"; }, 2200); });
+  f.addEventListener("input", function () { draw(); save(); });
+  f.addEventListener("change", function () { draw(); save(); });
+
+  // etapy
+  var tabs = document.querySelectorAll("[data-step]"), panels = document.querySelectorAll("[data-panel]"), cur = 0;
+  function go(i) { cur = Math.max(0, Math.min(4, i)); tabs.forEach(function (t, j) { t.setAttribute("aria-selected", String(j === cur)); }); panels.forEach(function (p, j) { p.hidden = j !== cur; }); }
+  tabs.forEach(function (t, j) { t.addEventListener("click", function () { go(j); }); });
+  f.querySelectorAll("[data-next]").forEach(function (b) { b.addEventListener("click", function () { go(cur + 1); f.scrollIntoView({ behavior: "smooth", block: "start" }); }); });
+  f.querySelectorAll("[data-prev]").forEach(function (b) { b.addEventListener("click", function () { go(cur - 1); }); });
+
+  // widok: cały tort albo przekrój na pierwszym planie
+  var canvas = document.querySelector("[data-canvas]");
+  document.querySelectorAll("[data-view]").forEach(function (b) { if (b.tagName !== "BUTTON") return; b.addEventListener("click", function () { document.querySelectorAll("button[data-view]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); canvas.dataset.view = b.dataset.view; }); });
+
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var msg = document.querySelector("[data-done]");
+    if (!f.elements["name"].value.trim() || !f.tel.value.trim()) { msg.textContent = "Podaj imię i telefon, żebyśmy mogli oddzwonić."; (f.elements["name"].value.trim() ? f.tel : f.name).focus(); return; }
+    var tot = draw(), d = new Date(f.date.value + "T12:00:00");
+    msg.textContent = "Dziękujemy, " + f.elements["name"].value.trim() + "! Tort na " + d.toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long" }) + ", " + zl(tot) + ", odbiór: " + f.shop.value + ". Oddzwonimy dziś z potwierdzeniem.";
+  });
+
+  if (location.hash.length > 3) load(new URLSearchParams(location.hash.slice(1)));
+  draw();
+})();
+</script>
+
+</body>
+</html>
