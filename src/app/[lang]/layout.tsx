@@ -8,6 +8,7 @@ import { NICHES, niches } from "@/data/niches";
 import { LANGS, isLang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import "./globals.css";
+import { PressFeedback } from "@/components/PressFeedback";
 
 const grotesk = Schibsted_Grotesk({ subsets: ["latin", "latin-ext"], variable: "--font-grotesk", display: "swap" });
 const newsreader = Newsreader({
@@ -67,6 +68,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         </noscript>
       </head>
       <body>
+        <PressFeedback />
         <Splash />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(studioLd(lang)) }} />
         {children}

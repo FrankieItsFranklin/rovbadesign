@@ -13,4 +13,4 @@
 :HL["/demo/korzenna/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"wydarzenia","h":64,"c":"$Q2"}]]
-0:{"b":"B5Ws-ocyFOBhO69q3r8DL","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"JdpgvqCHbfymbO6iS9N1Q","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

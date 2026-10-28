@@ -99,6 +99,6 @@ for fname, key, title, desc in PAGES:
     if m: script, src = m.group(0), src[:m.start()]
     html = (HEAD.format(pal=DEFAULT_PAL, title=title, desc=desc) + style + "</head>\n<body>\n" + SPRITES + header(key) +
             "<main>\n" + src.strip() + "\n</main>\n" + DRAWER + FOOTER +
-            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=7"></script>\n' + script + "\n</body>\n</html>\n")
+            '<script src="assets/concept.js"></script>\n<script src="assets/kruszon/site.js?v=7"></script>\n<script src="assets/press.js" defer></script>\n' + script + "\n</body>\n</html>\n")
     (OUT / fname).write_text(html, encoding="utf-8")
     print("ok", fname)
