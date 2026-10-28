@@ -514,11 +514,4 @@ export const imageCredits = [
     licence: "CC BY-SA 4.0",
     url: "https://commons.wikimedia.org/wiki/File:DSCF1083_Vintage_red_barber_chairs_in_a_rustic_wooden_shop_waiting_for_the_next_customer.jpg",
   },
-  {
-    project: "atelier-17",
-    title: "Hairdresser (1953)",
-    author: "U. A. Saarinen",
-    licence: "CC BY 4.0",
-    url: "https://commons.wikimedia.org/wiki/File:Hairdresser_1953_(JOKAUAS2_2203-10).tif",
-  },
 ];
