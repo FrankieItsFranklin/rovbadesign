@@ -261,7 +261,9 @@ export class LineEngine {
       }
       if (it.shot && Math.abs(shift - it.shift) > 0.05) {
         it.shift = shift;
-        it.shot.style.transform = `translate3d(${shift.toFixed(2)}px, 0, 0)`;
+        // At rest the whole screenshot fits the print; while it moves, it grows just enough that no edge shows.
+        const grow = 1 + (2 * Math.abs(shift)) / Math.max(1, it.w);
+        it.shot.style.transform = shift === 0 ? "" : `translate3d(${shift.toFixed(2)}px, 0, 0) scale(${grow.toFixed(4)})`;
       }
       it.el.style.transform = `translate3d(${it.x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${it.angle.toFixed(3)}deg)`;
     }

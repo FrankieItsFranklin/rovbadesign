@@ -28,7 +28,7 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){{var m=location.search.match(/[?&]pal=(\\w+)/);if(m)document.documentElement.dataset.pal=m[1];document.documentElement.classList.add("js")}})()</script>
-<link rel="stylesheet" href="assets/kruszon/site.css?v=9">
+<link rel="stylesheet" href="assets/kruszon/site.css?v=10">
 """
 
 SPRITES = """<svg width="0" height="0" style="position:absolute" aria-hidden="true">

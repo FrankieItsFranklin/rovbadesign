@@ -521,18 +521,4 @@ export const imageCredits = [
     licence: "CC BY 4.0",
     url: "https://commons.wikimedia.org/wiki/File:Hairdresser_1953_(JOKAUAS2_2203-10).tif",
   },
-  {
-    project: "szprycha",
-    title: "Bicycle wheel",
-    author: "Dhodges",
-    licence: "CC BY-SA 3.0",
-    url: "https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg",
-  },
-  {
-    project: "ostrozka",
-    title: "Delphinium elatum, Edwards's Botanical Register (1838)",
-    author: "Sarah Ann Drake",
-    licence: "public domain",
-    url: "https://commons.wikimedia.org/wiki/File:Delphinium_elatum_var._palmatifidum_as_Delphinium_intermedium_var._palmatifidum_by_S._A._Drake._Edwards%27s_Botanical_Register_vol._24,_t._38_(1838).tif",
-  },
 ];

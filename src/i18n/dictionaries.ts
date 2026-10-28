@@ -50,7 +50,7 @@ const en = {
     signature: "ROVBA Design, Warsaw, 2026",
     credits: "Photographs in the concept projects:",
     by: "by",
-    via: ", via Wikimedia Commons.",
+    via: ", via Wikimedia Commons. Other photographs are from Unsplash and credited in each demo.",
   },
   filter: { label: "Filter the work by trade", all: "All" },
   offer: {
@@ -223,7 +223,7 @@ const pl: Dictionary = {
     signature: "ROVBA Design, Warszawa, 2026",
     credits: "Zdjęcia w projektach koncepcyjnych:",
     by: "autor:",
-    via: ", Wikimedia Commons.",
+    via: ", Wikimedia Commons. Pozostałe zdjęcia pochodzą z Unsplash i są podpisane w każdym demo.",
   },
   filter: { label: "Filtruj prace według branży", all: "Wszystkie" },
   offer: {

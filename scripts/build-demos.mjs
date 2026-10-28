@@ -23,6 +23,19 @@ const DEMOS = [
 const only = process.argv.slice(2);
 
 // Root-absolute links of an Astro site, prefixed with the demo's folder.
+/** Rewrites relative src/href/srcset in the copied pages to absolute paths under the demo's folder. */
+function absolutize(dir, base) {
+  const rel = /^(?![a-z][a-z0-9+.-]*:|\/|#|\?)/i;
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith(".html")) continue;
+    const file = path.join(dir, f);
+    const html = fs.readFileSync(file, "utf8")
+      .replace(/\b(src|href)="([^"]*)"/g, (m, attr, url) => (url && rel.test(url) ? `${attr}="${base}/${url.replace(/^\.\//, "")}"` : m))
+      .replace(/\bsrcset="([^"]*)"/g, (m, set) => `srcset="${set.split(",").map((part) => { const t = part.trim(); return rel.test(t) ? `${base}/${t}` : t; }).join(", ")}"`);
+    fs.writeFileSync(file, html);
+  }
+}
+
 function prefixRootLinks(dir, base) {
   const rx = /(?<=[\s"'`(=,])\/(?=[_a-z0-9-]*[/?#."'`)\s,]|["'`)\s,])/g;
   for (const file of walk(dir)) {
@@ -86,6 +99,8 @@ for (const demo of DEMOS) {
     fs.mkdirSync(target, { recursive: true });
     for (const f of fs.readdirSync(demo.dir)) if (f.endsWith(".html")) fs.copyFileSync(path.join(demo.dir, f), path.join(target, f));
     fs.cpSync(path.join(demo.dir, "assets"), path.join(target, "assets"), { recursive: true });
+    // /demo/<id>/ redirects to /demo/<id> (no trailing slash), where relative links would point one folder up.
+    absolutize(target, `/demo/${demo.id}`);
   } else {
     fs.mkdirSync(target, { recursive: true });
     for (const f of fs.readdirSync(demo.dir)) {

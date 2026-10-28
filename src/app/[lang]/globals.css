@@ -185,7 +185,7 @@
 }
 .card-shot {
   position: absolute;
-  inset: 0 -12px;
+  inset: 0;
   display: block;
   will-change: transform;
 }
@@ -244,13 +244,7 @@
   .line:not(.is-dragging) .card:hover .card-lift {
     transform: translateY(-6px);
   }
-  .line:not(.is-dragging) .card:hover .card-shot {
-  position: absolute;
-  inset: 0 -12px;
-  display: block;
-  will-change: transform;
-}
-.card-print img {
+  .line:not(.is-dragging) .card:hover .card-print img {
     transform: scale(1.04);
   }
   .line:not(.is-dragging) .card:hover :is(.card-shade, .card-caption) {

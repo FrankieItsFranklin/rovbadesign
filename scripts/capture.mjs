@@ -10,13 +10,13 @@ const OUT = path.resolve("public/work");
 // desktop/mobile: позиции кадров — доля высоты окна или CSS-селектор секции
 const SOURCES = [
   { id: "szkliwo", url: "http://localhost:4323/", cover: [1280, 1600], desktop: [0, "#uslugi", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
-  { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "tilia", url: "http://localhost:4324/", cover: [1280, 1600], desktop: [0, 1.2, 2.6], mobile: [0, 1.3, 3] },
-  { id: "korzenna", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "rubryka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "przystan", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "kotwica", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
-  { id: "fiszka", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, 1, 2.2], mobile: [0, 1.2, 2.6] },
+  { id: "halong", url: "http://localhost:4321/", cover: [1280, 1600], desktop: [0, "#menu", "#galeria"], mobile: [0, "#menu", "#kontakt"] },
+  { id: "tilia", url: "http://localhost:4324/", cover: [1280, 1600], desktop: [0, "#o-gabinecie", "#pierwsza-wizyta"], mobile: [0, "#uslugi", "#zespol"] },
+  { id: "korzenna", url: "http://localhost:3201/", cover: [1440, 1440], desktop: [0, "h:Karta na jesień", "h:Gdzie usiąść"], mobile: [0, "h:Karta na jesień", "h:Gdzie usiąść"] },
+  { id: "rubryka", url: "http://localhost:3301/", cover: [1200, 1600], desktop: [0, "#kalkulator", "#jak"], mobile: [0, "#kalkulator", "#jak"] },
+  { id: "przystan", url: "http://localhost:3401/", cover: [1280, 1600], desktop: [0, "#uslugi", "#zespol"], mobile: [0, "#uslugi", "#opinie"] },
+  { id: "kotwica", url: "http://localhost:3501/", cover: [1280, 1600], desktop: [0, "#jak-zbudowany", "h:Co leczymy"], mobile: [0, "h:Co leczymy", "h:Ile kosztuje"] },
+  { id: "fiszka", url: "http://localhost:4000/static/lident/", cover: [1440, 1440], desktop: [0, "h:Pierwszy krok", "h:Jak się umówić"], mobile: [0, "h:Z czym przychodzisz", "h:Jak się umówić"] },
   { id: "ventotto", url: "concept:ventotto", cover: [1280, 1600], desktop: [0, "#dzien", "#cantina"], mobile: [0, "#dzien", "#forno"] },
   { id: "north-barber", url: "concept:north-barber", cover: [1200, 1600], desktop: [0, "#cennik", "#termin"], mobile: [0, "#termin", "#barberzy"] },
   { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#uslugi", "#co-nie-dziala"], mobile: [0, "#co-nie-dziala", "#uslugi"] },
@@ -46,8 +46,19 @@ async function shoot(browser, src, kind, [w, h], scale, positions) {
   await settle(page);
   const files = [];
   for (const [i, pos] of positions.entries()) {
-    if (typeof pos === "string") await page.evaluate((sel) => scrollTo(0, document.querySelector(sel).getBoundingClientRect().top + scrollY), pos);
-    else await page.evaluate((y) => scrollTo(0, y), Math.round(pos * h));
+    // Selector or "h:Heading text": the section starts right under the fixed or sticky header, not behind it.
+    // Twice: images and fonts that settle after the first jump can shift the section.
+    for (let pass = 0; pass < (typeof pos === "string" ? 2 : 0); pass++) await page.evaluate((sel) => {
+      const el = sel.startsWith("h:") ? [...document.querySelectorAll("h1, h2")].find((h) => h.textContent.replace(/\s+/g, " ").includes(sel.slice(2)))?.closest("section, [id]") : document.querySelector(sel);
+      if (!el) throw new Error("capture: no section for " + sel);
+      const head = [...document.querySelectorAll("header, nav, [data-nav]")].find((h) => ["fixed", "sticky"].includes(getComputedStyle(h).position) && h.getBoundingClientRect().top <= 0 + 1);
+      // Keep 48–120px of air above the section's heading, whatever the section's own padding is.
+      const h = el.matches("h1, h2") ? el : el.querySelector("h1, h2"), top = el.getBoundingClientRect().top + scrollY;
+      const ht = h ? h.getBoundingClientRect().top + scrollY : top + 80;
+      const y = Math.min(ht - 48, Math.max(ht - 120, top));
+      scrollTo(0, Math.max(0, y - (head ? head.getBoundingClientRect().height : 0)));
+    }, pos).then(() => page.waitForTimeout(400));
+    if (typeof pos !== "string") await page.evaluate((y) => scrollTo(0, y), Math.round(pos * h));
     await page.waitForTimeout(500);
     const file = `${src.id}/${kind}-${i + 1}.jpg`;
     await page.screenshot({ path: path.join(OUT, file), type: "jpeg", quality: 84 });

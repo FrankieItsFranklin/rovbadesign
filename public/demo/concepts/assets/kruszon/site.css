@@ -59,6 +59,8 @@ p { max-width:68ch; }
 
 /* latające wyroby: tor liczony w JS z postępu sekcji, ruch tylko w pasach bez tekstu */
 .flyer { position:absolute; left:0; top:0; z-index:3; pointer-events:none; will-change:transform; width:var(--w, 160px); }
+/* Ruchome wycinki bez filtra: drop-shadow na przesuwanej warstwie Safari rysuje od nowa w każdej klatce. */
+.flyer.cut { filter:none; }
 .flight { position:relative; height:clamp(260px, 42vh, 460px); overflow:hidden; }
 .flight .lbl { position:absolute; right:var(--m); bottom:18px; z-index:3; font-size:clamp(28px, 2.6vw, 40px); }
 
@@ -71,7 +73,7 @@ p { max-width:68ch; }
 @keyframes bob2 { from { transform:translateY(-14px) rotate(4deg); } to { transform:translateY(12px) rotate(-8deg); } }
 @keyframes bob3 { from { transform:translate(-6px, -10px) rotate(-3deg); } to { transform:translate(6px, 10px) rotate(5deg); } }
 @keyframes bob4 { from { transform:translateY(-18px) rotate(8deg); } to { transform:translateY(16px) rotate(-4deg); } }
-.scatter .bit { height:auto; filter:drop-shadow(0 8px 8px rgb(52 28 23 / .2)); }
+.scatter .bit { height:auto; }
 .scatter .dust { width:240px; height:180px; max-width:none; margin:-90px 0 0 -120px; }
 
 /* ---------- nagłówek ---------- */
