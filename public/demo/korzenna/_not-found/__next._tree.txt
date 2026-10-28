@@ -1,5 +1,5 @@
 :HL["/demo/korzenna/_next/static/chunks/0ja_bf0tfiu3o.css","style"]
-:HL["/demo/korzenna/_next/static/chunks/2y29mfpv4ufme.css","style"]
+:HL["/demo/korzenna/_next/static/chunks/1bh5kg4bnj3u_.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
-0:{"b":"JdpgvqCHbfymbO6iS9N1Q","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"mJtlgb69hyR506L0zqYKr","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

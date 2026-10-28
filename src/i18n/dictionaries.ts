@@ -197,7 +197,7 @@ const pl: Dictionary = {
   studio: {
     title: "Studio",
     statement:
-      "ROVBA to małe studio stron w Warszawie. Projektujemy i budujemy strony dla restauracji, gabinetów, barberów i salonów — każda dostaje własny wizualny świat zamiast szablonu.",
+      "ROVBA to małe studio stron w Warszawie. Projektujemy i budujemy strony dla restauracji, gabinetów, barberów i salonów. Każda dostaje własny wizualny świat zamiast szablonu.",
     columns: [
       { title: "Co robimy", items: ["Art direction", "Projekt strony", "Programowanie", "Edycja treści przez właściciela", "Wdrożenie i przekazanie"] },
       {

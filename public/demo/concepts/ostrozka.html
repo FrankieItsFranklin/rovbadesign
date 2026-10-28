@@ -27,7 +27,7 @@
   .wrap { max-width:1440px; margin-inline:auto; padding-inline:var(--m); }
   .pad { padding-block:clamp(90px, 10vw, 150px); }
   .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-  .kick { font:600 13px/1.2 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); }
+  .kick { font:600 16px/1.3 var(--sans); color:var(--ink-2); }
   .h2 { font:400 clamp(46px, 5.6vw, 92px)/.98 var(--serif); letter-spacing:-.02em; }
   .h2 em, h1 em { font-style:italic; }
   .lead { font-size:clamp(18px, 1.5vw, 21px); line-height:1.5; max-width:46ch; }
@@ -74,7 +74,7 @@
   .tagcard { position:absolute; left:-40px; bottom:60px; width:240px; background:var(--card); border-radius:6px; padding:26px 22px 18px; box-shadow:0 18px 40px -18px rgb(30 42 32 / .4); transform:rotate(-4deg); transform-origin:50% 0; }
   .tagcard::before { content:""; position:absolute; top:10px; left:50%; width:10px; height:10px; margin-left:-5px; border-radius:50%; background:var(--paper); box-shadow:inset 0 0 0 1.5px var(--line); }
   .tagcard p { font:500 25px/1.08 var(--hand); color:var(--ink); margin-top:8px; }
-  .tagcard small { display:block; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); }
+  .tagcard small { display:block; font-size:14px; font-weight:600; color:var(--ink-2); }
   .js .tagcard { animation:swing 2400ms var(--ease) 500ms both; }
   @keyframes swing { 0% { transform:rotate(-12deg) translateY(-12px); opacity:0; } 40% { opacity:1; } 60% { transform:rotate(-2deg); } 100% { transform:rotate(-4deg); } }
 
@@ -119,7 +119,7 @@
   .stage .tools button:hover { background:#fff; }
   .stage .tools button:active { transform:scale(.96); }
   .panel { background:var(--card); border-radius:28px; padding:clamp(20px, 2.4vw, 32px); display:grid; gap:26px; }
-  .panel h3 { font:600 13px/1.2 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); margin-bottom:12px; }
+  .panel h3 { font:600 16px/1.2 var(--sans); color:var(--ink-2); margin-bottom:12px; }
   .picker { list-style:none; padding:0; display:grid; }
   .picker li { display:grid; grid-template-columns:52px 1fr auto; gap:14px; align-items:center; padding:10px 0; border-top:1px solid #efe8dc; }
   .picker li:first-child { border-top:0; }
@@ -230,7 +230,7 @@
   .where figure { border-radius:var(--r); overflow:hidden; aspect-ratio:4/5; }
   .where figure img { width:100%; height:100%; object-fit:cover; }
   .where dl { display:grid; gap:16px; margin-top:24px; }
-  .where dt { font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); }
+  .where dt { font-size:15px; font-weight:600; color:var(--ink-2); }
   .where dd a { text-decoration-color:var(--blue); text-underline-offset:4px; }
 
   footer { background:var(--ink); color:var(--paper); padding:56px var(--m) 36px; }
@@ -302,7 +302,7 @@
 
 <section class="today pad wrap" id="dzis" aria-labelledby="dz-h" data-reveal>
   <div class="top">
-    <div data-r><p class="kick">Lista zmienia się co dwa dni</p><h2 id="dz-h" class="h2" style="margin-top:16px">Dziś w <em>wiadrach</em></h2></div>
+    <div data-r><p class="kick">Lista zmienia się co dwa dni</p><h2 id="dz-h" class="h2" style="margin-top:16px">Dziś w wiadrach</h2></div>
     <p data-r>Ceny za łodygę. Dodaj łodygę prosto z wiadra, a kreator poniżej od razu wstawi ją do bukietu.</p>
   </div>
   <ul class="stems" data-stems></ul>
@@ -311,7 +311,7 @@
 <section class="studio pad" id="bukiet" aria-labelledby="st-h" data-reveal>
   <div class="wrap">
     <div class="head">
-      <div data-r><p class="kick">Kreator bukietu</p><h2 id="st-h" class="h2" style="margin-top:16px">Złóż bukiet <em>sam</em></h2></div>
+      <div data-r><h2 id="st-h" class="h2">Złóż bukiet sam</h2></div>
       <p data-r>Dodawaj łodygi, a bukiet ułoży się w papierze tak, jak wiążemy go przy straganie. Na bileciku napiszemy ręcznie, co chcesz.</p>
     </div>
     <div class="grid">
@@ -375,14 +375,14 @@
 </section>
 
 <section class="week pad wrap" id="bukiety" aria-labelledby="wk-h" data-reveal>
-  <div data-r><p class="kick">Każdy bukiet wychodzi z bilecikiem</p><h2 id="wk-h" class="h2" style="margin-top:16px">Bukiety <em>tygodnia</em></h2></div>
+  <div data-r><p class="kick">Każdy bukiet wychodzi z bilecikiem</p><h2 id="wk-h" class="h2" style="margin-top:16px">Bukiety tygodnia</h2></div>
   <div class="grid" data-week></div>
 </section>
 
 <section class="order-block pad" id="zamowienia" aria-labelledby="oz-h" data-reveal>
   <div class="wrap">
     <div class="top">
-      <div data-r><p class="kick">Na zamówienie</p><h2 id="oz-h" class="h2" style="margin-top:16px">Dzień albo dwa <em>wcześniej</em></h2></div>
+      <div data-r><p class="kick">Na zamówienie</p><h2 id="oz-h" class="h2" style="margin-top:16px">Dzień albo dwa wcześniej</h2></div>
       <p class="lead" data-r>Napisz albo przyjdź do straganu. Resztą zajmiemy się same, łącznie z wazonami i dowozem.</p>
     </div>
     <div class="grid">
@@ -408,7 +408,7 @@
   <div class="grid">
     <figure data-r><img src="assets/os-sklep.jpg" width="1300" height="866" loading="lazy" alt="Bukiety w szarym papierze w ocynkowanych wiadrach w kwiaciarni"></figure>
     <div>
-      <div data-r><p class="kick">Skąd biorą się kwiaty</p><h2 id="rh-h" class="h2" style="margin-top:16px">Trzy dostawy <em>w tygodniu</em></h2>
+      <div data-r><p class="kick">Skąd biorą się kwiaty</p><h2 id="rh-h" class="h2" style="margin-top:16px">Trzy dostawy w tygodniu</h2>
       <p class="lead" style="margin-top:20px">Nie trzymamy kwiatów w chłodni tygodniami. Kupujemy co dwa dni, małymi partiami, i to widać w wiadrach.</p></div>
       <ol class="days">
         <li data-d="1" data-r><span class="d">Poniedziałek</span><dl><dt>5:00</dt><dd>Giełda kwiatowa w Baranowie</dd><dt>7:00</dt><dd>Otwieramy stragan</dd></dl></li>
@@ -467,7 +467,7 @@
   <div class="wrap grid">
     <div data-r>
       <p class="kick">Oddzwonimy przed 19:00</p>
-      <h2 id="ko-h" class="h2" style="margin-top:16px">Zamów bukiet <em>na jutro</em></h2>
+      <h2 id="ko-h" class="h2" style="margin-top:16px">Zamów bukiet na jutro</h2>
       <form class="order" data-order>
         <div class="two"><label>Imię<input name="n" required autocomplete="given-name"></label><label>Telefon<input name="t" type="tel" required autocomplete="tel" placeholder="600 000 000"></label></div>
         <label>Bukiet<textarea name="b" data-order-b placeholder="Złóż bukiet w kreatorze albo opisz go własnymi słowami: dla kogo, jakie kolory."></textarea></label>
@@ -491,7 +491,7 @@
 
 <footer>
   <div class="big" data-fit aria-hidden="true">Ostróżka<i>.</i></div>
-  <div class="row"><span>Ostróżka · kwiaty z Rynku Wildeckiego · Rynek Wildecki 8, 61-546 Poznań</span><span>Strona: ROVBA Design</span></div>
+  <div class="row"><span>Ostróżka, kwiaty z Rynku Wildeckiego<br>Rynek Wildecki 8, 61-546 Poznań</span><span>Strona: ROVBA Design</span></div>
   <p class="credits">Zdjęcia z <a href="https://unsplash.com">Unsplash</a>: <a href="https://unsplash.com/photos/person-holding-bouquet-of-flowers-s3AFTBZ3cnc">bukiet z bilecikiem</a> Carrie Beth Williams; <a href="https://unsplash.com/photos/a-person-holding-a-pink-flower-in-their-hand--NST8RagMmY">dalia</a> Kimberly Betham; <a href="https://unsplash.com/photos/a-vibrant-blue-flower-stalk-with-white-centers-2r3QRvHXDOw">ostróżka</a> Takashi Miyazaki; <a href="https://unsplash.com/photos/white-petaled-flower-6BfA88I3Fo4">aster</a> Yoksel Zok; <a href="https://unsplash.com/photos/photo-of-sunflower-during-daytime-sIjMLE3TX0A">słonecznik</a> Conner Baker; <a href="https://unsplash.com/photos/a-bunch-of-pink-flowers-on-a-white-background-TtjC3_phPOk">goździk</a> Natalie Kinnear; <a href="https://unsplash.com/photos/pink-rose-in-close-up-photography-guyTcnpRkaw">róża</a> Oscar Helgstrand; <a href="https://unsplash.com/photos/person-holding-leaf-plant-4N5huJDOydQ">eukaliptus</a> Alex Lvrs; <a href="https://unsplash.com/photos/white-flowers-in-clear-glass-vase-b7VsooJbtt0">gipsówka</a> Fiona Murray-deGraaff; <a href="https://unsplash.com/photos/bouquet-of-flowers-hg0EDH34Nm0">na imieniny</a> Matthew Nevins Bell; <a href="https://unsplash.com/photos/bouquet-of-white-and-blue-flowers-wrapped-in-brown-paper-OKeibxllhv8">na przeprosiny</a> Viktoriia Nechepurenko; <a href="https://unsplash.com/photos/white-and-beige-rose-flower-bouquet-WCkWGoHHNOM">do szpitala</a> Alina Karpenko; <a href="https://unsplash.com/photos/a-bouquet-of-white-flowers-sitting-on-top-of-a-table-mcHcSEI77NU">ślub</a> The Now Time; <a href="https://unsplash.com/photos/white-and-purple-flowers-in-black-vase-PTLBXS2zM0o">stół</a> micheile henderson; <a href="https://unsplash.com/photos/pink-and-white-flowers-on-black-table-lWuI2fcXCjY">dla siebie</a> Aleksandra Sapozhnikova; <a href="https://unsplash.com/photos/white-and-green-flower-bouquet-UQl_-yabQiA">śluby</a> nikki gibson; <a href="https://unsplash.com/photos/a-woman-arranging-flowers-in-a-vase-on-a-table-X_7Qb2Tg_6g">biura</a> Oxana Melis; <a href="https://unsplash.com/photos/a-vibrant-bouquet-of-dahlias-and-other-flowers-with-ribbon-roRXPST6KxQ">wiązanki</a> Sandie Clarke; <a href="https://unsplash.com/photos/woman-in-blue-scoop-neck-shirt-holding-bouquet-of-flowers-eoAubhPm6H8">piwonie</a> Zoe Richardson; <a href="https://unsplash.com/photos/bags-of-flowers-in-a-store-Q9PSeaNP6yU">wiadra</a> balesstudio; <a href="https://unsplash.com/photos/assorted-color-flower-bouquet-lot-1D_QE7gj4-4">bukiety w papierze</a> Cindy Chan; <a href="https://unsplash.com/photos/a-quaint-flower-shop-facade-with-abundant-plants-and-flowers-Y36fXFrF0lw">witryna</a> Annie Spratt. Kwiaty w kreatorze narysowane w kodzie.</p>
 </footer>
 

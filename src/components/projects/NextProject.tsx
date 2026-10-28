@@ -29,7 +29,9 @@ export function NextProject({ project, lang }: { project: Project; lang: Lang })
         <p className="label text-muted">{dictionaries[lang].work.next}&nbsp;&nbsp;→</p>
         <p className="mt-4 text-[clamp(48px,8vw,128px)] leading-[0.88] font-bold tracking-[-0.045em]">{project.title}</p>
         <p className="mt-4 text-[15px] text-muted">
-          {project.category} — {project.city}
+          {project.category}
+          <br />
+          {project.city}
         </p>
       </div>
       <div className="md:col-span-5 md:col-start-8">

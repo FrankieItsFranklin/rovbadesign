@@ -56,11 +56,10 @@
 
 /* ——— small type ——— */
 
+/* Small labels in the body face, sentence case and untracked (better-design: tracked-caps-label). */
 .label {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.35;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
   font-weight: 500;
 }
 
@@ -219,10 +218,8 @@
     transform 420ms var(--ease-out);
 }
 .card-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 .card-meta {
   margin-top: 2px;

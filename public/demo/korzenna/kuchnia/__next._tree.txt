@@ -1,5 +1,5 @@
 :HL["/demo/korzenna/_next/static/chunks/0ja_bf0tfiu3o.css","style"]
-:HL["/demo/korzenna/_next/static/chunks/2y29mfpv4ufme.css","style"]
+:HL["/demo/korzenna/_next/static/chunks/1bh5kg4bnj3u_.css","style"]
 :HL["/demo/korzenna/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/demo/korzenna/_next/static/media/2e95a7d252b9825a-s.p.15orukf5wyxb5.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/demo/korzenna/_next/static/media/2fe89d53234c61d4-s.p.1u30mmyq6lnsd.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -13,4 +13,4 @@
 :HL["/demo/korzenna/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"kuchnia","h":64,"c":"$Q2"}]]
-0:{"b":"JdpgvqCHbfymbO6iS9N1Q","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"mJtlgb69hyR506L0zqYKr","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

@@ -263,7 +263,8 @@ body.menu-open { overflow: hidden; }
    ========================================================= */
 .hero { padding: var(--s-4) 0 var(--s-5); }
 .hero__grid { display: grid; gap: var(--s-3); }
-.hero__place { font: 700 0.8125rem/1.4 var(--f-type); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); margin: 0; }
+/* adres w kroju tekstu, zwykłą wielkością liter (better-design: mono-costume, tracked-caps-label) */
+.hero__place { font: 500 0.9375rem/1.4 var(--f-body); color: var(--c-muted); margin: 0; }
 .hero__title { margin: 0; max-width: none; }
 .hero__title > span { display: block; }
 .hero__title > span + span { color: var(--c-pencil); }

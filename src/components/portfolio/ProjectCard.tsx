@@ -57,7 +57,9 @@ export function ProjectCard({ project, size, lang, copy, first, cardRef, onOpen 
             <span className="card-caption">
               <span className="card-title">{project.title}</span>
               <span className="card-meta">
-                {project.category} — {project.city}
+                {project.category}
+                <br />
+                {project.city}
               </span>
             </span>
           </span>

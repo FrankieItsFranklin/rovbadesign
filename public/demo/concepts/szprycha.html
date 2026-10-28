@@ -33,7 +33,7 @@
   .wrap { max-width:1440px; margin-inline:auto; padding-inline:var(--m); }
   .huge { font-weight:850; font-stretch:115%; text-transform:uppercase; letter-spacing:-.035em; line-height:.86; }
   .h2 { font-weight:800; font-stretch:112%; text-transform:uppercase; letter-spacing:-.03em; line-height:.92; font-size:clamp(40px, 5.4vw, 88px); }
-  .kick { font:600 13px/1 var(--f); letter-spacing:.14em; text-transform:uppercase; color:var(--grey); }
+  .kick { font:600 15px/1.2 var(--f); color:var(--grey); }
   .dot { color:var(--sig); }
   .btn { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 26px; border-radius:999px; background:var(--sig); color:var(--ink); font:700 15px var(--f); letter-spacing:.02em; text-decoration:none; border:0; cursor:pointer; transition:background-color 160ms, transform 160ms var(--ease); }
   .btn:hover { background:var(--sig-2); }
@@ -87,7 +87,7 @@
   .cards { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; }
   .card { background:var(--paper); border-radius:var(--r); padding:26px 22px 24px; display:flex; flex-direction:column; gap:12px; transition:transform 350ms var(--ease), box-shadow 350ms; }
   .card:hover { transform:translateY(-6px); box-shadow:0 24px 40px -28px rgb(0 0 0 / .35); }
-  .card .n { font:600 13px var(--f); letter-spacing:.12em; color:var(--mute); }
+  .card .n { font:600 14px var(--f); color:var(--sig); }
   .card h3 { font-weight:800; font-stretch:112%; text-transform:uppercase; font-size:28px; line-height:.95; letter-spacing:-.02em; }
   .card .who { font-size:15px; color:var(--mute); }
   .card ul { list-style:none; padding:0; display:grid; gap:6px; font-size:15px; }
@@ -98,7 +98,7 @@
   .card .t { font-size:14px; text-align:right; color:var(--mute); }
   .card .btn { min-height:44px; padding:0 18px; font-size:14px; width:100%; justify-content:center; margin-top:12px; }
   .card.hl { background:var(--ink); color:var(--bone); }
-  .card.hl .who, .card.hl .n, .card.hl .t, .card.hl .pr small { color:#b9b7ae; }
+  .card.hl .who, .card.hl .t, .card.hl .pr small { color:#b9b7ae; }
   .card.hl li::before { background:var(--sig); }
   .card.hl .foot { border-top-color:var(--line); }
 
@@ -212,7 +212,7 @@
   .contact .grid > div { min-width:0; }
   .contact .tel:hover { color:var(--sig); }
   .contact dl { display:grid; gap:16px; font-size:16px; }
-  .contact dt { color:var(--grey); font-size:13px; letter-spacing:.12em; text-transform:uppercase; }
+  .contact dt { color:var(--grey); font-size:15px; font-weight:600; }
   .contact dd a { text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--sig); }
   footer { padding:40px var(--m) 36px; border-top:1px solid var(--line); }
   footer .big { font-weight:850; font-stretch:125%; text-transform:uppercase; font-size:clamp(70px, 15.6vw, 270px); letter-spacing:-.045em; line-height:.8; color:var(--sig); }
@@ -274,11 +274,11 @@
       <p data-r>Każda usługa ma stałą cenę i czas. Części liczymy osobno i zawsze dzwonimy, zanim cokolwiek wymienimy.</p>
     </div>
     <div class="cards">
-      <article class="card" data-r><p class="n">01</p><h3>Szybka naprawa</h3><p class="who">Guma, luźny hamulec, skacze łańcuch.</p><ul><li>dętka albo opona</li><li>regulacja jednego hamulca</li><li>smarowanie łańcucha</li></ul><div class="foot"><span class="pr">od 30 zł<small>+ części</small></span><span class="t">20–40 min<br>na miejscu</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="kolo-tyl">Wybierz</a></article>
-      <article class="card" data-r><p class="n">02</p><h3>Przegląd podstawowy</h3><p class="who">Rower jeździ, ale prosi o uwagę.</p><ul><li>hamulce i przerzutki</li><li>centrowanie kół</li><li>dokręcenie wszystkiego</li></ul><div class="foot"><span class="pr">110 zł<small>bez części</small></span><span class="t">1 dzień<br>odbiór po 17</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="przeglad">Wybierz</a></article>
-      <article class="card hl" data-r><p class="n">03 · najczęściej</p><h3>Przegląd pełny</h3><p class="who">Po zimie albo przed dłuższą trasą.</p><ul><li>wszystko z podstawowego</li><li>mycie i smarowanie napędu</li><li>łożyska, stery, suport</li></ul><div class="foot"><span class="pr">180 zł<small>bez części</small></span><span class="t">2 dni<br>z myciem</span></div><a class="btn" href="#co-nie-dziala" data-preset="pelny">Wybierz</a></article>
-      <article class="card" data-r><p class="n">04</p><h3>Koło i napęd</h3><p class="who">Koło bije, łańcuch zużyty, trzeszczy suport.</p><ul><li>centrowanie, szprychy</li><li>łańcuch, kaseta, korba</li><li>pomiar zużycia gratis</li></ul><div class="foot"><span class="pr">od 50 zł<small>+ części</small></span><span class="t">1 dzień</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="naped">Wybierz</a></article>
-      <article class="card" data-r><p class="n">05</p><h3>Zima u nas</h3><p class="who">Nie masz gdzie trzymać roweru.</p><ul><li>przechowanie w suchym</li><li>przegląd wiosną taniej</li><li>odbiór w dowolny dzień</li></ul><div class="foot"><span class="pr">60 zł<small>za miesiąc</small></span><span class="t">od listopada<br>do marca</span></div><a class="btn ghost" href="#kontakt">Zapytaj</a></article>
+      <article class="card" data-r><h3>Szybka naprawa</h3><p class="who">Guma, luźny hamulec, skacze łańcuch.</p><ul><li>dętka albo opona</li><li>regulacja jednego hamulca</li><li>smarowanie łańcucha</li></ul><div class="foot"><span class="pr">od 30 zł<small>+ części</small></span><span class="t">20–40 min<br>na miejscu</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="kolo-tyl">Wybierz</a></article>
+      <article class="card" data-r><h3>Przegląd podstawowy</h3><p class="who">Rower jeździ, ale prosi o uwagę.</p><ul><li>hamulce i przerzutki</li><li>centrowanie kół</li><li>dokręcenie wszystkiego</li></ul><div class="foot"><span class="pr">110 zł<small>bez części</small></span><span class="t">1 dzień<br>odbiór po 17</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="przeglad">Wybierz</a></article>
+      <article class="card hl" data-r><p class="n">Najczęściej wybierany</p><h3>Przegląd pełny</h3><p class="who">Po zimie albo przed dłuższą trasą.</p><ul><li>wszystko z podstawowego</li><li>mycie i smarowanie napędu</li><li>łożyska, stery, suport</li></ul><div class="foot"><span class="pr">180 zł<small>bez części</small></span><span class="t">2 dni<br>z myciem</span></div><a class="btn" href="#co-nie-dziala" data-preset="pelny">Wybierz</a></article>
+      <article class="card" data-r><h3>Koło i napęd</h3><p class="who">Koło bije, łańcuch zużyty, trzeszczy suport.</p><ul><li>centrowanie, szprychy</li><li>łańcuch, kaseta, korba</li><li>pomiar zużycia gratis</li></ul><div class="foot"><span class="pr">od 50 zł<small>+ części</small></span><span class="t">1 dzień</span></div><a class="btn ghost" href="#co-nie-dziala" data-preset="naped">Wybierz</a></article>
+      <article class="card" data-r><h3>Zima u nas</h3><p class="who">Nie masz gdzie trzymać roweru.</p><ul><li>przechowanie w suchym</li><li>przegląd wiosną taniej</li><li>odbiór w dowolny dzień</li></ul><div class="foot"><span class="pr">60 zł<small>za miesiąc</small></span><span class="t">od listopada<br>do marca</span></div><a class="btn ghost" href="#kontakt">Zapytaj</a></article>
     </div>
   </div>
 </section>
@@ -364,7 +364,7 @@
 <section class="models light pad" aria-labelledby="mod-h" data-reveal>
   <div class="wrap">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap">
-      <div data-r><p class="kick">Co najczęściej stoi na stojaku</p><h2 id="mod-h" class="h2" style="margin-top:14px">Co do nas przyjeżdża</h2></div>
+      <div data-r><h2 id="mod-h" class="h2">Co do nas przyjeżdża</h2></div>
       <div class="rail-nav" data-r><button type="button" aria-label="Poprzednie" data-rail="-1">←</button><button type="button" aria-label="Następne" data-rail="1">→</button></div>
     </div>
     <div class="rail" data-rail-box>
@@ -439,7 +439,7 @@
 
 <footer>
   <div class="big" data-fit aria-hidden="true">Szprycha</div>
-  <div class="row"><span>Szprycha · serwis rowerowy · ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
+  <div class="row"><span>Szprycha, serwis rowerowy<br>ul. Józefińska 17, 30-529 Kraków</span><span>Strona: ROVBA Design</span></div>
   <p class="credits">Zdjęcia z <a href="https://unsplash.com">Unsplash</a>: <a href="https://unsplash.com/photos/a-man-working-on-a-bike-in-a-garage--cxC8iFx6V4">warsztat</a>, <a href="https://unsplash.com/photos/a-person-cutting-a-bicycle-vW0w7Bpz_m4">tarcza</a> i <a href="https://unsplash.com/photos/a-bunch-of-tools-hanging-up-on-a-wall-2Qlj2Gaft7w">narzędzia</a> Anton Savinov; <a href="https://unsplash.com/photos/female-beach-cruiser-bike-leaning-on-yellow-painted-wall-Lpqg7ypu2B4">damka</a> Chris Barbalis; <a href="https://unsplash.com/photos/female-beach-cruiser-bike-on-wall-va6b5ag3Jvo">holender</a> Fernando Meloni; <a href="https://unsplash.com/photos/blue-city-bike-parked-beside-blue-painted-wall-UaHV4WzVArk">miejski</a> Liza Pooor; <a href="https://unsplash.com/photos/black-road-bike-against-wooden-wall-sw9Vozf6j_4">szosówka</a> Dmitrii Vaccinium; <a href="https://unsplash.com/photos/mountain-bike-against-corrugated-wall-vZAk_n9Plfc">góral</a> streetsh; <a href="https://unsplash.com/photos/blue-and-black-city-bike-on-white-flooring-bFDdb5Yl_-w">trekking</a> Sagar Rana; <a href="https://unsplash.com/photos/man-riding-bicycle-on-road-during-daytime-ZPpC98Vus3k">ulica</a> Tobias Cornille.</p>
 </footer>
 
