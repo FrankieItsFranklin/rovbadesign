@@ -3,6 +3,35 @@ import { SEGMENTS } from "./src/i18n/routes";
 
 const inner = Object.entries(SEGMENTS) as [string, { en: string; pl: string }][];
 
+const dev = process.env.NODE_ENV !== "production";
+
+// The studio site loads everything from its own origin (Vercel Analytics too: /_vercel/insights).
+// 'unsafe-inline' for scripts: Next's inline bootstrap, the splash script and JSON-LD; nonces would force every
+// page to render on request instead of being static. Dev additionally needs eval and the HMR websocket.
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  `connect-src 'self'${dev ? " ws:" : ""}`,
+  "media-src 'self'",
+  "frame-src 'self'",
+  "frame-ancestors 'self'",
+  "form-action 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+].join("; ");
+
+// Everywhere, demos included. HSTS is already sent by Vercel.
+const baseHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+];
+
 const nextConfig: NextConfig = {
   devIndicators: false,
   experimental: { globalNotFound: true },
@@ -46,7 +75,12 @@ const nextConfig: NextConfig = {
     };
   },
   async headers() {
-    return [{ source: "/demo/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+    return [
+      { source: "/:path*", headers: baseHeaders },
+      // Demos are other sites' static exports (Google Fonts, Unsplash, OpenStreetMap maps), so no CSP there.
+      { source: "/((?!demo/|demo$).*)", headers: [{ key: "Content-Security-Policy", value: csp }] },
+      { source: "/demo/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+    ];
   },
   images: {
     formats: ["image/avif", "image/webp"],
