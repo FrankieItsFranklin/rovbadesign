@@ -2,8 +2,12 @@ import type { Lang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { PrefillLink } from "./PrefillLink";
 
-/** Prices live here; null shows "quoted after a short call". Fill in e.g. "od 2 500 zł". */
-const PRICES: (string | null)[] = [null, null, null];
+/** Starting prices in PLN, one per package; null shows "quoted after a short call". */
+const PRICES: (number | null)[] = [1500, 3500, 6000];
+
+// Grouping by hand: Polish Intl leaves four-digit numbers ungrouped ("1500"), and the space must not break.
+const group = (n: number, sep: string) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+const formatPrice = (n: number, lang: Lang) => (lang === "pl" ? `od ${group(n, " ")} zł` : `from PLN ${group(n, ",")}`);
 
 export function OfferSection({ lang }: { lang: Lang }) {
   const d = dictionaries[lang].offer;
@@ -36,7 +40,7 @@ export function OfferSection({ lang }: { lang: Lang }) {
               <p>
                 <span className="label text-muted">{d.priceLabel}</span>
                 <br />
-                <span className="text-[19px]">{PRICES[i] ?? d.priceOnRequest}</span>
+                <span className="text-[19px]">{PRICES[i] != null ? formatPrice(PRICES[i], lang) : d.priceOnRequest}</span>
               </p>
               <PrefillLink
                 lang={lang}
