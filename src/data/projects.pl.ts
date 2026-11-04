@@ -196,7 +196,21 @@ export const polishProjects: Record<string, PolishCopy> = {
       "Ciastka sfotografowane na białym tle i wycięte, więc unoszą się nad stroną jak na tacy.",
       "Ciastka przelatują przez pasy bez tekstu, a nagłówki i liczby zawsze zostają czyste.",
     ],
+  },  identi: {
+    category: "Gabinet stomatologiczny",
+    city: "Warszawa",
+    description:
+      "Nowa strona gabinetu na Gocławiu, który leczy okolicę od 1997 roku. Strona zaczyna się od tego, z czym przychodzi pacjent, a nie od nazw specjalizacji.",
+    challenge: "Stara strona miała trzy podstrony z 2014 roku, bez cen, godzin i listy zabiegów. Pacjent nie wiedział, kto go przyjmie ani ile kosztuje pierwsza wizyta.",
+    approach:
+      "Właściciel we własnym gabinecie na pierwszym ekranie, pod nim cztery ścieżki pacjenta, a potem każdy zabieg w jednym wierszu: lekarz, cena „od” i przycisk, który otwiera formularz z wybranym już zabiegiem.",
+    details: [
+      "Najpierw cztery ścieżki: ból, przegląd, wizyta dziecka, implanty i aparat. Ból prowadzi prosto do telefonu.",
+      "Lekarze, biografie i ceny pochodzą z materiałów gabinetu; rejestracja zmienia je w prostym panelu.",
+      "Jeden formularz dla całej strony, otwierany z każdego wiersza z wybranym zabiegiem; to zapytanie o termin, nie rezerwacja.",
+    ],
   },
+
 };
 
 /** Service names and detail labels shared by many projects. */

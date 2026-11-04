@@ -36,6 +36,8 @@ export type Project = {
   cardScale: number;
   cardAspectRatio: CardAspect;
   featured: boolean;
+  /** false = the case page exists, but the card is not hung on the line on the home page. */
+  onLine?: boolean;
 };
 
 const shots = (id: string) => ({
@@ -482,6 +484,39 @@ export const projects: Project[] = [
     cardScale: 1.04,
     cardAspectRatio: "16/10",
     featured: true,
+  },
+  {
+    // Real client, prototype not yet accepted: case page only, not on the line (user's call, 2026-11-04).
+    id: "identi",
+    onLine: false,
+    niche: "dental",
+    slug: "identi",
+    title: "Identi",
+    client: "Identi Stomatologia",
+    category: "Dental Clinic",
+    city: "Warsaw",
+    year: 2026,
+    status: "Prototype",
+    services: ["UX/UI", "Web Design", "Development", "CMS"],
+    description:
+      "A redesign for a dental practice on Gocław that has treated the neighbourhood since 1997. The page starts from what brings the patient in, not from the names of dental specialties.",
+    challenge: "The old site was three pages from 2014 without prices, hours or services. Patients could not tell who would treat them or what a first visit costs.",
+    approach:
+      "The owner in his own room on the first screen, four patient paths under it, then every treatment as one row with the doctor, the price from and a button that opens the request form with that treatment already chosen.",
+    details: [
+      { label: "Structure", text: "Four paths first: pain, check-up, a child's visit, implants and braces. Pain goes straight to the phone." },
+      { label: "Content", text: "Doctors, bios and prices come from the clinic's own material; the reception edits them in a small admin panel." },
+      { label: "Interaction", text: "One request form for the whole site, opened from any row with the treatment preselected; it is a request, not a booking." },
+    ],
+    ...shots("identi"),
+    coverPosition: "50% 0%",
+    accent: "#0c2540",
+    accentInk: "#d7e5f1",
+    cardRotation: 1.4,
+    cardDrop: 4,
+    cardScale: 1,
+    cardAspectRatio: "16/10",
+    featured: false,
   },
 ];
 

@@ -76,7 +76,7 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
         </h2>
         <div className="md:col-span-7">
           <p className="text-[19px] leading-[1.55]">{d.tools}</p>
-          <p className="label mt-8 text-muted">{dict.home.count(projects.length)}</p>
+          <p className="label mt-8 text-muted">{dict.home.count(projects.filter((p) => p.onLine !== false).length)}</p>
         </div>
       </section>
     </InnerPage>

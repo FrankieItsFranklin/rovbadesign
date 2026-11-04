@@ -17,7 +17,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">): Promis
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const lang = (await params).lang as Lang;
   const d = dictionaries[lang];
-  const projects = localizedProjects(lang);
+  // Cases with onLine: false keep their page but are not hung on the line.
+  const projects = localizedProjects(lang).filter((p) => p.onLine !== false);
   return (
     <>
       <main>

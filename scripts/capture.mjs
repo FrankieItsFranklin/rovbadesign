@@ -22,6 +22,7 @@ const SOURCES = [
   { id: "szprycha", url: "concept:szprycha", cover: [1280, 1600], desktop: [0, "#uslugi", "#co-nie-dziala"], mobile: [0, "#co-nie-dziala", "#uslugi"] },
   { id: "ostrozka", url: "concept:ostrozka", cover: [1280, 1600], desktop: [0, "#bukiet .grid", "#bukiety"], mobile: [0, "#bukiet .grid", "#dzis"] },
   { id: "kruszon", url: "concept:kruszon", cover: [1280, 1600], desktop: [0, ".cats", ".news"], mobile: [0, ".cats", ".news"] },
+  { id: "identi", url: "http://localhost:4330/", cover: [1280, 1600], desktop: [0, "h:Kto się tym zajmie", "h:Poznaj naszych lekarzy"], mobile: [0, "h:Kto się tym zajmie", "h:Pierwsza wizyta"] },
   { id: "atelier-17", url: "concept:atelier-17", cover: [1280, 1600], desktop: [0, "#uslugi", "#wizyta"], mobile: [0, "#wizyta", "#uslugi"] },
 ];
 
