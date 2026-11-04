@@ -489,6 +489,7 @@ export const projects: Project[] = [
     // Real client, prototype not yet accepted: case page only, not on the line (user's call, 2026-11-04).
     id: "identi",
     onLine: false,
+    demoUrl: "/demo/identi",
     niche: "dental",
     slug: "identi",
     title: "Identi",

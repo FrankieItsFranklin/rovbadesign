@@ -1,5 +1,6 @@
-// Builds public copies of fictional projects into public/demo/<id>/ (served at /demo/<id>/).
-// Only fictional work goes here.
+// Builds public copies of projects into public/demo/<id>/ (served at /demo/<id>/).
+// Fictional work, plus Identi (a real client, at the user's request 2026-11-04): its copy has no admin,
+// no stored requests and a form that sends nothing.
 // Usage: npm run demos [id ...]
 import { execSync } from "node:child_process";
 import fs from "node:fs";
@@ -17,10 +18,50 @@ const DEMOS = [
   { id: "rubryka", kind: "next", dir: path.join(process.env.HOME, "Desktop/1/finance-template") },
   { id: "kotwica", kind: "next", dir: path.join(process.env.HOME, "Desktop/1/dental-template") },
   { id: "przystan", kind: "next", dir: path.join(process.env.HOME, "Desktop/1/dental-smile-template") },
+  // realpath: the folder name "сайты" is stored decomposed (NFD) on disk, and Turbopack compares raw paths.
+  { id: "identi", kind: "next", dir: fs.realpathSync.native(path.join(process.env.HOME, "Desktop/сайты/identi/web")), prepare: prepareIdenti },
   { id: "concepts", kind: "static", dir: path.resolve("design/concepts") },
 ];
 
 const only = process.argv.slice(2);
+
+/** Identi has no demo switches of its own: the build copy is trimmed to the public site here. */
+function prepareIdenti(tmp, base) {
+  const rm = (p) => fs.rmSync(path.join(tmp, p), { recursive: true, force: true });
+  // admin, media upload route, the auth proxy, design variants and their stock photos, secrets and patient requests
+  for (const p of ["src/app/admin", "src/app/media", "src/proxy.ts", "src/app/(site)/warianty", "public/demo", ".env", "content/requests.json", "content/uploads", "docs", "scripts", "src/app/opengraph-image.tsx"]) rm(p);
+  // Static export has no server actions: a plain function that answers in the browser, sends and stores nothing.
+  fs.writeFileSync(path.join(tmp, "src/app/(site)/actions.ts"), `export type RequestState = { ok: boolean; message: string; at: number } | null;
+
+export async function requestVisit(_prev: RequestState, fd: FormData): Promise<RequestState> {
+  await new Promise((r) => setTimeout(r, 600));
+  if (String(fd.get("name") ?? "").trim().length < 2 || String(fd.get("phone") ?? "").replace(/\\D/g, "").length < 9) return { ok: false, message: "Proszę uzupełnić imię i numer telefonu.", at: Date.now() };
+  return { ok: true, message: "To wersja demonstracyjna: zapytanie nie zostało wysłane.", at: Date.now() };
+}
+`);
+  // /kontakt reads ?powod= at request time; a static page starts with the default reason.
+  const kontakt = path.join(tmp, "src/app/(site)/kontakt/page.tsx");
+  fs.writeFileSync(kontakt, fs.readFileSync(kontakt, "utf8").replace("searchParams={searchParams as Promise<{ powod?: string }>}", "searchParams={Promise.resolve({})}"));
+  // Export mode cannot use Cache Components: content is read once at build time anyway,
+  // and the segment option `instant` only exists with Cache Components.
+  for (const f of walk(path.join(tmp, "src"))) {
+    if (!/\.tsx?$/.test(f)) continue;
+    // Plain <a href="/..."> does not get basePath (next/link does): prefix it in the source.
+    const src = fs.readFileSync(f, "utf8"), out = src.replace(/^export const instant = false;\n/m, "")
+      .replace(/(<a\b[^>]*?\bhref=)"\/(?!\/)/g, `$1"${base}/`).replace(/(<a\b[^>]*?\bhref=\{`)\/(?!\/)/g, `$1${base}/`);
+    if (out !== src) fs.writeFileSync(f, out);
+  }
+  const content = path.join(tmp, "src/lib/content.ts");
+  fs.writeFileSync(content, fs.readFileSync(content, "utf8").split("\n").filter((l) => !/next\/cache"|"use cache"|cacheTag\(|cacheLife\(/.test(l)).join("\n"));
+  fs.writeFileSync(path.join(tmp, "next.config.ts"), `import type { NextConfig } from "next";
+const nextConfig: NextConfig = {
+  output: "export", basePath: "${base}", trailingSlash: true, images: { unoptimized: true },
+  devIndicators: false,
+  turbopack: { root: process.env.DEMO_ROOT },
+};
+export default nextConfig;
+`);
+}
 
 // Root-absolute links of an Astro site, prefixed with the demo's folder.
 /** Rewrites relative src/href/srcset in the copied pages to absolute paths under the demo's folder. */
@@ -67,11 +108,13 @@ function buildNext(demo, target) {
   fs.symlinkSync(path.join(demo.dir, "node_modules"), path.join(tmp, "node_modules"));
   for (const f of ["src/app/robots.ts", "src/app/sitemap.ts"]) fs.rmSync(path.join(tmp, f), { force: true });
   const base = `/demo/${demo.id}`;
+  demo.prepare?.(tmp, base);
   execSync("npx next build", { cwd: tmp, env: { ...env, DEMO_BUILD: base, DEMO_ROOT: demo.dir, NEXT_TELEMETRY_DISABLED: "1" }, stdio: "inherit" });
   fs.cpSync(path.join(tmp, "out"), target, { recursive: true });
   fs.rmSync(tmp, { recursive: true, force: true });
   // Plain string paths to files in public/ (next/image with unoptimized, CSS urls) do not get basePath.
-  const pub = fs.existsSync(path.join(demo.dir, "public")) ? fs.readdirSync(path.join(demo.dir, "public")) : [];
+  // "demo" would also match the basePath itself; a demo's own public/demo folder is removed in prepare.
+  const pub = (fs.existsSync(path.join(demo.dir, "public")) ? fs.readdirSync(path.join(demo.dir, "public")) : []).filter((n) => n !== "demo");
   if (!pub.length) return;
   const names = pub.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const rx = new RegExp(`(?<=["'\`(\\s,=])/(?=(?:${names})(?:[/"'\`?)\\s]|$))`, "g");

@@ -1,0 +1,11 @@
+:HL["/demo/identi/_next/static/chunks/23spzrxujtzfr.css","style"]
+:HL["/demo/identi/_next/static/chunks/3zm_269u3uzu8.css","style"]
+:HL["/demo/identi/_next/static/media/0759637e134d98b7-s.p.2028s2bhlck6k.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/demo/identi/_next/static/media/0d26246fbc0df9ee-s.p.3-s8-8wlgr10e.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/demo/identi/_next/static/media/e0edc2d3112cb0b1-s.p.0_wgmn9v_ty9c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/demo/identi/_next/static/media/ef10f91ac0b63ccd-s.p.36m8t867kleh_.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+4:[["children",{"s":"__PAGE__","h":160}]]
+3:[["children",{"s":{"n":"slug","t":"d","k":"protetyka","s":[]},"h":96,"c":"$Q4"}]]
+2:[["children",{"s":"uslugi","h":64,"c":"$Q3"}]]
+1:[["children",{"s":"(site)","h":32,"c":"$Q2"}]]
+0:{"b":"gayUCQEzQ4fnMHPnGNHJg","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
