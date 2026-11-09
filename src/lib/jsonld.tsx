@@ -61,6 +61,7 @@ export function siteGraph(lang: Lang): Thing[] {
         addressCountry: "PL",
       },
       hasMap: mapsUrl,
+      sameAs: [studio.googleProfile],
       member: studio.team.map(person),
       areaServed: [
         { "@type": "City", name: "Warszawa" },
