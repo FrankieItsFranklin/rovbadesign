@@ -7,12 +7,14 @@ export const SEGMENTS = {
   privacy: { en: "privacy", pl: "polityka-prywatnosci" },
   journal: { en: "journal", pl: "dziennik" },
   for: { en: "for", pl: "dla" },
+  pricing: { en: "pricing", pl: "cennik" },
+  services: { en: "services", pl: "uslugi" },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export type PageKey = keyof typeof SEGMENTS;
 
 /** Public path of an inner page, with an optional trailing slug. */
 export const pagePath = (lang: Lang, key: PageKey, slug?: string) => {
-  const base = `${lang === "en" ? "" : "/pl"}/${SEGMENTS[key][lang]}`;
+  const base = `${lang === "pl" ? "" : "/en"}/${SEGMENTS[key][lang]}`;
   return slug ? `${base}/${slug}` : base;
 };

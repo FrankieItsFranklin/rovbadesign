@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InnerPage } from "@/components/InnerPage";
+import { FaqSection } from "@/components/space/FaqSection";
+import { generalFaq, nicheFaq } from "@/data/faq";
+import { breadcrumbs, faqPage, JsonLd, nicheService } from "@/lib/jsonld";
 import { PrefillLink } from "@/components/portfolio/PrefillLink";
 import { localizedProjects } from "@/data/localize";
 import { nicheBySlug, niches, NICHES } from "@/data/niches";
@@ -22,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/for/[niche
   if (!n) return {};
   const c = niches[n][lang as Lang];
   return {
-    title: c.metaTitle,
+    title: { absolute: c.metaTitle },
     description: c.metaDescription,
     alternates: {
       canonical: pagePath(lang as Lang, "for", c.slug),
@@ -40,9 +43,13 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
   const d = dictionaries[lang];
   const work = localizedProjects(lang).filter((p) => p.niche === n);
   const other = lang === "en" ? "pl" : "en";
+  const path = pagePath(lang, "for", c.slug);
+  // The niche's own questions first, then price, time and ownership from the general list.
+  const faq = [...nicheFaq[n][lang], ...generalFaq[lang].slice(0, 3)];
 
   return (
     <InnerPage lang={lang} alternate={pagePath(other, "for", niches[n][other].slug)} label={c.label} title={c.title} lead={c.lead}>
+      <JsonLd data={[nicheService(lang, c.title, c.metaDescription, path), faqPage(faq, path), breadcrumbs(lang, [[c.label, path]])]} />
       <section aria-labelledby="needs" className="grid gap-10 md:grid-cols-12 md:gap-8">
         <h2 id="needs" className="label md:col-span-3">
           {d.niche.needs}
@@ -51,7 +58,7 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
           {c.needs.map((x) => (
             <li key={x.title} className="border-t border-ink pt-5">
               <div>
-                <h3 className="text-[20px] font-semibold tracking-[-0.01em]">{x.title}</h3>
+                <h3 className="text-[20px] font-semibold">{x.title}</h3>
                 <p className="mt-2 text-[17px] leading-[1.5] text-ink/80">{x.text}</p>
               </div>
             </li>
@@ -69,7 +76,7 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
               {work.map((p) => (
                 <li key={p.id}>
                   <Link href={localePath(lang, `/work/${p.slug}`)} className="group block">
-                    <span className="relative block aspect-[16/10] overflow-hidden rounded-[6px] bg-paper-2">
+                    <span className="relative block aspect-[16/10] overflow-hidden bg-space-2">
                       <Image
                         src={p.desktopImages[0]}
                         alt={d.card.alt(p.title)}
@@ -80,7 +87,7 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
                         style={{ objectPosition: "50% 0%" }}
                       />
                     </span>
-                    <span className="mt-4 block text-[20px] font-semibold tracking-[-0.01em]">{p.title}</span>
+                    <span className="mt-4 block text-[20px] font-semibold">{p.title}</span>
                     <span className="label mt-1 block text-muted">
                       {p.category} · {p.city} · {d.work.statuses[p.status]}
                     </span>
@@ -99,17 +106,19 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
           {d.niche.approach}
         </h2>
         <div className="md:col-span-8">
-          <p className="font-serif text-[26px] leading-[1.2] tracking-[-0.012em] md:text-[34px]">{c.approach}</p>
+          <p className="font-light text-[26px] leading-[1.2] md:text-[34px]">{c.approach}</p>
           <PrefillLink
             lang={lang}
             topic={d.form.topicOptions[0]}
             message={`${c.label}: `}
-            className="label mt-10 inline-flex min-h-12 items-center rounded-full bg-ink px-7 text-paper transition-transform duration-150 active:scale-[0.97]"
+            className="btn btn-primary btn-lg mt-10"
           >
             {d.niche.cta}
           </PrefillLink>
         </div>
       </section>
+
+      <FaqSection inner title={d.faq.title} items={faq} />
 
       <nav aria-labelledby="other" className="mt-28 grid gap-6 md:mt-40 md:grid-cols-12 md:gap-8">
         <h2 id="other" className="label md:col-span-3">
@@ -118,7 +127,7 @@ export default async function NichePage({ params }: PageProps<"/[lang]/for/[nich
         <ul className="flex flex-wrap gap-3 md:col-span-9">
           {NICHES.filter((x) => x !== n).map((x) => (
             <li key={x}>
-              <Link href={pagePath(lang, "for", niches[x][lang].slug)} className="label inline-flex min-h-11 items-center rounded-full border border-ink/25 px-5 hover:border-ink">
+              <Link href={pagePath(lang, "for", niches[x][lang].slug)} className="btn btn-line">
                 {niches[x][lang].label}
               </Link>
             </li>

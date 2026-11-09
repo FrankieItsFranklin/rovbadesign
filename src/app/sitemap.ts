@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { journal } from "@/data/journal";
 import { niches, NICHES } from "@/data/niches";
 import { projects } from "@/data/projects";
+import { SERVICES } from "@/data/services";
 import { SITE_URL } from "@/data/studio";
 import { localePath } from "@/i18n/config";
 import { pagePath } from "@/i18n/routes";
@@ -13,7 +14,10 @@ const pair = (en: string, pl: string, priority: number): MetadataRoute.Sitemap =
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    ...pair("/", "/pl", 1),
+    ...pair("/en", "/", 1),
+    ...pair(localePath("en", "/work"), localePath("pl", "/work"), 0.9),
+    ...pair(pagePath("en", "services"), pagePath("pl", "services"), 0.9),
+    ...SERVICES.flatMap((x) => pair(pagePath("en", "services", x.en.slug), pagePath("pl", "services", x.pl.slug), 0.8)),
     ...NICHES.flatMap((n) => pair(pagePath("en", "for", niches[n].en.slug), pagePath("pl", "for", niches[n].pl.slug), 0.9)),
     ...projects.flatMap((p) => pair(localePath("en", `/work/${p.slug}`), localePath("pl", `/work/${p.slug}`), 0.7)),
     ...pair(pagePath("en", "about"), pagePath("pl", "about"), 0.6),

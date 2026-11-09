@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { InnerPage } from "@/components/InnerPage";
-import { hasLegalDetails, studio } from "@/data/studio";
+import { hasLegalDetails, studio, studioAddress } from "@/data/studio";
 import type { Lang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { pagePath } from "@/i18n/routes";
@@ -10,7 +10,7 @@ import { pagePath } from "@/i18n/routes";
 
 const controller = (lang: Lang) =>
   hasLegalDetails
-    ? `${studio.owner}, NIP ${studio.nip}${studio.address ? `, ${studio.address}` : ""}`
+    ? `${studio.owner}, NIP ${studio.nip}, ${studioAddress}`
     : lang === "pl"
       ? "ROVBA Design, Warszawa (pełne dane rejestrowe zostaną tu uzupełnione)"
       : "ROVBA Design, Warsaw (full registration details will be added here)";
@@ -48,11 +48,11 @@ export default async function Privacy({ params }: PageProps<"/[lang]/privacy">) 
   const lang = (await params).lang as Lang;
   const title = dictionaries[lang].legal.privacy;
   return (
-    <InnerPage lang={lang} alternate={pagePath(lang === "en" ? "pl" : "en", "privacy")} label={title} title={title}>
+    <InnerPage lang={lang} alternate={pagePath(lang === "en" ? "pl" : "en", "privacy")} label={title} title={title} read>
       <div className="max-w-[68ch] text-[17px] leading-[1.6] md:ml-[25%]">
         {content(lang).map((s) => (
           <section key={s.h} className="mt-10 first:mt-0">
-            <h2 className="text-[22px] font-semibold tracking-[-0.015em]">{s.h}</h2>
+            <h2 className="text-[22px] font-semibold">{s.h}</h2>
             <p className="mt-3">{s.p}</p>
           </section>
         ))}

@@ -35,37 +35,44 @@ const baseHeaders = [
 const nextConfig: NextConfig = {
   devIndicators: false,
   experimental: { globalNotFound: true },
-  // English lives at the root, Polish under /pl; internally both are the [lang] segment.
+  // Polish lives at the root, English under /en; internally both are the [lang] segment.
+  // Until 2026-11 it was the other way round, so the old public addresses redirect to the new ones.
   async redirects() {
     return [
-      { source: "/en", destination: "/", permanent: true },
+      // Old Polish addresses: internal key names first (/pl/about → /o-studiu), then everything else drops /pl.
+      ...inner.flatMap(([key, s]) => [
+        { source: `/pl/${key}`, destination: `/${s.pl}`, permanent: true },
+        { source: `/pl/${key}/:slug`, destination: `/${s.pl}/:slug`, permanent: true },
+      ]),
+      { source: "/pl", destination: "/", permanent: true },
+      // Generated Open Graph images keep their internal /pl/… address.
+      { source: "/pl/:path((?!.*opengraph-image).*)", destination: "/:path", permanent: true },
+      // Old English inner pages at the root now live under /en (their Polish names differ, so nothing collides).
+      ...inner.flatMap(([, s]) => [
+        { source: `/${s.en}`, destination: `/en/${s.en}`, permanent: true },
+        { source: `/${s.en}/:slug`, destination: `/en/${s.en}/:slug`, permanent: true },
+      ]),
+      // UX/UI was folded into website design (2026-11-09).
+      { source: "/uslugi/ux-ui", destination: "/uslugi/projektowanie-stron", permanent: true },
+      { source: "/en/services/ux-ui", destination: "/en/services/web-design", permanent: true },
       // Renamed demo projects keep their old case-study addresses working.
       ...[["luka", "rubryka"], ["adp-clinic", "kotwica"], ["milanovo", "ventotto"], ["finir", "szkliwo"], ["lident", "fiszka"], ["piernicova", "korzenna"], ["sobaniec", "przystan"], ["bochen", "kruszon"]].flatMap(([from, to]) => [
         { source: `/work/${from}`, destination: `/work/${to}`, permanent: true },
-        { source: `/pl/work/${from}`, destination: `/pl/work/${to}`, permanent: true },
+        { source: `/en/work/${from}`, destination: `/en/work/${to}`, permanent: true },
       ]),
-      // Generated Open Graph images keep their internal /en/… address.
-      { source: "/en/:path((?!.*opengraph-image).*)", destination: "/:path", permanent: true },
-      // Internal Polish paths that have a Polish public name.
-      ...inner
-        .filter(([key, s]) => s.pl !== key)
-        .flatMap(([key, s]) => [
-          { source: `/pl/${key}`, destination: `/pl/${s.pl}`, permanent: true },
-          { source: `/pl/${key}/:slug`, destination: `/pl/${s.pl}/:slug`, permanent: true },
-        ]),
     ];
   },
   async rewrites() {
     return {
       beforeFiles: [
-        { source: "/", destination: "/en" },
-        { source: "/work/:slug", destination: "/en/work/:slug" },
+        { source: "/", destination: "/pl" },
+        { source: "/work", destination: "/pl/work" },
+        { source: "/work/:slug", destination: "/pl/work/:slug" },
         ...inner.flatMap(([key, s]) => [
-          { source: `/${s.en}`, destination: `/en/${key}` },
-          { source: `/${s.en}/:slug`, destination: `/en/${key}/:slug` },
-          { source: `/pl/${s.pl}`, destination: `/pl/${key}` },
-          { source: `/pl/${s.pl}/:slug`, destination: `/pl/${key}/:slug` },
+          { source: `/${s.pl}`, destination: `/pl/${key}` },
+          { source: `/${s.pl}/:slug`, destination: `/pl/${key}/:slug` },
         ]),
+        // English public names equal the internal keys, so /en/<key> needs no rewrite.
       ],
       // Static demos are built one folder per page: /demo/tilia/kontakt → …/kontakt/index.html.
       afterFiles: [

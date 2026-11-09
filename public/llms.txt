@@ -1,0 +1,41 @@
+# ROVBA Design
+
+> Niezależne studio stron internetowych z Warszawy. Projektujemy i budujemy strony dla restauracji i kawiarni, gabinetów stomatologicznych, barberów i salonów fryzjerskich oraz lokalnych firm usługowych. Strona po polsku: https://www.rovbadesign.pl/, po angielsku: https://www.rovbadesign.pl/en
+
+An independent web studio in Warsaw, Poland. We design and build websites for restaurants and cafés, dental clinics, barbers and hair salons, and local service firms. Every site gets its own visual direction (no templates), a working prototype the client sees on their own phone within a few days, and is handed over with the domain, code and content owned by the client.
+
+## Pakiety i ceny / Packages and prices
+
+- Wizytówka (one-page site): od 1 500 zł netto / from PLN 1,500 + VAT. Jedna długa strona, menu lub cennik, godziny, adres, mapa, telefon, wersja polska i angielska, uruchomienie na domenie klienta.
+- Strona firmowa (business site): od 3 500 zł netto / from PLN 3,500 + VAT. Do 8 podstron, własny kierunek wizualny i dobór zdjęć, link do rezerwacji lub formularz, edytor treści dla właściciela, konfiguracja profilu firmy w Google.
+- Strona z narzędziem (site with a tool): od 6 000 zł netto / from PLN 6,000 + VAT. Wszystko ze strony firmowej plus jedno interaktywne narzędzie (kalkulator ceny, tablica terminów, wyszukiwarka menu), analityka bez cookies, trzy miesiące drobnych zmian.
+- Bezpłatny przegląd obecnej strony / free review of a current site: the studio looks at the site on a phone and replies with a short list of concrete fixes.
+
+Ceny są cenami netto (bez VAT) i początkowymi; dokładną wycenę klient dostaje na piśmie przed rozpoczęciem pracy. Prices are starting prices net of VAT; a written quote is sent before work starts.
+
+## Warunki / Terms
+
+- Czas: projekt po kilku dniach, gotowa strona zwykle w 1–3 tygodnie. Time: the design within a few days, the finished site usually in 1–3 weeks.
+- Domena i hosting na pierwszy rok w cenie; później domena ok. 80–150 zł rocznie, hosting ok. 300–400 zł rocznie. Domain and hosting for the first year included; afterwards about PLN 80–150 a year for the domain and PLN 300–400 a year for hosting.
+- Rok gwarancji na każdą stronę. A one-year guarantee on every site.
+- Przeniesienie autorskich praw majątkowych na klienta. The economic copyright is transferred to the client.
+
+## Usługi / Services
+
+Projektowanie stron i UX/UI, tworzenie stron, modernizacja istniejących stron, SEO techniczne, strony wielojęzyczne.
+Technology: Next.js or Astro, hosted on Vercel or Cloudflare, with a browser editor where the owner needs one. Tested on real phones.
+
+## Strony / Pages
+
+- [Realizacje / Work](https://www.rovbadesign.pl/work): live sites, working prototypes and studio concepts, each marked with its status.
+- [Strony dla restauracji](https://www.rovbadesign.pl/dla/restauracji)
+- [Strony dla gabinetów stomatologicznych](https://www.rovbadesign.pl/dla/gabinetow-stomatologicznych)
+- [Strony dla barberów i salonów](https://www.rovbadesign.pl/dla/barberow-i-salonow)
+- [Strony dla lokalnych firm usługowych](https://www.rovbadesign.pl/dla/firm-uslugowych)
+- [O studiu / About](https://www.rovbadesign.pl/o-studiu)
+- [Dziennik / Journal](https://www.rovbadesign.pl/dziennik): short notes for owners of restaurants, clinics and salons.
+
+## Kontakt / Contact
+
+Telefon: +48 572 772 218. E-mail: rovbadesign@gmail.com. Adres: ul. Cichociemnych 3, Praga-Południe, Warszawa.
+Zespół / Team: Yevhen Rovba, Aliaksei Shkuratau. Kontakt przez formularz na https://www.rovbadesign.pl/#contact; odpowiadamy w ciągu dwóch dni roboczych / we reply within two working days.

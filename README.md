@@ -45,7 +45,7 @@ npm run dev          # http://localhost:3801
 
 ## Перед публикацией заменить
 
-- `hello@rovba.design` в `src/components/portfolio/ContactSection.tsx` — адрес-заглушка.
+- Почтовый индекс студии (`postalCode` в `src/data/studio.ts`), позже — NIP и владелец для политики конфиденциальности.
 - Статусы проектов: живой только Ha Long Curry; Finir, Lident, Luka, Piernicova, ADP, Sobaniec, Dental 3D — прототипы; Milanovo, North Barber, Atelier 17 — концепты студии (имена, цены, команда в них придуманы). Перед показом прототипов с названиями реальных клиник/ресторанов — согласовать с ними.
 - Год 2026 у всех проектов и тексты кейсов — проверить.
 

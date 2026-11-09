@@ -1,7 +1,7 @@
-export const LANGS = ["en", "pl"] as const;
+export const LANGS = ["pl", "en"] as const;
 export type Lang = (typeof LANGS)[number];
 
 export const isLang = (value: string): value is Lang => (LANGS as readonly string[]).includes(value);
 
-/** English lives at the root, Polish under /pl. */
-export const localePath = (lang: Lang, path: string) => (lang === "en" ? path : path === "/" ? "/pl" : `/pl${path}`);
+/** Polish lives at the root, English under /en (since 2026-11; before that it was the other way round). */
+export const localePath = (lang: Lang, path: string) => (lang === "pl" ? path : path === "/" ? "/en" : `/en${path}`);

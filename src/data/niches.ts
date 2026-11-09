@@ -21,7 +21,7 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "restaurants",
       label: "Restaurants",
       title: "Websites for restaurants and cafés",
-      metaTitle: "Websites for restaurants in Warsaw",
+      metaTitle: "Website for a restaurant or café, Warsaw | ROVBA",
       metaDescription: "Restaurant websites from a Warsaw studio: the menu as a real page, opening hours on the first screen, reservations and an editor the owner can use.",
       lead: "Guests open a restaurant site for three things: the menu, the hours and a way to book. Everything else has to earn its place around them.",
       needs: [
@@ -37,8 +37,8 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "restauracji",
       label: "Restauracje",
       title: "Strony internetowe dla restauracji i kawiarni",
-      metaTitle: "Strony dla restauracji w Warszawie",
-      metaDescription: "Strony restauracji od warszawskiego studia: menu jako prawdziwa strona, godziny na pierwszym ekranie, rezerwacje i edytor dla właściciela.",
+      metaTitle: "Strona internetowa dla restauracji, Warszawa | ROVBA",
+      metaDescription: "Strony restauracji i kawiarni: menu jako strona, nie PDF, godziny na pierwszym ekranie, rezerwacje i edytor dla właściciela. Warszawa, od 1 500 zł netto.",
       lead: "Gość otwiera stronę restauracji po trzy rzeczy: menu, godziny i sposób na rezerwację. Wszystko inne musi zasłużyć na miejsce obok nich.",
       needs: [
         { title: "Menu jako strona, nie PDF", text: "Dania z cenami i jedną linijką o składnikach, czytelne na telefonie i widoczne w Google." },
@@ -55,8 +55,8 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "dental-clinics",
       label: "Dental clinics",
       title: "Websites for dental clinics",
-      metaTitle: "Websites for dental clinics in Warsaw",
-      metaDescription: "Dental clinic websites from a Warsaw studio: prices patients can read, the team by name, a calm first visit explained and booking in a few taps.",
+      metaTitle: "Website for a dental clinic, Warsaw | ROVBA",
+      metaDescription: "Dental clinic websites: prices patients can read, the team by name, the first visit explained and booking via ZnanyLekarz or Booksy.",
       lead: "Patients come anxious and with one question: who will treat me, how much will it cost and how do I book. A good clinic site answers before they have to call.",
       needs: [
         { title: "Prices that can be read", text: "The full price list or honest ranges, grouped by treatment, searchable on a phone." },
@@ -71,8 +71,8 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "gabinetow-stomatologicznych",
       label: "Stomatologia",
       title: "Strony internetowe dla gabinetów stomatologicznych",
-      metaTitle: "Strony dla dentystów w Warszawie",
-      metaDescription: "Strony gabinetów stomatologicznych od warszawskiego studia: czytelny cennik, zespół z nazwiska, spokojnie opisana pierwsza wizyta i zapis w kilku dotknięciach.",
+      metaTitle: "Strona internetowa dla dentysty, Warszawa | ROVBA",
+      metaDescription: "Strony dla gabinetów stomatologicznych: czytelny cennik, zespół z nazwiska, pierwsza wizyta krok po kroku i zapis przez ZnanyLekarz lub Booksy.",
       lead: "Pacjent przychodzi zestresowany i z jednym pytaniem: kto mnie wyleczy, ile to kosztuje i jak się zapisać. Dobra strona gabinetu odpowiada, zanim trzeba zadzwonić.",
       needs: [
         { title: "Cennik, który da się przeczytać", text: "Pełny cennik albo uczciwe widełki, w grupach, z wyszukiwarką na telefonie." },
@@ -89,7 +89,7 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "barbers-and-salons",
       label: "Barbers & salons",
       title: "Websites for barbers and hair salons",
-      metaTitle: "Websites for barbers and salons in Warsaw",
+      metaTitle: "Website for a barber or hair salon, Warsaw | ROVBA",
       metaDescription: "Websites for barbershops and hair salons: the price list as a sign, the next free slot on the page and a look that is yours, not the booking widget's.",
       lead: "Clients choose a barber or a salon by look and by the next free slot. The site has to show both in seconds.",
       needs: [
@@ -105,8 +105,8 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "barberow-i-salonow",
       label: "Barberzy i salony",
       title: "Strony internetowe dla barberów i salonów fryzjerskich",
-      metaTitle: "Strony dla barberów i salonów w Warszawie",
-      metaDescription: "Strony barbershopów i salonów fryzjerskich: cennik jak szyld, najbliższy wolny termin na stronie i wygląd Twój, a nie widgetu rezerwacji.",
+      metaTitle: "Strona dla barbera i salonu fryzjerskiego, Warszawa | ROVBA",
+      metaDescription: "Strony barbershopów i salonów: cennik jak szyld, najbliższy wolny termin z Booksy na stronie i wygląd Twój, nie widgetu. Od 1 500 zł netto.",
       lead: "Klienci wybierają barbera albo salon po wyglądzie i po najbliższym wolnym terminie. Strona musi pokazać jedno i drugie w kilka sekund.",
       needs: [
         { title: "Cennik czytelny z drugiej strony ulicy", text: "Każda usługa z ceną i czasem, bez sztuczek z „od”." },
@@ -123,7 +123,7 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "local-services",
       label: "Local services",
       title: "Websites for local service firms",
-      metaTitle: "Websites for local businesses in Warsaw",
+      metaTitle: "Website for a local service firm, Warsaw | ROVBA",
       metaDescription: "Websites for accounting offices and other local service firms: a clear promise, the price before the first meeting and an easy first contact.",
       lead: "Small firms lose clients who leave before they ask. A clear promise, the price and one simple next step keep them.",
       needs: [
@@ -139,8 +139,8 @@ export const niches: Record<Niche, Record<Lang, Copy>> = {
       slug: "firm-uslugowych",
       label: "Usługi lokalne",
       title: "Strony internetowe dla lokalnych firm usługowych",
-      metaTitle: "Strony dla lokalnych firm w Warszawie",
-      metaDescription: "Strony biur rachunkowych i innych lokalnych firm usługowych: jasna obietnica, cena przed pierwszym spotkaniem i łatwy pierwszy kontakt.",
+      metaTitle: "Strona internetowa dla firmy usługowej, Warszawa | ROVBA",
+      metaDescription: "Strony biur rachunkowych i lokalnych firm usługowych: jasna obietnica, cena albo kalkulator przed spotkaniem, profil firmy w Google i łatwy pierwszy kontakt.",
       lead: "Małe firmy tracą klientów, którzy odchodzą, zanim zapytają. Jasna obietnica, cena i jeden prosty następny krok ich zatrzymują.",
       needs: [
         { title: "Jedna jasna obietnica", text: "Co robisz i dla kogo, w pierwszym zdaniu." },

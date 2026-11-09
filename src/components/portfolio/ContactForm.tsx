@@ -6,8 +6,10 @@ import { studio } from "@/data/studio";
 import type { Lang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { pagePath } from "@/i18n/routes";
+import { localePath } from "@/i18n/config";
+import { LogoMark } from "@/components/LogoMark";
 
-type State = "idle" | "sending" | "ok" | "error" | "invalid";
+type State = "idle" | "sending" | "ok" | "done" | "error" | "invalid";
 
 /** Fields come pre-filled from links such as #contact?topic=… (packages, the free review). */
 export const PREFILL_EVENT = "rovba:prefill";
@@ -16,8 +18,19 @@ export type Prefill = { topic?: string; message?: string };
 export function ContactForm({ lang }: { lang: Lang }) {
   const d = dictionaries[lang].form;
   const [state, setState] = useState<State>("idle");
-  const started = useRef(Date.now());
+  const started = useRef(0);
   const formRef = useRef<HTMLFormElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
+
+  // When the form appeared: a bot that submits faster than a person could is turned away by the API.
+  useEffect(() => {
+    started.current = Date.now();
+  }, []);
+
+  // A sent request opens the confirmation as a modal dialog (focus moves into it, Escape closes it).
+  useEffect(() => {
+    if (state === "ok") dialog.current?.showModal();
+  }, [state]);
 
   useEffect(() => {
     const apply = (e: Event) => {
@@ -63,16 +76,10 @@ export function ContactForm({ lang }: { lang: Lang }) {
     }
   }
 
-  if (state === "ok") {
-    return (
-      <p role="status" className="max-w-[36ch] font-serif text-[26px] leading-[1.2]">
-        {d.ok}
-      </p>
-    );
-  }
 
-  const field = "w-full border-b border-paper/35 bg-transparent py-3 text-[18px] text-paper outline-none transition-colors placeholder:text-paper/40 focus:border-paper";
+  const field = "w-full border-b border-paper/35 bg-transparent py-3 text-[18px] text-paper outline-none transition-[border-color,box-shadow] placeholder:text-paper/40 focus:border-paper focus:shadow-[0_1px_0_0_#f3f2f0]";
   return (
+    <>
     <form ref={formRef} onSubmit={submit} noValidate className="grid gap-x-8 gap-y-7 md:grid-cols-2" aria-describedby="form-status">
       <label className="grid gap-1">
         <span className="label text-paper/60">{d.name}</span>
@@ -126,12 +133,13 @@ export function ContactForm({ lang }: { lang: Lang }) {
         <button
           type="submit"
           disabled={state === "sending"}
-          className="label min-h-12 rounded-full bg-paper px-8 text-ink transition-transform duration-150 ease-out active:scale-[0.97] disabled:opacity-60"
+          className="btn btn-lg btn-light disabled:opacity-60"
         >
           {state === "sending" ? d.sending : d.send}
         </button>
         <p id="form-status" role="status" className="text-[15px] text-paper/80">
           {state === "invalid" && d.required}
+          {(state === "ok" || state === "done") && d.ok}
           {state === "error" && (
             <>
               {d.error}{" "}
@@ -143,5 +151,28 @@ export function ContactForm({ lang }: { lang: Lang }) {
         </p>
       </div>
     </form>
+    <dialog ref={dialog} className="sent" aria-labelledby="sent-title" onClose={() => setState("done")}>
+      <LogoMark className="sent-mark" />
+      <p className="tech">{d.sent.label}</p>
+      <p id="sent-title" className="sent-title">
+        {d.sent.title}
+      </p>
+      <p className="sent-text">
+        {d.sent.text}{" "}
+        <a href={`mailto:${studio.email}`} className="link-quiet">
+          {studio.email}
+        </a>
+        .
+      </p>
+      <div className="sent-actions">
+        <button type="button" className="btn btn-primary" onClick={() => dialog.current?.close()} autoFocus>
+          {d.sent.close}
+        </button>
+        <Link href={localePath(lang, "/work")} className="btn btn-line">
+          {d.sent.work}
+        </Link>
+      </div>
+    </dialog>
+    </>
   );
 }

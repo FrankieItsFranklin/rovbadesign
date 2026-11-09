@@ -25,17 +25,17 @@ export function ProjectHero({ project, lang }: { project: Project; lang: Lang })
 
   return (
     <section className="px-[var(--gutter)] pt-28 md:pt-36">
-      <div className="grid items-end gap-8 md:grid-cols-12 md:gap-8">
+      <div className="grid justify-items-center gap-8 text-center">
         <h1
-          className="case-reveal text-[clamp(56px,10.5vw,168px)] leading-[0.86] font-bold tracking-[-0.045em] md:col-span-8"
+          className="case-reveal font-display text-[clamp(44px,7vw,112px)] leading-[0.92] font-light tracking-[0.01em] uppercase"
           style={{ ["--d" as string]: 0 }}
         >
           {project.title}
         </h1>
-        <dl className="case-reveal grid grid-cols-2 gap-x-6 gap-y-4 md:col-span-4 md:pb-3" style={{ ["--d" as string]: 1 }}>
+        <dl className="case-reveal grid grid-cols-2 gap-x-10 gap-y-4 md:grid-cols-4" style={{ ["--d" as string]: 1 }}>
           {facts.map((f) => (
             <div key={f.label}>
-              <dt className="label text-muted">{f.label}</dt>
+              <dt className="tech">{f.label}</dt>
               <dd className="mt-1 text-[15px]">{f.value}</dd>
             </div>
           ))}

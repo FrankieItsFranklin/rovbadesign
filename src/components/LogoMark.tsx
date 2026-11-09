@@ -6,7 +6,7 @@ const MARK_VIEWBOX = "-2 -2 181.82 158";
 /** The ROVBA sign on its own, in the current text colour. Pieces are classed for the hover. */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox={MARK_VIEWBOX} fill="currentColor" aria-hidden="true" focusable="false">
+    <svg className={`logo-mark ${className ?? ""}`} viewBox={MARK_VIEWBOX} fill="currentColor" aria-hidden="true" focusable="false">
       {MARK_PIECES.map((d, i) => (
         <path key={i} className={`logo-piece logo-piece-${i + 1}`} d={d} />
       ))}

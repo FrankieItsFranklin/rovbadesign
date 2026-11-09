@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { InnerPage } from "@/components/InnerPage";
+import { breadcrumbs, JsonLd, person } from "@/lib/jsonld";
 import { projects } from "@/data/projects";
-import { studio } from "@/data/studio";
+import { mapsUrl, studio, studioAddress } from "@/data/studio";
 import type { Lang } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { pagePath } from "@/i18n/routes";
@@ -22,26 +23,35 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
   const dict = dictionaries[lang];
   const d = dict.about;
   const bio = studio.bio[lang];
-  const showPerson = Boolean(studio.owner && (bio || studio.photo));
 
   return (
     <InnerPage lang={lang} alternate={pagePath(lang === "en" ? "pl" : "en", "about")} label={dict.nav.about} title={d.title} lead={d.lead}>
-      {showPerson && (
-        <section aria-labelledby="person" className="mb-28 grid gap-10 md:mb-40 md:grid-cols-12 md:gap-8">
-          <h2 id="person" className="label md:col-span-3">
-            {d.personTitle}
-          </h2>
-          {studio.photo && (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-paper-2 md:col-span-4">
-              <Image src={studio.photo} alt={studio.owner} fill sizes="(max-width: 768px) 90vw, 33vw" className="object-cover" />
-            </div>
-          )}
-          <div className="md:col-span-5">
-            <p className="text-[24px] font-semibold tracking-[-0.015em]">{studio.owner}</p>
-            {bio && <p className="mt-4 text-[18px] leading-[1.55]">{bio}</p>}
+      <JsonLd data={[...studio.team.map(person), breadcrumbs(lang, [[d.title, pagePath(lang, "about")]])]} />
+      <section aria-labelledby="person" className="mb-28 grid gap-10 md:mb-40 md:grid-cols-12 md:gap-8">
+        <h2 id="person" className="label md:col-span-3">
+          {d.personTitle}
+        </h2>
+        {studio.photo && (
+          <div className="relative aspect-[4/5] overflow-hidden bg-space-2 md:col-span-4">
+            <Image src={studio.photo} alt={studio.team.join(", ")} fill sizes="(max-width: 768px) 90vw, 33vw" className="object-cover" />
           </div>
-        </section>
-      )}
+        )}
+        <div className="md:col-span-5">
+          <ul className="grid gap-2">
+            {studio.team.map((name) => (
+              <li key={name} className="text-[24px] font-semibold">
+                {name}
+              </li>
+            ))}
+          </ul>
+          {bio && <p className="mt-4 text-[18px] leading-[1.55]">{bio}</p>}
+          <p className="mt-6 text-[17px] leading-[1.55] text-text-2">
+            <a href={mapsUrl} target="_blank" rel="noreferrer" className="link-quiet">
+              {studioAddress}
+            </a>
+          </p>
+        </div>
+      </section>
 
       <section aria-labelledby="principles" className="grid gap-10 md:grid-cols-12 md:gap-8">
         <h2 id="principles" className="label md:col-span-3">
@@ -50,7 +60,7 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
         <ul className="grid gap-x-8 gap-y-10 md:col-span-9 md:grid-cols-2">
           {d.principles.map((p) => (
             <li key={p.title} className="border-t border-ink pt-5">
-              <h3 className="text-[22px] font-semibold tracking-[-0.015em]">{p.title}</h3>
+              <h3 className="text-[22px] font-semibold">{p.title}</h3>
               <p className="mt-2 text-[17px] leading-[1.5] text-ink/80">{p.text}</p>
             </li>
           ))}
@@ -63,7 +73,7 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
         </h2>
         <ol className="grid gap-4 md:col-span-9">
           {dict.studio.columns[2].items.map((step) => (
-            <li key={step} className="font-serif text-[26px] leading-[1.2] tracking-[-0.012em] md:text-[34px]">
+            <li key={step} className="font-light text-[26px] leading-[1.2] md:text-[34px]">
               {step}
             </li>
           ))}

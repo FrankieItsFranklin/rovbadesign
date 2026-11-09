@@ -1,38 +1,35 @@
 import type { Metadata } from "next";
 import { ContactSection } from "@/components/portfolio/ContactSection";
-import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter";
-import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader";
-import { FilteredLine } from "@/components/portfolio/FilteredLine";
-import { OfferSection } from "@/components/portfolio/OfferSection";
 import { StudioSection } from "@/components/portfolio/StudioSection";
-import { localizedProjects } from "@/data/localize";
-import { type Lang, localePath } from "@/i18n/config";
+import { FaqSection } from "@/components/space/FaqSection";
+import { generalFaq } from "@/data/faq";
 import { dictionaries } from "@/i18n/dictionaries";
+import { faqPage, JsonLd } from "@/lib/jsonld";
+import { Hero } from "@/components/space/Hero";
+import { ProcessSection } from "@/components/space/ProcessSection";
+import { SiteHeader } from "@/components/space/SiteHeader";
+import { type Lang, localePath } from "@/i18n/config";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]">): Promise<Metadata> {
   const lang = (await params).lang as Lang;
-  return { alternates: { canonical: lang === "en" ? "/" : "/pl", languages: { en: "/", pl: "/pl" } } };
+  return { alternates: { canonical: localePath(lang, "/"), languages: { pl: "/", en: "/en", "x-default": "/" } } };
 }
 
+// The work (/work) and the offer (/uslugi) have their own pages; the landing is the first screen, the process, the
+// studio, the questions and contact.
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const lang = (await params).lang as Lang;
-  const d = dictionaries[lang];
-  // Cases with onLine: false keep their page but are not hung on the line.
-  const projects = localizedProjects(lang).filter((p) => p.onLine !== false);
+  const faq = dictionaries[lang].faq;
   return (
     <>
-      <main>
-        <section id="work" className="home-hero" aria-labelledby="work-title">
-          <h1 id="work-title" className="sr-only">
-            {d.home.heading}
-          </h1>
-          <PortfolioHeader lang={lang} alternate={localePath(lang === "en" ? "pl" : "en", "/")} />
-          <FilteredLine projects={projects} lang={lang} />
-          <PortfolioFooter count={projects.length} lang={lang} />
-        </section>
+      <SiteHeader lang={lang} alternate={localePath(lang === "en" ? "pl" : "en", "/")} />
+      <main id="main">
+        <Hero lang={lang} />
+        <ProcessSection lang={lang} />
         <StudioSection lang={lang} />
-        <OfferSection lang={lang} />
+        <FaqSection num={4} title={faq.title} lead={faq.lead} items={generalFaq[lang]} />
       </main>
+      <JsonLd data={faqPage(generalFaq[lang], localePath(lang, "/"))} />
       <ContactSection lang={lang} />
     </>
   );
