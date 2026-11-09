@@ -827,9 +827,13 @@
     background-color 300ms ease,
     box-shadow 300ms ease;
 }
+/* Scrolled, the right side becomes one plate with a black contour; the call cell inside it keeps only its left edge. */
 .hd[data-scrolled] .hd-right {
   background: rgba(243, 242, 240, 0.92);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 1px var(--color-text);
+}
+.hd[data-scrolled] .hd-call {
+  border-block: 0;
 }
 .hd-nav ul {
   display: flex;
@@ -1504,7 +1508,9 @@ main:target,
 }
 
 /* A return visit within the session skips the entrance. */
-:root[data-seen] :is(.enter, .idx-item, .idx-item::before, .hd-tab) {
+/* Pseudo-elements cannot sit inside :is(), so the leader lines get selectors of their own. */
+:root[data-seen] :is(.enter, .idx-item, .readout[data-lead], .hd-tab),
+:root[data-seen] .idx-item::before {
   animation: none;
 }
 

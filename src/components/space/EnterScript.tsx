@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLayoutEffect } from "react";
 
 // The entrance (DESIGN.md §6) plays on the first page of a browser session only. Decided before the first paint,
@@ -7,19 +8,23 @@ import { useLayoutEffect } from "react";
 const SEEN = `try{var k="rovba:entered";if(sessionStorage.getItem(k))document.documentElement.dataset.seen="";else sessionStorage.setItem(k,"1")}catch(e){}`;
 
 /**
- * Inline and synchronous from the server HTML. When React re-creates <html> (a language switch remounts the layout)
- * the attribute is lost, so the layout effect puts it back before that paint.
+ * Inline and synchronous from the server HTML. Within the visit, any move to another address inside the site (a
+ * language switch, a link) marks the entrance as seen before that paint, so neither the entrance nor the reveal of the
+ * first screen plays again; a re-created <html> (the layout remounted) is marked as well, since it lost the attribute.
  */
 let root: HTMLElement | null = null;
+let firstPath: string | null = null;
 
 export function EnterScript() {
+  const path = usePathname();
   useLayoutEffect(() => {
-    // The first hydration keeps whatever the inline script decided; a new <html> (a remount) is marked as seen.
-    // Comparing the element, not counting mounts, keeps React's development double-mount from skipping the entrance.
+    // Comparing the element and the path, not counting mounts, keeps React's development double-mount from skipping
+    // the entrance on the first page.
     const html = document.documentElement;
-    if (root && root !== html) html.dataset.seen = "";
+    if (firstPath === null) firstPath = path;
+    if ((root && root !== html) || path !== firstPath) html.dataset.seen = "";
     root = html;
-  }, []);
+  }, [path]);
   return (
     <script
       type={typeof window === "undefined" ? undefined : "text/plain"}

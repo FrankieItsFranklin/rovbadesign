@@ -68,7 +68,7 @@ export function HeroIndex({ lang, label, more, services, lead, intro, actions }:
 
       <div className="hero-copy">
         {intro}
-        <div id="hero-readout" className="readout" aria-live="polite" key={active ?? "lead"}>
+        <div id="hero-readout" className="readout" aria-live="polite" key={active ?? "lead"} data-lead={active === null || undefined}>
           {current ? (
             <>
               <p className="tech">
